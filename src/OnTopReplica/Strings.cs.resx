@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,14 +112,18 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutAuthor" xml:space="preserve">
     <value>Vytvořil: %</value>
     <comment>Link % is replaced by string AboutAuthorContent.</comment>
+  </data>
+  <data name="AboutAuthorContent" xml:space="preserve">
+    <value />
+    <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
   <data name="AboutButtonCancelTT" xml:space="preserve">
     <value>Přerušit aktualizaci.</value>
@@ -172,27 +176,12 @@
     <value>Překlady: %</value>
     <comment>{0} translators (do not end with period)</comment>
   </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Aktualizuj!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>Aplikace OnTopReplica automaticky kontroluje dostupné aktualizace.</value>
-  </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Verze: %</value>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Resetovat nastavení okna?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Resetovat
-Všechna nastavení budou ztracena.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Operace "Resetovat okno" je vhodná k inicializaci všech nastavení pokud jste například ztratili kontrolu nad oknem nebo jej přesunuli mimo viditelnou plochu obrazovky.</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Resetovat</value>
+  <data name="ApplicationName" xml:space="preserve">
+    <value />
+    <comment>Probably doesn't need localization. :)</comment>
   </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>Resetovat nastavení?</value>
@@ -297,7 +286,7 @@ Tuto aplikaci je možné spouštět pouze na systémech Windows Vista Home Premi
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>V tomto režimu aplikace OnTopReplica přeposílá kliknutí levého tlačítka myši do zdrojového okna (je tedy možné provádět základní ovládání zdrojového okna bez nutnosti jej aktivovat).
 
-Ukončit režim "přeposíání kliknutí" je možné opětovným vyvolání položky v menu.</value>
+Ukončit tento režim je možné pomocí nabídky ikony v oznamovací oblasti.</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>Přeposílání kliknutí</value>
@@ -336,6 +325,9 @@ K návratu do standardního režimu použijte příkaz pro vypnutí v nabídce i
   </data>
   <data name="MenuAboutTT" xml:space="preserve">
     <value>Skryje hlavní okno a zobrazí informace "O aplikaci".</value>
+  </data>
+  <data name="MenuAdvanced" xml:space="preserve">
+    <value>Advanced</value>
   </data>
   <data name="MenuChrome" xml:space="preserve">
     <value>Okraj</value>
@@ -411,12 +403,6 @@ K návratu do standardního režimu použijte příkaz pro vypnutí v nabídce i
   </data>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Opustit celoobrazovkový režim</value>
-  </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Ukládat pozici a velikost okna</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Přepínač, který definuje, zda si má aplikace OnTopReplica ukládat poslední pozici a velikost okna a obnovovat tyto údaje po restartování aplikace.</value>
   </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Minimalizovat do traye</value>

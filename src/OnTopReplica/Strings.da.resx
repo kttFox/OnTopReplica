@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,11 +112,19 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutAuthor" xml:space="preserve">
+    <value>Created by: %.</value>
+    <comment>Link % is replaced by string AboutAuthorContent.</comment>
+  </data>
+  <data name="AboutAuthorContent" xml:space="preserve">
+    <value />
+    <comment>Must not be localized. Leave blank in non-default languages.</comment>
+  </data>
   <data name="AboutButtonCancelTT" xml:space="preserve">
     <value>Annuller updateringen.</value>
   </data>
@@ -129,30 +137,55 @@
   <data name="AboutButtonUpdateTT" xml:space="preserve">
     <value>Opdater OnTopReplica nu.</value>
   </data>
+  <data name="AboutContribute" xml:space="preserve">
+    <value>Care to contribute to the project? You are welcome to improve available translations, start a new one for your native language or to check out the % from CodePlex.</value>
+  </data>
+  <data name="AboutContributeContent" xml:space="preserve">
+    <value>source code</value>
+  </data>
+  <data name="AboutCreditsSources" xml:space="preserve">
+    <value>OnTopReplica is based upon the WindowsFormsAero library and some other libraries and code sources. %.</value>
+    <comment>Link % is replaced by string AboutCreditsSourcesContent.</comment>
+  </data>
+  <data name="AboutCreditsSourcesContent" xml:space="preserve">
+    <value>Read the full credits</value>
+  </data>
+  <data name="AboutDividerContribute" xml:space="preserve">
+    <value>Contribute</value>
+  </data>
+  <data name="AboutDividerCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="AboutDividerLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="AboutLicense" xml:space="preserve">
+    <value>The application is licensed under the % license, which meets the terms of the "open-source" definition specified by OSI.</value>
+  </data>
+  <data name="AboutLicenseContent" xml:space="preserve">
+    <value>Microsoft Reciprocal (MS-RL)</value>
+    <comment>Can be left blank.</comment>
+  </data>
   <data name="AboutSlogan" xml:space="preserve">
     <value>En letvægts, live, miniature udgave af et vindue du vælger, der altid er øverst.</value>
   </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Opdater nu!</value>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About OnTopReplica</value>
   </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica checker automatiskt for opdateringer.</value>
+  <data name="AboutTranslators" xml:space="preserve">
+    <value>Translators: {0}</value>
+    <comment>{0} translators (do not end with period)</comment>
+  </data>
+  <data name="AboutTranslatorsContent" xml:space="preserve">
+    <value>Christian Olaechea M., Daniel Zeus.EX, Federico Lorenzo, Goran Brecelj, Jan Romanczyk, Marco Kraxner, Patrik (batupata), Raúl Morillo, René Mihula, Roberto Leiro, Rodrigo Lourenço, Thomas Amundsen, Eric Hoffmann.</value>
+    <comment>Must not be localized. Leave blank in non-default languages.</comment>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
     <value />
     <comment>Probably doesn't need localization. :)</comment>
-  </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Nulstil vinduet helt?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;NulstilAlle ændringer vil blive tabt.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Kan bruges til at nulstille alle indstillinger hvis du mister kontrollen over vinduet eller hvis det er flyttet uden for skærmen.</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Nulstil</value>
   </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>Nulstil indstillinger?</value>
@@ -255,7 +288,7 @@ Dette program kræver Windows Vista Home Premium eller bedre.</value>
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>Hvis denne funktion er aktiveret vil OnTopReplica vidersende alle venstr museklik til det klonede vindue (dette gør dig i stand til at udføre basis musefunktioner i det klonede vindue uden at skulle aktivere det).
 
-For at afslutte denne funktion skal du højreklikke på OnTopReplica og deaktivere "Click forwarding" i menuen.</value>
+For at afslutte denne funktion skal du bruge menuen på ikonet i proceslinjens meddelelsesområde.</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>Click forwarding</value>
@@ -294,6 +327,9 @@ For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i
   </data>
   <data name="MenuAboutTT" xml:space="preserve">
     <value>Skjuler hoved vinduet og viser om boxen.</value>
+  </data>
+  <data name="MenuAdvanced" xml:space="preserve">
+    <value>Advanced</value>
   </data>
   <data name="MenuChrome" xml:space="preserve">
     <value>Krom</value>
@@ -334,30 +370,6 @@ For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 kvart</value>
   </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (uigennemsigtig)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>Sæt OnTopReplica til at være helt uigennemsigtig.</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>Sætter OnTopReplica til 25% uigennemsigtighed.</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>Sætter OnTopReplica til 50% uigennemsigtighed.</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>Sætter OnTopReplica til 75% uigennemsigtighed.</value>
-  </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Uigennemsigtighed</value>
   </data>
@@ -373,6 +385,12 @@ For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i
   <data name="MenuPosBottomRight" xml:space="preserve">
     <value>Nederst højre</value>
   </data>
+  <data name="MenuPosCenter" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="MenuPosDisabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
   <data name="MenuPosition" xml:space="preserve">
     <value>Position</value>
   </data>
@@ -387,12 +405,6 @@ For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i
   </data>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Afslut fuldskærm tilstand.</value>
-  </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Gendan sidste position og størrelse</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Vælger om OnTopReplica skal gemme sidst brugte størrelse og position, til næste gang det starter op.</value>
   </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Minimer til systembakken.</value>
@@ -462,122 +474,6 @@ For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i
   </data>
   <data name="RightClick" xml:space="preserve">
     <value>Højreklik her for at starte...</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Annuller opdateringenOnTopReplica påminder dig igen næste gang det startes.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>FortsætInstaller OnTopReplica</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>Den nye version vil automatiskt blive downloaded og installeret.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Installeret version: {0}
-Tilgængelig version: {1}</value>
-  </data>
-  <data name="AboutAuthor" xml:space="preserve">
-    <value>Created by: %.</value>
-    <comment>Link % is replaced by string AboutAuthorContent.</comment>
-  </data>
-  <data name="AboutAuthorContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutContribute" xml:space="preserve">
-    <value>Care to contribute to the project? You are welcome to improve available translations, start a new one for your native language or to check out the % from CodePlex.</value>
-  </data>
-  <data name="AboutContributeContent" xml:space="preserve">
-    <value>source code</value>
-  </data>
-  <data name="AboutCreditsSources" xml:space="preserve">
-    <value>OnTopReplica is based upon the WindowsFormsAero library and some other libraries and code sources. %.</value>
-    <comment>Link % is replaced by string AboutCreditsSourcesContent.</comment>
-  </data>
-  <data name="AboutCreditsSourcesContent" xml:space="preserve">
-    <value>Read the full credits</value>
-  </data>
-  <data name="AboutDividerContribute" xml:space="preserve">
-    <value>Contribute</value>
-  </data>
-  <data name="AboutDividerCredits" xml:space="preserve">
-    <value>Credits</value>
-  </data>
-  <data name="AboutDividerLicense" xml:space="preserve">
-    <value>License</value>
-  </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Updates</value>
-  </data>
-  <data name="AboutLicense" xml:space="preserve">
-    <value>The application is licensed under the % license, which meets the terms of the "open-source" definition specified by OSI.</value>
-  </data>
-  <data name="AboutLicenseContent" xml:space="preserve">
-    <value>Microsoft Reciprocal (MS-RL)</value>
-    <comment>Can be left blank.</comment>
-  </data>
-  <data name="AboutTitle" xml:space="preserve">
-    <value>About OnTopReplica</value>
-  </data>
-  <data name="AboutTranslators" xml:space="preserve">
-    <value>Translators: {0}</value>
-    <comment>{0} translators (do not end with period)</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value>Christian Olaechea M., Daniel Zeus.EX, Federico Lorenzo, Goran Brecelj, Jan Romanczyk, Marco Kraxner, Patrik (batupata), Raúl Morillo, René Mihula, Roberto Leiro, Rodrigo Lourenço, Thomas Amundsen, Eric Hoffmann.</value>
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>OnTopReplica was unable to check whether an updated version is available. Make sure you are connected to the Internet. If you are, the website may be temporarily down.</value>
-  </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Disable</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Enable Group mode</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Select multiple windows to enable.</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Group switch mode is enabled.</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Group switch mode:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Windows</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
-  <data name="MenuAdvanced" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Group Switch mode</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica will automatically clone a window from an user defined group, switching to the one least recently activated to the foreground.</value>
-  </data>
-  <data name="MenuPosCenter" xml:space="preserve">
-    <value>Center</value>
-  </data>
-  <data name="MenuPosDisabled" xml:space="preserve">
-    <value>Disabled</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Restore last cloned window</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>When enabled, OnTopReplica will attempt to restore the last cloned window on start up.</value>
-  </data>
-  <data name="MenuSettings" xml:space="preserve">
-    <value>Settings...</value>
-  </data>
-  <data name="MenuSettingsTT" xml:space="preserve">
-    <value>Displays the settings panel.</value>
   </data>
   <data name="SettingsHotKeyClone" xml:space="preserve">
     <value>Clone current window</value>

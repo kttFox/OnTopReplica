@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutAuthor" xml:space="preserve">
     <value>Автор: %.</value>
@@ -281,7 +281,7 @@
     <value>Хотите включить передачу щелчков мышью главному окну?</value>
   </data>
   <data name="InfoClickForwardingContent" xml:space="preserve">
-    <value>Нажать Esc для выхода из этого режима.</value>
+    <value>Для выхода из этого режима используйте меню значка в области уведомлений.</value>
     <comment>There appears to be a missing part.</comment>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
@@ -398,12 +398,6 @@
   </data>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Выйти из полноэкранного режима</value>
-  </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Использовать последнее положение и размер</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Сохранение программой своего последнего положения и размера с их использованием при запуске.</value>
   </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Свернуть</value>

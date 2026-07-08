@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,14 +112,18 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutAuthor" xml:space="preserve">
     <value>Autor: %.</value>
     <comment>Link % is replaced by string AboutAuthorContent.</comment>
+  </data>
+  <data name="AboutAuthorContent" xml:space="preserve">
+    <value />
+    <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
   <data name="AboutButtonCancelTT" xml:space="preserve">
     <value>Przerwij proces aktualizacji.</value>
@@ -282,7 +286,7 @@ Aplikacja działa na Windows Vista Home Premium i nowszych.</value>
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>Kiedy ten tryb jest aktywny, OnTopReplica będzie przekazywać kliknięcia przycisków myszy do okna, które jest klonowane (dzięki temu możesz wykonywać na tym oknie podstawowe operacje bez konieczności uaktywniania go).
 
-Naciśnij ESC aby zakończyć ten tryb.</value>
+Aby zakończyć ten tryb, użyj menu ikony w zasobniku systemowym.</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>Przekazywanie kliknięć</value>
@@ -399,12 +403,6 @@ Aby powrócić do normalnego trybu, użyj polecenia wyłączenia w menu ikony On
   </data>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Wyjdź z trybu pełnoekranowego</value>
-  </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Zapamiętaj ostatnią pozycję i rozmiar</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Wybierz, czy OnTopReplica powinien zapamiętać ostatnią pozycję i rozmiar i użyć ich ponownie przy kolejnym uruchomieniu.</value>
   </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Minimalizuj</value>

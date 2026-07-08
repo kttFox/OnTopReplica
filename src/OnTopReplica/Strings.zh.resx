@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -183,30 +183,14 @@
     <value>OnTopReplica</value>
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>确认重置窗口？</value>
-  </data>
-  <!-- 颜色报警面板字符串 -->
   <data name="ColorAlert_Title" xml:space="preserve">
     <value>颜色报警</value>
-  </data>
-  <data name="ColorAlert_TargetColor" xml:space="preserve">
-    <value>目标颜色：</value>
-  </data>
-  <data name="ColorAlert_Tolerance" xml:space="preserve">
-    <value>颜色容差：</value>
   </data>
   <data name="ColorAlert_Interval" xml:space="preserve">
     <value>采样间隔 (毫秒)：</value>
   </data>
   <data name="ColorAlert_Enable" xml:space="preserve">
     <value>启用颜色检测</value>
-  </data>
-  <data name="ColorAlert_Choose" xml:space="preserve">
-    <value>选择…</value>
-  </data>
-  <data name="ColorAlert_ToleranceTooltip" xml:space="preserve">
-    <value>数值越大 = 匹配更多颜色 (0-255)</value>
   </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>颜色检查之间的时间 (毫秒)</value>
@@ -320,7 +304,7 @@
     <value>希望打开“点击转移”吗？</value>
   </data>
   <data name="InfoClickForwardingContent" xml:space="preserve">
-    <value>如果该模式启用，OnTopReplica将会把所有的鼠标点击事件转移到所监视的窗口（这将可以让你通过OnTopReplica来操作监视的窗口而不用切换到它）。退出该模式请按ESC。</value>
+    <value>如果该模式启用，OnTopReplica将会把所有的鼠标点击事件转移到所监视的窗口（这将可以让你通过OnTopReplica来操作监视的窗口而不用切换到它）。退出该模式请使用任务栏托盘图标的菜单。</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>点击转移</value>
@@ -436,12 +420,6 @@
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>退出全屏模式</value>
   </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>记录最后的位置和大小</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>切换OnTopReplica是否存储最后的位置和大小以便下次启动时使用。</value>
-  </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>最小化</value>
   </data>
@@ -549,5 +527,35 @@
   </data>
   <data name="RegionsY" xml:space="preserve">
     <value>Y</value>
+  </data>
+  <data name="MenuAddPanel" xml:space="preserve">
+    <value>添加面板</value>
+  </data>
+  <data name="MenuAddPanelTT" xml:space="preserve">
+    <value>打开另一个面板窗口以监控不同的区域</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>退出程序</value>
+  </data>
+  <data name="MenuExitTT" xml:space="preserve">
+    <value>关闭所有面板并退出程序</value>
+  </data>
+  <data name="ColorAlert_DetectColors" xml:space="preserve">
+    <value>检测颜色:</value>
+  </data>
+  <data name="ColorAlert_Gray" xml:space="preserve">
+    <value>灰色 (Gray)</value>
+  </data>
+  <data name="ColorAlert_IntervalRange" xml:space="preserve">
+    <value>(范围 100-10000)</value>
+  </data>
+  <data name="ColorAlert_Orange" xml:space="preserve">
+    <value>橙色 (Orange)</value>
+  </data>
+  <data name="ColorAlert_Red" xml:space="preserve">
+    <value>红色 (Red)</value>
+  </data>
+  <data name="ColorAlert_TestAlarm" xml:space="preserve">
+    <value>测试报警</value>
   </data>
 </root>

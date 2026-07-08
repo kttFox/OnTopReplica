@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutAuthor" xml:space="preserve">
     <value>Criado por: %.</value>
@@ -139,14 +139,12 @@
   </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>Quer ajudar a melhorar esse projeto? Você é bem vindo a melhorar traduções existentes, começar um nova ou mesmo checar % do CodePlex.</value>
-    
   </data>
   <data name="AboutContributeContent" xml:space="preserve">
     <value>source code</value>
   </data>
   <data name="AboutCreditsSources" xml:space="preserve">
     <value>OnTopReplica é baseado na biblioteca WindowsFormsAero e outras bibliotecas e códigos fonte. %.</value>
-    
     <comment>Link % is replaced by string AboutCreditsSourcesContent.</comment>
   </data>
   <data name="AboutCreditsSourcesContent" xml:space="preserve">
@@ -170,7 +168,6 @@
   </data>
   <data name="AboutSlogan" xml:space="preserve">
     <value>Uma janela em miniatura Leve, em Tempo Real e que sempre fica em foco na janela de sua escolha.</value>
-    
   </data>
   <data name="AboutTitle" xml:space="preserve">
     <value>Sobre OnTopReplica</value>
@@ -213,17 +210,15 @@
     <value>Detalhes do Windows Aero</value>
   </data>
   <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Windows Aero está apenas disponível no Windows Vista Home Premium ou mais recente.</value>    
+    <value>Windows Aero está apenas disponível no Windows Vista Home Premium ou mais recente.</value>
   </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>A função 'Desktop Composition' não está ativada.</value>
-
   </data>
   <data name="ErrorDwmOffContent" xml:space="preserve">
     <value>Você deve habilitar a função 'Desktop Composition' ao selecionar o tema 'Windows Aero' usado pelo Windows.
 
 Você pode ativa-lá clicando com o botão direto do mouse no Desktop e clicando em Personalizar.</value>
-
   </data>
   <data name="ErrorGenericInfoButton" xml:space="preserve">
     <value>Detalhes do erro</value>
@@ -233,7 +228,6 @@ Você pode ativa-lá clicando com o botão direto do mouse no Desktop e clicando
   </data>
   <data name="ErrorGenericThumbnailHandleError" xml:space="preserve">
     <value>Aparentemente a janela selecionada foi fechada ou não é mais válida.</value>
-    
   </data>
   <data name="ErrorGenericTitle" xml:space="preserve">
     <value>Erro</value>
@@ -241,7 +235,6 @@ Você pode ativa-lá clicando com o botão direto do mouse no Desktop e clicando
   <data name="ErrorNoDwm" xml:space="preserve">
     <value>A função 'Desktop Composition' não é suportada no seu Sistema Operacional atual.
 Você deve rodar essa aplicação em um Windows Vista Home Premium ou mais atual.</value>
-
   </data>
   <data name="ErrorNoDwmTitle" xml:space="preserve">
     <value>'Desktop Composition' não suportada</value>
@@ -297,8 +290,7 @@ Você deve rodar essa aplicação em um Windows Vista Home Premium ou mais atual
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>Se essa função estiver ativada, OnTopReplica irá repassar todos os cliques do mouse (isso permite que você mude as configurações do OnTopReplica sem precisar ativa-lo).
 
-Para desativar esse modo, aperte ESC.</value>
-
+Para desativar esse modo, use o menu do ícone da bandeja do sistema.</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>Click forwarding</value>
@@ -319,7 +311,6 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
   </data>
   <data name="InfoUpdatedContent" xml:space="preserve">
     <value>Para poder utilizar a versão atualizada de OnTopReplica, você deve reiniciar o programa.</value>
-    
   </data>
   <data name="InfoUpdatedTitle" xml:space="preserve">
     <value>Atualização com sucesso</value>
@@ -338,7 +329,6 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
   </data>
   <data name="MenuAboutTT" xml:space="preserve">
     <value>Esconde a janela principal e abre a janela "Sobre".</value>
-    
   </data>
   <data name="MenuAdvanced" xml:space="preserve">
     <value>Avançado</value>
@@ -347,7 +337,7 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
     <value>Mostrar bordas da janela</value>
   </data>
   <data name="MenuChromeTT" xml:space="preserve">
-    <value>Alterna a exibição da borda da janela.</value>    
+    <value>Alterna a exibição da borda da janela.</value>
   </data>
   <data name="MenuClickForwarding" xml:space="preserve">
     <value>Habilita 'Click forwarding'</value>
@@ -360,7 +350,6 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
   </data>
   <data name="MenuClickThroughTT" xml:space="preserve">
     <value>OnTopReplica irá se comportar como uma janela transparente que permite clicar através dela.</value>
-    
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>Fechar</value>
@@ -408,10 +397,10 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
     <value>Travar posição</value>
   </data>
   <data name="MenuPositionTT" xml:space="preserve">
-    <value>Posiciona OnTopReplica automaticamente na tela atual.</value>    
+    <value>Posiciona OnTopReplica automaticamente na tela atual.</value>
   </data>
   <data name="MenuPosTopLeft" xml:space="preserve">
-    <value>Superior Esquerdo</value>    
+    <value>Superior Esquerdo</value>
   </data>
   <data name="MenuPosTopRight" xml:space="preserve">
     <value>Superior Direito</value>
@@ -453,7 +442,7 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
     <value>- nenhuma -</value>
   </data>
   <data name="MenuWindowsTT" xml:space="preserve">
-    <value>Exibe uma lista de janela que você pode selecionar como origem da miniatura.</value>    
+    <value>Exibe uma lista de janela que você pode selecionar como origem da miniatura.</value>
   </data>
   <data name="MenuWindowsWholeRegion" xml:space="preserve">
     <value>- todo -</value>
@@ -477,7 +466,7 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
     <value>Salvar</value>
   </data>
   <data name="RegionsStoredRegions" xml:space="preserve">
-    <value>Região Salvas:</value>    
+    <value>Região Salvas:</value>
   </data>
   <data name="RegionsTitle" xml:space="preserve">
     <value>Regiões:</value>
@@ -486,16 +475,16 @@ Para retornar ao modo normal, use o comando de desativação no menu do ícone d
     <value>Comprimento</value>
   </data>
   <data name="RightClick" xml:space="preserve">
-    <value>Clique com o botão direito para iniciar...</value>     
+    <value>Clique com o botão direito para iniciar...</value>
   </data>
   <data name="SettingsHotKeyClone" xml:space="preserve">
-    <value>Clonar janela atual</value>    
+    <value>Clonar janela atual</value>
   </data>
   <data name="SettingsHotKeyDescription" xml:space="preserve">
-    <value>Esses atalhos podem ser usados quando o OnTopReplica não está em foco.</value>    
+    <value>Esses atalhos podem ser usados quando o OnTopReplica não está em foco.</value>
   </data>
   <data name="SettingsHotKeyShowHide" xml:space="preserve">
-    <value>Mostrar/Esconder</value>    
+    <value>Mostrar/Esconder</value>
   </data>
   <data name="SettingsHotKeyTitle" xml:space="preserve">
     <value>Teclas de Atalho:</value>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutAuthor" xml:space="preserve">
     <value>Created by: %.</value>
@@ -290,7 +290,7 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>If this mode is enabled, OnTopReplica will forward all left mouse clicks to the window that is being cloned (this will allow you to do basic mouse operations on the cloned window without having to activate it).
 
-To exit this mode, push ESC.</value>
+To exit this mode, use the task tray icon's menu.</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>Click forwarding</value>
@@ -407,12 +407,6 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
   </data>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Quit fullscreen mode</value>
-  </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Recall last position and size</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Toggles whether OnTopReplica should store its last position and size and use them when it is restarted.</value>
   </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Minimize</value>

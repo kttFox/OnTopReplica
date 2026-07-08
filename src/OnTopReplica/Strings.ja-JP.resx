@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -183,18 +183,26 @@
     <value>OnTopReplica</value>
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>ウィンドウを完全にリセットしますか？</value>
+  <data name="ColorAlert_Title" xml:space="preserve">
+    <value>カラーアラート</value>
   </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Reset
-All settings will be lost.</value>
+  <data name="ColorAlert_Interval" xml:space="preserve">
+    <value>サンプリング間隔 (ms):</value>
   </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Can be used to reset all settings if you lost control over the window or moved it beyond the screen boundary.</value>
+  <data name="ColorAlert_Enable" xml:space="preserve">
+    <value>色検出を有効にする</value>
   </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>リセット</value>
+  <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
+    <value>色チェックの間隔 (ミリ秒)</value>
+  </data>
+  <data name="ColorAlert_MenuTooltip" xml:space="preserve">
+    <value>ウィンドウを監視し、特定の色を検出したら警報します</value>
+  </data>
+  <data name="ColorAlert_Volume" xml:space="preserve">
+    <value>警報音量:</value>
+  </data>
+  <data name="ColorAlert_SoundFile" xml:space="preserve">
+    <value>サウンドファイル:</value>
   </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>設定をリセットしますか？</value>
@@ -300,7 +308,7 @@ You must run this application on Windows Vista Home Premium or better.</value>
     <value>このモードが有効な場合、マウスの左クリックを複製したウィンドウに転送します。
 (複製したウィンドウをアクティブにすることなく、OnTopReplica上で基本的なマウス操作を行うことができます。)
 
-このモードを終了するには、ESCキーを押します。</value>
+このモードを解除するには、タスクトレイのアイコンメニューから操作します。(ESCキーでは解除できません)</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>クリック-フォワーディング</value>
@@ -442,12 +450,6 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>フルスクリーンモードを終了</value>
   </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Recall last position and size</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Toggles whether OnTopReplica should store its last position and size and use them when it is restarted.</value>
-  </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>最小化</value>
   </data>
@@ -538,61 +540,6 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="SettingsTitle" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Cancel update
-OnTopReplica will prompt you the next time it is started.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>ダウンロード
-Install OnTopReplica {0}.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>The new version can be downloaded and installed from the official website.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>インストールされたバージョン: {0}
-新しいバージョン: {1}</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>新しいバージョン {0} があります</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} bytes downloaded.</value>
-    <comment>{0} downloaded bytes {1} total bytes
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>ダウンロード中...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>The latest version of OnTopReplica is already installed. The program automatically checks for updates at every start.
-
-You can keep up to date about OnTopReplica's development, suggest improvements and new features by &lt;a href="website"&gt;visiting the official website&lt;/a&gt;.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>Latest stable version released on {0}.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica はアップデートされました。</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Install
-OnTopReplica will be closed and the update installed.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>OnTopReplica version {0} is ready to be installed on your computer.</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>アップデート準備完了</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>OnTopReplica のアップデート</value>
-  </data>
   <data name="RegionsBottom" xml:space="preserve">
     <value>下</value>
   </data>
@@ -610,5 +557,47 @@ OnTopReplica will be closed and the update installed.</value>
   </data>
   <data name="RegionsY" xml:space="preserve">
     <value>Y</value>
+  </data>
+  <data name="MenuAddPanel" xml:space="preserve">
+    <value>パネルを追加</value>
+  </data>
+  <data name="MenuAddPanelTT" xml:space="preserve">
+    <value>別の領域を監視するパネルウィンドウを新しく開きます</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="MenuExitTT" xml:space="preserve">
+    <value>すべてのパネルを閉じてプログラムを終了します</value>
+  </data>
+  <data name="ColorAlert_DetectColors" xml:space="preserve">
+    <value>検出する色:</value>
+  </data>
+  <data name="ColorAlert_Gray" xml:space="preserve">
+    <value>グレー (Gray)</value>
+  </data>
+  <data name="ColorAlert_IntervalRange" xml:space="preserve">
+    <value>(100〜10000の範囲)</value>
+  </data>
+  <data name="ColorAlert_Orange" xml:space="preserve">
+    <value>オレンジ (Orange)</value>
+  </data>
+  <data name="ColorAlert_Red" xml:space="preserve">
+    <value>赤 (Red)</value>
+  </data>
+  <data name="ColorAlert_TestAlarm" xml:space="preserve">
+    <value>アラームをテスト</value>
+  </data>
+  <data name="ColorAlert_CustomColor" xml:space="preserve">
+    <value>カスタム色</value>
+  </data>
+  <data name="ColorAlert_ChooseColor" xml:space="preserve">
+    <value>色を選択...</value>
+  </data>
+  <data name="ColorAlert_SampleCursorColor" xml:space="preserve">
+    <value>カーソル色を取得</value>
+  </data>
+  <data name="ColorAlert_SamplingInProgress" xml:space="preserve">
+    <value>クリックして選択...</value>
   </data>
 </root>

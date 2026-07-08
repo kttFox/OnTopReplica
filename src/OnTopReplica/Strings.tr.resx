@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutAuthor" xml:space="preserve">
     <value>Yazar Hakkında: %.</value>
@@ -287,7 +287,7 @@ Bu programı Windows Vista Home Premium veya daha iyisinde çalıştırmalısın
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>Eğer bu mod etkinleştirilmiş ise, OnTopReplica bütün sol fare tıklamalarını klonlanmış pencereye iletecektir(bu size klonlanmış pencere üzerinde onu aktifleştirmeden temel fare işlemlerinizi yapabilmenize izin verir).
 
-Bu moddan çıkmak için, ESC'ye basınız.</value>
+Bu moddan çıkmak için görev çubuğu simgesinin menüsünü kullanınız.</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>Tıkla yönlendir</value>
@@ -404,12 +404,6 @@ Normal moda dönmek için, bildirim alanındaki OnTopReplica simgesinin menüsü
   </data>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Tamekran modundan çık</value>
-  </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Son pozisyona dön ve boyutlandır</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>OnTopReplica'nın son konumunu kaydedip kaydetmeyeceğini değiştirir ve boyutlandırıp bunu yeniden başladığında kullanır.</value>
   </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Küçült</value>
