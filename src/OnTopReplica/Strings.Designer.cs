@@ -412,6 +412,24 @@ namespace OnTopReplica {
         }
         
         /// <summary>
+        ///   (click and press a key) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_KeyNone {
+            get {
+                return ResourceManager.GetString("ColorAlert_KeyNone", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Press key on alarm: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_KeyPress {
+            get {
+                return ResourceManager.GetString("ColorAlert_KeyPress", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Test alarm に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ColorAlert_TestAlarm {

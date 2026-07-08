@@ -42,6 +42,8 @@ namespace OnTopReplica.SidePanels {
 			this.labelSoundFile = new System.Windows.Forms.Label();
 			this.comboSound = new System.Windows.Forms.ComboBox();
 			this.btnTestAlarm = new System.Windows.Forms.Button();
+			this.checkKeyPress = new System.Windows.Forms.CheckBox();
+			this.textKeyCapture = new System.Windows.Forms.TextBox();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.tooltipInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.groupColor.SuspendLayout();
@@ -68,11 +70,13 @@ namespace OnTopReplica.SidePanels {
 			this.groupColor.Controls.Add(this.labelSoundFile);
 			this.groupColor.Controls.Add(this.comboSound);
 			this.groupColor.Controls.Add(this.btnTestAlarm);
+			this.groupColor.Controls.Add(this.checkKeyPress);
+			this.groupColor.Controls.Add(this.textKeyCapture);
 			this.groupColor.Dock = System.Windows.Forms.DockStyle.Top;
 			this.groupColor.Location = new System.Drawing.Point(10, 5);
 			this.groupColor.Name = "groupColor";
 			this.groupColor.Padding = new System.Windows.Forms.Padding(12);
-			this.groupColor.Size = new System.Drawing.Size(388, 360);
+			this.groupColor.Size = new System.Drawing.Size(388, 396);
 			this.groupColor.TabIndex = 0;
 			this.groupColor.TabStop = false;
 			this.groupColor.Text = "Color Alert";
@@ -280,10 +284,33 @@ namespace OnTopReplica.SidePanels {
 			this.btnTestAlarm.Text = "Test alarm";
 			this.btnTestAlarm.UseVisualStyleBackColor = true;
 			this.btnTestAlarm.Click += new System.EventHandler(this.BtnTestAlarm_Click);
-			// 
+			//
+			// checkKeyPress
+			//
+			this.checkKeyPress.AutoSize = true;
+			this.checkKeyPress.Location = new System.Drawing.Point(15, 358);
+			this.checkKeyPress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.checkKeyPress.Name = "checkKeyPress";
+			this.checkKeyPress.Size = new System.Drawing.Size(120, 19);
+			this.checkKeyPress.TabIndex = 17;
+			this.checkKeyPress.Text = "Press key on alarm:";
+			this.checkKeyPress.UseVisualStyleBackColor = true;
+			this.checkKeyPress.CheckedChanged += new System.EventHandler(this.CheckKeyPress_CheckedChanged);
+			//
+			// textKeyCapture
+			//
+			this.textKeyCapture.Location = new System.Drawing.Point(175, 355);
+			this.textKeyCapture.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.textKeyCapture.Name = "textKeyCapture";
+			this.textKeyCapture.ReadOnly = true;
+			this.textKeyCapture.Size = new System.Drawing.Size(140, 23);
+			this.textKeyCapture.TabIndex = 18;
+			this.textKeyCapture.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.textKeyCapture.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextKeyCapture_KeyDown);
+			//
 			// btnClose
 			// 
-			this.btnClose.Location = new System.Drawing.Point(158, 371);
+			this.btnClose.Location = new System.Drawing.Point(158, 407);
 			this.btnClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(93, 29);
@@ -298,10 +325,10 @@ namespace OnTopReplica.SidePanels {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.groupColor);
 			this.Controls.Add(this.btnClose);
-			this.MinimumSize = new System.Drawing.Size(408, 412);
+			this.MinimumSize = new System.Drawing.Size(408, 448);
 			this.Name = "ColorAlertPanel";
 			this.Padding = new System.Windows.Forms.Padding(10, 5, 10, 0);
-			this.Size = new System.Drawing.Size(408, 412);
+			this.Size = new System.Drawing.Size(408, 448);
 			this.groupColor.ResumeLayout(false);
 			this.groupColor.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numInterval)).EndInit();
@@ -330,6 +357,8 @@ namespace OnTopReplica.SidePanels {
         private System.Windows.Forms.Label labelSoundFile;
         private System.Windows.Forms.ComboBox comboSound;
         private System.Windows.Forms.Button btnTestAlarm;
+        private System.Windows.Forms.CheckBox checkKeyPress;
+        private System.Windows.Forms.TextBox textKeyCapture;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ToolTip tooltipInfo;
     }

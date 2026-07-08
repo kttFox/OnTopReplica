@@ -558,4 +558,10 @@
   <data name="ColorAlert_TestAlarm" xml:space="preserve">
     <value>测试报警</value>
   </data>
+  <data name="ColorAlert_KeyPress" xml:space="preserve">
+    <value>报警时发送按键:</value>
+  </data>
+  <data name="ColorAlert_KeyNone" xml:space="preserve">
+    <value>(点击并按下按键)</value>
+  </data>
 </root>

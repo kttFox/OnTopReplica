@@ -29,6 +29,7 @@ namespace OnTopReplica.SidePanels {
             btnPickCustomColor.Text = Strings.ColorAlert_ChooseColor;
             btnSampleCursorColor.Text = Strings.ColorAlert_SampleCursorColor;
             btnTestAlarm.Text = Strings.ColorAlert_TestAlarm;
+            checkKeyPress.Text = Strings.ColorAlert_KeyPress;
             labelVolume.Text = Strings.ColorAlert_Volume;
             labelSoundFile.Text = Strings.ColorAlert_SoundFile;
             btnClose.Text = Strings.MenuClose;
@@ -92,6 +93,13 @@ namespace OnTopReplica.SidePanels {
                 checkOrange.Checked = categories.Contains(ColorCategory.Orange);
                 checkGray.Checked = categories.Contains(ColorCategory.Gray);
                 checkCustomColor.Checked = _customTargetColor.HasValue;
+
+                // キー送信設定
+                if (_processor != null) {
+                    _keyPressKey = _processor.KeyPressKey;
+                    checkKeyPress.Checked = _processor.KeyPressEnabled;
+                }
+                UpdateKeyCaptureUi();
 
                 Log.Write("Loaded ColorAlert categories: {0}", CategoriesToString(categories));
 
@@ -165,6 +173,8 @@ namespace OnTopReplica.SidePanels {
                 if (GetSelectedSoundPath() != null) {
                     _processor.AlarmSoundFile = GetSelectedSoundPath();
                 }
+                _processor.KeyPressEnabled = checkKeyPress.Checked;
+                _processor.KeyPressKey = _keyPressKey;
             }
 
             //Color detection settings (incl. volume and sound) are persisted
@@ -252,6 +262,8 @@ namespace OnTopReplica.SidePanels {
             if (soundPath != null) {
                 _processor.AlarmSoundFile = soundPath;
             }
+            _processor.KeyPressEnabled = checkKeyPress.Checked;
+            _processor.KeyPressKey = _keyPressKey;
             Log.Write("SyncSettingsToProcessor: categories={0}, custom={1}", CategoriesToString(_processor.EnabledCategories), _processor.CustomTargetColor.HasValue ? _processor.CustomTargetColor.Value.ToString() : "none");
         }
 
@@ -395,6 +407,50 @@ namespace OnTopReplica.SidePanels {
             }
 
             Log.Write("PopulateSoundList found {0} items", comboSound.Items.Count);
+        }
+
+        private Keys _keyPressKey = Keys.None;
+
+        /// <summary>
+        /// キー表示テキストボックスを現在の設定に合わせて更新する。
+        /// </summary>
+        private void UpdateKeyCaptureUi() {
+            textKeyCapture.Text = _keyPressKey == Keys.None
+                ? Strings.ColorAlert_KeyNone
+                : _keyPressKey.ToString();
+        }
+
+        private void CheckKeyPress_CheckedChanged(object sender, EventArgs e) {
+            if (_loading) return;
+            if (_processor != null) {
+                _processor.KeyPressEnabled = checkKeyPress.Checked;
+                _processor.KeyPressKey = _keyPressKey;
+            }
+            if (checkKeyPress.Checked && _keyPressKey == Keys.None) {
+                textKeyCapture.Focus();
+            }
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
+        private void TextKeyCapture_KeyDown(object sender, KeyEventArgs e) {
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+
+            // 修飾キー単独は無視する(キーが確定するまで待つ)
+            var key = e.KeyCode;
+            if (key == Keys.ShiftKey || key == Keys.ControlKey || key == Keys.Menu ||
+                key == Keys.LWin || key == Keys.RWin || key == Keys.None) {
+                return;
+            }
+
+            _keyPressKey = key;
+            UpdateKeyCaptureUi();
+            if (_processor != null) {
+                _processor.KeyPressKey = _keyPressKey;
+                _processor.KeyPressEnabled = checkKeyPress.Checked;
+            }
+            Log.Write("ColorAlert key press set to {0}", _keyPressKey);
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
         }
 
         private void BtnTestAlarm_Click(object sender, EventArgs e) {

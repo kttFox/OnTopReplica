@@ -328,6 +328,10 @@ namespace OnTopReplica {
                     //File path or "system:" pseudo-path: cannot contain the separator
                     tokens.Add("sound=" + proc.AlarmSoundFile);
                 }
+                tokens.Add("keyon=" + (proc.KeyPressEnabled ? "1" : "0"));
+                if (proc.KeyPressKey != System.Windows.Forms.Keys.None) {
+                    tokens.Add("key=" + ((int)proc.KeyPressKey).ToString(inv));
+                }
             }
             catch { }
         }
@@ -372,6 +376,16 @@ namespace OnTopReplica {
 
                 if (tokens.TryGetValue("sound", out v) && v.Length > 0) {
                     proc.AlarmSoundFile = v;
+                }
+
+                int keyCode;
+                if (tokens.TryGetValue("key", out v) &&
+                    int.TryParse(v, NumberStyles.Integer, inv, out keyCode)) {
+                    proc.KeyPressKey = (System.Windows.Forms.Keys)keyCode;
+                }
+
+                if (tokens.TryGetValue("keyon", out v)) {
+                    proc.KeyPressEnabled = v == "1";
                 }
 
                 if (tokens.TryGetValue("alert", out v)) {

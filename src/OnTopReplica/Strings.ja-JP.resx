@@ -588,6 +588,12 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="ColorAlert_TestAlarm" xml:space="preserve">
     <value>アラームをテスト</value>
   </data>
+  <data name="ColorAlert_KeyPress" xml:space="preserve">
+    <value>アラーム時にキーを送信:</value>
+  </data>
+  <data name="ColorAlert_KeyNone" xml:space="preserve">
+    <value>(クリックしてキーを入力)</value>
+  </data>
   <data name="ColorAlert_CustomColor" xml:space="preserve">
     <value>カスタム色</value>
   </data>

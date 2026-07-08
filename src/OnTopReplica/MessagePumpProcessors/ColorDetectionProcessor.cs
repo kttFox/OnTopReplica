@@ -59,7 +59,16 @@ namespace OnTopReplica.MessagePumpProcessors {
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool DeleteObject(IntPtr hObject);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        private static extern uint MapVirtualKey(uint uCode, uint uMapType);
+
         private const uint SRCCOPY = 0x00CC0020;
+        private const uint WM_KEYDOWN = 0x0100;
+        private const uint WM_KEYUP = 0x0101;
 
         // PW_RENDERFULLCONTENT = 2: DirectComposition コンテンツを含む完全なレンダリング
         private const uint PW_RENDERFULLCONTENT = 2;
@@ -142,6 +151,52 @@ namespace OnTopReplica.MessagePumpProcessors {
         public string AlarmSoundFile {
             get { return _alarmSoundFile; }
             set { _alarmSoundFile = value; }
+        }
+
+        private bool _keyPressEnabled = false;
+        private Keys _keyPressKey = Keys.None;
+
+        /// <summary>
+        /// アラーム発報時に監視対象ウィンドウへキーを送信するかどうか。
+        /// </summary>
+        public bool KeyPressEnabled {
+            get { return _keyPressEnabled; }
+            set { _keyPressEnabled = value; }
+        }
+
+        /// <summary>
+        /// アラーム発報時に送信するキー(修飾キーなしの単一キー)。
+        /// </summary>
+        public Keys KeyPressKey {
+            get { return _keyPressKey; }
+            set { _keyPressKey = value; }
+        }
+
+        /// <summary>
+        /// 監視対象ウィンドウへ設定されたキーを PostMessage で送信する。
+        /// 非アクティブなウィンドウにも届く。バックグラウンドスレッドから呼び出し可能。
+        /// </summary>
+        private void SendKeyToTargetWindow() {
+            if (!_keyPressEnabled || _keyPressKey == Keys.None)
+                return;
+
+            var handle = Form != null ? Form.CurrentThumbnailWindowHandle : null;
+            if (handle == null)
+                return;
+
+            try {
+                uint vk = (uint)(_keyPressKey & Keys.KeyCode);
+                uint scanCode = MapVirtualKey(vk, 0 /* MAPVK_VK_TO_VSC */);
+                IntPtr wParam = new IntPtr((int)vk);
+                IntPtr lParamDown = new IntPtr(unchecked((int)(1u | (scanCode << 16))));
+                IntPtr lParamUp = new IntPtr(unchecked((int)(1u | (scanCode << 16) | (1u << 30) | (1u << 31))));
+                PostMessage(handle.Handle, WM_KEYDOWN, wParam, lParamDown);
+                PostMessage(handle.Handle, WM_KEYUP, wParam, lParamUp);
+                Log.Write("ColorDetection: key {0} sent to target window", _keyPressKey);
+            }
+            catch (Exception ex) {
+                Log.Write("ColorDetection: failed to send key: {0}", ex.Message);
+            }
         }
 
         /// <summary>
@@ -760,6 +815,9 @@ namespace OnTopReplica.MessagePumpProcessors {
             _alarmStopTimer = new System.Threading.Timer(_ => StopAlarm(), null, AlarmDuration, System.Threading.Timeout.Infinite);
 
             Log.Write("Color alarm triggered! volume={0}, file={1}", _alarmVolume, _alarmSoundFile);
+
+            // 設定されていれば、監視対象ウィンドウへキーを1回送信する
+            SendKeyToTargetWindow();
 
             // システムサウンドの疑似パスは直接再生する(スレッドセーフのため dispatcher は不要)
             if (TryPlaySystemSound(_alarmSoundFile)) {
