@@ -358,6 +358,33 @@ namespace OnTopReplica {
         }
         
         /// <summary>
+        ///   (click and press a key) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_KeyNone {
+            get {
+                return ResourceManager.GetString("ColorAlert_KeyNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Press key on alarm: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_KeyPress {
+            get {
+                return ResourceManager.GetString("ColorAlert_KeyPress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Color Alert... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_MenuTitle {
+            get {
+                return ResourceManager.GetString("ColorAlert_MenuTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Monitor window for specific color and alert に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ColorAlert_MenuTooltip {
@@ -411,24 +438,6 @@ namespace OnTopReplica {
             }
         }
         
-        /// <summary>
-        ///   (click and press a key) に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ColorAlert_KeyNone {
-            get {
-                return ResourceManager.GetString("ColorAlert_KeyNone", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Press key on alarm: に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ColorAlert_KeyPress {
-            get {
-                return ResourceManager.GetString("ColorAlert_KeyPress", resourceCulture);
-            }
-        }
-
         /// <summary>
         ///   Test alarm に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -743,7 +752,7 @@ namespace OnTopReplica {
         /// <summary>
         ///   In this mode the fullscreen window will behave as a partially transparent overlay, allowing you to click on the other windows behind it.
         ///
-        ///To return to normal mode anytime, activate OnTopReplica by clicking on the task bar (or the tray icon). に類似しているローカライズされた文字列を検索します。
+        ///To return to normal mode, use the disable command in the menu of the OnTopReplica tray icon. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InfoClickThroughContent {
             get {

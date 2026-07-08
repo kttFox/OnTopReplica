@@ -336,7 +336,7 @@
 			// 
 			this.colorAlertToolStripMenuItem.Name = "colorAlertToolStripMenuItem";
 			this.colorAlertToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-			this.colorAlertToolStripMenuItem.Text = global::OnTopReplica.Strings.ColorAlert_Title;
+			this.colorAlertToolStripMenuItem.Text = global::OnTopReplica.Strings.ColorAlert_MenuTitle;
 			this.colorAlertToolStripMenuItem.ToolTipText = global::OnTopReplica.Strings.ColorAlert_MenuTooltip;
 			this.colorAlertToolStripMenuItem.Click += new System.EventHandler(this.Menu_ColorAlert_click);
 			// 

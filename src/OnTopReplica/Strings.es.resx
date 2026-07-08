@@ -321,7 +321,7 @@ Para volver al modo normal, usa el comando de desactivación en el menú del ico
     <value>Idioma</value>
   </data>
   <data name="MenuAbout" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>Acerca de...</value>
   </data>
   <data name="MenuAboutTT" xml:space="preserve">
     <value>Oculta la ventana principal y muestra la ventana de "Acerca de"</value>
@@ -411,7 +411,7 @@ Para volver al modo normal, usa el comando de desactivación en el menú del ico
     <value>Minimiza OnTopReplica a la barra de tareas (o de sistema).</value>
   </data>
   <data name="MenuRegion" xml:space="preserve">
-    <value>Seleccionar región</value>
+    <value>Seleccionar región...</value>
   </data>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Activa o desactiva "Seleccionar región", que permite seleccionar una región específica de la ventana clonada.</value>

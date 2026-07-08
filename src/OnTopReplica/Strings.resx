@@ -190,6 +190,9 @@
   <data name="ColorAlert_Title" xml:space="preserve">
     <value>Color Alert</value>
   </data>
+  <data name="ColorAlert_MenuTitle" xml:space="preserve">
+    <value>Color Alert...</value>
+  </data>
   <data name="ColorAlert_Interval" xml:space="preserve">
     <value>Sample Interval (ms):</value>
   </data>
@@ -562,7 +565,7 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
     <value>Y</value>
   </data>
   <data name="MenuAddPanel" xml:space="preserve">
-    <value>Add panel</value>
+    <value>Add panel...</value>
   </data>
   <data name="MenuAddPanelTT" xml:space="preserve">
     <value>Opens another panel window to monitor a different region</value>
