@@ -32,6 +32,10 @@ namespace OnTopReplica.Native {
         public static extern bool IsWindowVisible(IntPtr hWnd);
 
         [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
         public static extern IntPtr GetDesktopWindow();
 
         [DllImport("user32.dll")]
