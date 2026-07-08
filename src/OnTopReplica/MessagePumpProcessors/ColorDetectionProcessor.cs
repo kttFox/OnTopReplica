@@ -79,8 +79,6 @@ namespace OnTopReplica.MessagePumpProcessors {
         private HashSet<ColorCategory> _enabledCategories = new HashSet<ColorCategory>();
         private int _sampleInterval = 500; // サンプリング間隔(ミリ秒)
         private float _alarmVolume = 1.0f; // 0.0 - 1.0
-        private string _alarmSoundFile = string.Empty;
-        private Color? _customTargetColor;
         private volatile bool _alarmActive = false;
         private System.Threading.Timer _alarmStopTimer = null; // アラーム開始からちょうど AlarmDuration ミリ秒後に発火する
         private System.Threading.Thread _detectionThread = null; // バックグラウンド検出スレッド(message pump から独立)
@@ -129,10 +127,7 @@ namespace OnTopReplica.MessagePumpProcessors {
             set { _enabledCategories = value ?? new HashSet<ColorCategory>(); }
         }
 
-        public Color? CustomTargetColor {
-            get { return _customTargetColor; }
-            set { _customTargetColor = value; }
-        }
+        public Color? CustomTargetColor { get; set; }
 
         public int SampleInterval {
             get { return _sampleInterval; }
@@ -148,36 +143,24 @@ namespace OnTopReplica.MessagePumpProcessors {
             set { _alarmVolume = Math.Max(0, Math.Min(1, value)); }
         }
 
-        public string AlarmSoundFile {
-            get { return _alarmSoundFile; }
-            set { _alarmSoundFile = value; }
-        }
-
-        private bool _keyPressEnabled = false;
-        private Keys _keyPressKey = Keys.None;
+        public string AlarmSoundFile { get; set; } = string.Empty;
 
         /// <summary>
         /// アラーム発報時に監視対象ウィンドウへキーを送信するかどうか。
         /// </summary>
-        public bool KeyPressEnabled {
-            get { return _keyPressEnabled; }
-            set { _keyPressEnabled = value; }
-        }
+        public bool KeyPressEnabled { get; set; } = false;
 
         /// <summary>
         /// アラーム発報時に送信するキー(修飾キーなしの単一キー)。
         /// </summary>
-        public Keys KeyPressKey {
-            get { return _keyPressKey; }
-            set { _keyPressKey = value; }
-        }
+        public Keys KeyPressKey { get; set; } = Keys.None;
 
         /// <summary>
         /// 監視対象ウィンドウへ設定されたキーを PostMessage で送信する。
         /// 非アクティブなウィンドウにも届く。バックグラウンドスレッドから呼び出し可能。
         /// </summary>
         private void SendKeyToTargetWindow() {
-            if (!_keyPressEnabled || _keyPressKey == Keys.None)
+            if (!KeyPressEnabled || KeyPressKey == Keys.None)
                 return;
 
             var handle = Form != null ? Form.CurrentThumbnailWindowHandle : null;
@@ -185,14 +168,14 @@ namespace OnTopReplica.MessagePumpProcessors {
                 return;
 
             try {
-                uint vk = (uint)(_keyPressKey & Keys.KeyCode);
+                uint vk = (uint)(KeyPressKey & Keys.KeyCode);
                 uint scanCode = MapVirtualKey(vk, 0 /* MAPVK_VK_TO_VSC */);
                 IntPtr wParam = new IntPtr((int)vk);
                 IntPtr lParamDown = new IntPtr(unchecked((int)(1u | (scanCode << 16))));
                 IntPtr lParamUp = new IntPtr(unchecked((int)(1u | (scanCode << 16) | (1u << 30) | (1u << 31))));
                 PostMessage(handle.Handle, WM_KEYDOWN, wParam, lParamDown);
                 PostMessage(handle.Handle, WM_KEYUP, wParam, lParamUp);
-                Log.Write("ColorDetection: key {0} sent to target window", _keyPressKey);
+                Log.Write("ColorDetection: key {0} sent to target window", KeyPressKey);
             }
             catch (Exception ex) {
                 Log.Write("ColorDetection: failed to send key: {0}", ex.Message);
@@ -271,7 +254,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 if (!_detectionRunning) break;
                 if (!_enabled) break;
                 if (Form == null || Form.CurrentThumbnailWindowHandle == null) continue;
-                if (_enabledCategories.Count == 0 && !_customTargetColor.HasValue) continue;
+                if (_enabledCategories.Count == 0 && !CustomTargetColor.HasValue) continue;
                 if (_alarmActive) continue;
 
                 var catList = string.Join(",", _enabledCategories);
@@ -622,7 +605,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 return false;
 
             Log.Write("ColorDetection Scan: enabledCategories=[{0}], customColor={1}, bmpSize={2}x{3}",
-                string.Join(",", _enabledCategories), _customTargetColor.HasValue ? _customTargetColor.Value.ToString() : "none", bmp.Width, bmp.Height);
+                string.Join(",", _enabledCategories), CustomTargetColor.HasValue ? CustomTargetColor.Value.ToString() : "none", bmp.Width, bmp.Height);
 
             BitmapData data = null;
             try {
@@ -660,7 +643,7 @@ namespace OnTopReplica.MessagePumpProcessors {
 
                         // カスタム色は白/黒スキップより先に判定する
                         // (白っぽい/黒っぽいカスタム色も検出できるようにするため)
-                        if (_customTargetColor.HasValue && IsNearCustomColor(pr, pg, pb, _customTargetColor.Value)) {
+                        if (CustomTargetColor.HasValue && IsNearCustomColor(pr, pg, pb, CustomTargetColor.Value)) {
                             customCount++;
                         }
 
@@ -716,8 +699,8 @@ namespace OnTopReplica.MessagePumpProcessors {
                 }
 
                 // --- ルール3: カスタム色 ---
-                if (_customTargetColor.HasValue && customCount >= 1) {
-                    Log.Write("ColorDetection MATCH: Custom, {0} pixel(s), target={1}", customCount, _customTargetColor.Value);
+                if (CustomTargetColor.HasValue && customCount >= 1) {
+                    Log.Write("ColorDetection MATCH: Custom, {0} pixel(s), target={1}", customCount, CustomTargetColor.Value);
                     SaveDebugBitmap(bmp, "alarm_trigger");
                     return true;
                 }
@@ -814,21 +797,21 @@ namespace OnTopReplica.MessagePumpProcessors {
             _alarmStopTimer?.Dispose();
             _alarmStopTimer = new System.Threading.Timer(_ => StopAlarm(), null, AlarmDuration, System.Threading.Timeout.Infinite);
 
-            Log.Write("Color alarm triggered! volume={0}, file={1}", _alarmVolume, _alarmSoundFile);
+            Log.Write("Color alarm triggered! volume={0}, file={1}", _alarmVolume, AlarmSoundFile);
 
             // 設定されていれば、監視対象ウィンドウへキーを1回送信する
             SendKeyToTargetWindow();
 
             // システムサウンドの疑似パスは直接再生する(スレッドセーフのため dispatcher は不要)
-            if (TryPlaySystemSound(_alarmSoundFile)) {
-                Log.Write("System sound played: {0}", _alarmSoundFile);
+            if (TryPlaySystemSound(AlarmSoundFile)) {
+                Log.Write("System sound played: {0}", AlarmSoundFile);
                 return;
             }
 
             // MediaPlayer は WPF の Dispatcher を持つスレッド上で生成・使用しなければならない。
             // _uiDispatcher は Initialize() 内で UI スレッド上にてキャプチャ済み。
-            if (!string.IsNullOrEmpty(_alarmSoundFile) && File.Exists(_alarmSoundFile)) {
-                var soundFile = _alarmSoundFile;
+            if (!string.IsNullOrEmpty(AlarmSoundFile) && File.Exists(AlarmSoundFile)) {
+                var soundFile = AlarmSoundFile;
                 var volume = _alarmVolume;
                 if (_uiDispatcher != null) {
                     _uiDispatcher.BeginInvoke((Action)(() => {
