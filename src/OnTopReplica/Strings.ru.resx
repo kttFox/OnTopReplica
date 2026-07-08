@@ -291,18 +291,8 @@
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Включить режим сквозных щелчков мышью?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Режим сквозных щелчков мышью работает, только когда он включен в подменю «Изменить размер» и окно полупрозрачно.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
-    <value>Для возвращения в обычный режим в любое время, разверните программу щелчком по ней в панели задач (или лотке).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Нет, спасибо
-Вы можете включить сквозные щелчки мышью в другой раз.</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Использовать сквозные щелчки мышью</value>
+  <data name="InfoClickThroughContent" xml:space="preserve">
+    <value>Для возвращения в обычный режим воспользуйтесь командой отключения в меню значка OnTopReplica в области уведомлений.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Режим сквозных щелчков мышью</value>

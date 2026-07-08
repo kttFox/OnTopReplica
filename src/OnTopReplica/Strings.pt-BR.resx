@@ -306,23 +306,10 @@ Para desativar esse modo, aperte ESC.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Habilitar 'Click-Through'?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>'Click-through' só funciona se habilitado no menu e se a janela é semi-transparente.</value>
-    
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>Nesse modo, a janela em tela cheia permite que você os cliques não sejam interpretados por ela.
 
-Para retornar ao modo normal a qualquer momento, abra OnTopReplica no ícone na bandeja ou na barra de tarefas.</value>
-
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Não, obrigado.
-Você pode ativar 'click-trough' mais tarde</value>
-
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Usar 'Click-Through'</value>
+Para retornar ao modo normal, use o comando de desativação no menu do ícone do OnTopReplica na bandeja do sistema.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Modo 'Click-Through'</value>

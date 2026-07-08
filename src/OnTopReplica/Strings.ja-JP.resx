@@ -308,20 +308,10 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>クリック-スルーモードを有効にしますか？</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>クリック-スルーモードは、"高度な設定"で"クリック-スルー"が有効になっている場合かつ、ウィンドウが半透明の場合のみ機能します</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
-    <value>In this mode the fullscreen window will behave as a partially transparent overlay, allowing you to click on the other windows behind it.
+  <data name="InfoClickThroughContent" xml:space="preserve">
+    <value>このモードでは、全画面ウィンドウが半透明のオーバーレイとして表示され、背後のウィンドウをそのままクリックして操作できます。
 
-To return to normal mode anytime, activate OnTopReplica by clicking on the task bar (or the tray icon).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>No, thank you.
-You can enable click-through later</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>クリック-スルーを使う</value>
+通常モードに戻すには、通知領域（システムトレイ）の OnTopReplica アイコンのメニューから解除してください。</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>クリック-スルー モード</value>
@@ -370,6 +360,30 @@ You can enable click-through later</value>
   </data>
   <data name="MenuClickThroughTT" xml:space="preserve">
     <value>ウィンドウを透過してクリックします (OnTopReplicaで表示されているウィンドウの下へクリックをスルーします)</value>
+  </data>
+  <data name="MenuEnableClickForwardingAll" xml:space="preserve">
+    <value>すべてのパネルをクリック-フォワード</value>
+  </data>
+  <data name="MenuEnableClickForwardingAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック-フォワーディングを有効にします</value>
+  </data>
+  <data name="MenuDisableClickForwardingAll" xml:space="preserve">
+    <value>すべてのパネルのクリック-フォワードを解除</value>
+  </data>
+  <data name="MenuDisableClickForwardingAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック-フォワーディングを解除します</value>
+  </data>
+  <data name="MenuEnableClickThroughAll" xml:space="preserve">
+    <value>すべてのパネルをクリック-スルー</value>
+  </data>
+  <data name="MenuEnableClickThroughAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック-スルーを有効にします</value>
+  </data>
+  <data name="MenuDisableClickThroughAll" xml:space="preserve">
+    <value>すべてのパネルのクリック-スルーを解除</value>
+  </data>
+  <data name="MenuDisableClickThroughAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック-スルーを解除します</value>
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>閉じる</value>

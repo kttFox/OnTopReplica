@@ -290,20 +290,10 @@ Naciśnij ESC aby zakończyć ten tryb.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Włączyć tryb kliknij-przez?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Kliknij-przez działa tylko wtedy, gdy zostało włączone w podmenu 'Zmień rozmiar' i kiedy okno jest półprzeźroczyste.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>W tym trybie okno na pełnym ekranie będzie się zachowywać jak półprzeźroczysta warstwa i będziesz w stanie kliknąć na oknie znajdującym się pod nim.
 
-Aby w dowolnym momencie powrócić do normalnego trybu aktywuj OnTopReplica klikając na pasku zadań (lub na ikonce w tacce systemowej).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Nie, dziękuję.
-Możesz włączyć kliknij-przez później</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Użyj kliknij-przez</value>
+Aby powrócić do normalnego trybu, użyj polecenia wyłączenia w menu ikony OnTopReplica w tacce systemowej.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Tryb kliknij-przez</value>

@@ -331,20 +331,10 @@
   <data name="InfoClickThrough" xml:space="preserve">
     <value>启用点击穿过模式吗？</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>点击穿过功能仅在缩放启用或窗口半透明的状态下方能工作</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>In this mode the fullscreen window will behave as a partially transparent overlay, allowing you to click on the other windows behind it.
 
-To return to normal mode anytime, activate OnTopReplica by clicking on the task bar (or the tray icon).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>不了，谢谢
-等下再启用点击穿过</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>使用点击穿过</value>
+To return to normal mode, use the disable command in the menu of the OnTopReplica tray icon.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>点击穿过模式</value>

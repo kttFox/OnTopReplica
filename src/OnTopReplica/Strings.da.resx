@@ -263,20 +263,10 @@ For at afslutte denne funktion skal du højreklikke på OnTopReplica og deaktive
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Ønskes gennem klik i fuldskærms tilstand?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Gennem klik virker kun hvis det er blevet aktiveret i gendan undermenuen og hvis vinduet er delvist gennemsigtigt.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>I denne tilstand vil fuld skærm vinduet opføre sig som et delvist gennemsigtigt lag, hvilket gør dig i stand til at klikke på de underliggende vinduer.
 
-For at komme tilbage til normal tilstand, dobbeltklik på OnTopReplica ikonet i meddelelsesområdet på proceslinjen.</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Nej.
-Du kan aktivere gennem klik senere.</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Brug gennem klik.</value>
+For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i menuen for OnTopReplica-ikonet i meddelelsesområdet.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Gennem klik tilstand</value>

@@ -305,20 +305,10 @@ Ukončit režim "přeposíání kliknutí" je možné opětovným vyvolání pol
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Povolit "Proklikávání" v celoobrazovkovém režimu?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>"Proklikávání" funguje pouze pokud je povoleno v menu a okno má nastavenou průhlednost.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>V tomto režimu se bude okno roztažené přes celou obrazovku chovat jako poloprůhledná vrstva, přes kterou bude možné "proklikávat" na podložená okna.
 
-K návratu do standardního režimu je možné přejít kdykoli dvojklikem na ikonu v oznamovací oblasti (traye).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Ne.
-Režim "Proklikávání" je možné zvolit později v menu</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Používat "Proklikávání"</value>
+K návratu do standardního režimu použijte příkaz pro vypnutí v nabídce ikony OnTopReplica v oznamovací oblasti.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Režim "Proklikávání"</value>

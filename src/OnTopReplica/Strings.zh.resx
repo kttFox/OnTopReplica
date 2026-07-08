@@ -328,17 +328,8 @@
   <data name="InfoClickThrough" xml:space="preserve">
     <value>打开点击穿透模式？</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>如果窗口是半透明的，点击穿透只有在调整大小子菜单中启用才能工作。</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
-    <value>该模式下全屏窗口会变为有透明度来允许你点击后方的窗口。如果想要返回正常模式，请点击任务栏或托盘的OnTopReplica图标。</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>不，谢谢，你可以稍后打开点击穿透</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>使用点击穿透</value>
+  <data name="InfoClickThroughContent" xml:space="preserve">
+    <value>该模式下全屏窗口会变为有透明度来允许你点击后方的窗口。如果想要返回正常模式，请在托盘中OnTopReplica图标的菜单中选择解除。</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>点击穿透模式</value>

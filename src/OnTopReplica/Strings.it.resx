@@ -290,20 +290,10 @@ Per uscire da questa modalità, usa il tasto ESC.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Attivare la modalità Click-Through?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>La modalità "Click-Through" funziona solo se l'opzione è stata attivata e se la finestra è semitrasparente.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>In questa modalità la finestra clonata si comporterà come una maschera semitrasparente che permette di cliccare sulle finestre dietro di essa.
 
-Per tornare alla modalità normale in qualsiasi momento, attiva OnTopReplica (dalla barra delle applicazioni).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>No, grazie.
-Puoi abilitare il Click-Through in futuro</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Abilita Click-Through</value>
+Per tornare alla modalità normale, usa il comando di disattivazione nel menu dell'icona di OnTopReplica nell'area di notifica.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Modalità Click-Through</value>

@@ -335,20 +335,10 @@ To exit this mode, push ESC.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Enable Click-Through mode?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Click-through only works if it has been enabled in the Resize submenu and if the window is semi-transparent.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>In this mode the fullscreen window will behave as a partially transparent overlay, allowing you to click on the other windows behind it.
 
-To return to normal mode anytime, activate OnTopReplica by clicking on the task bar (or the tray icon).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>No, thank you.
-You can enable click-through later</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Use Click-Through</value>
+To return to normal mode, use the disable command in the menu of the OnTopReplica tray icon.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Click-Through mode</value>
@@ -397,6 +387,30 @@ You can enable click-through later</value>
   </data>
   <data name="MenuClickThroughTT" xml:space="preserve">
     <value>OnTopReplica will behave like a transparent overlay that lets your clicks through to the windows below.</value>
+  </data>
+  <data name="MenuEnableClickForwardingAll" xml:space="preserve">
+    <value>Enable Click Forwarding (all panels)</value>
+  </data>
+  <data name="MenuEnableClickForwardingAllTT" xml:space="preserve">
+    <value>Enable click forwarding for all panels in this set.</value>
+  </data>
+  <data name="MenuDisableClickForwardingAll" xml:space="preserve">
+    <value>Disable Click Forwarding (all panels)</value>
+  </data>
+  <data name="MenuDisableClickForwardingAllTT" xml:space="preserve">
+    <value>Disable click forwarding for all panels in this set.</value>
+  </data>
+  <data name="MenuEnableClickThroughAll" xml:space="preserve">
+    <value>Enable Click-Through (all panels)</value>
+  </data>
+  <data name="MenuEnableClickThroughAllTT" xml:space="preserve">
+    <value>Enable click-through mode for all panels in this set.</value>
+  </data>
+  <data name="MenuDisableClickThroughAll" xml:space="preserve">
+    <value>Disable Click-Through (all panels)</value>
+  </data>
+  <data name="MenuDisableClickThroughAllTT" xml:space="preserve">
+    <value>Disable click-through mode for all panels in this set.</value>
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>Close</value>

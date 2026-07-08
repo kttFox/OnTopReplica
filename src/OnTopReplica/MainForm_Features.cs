@@ -17,17 +17,30 @@ namespace OnTopReplica {
             }
             set {
                 if (value && Settings.Default.FirstTimeClickForwarding) {
-                    TaskDialog dlg = new TaskDialog(Strings.InfoClickForwarding, Strings.InfoClickForwardingTitle, Strings.InfoClickForwardingContent) {
-                        CommonButtons = CommonButton.Yes | CommonButton.No
-                    };
-                    if (dlg.Show(this).CommonButton == CommonButtonResult.No)
+                    if (!ConfirmFirstTimeClickForwarding())
                         return;
-
-                    Settings.Default.FirstTimeClickForwarding = false;
                 }
 
                 _thumbnailPanel.ReportThumbnailClicks = value;
             }
+        }
+
+        /// <summary>
+        /// Shows the one-time click-forwarding confirmation dialog (if not already shown/dismissed)
+        /// and persists that it has been shown. Returns false if the user declined.
+        /// </summary>
+        bool ConfirmFirstTimeClickForwarding() {
+            if (!Settings.Default.FirstTimeClickForwarding)
+                return true;
+
+            TaskDialog dlg = new TaskDialog(Strings.InfoClickForwarding, Strings.InfoClickForwardingTitle, Strings.InfoClickForwardingContent) {
+                CommonButtons = CommonButton.Yes | CommonButton.No
+            };
+            if (dlg.Show(this).CommonButton == CommonButtonResult.No)
+                return false;
+
+            Settings.Default.FirstTimeClickForwarding = false;
+            return true;
         }
 
         #endregion
@@ -43,6 +56,11 @@ namespace OnTopReplica {
                 return _clickThrough;
             }
             set {
+                if (value && Settings.Default.FirstTimeClickThrough) {
+                    if (!ConfirmFirstTimeClickThrough())
+                        return;
+                }
+
                 TransparencyKey = (value) ? Color.Black : DefaultNonClickTransparencyKey;
                 if (value) {
                     //Re-force as top most (always helps in some cases)
@@ -55,44 +73,22 @@ namespace OnTopReplica {
             }
         }
 
-        //Must NOT be equal to any other valid opacity value
-        const double ClickThroughHoverOpacity = 0.6;
-
-        Timer _clickThroughComeBackTimer = null;
-        long _clickThroughComeBackTicks;
-        const int ClickThroughComeBackTimerInterval = 1000;
-
         /// <summary>
-        /// When the mouse hovers over a fully opaque click-through form,
-        /// this fades the form to semi-transparency
-        /// and starts a timeout to get back to full opacity.
+        /// Shows the one-time click-through confirmation dialog (if not already shown/dismissed)
+        /// and persists that it has been shown. Returns false if the user declined.
         /// </summary>
-        private void RefreshClickThroughComeBack() {
-            if (this.Opacity == 1.0) {
-                this.Opacity = ClickThroughHoverOpacity;
-            }
+        bool ConfirmFirstTimeClickThrough() {
+            if (!Settings.Default.FirstTimeClickThrough)
+                return true;
 
-            if (_clickThroughComeBackTimer == null) {
-                _clickThroughComeBackTimer = new Timer();
-                _clickThroughComeBackTimer.Tick += _clickThroughComeBackTimer_Tick;
-                _clickThroughComeBackTimer.Interval = ClickThroughComeBackTimerInterval;
-            }
-            _clickThroughComeBackTicks = DateTime.UtcNow.Ticks;
-            _clickThroughComeBackTimer.Start();
-        }
+            TaskDialog dlg = new TaskDialog(Strings.InfoClickThrough, Strings.InfoClickThroughTitle, Strings.InfoClickThroughContent) {
+                CommonButtons = CommonButton.Yes | CommonButton.No
+            };
+            if (dlg.Show(this).CommonButton == CommonButtonResult.No)
+                return false;
 
-        void _clickThroughComeBackTimer_Tick(object sender, EventArgs e) {
-            var diff = DateTime.UtcNow.Subtract(new DateTime(_clickThroughComeBackTicks));
-            if (diff.TotalSeconds > 2) {
-                var mousePointer = WindowMethods.GetCursorPos();
-
-                if (!this.ContainsMousePointer(mousePointer)) {
-                    if (this.Opacity == ClickThroughHoverOpacity) {
-                        this.Opacity = 1.0;
-                    }
-                    _clickThroughComeBackTimer.Stop();
-                }
-            }
+            Settings.Default.FirstTimeClickThrough = false;
+            return true;
         }
 
         #endregion
@@ -106,6 +102,10 @@ namespace OnTopReplica {
                 return (FormBorderStyle == DefaultBorderStyle);
             }
             set {
+                //No-op when unchanged (the location shift below must not run twice)
+                if (value == IsChromeVisible)
+                    return;
+
                 //Cancel hiding chrome if no thumbnail is shown
                 if (!value && !_thumbnailPanel.IsShowingThumbnail)
                     return;

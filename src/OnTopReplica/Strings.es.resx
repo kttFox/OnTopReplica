@@ -266,20 +266,10 @@ Para salir de este modo, pulsar ESC.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Activar el modo Click a través?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Click a través solo funciona si se ha activado y la ventana es semi-transparente.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>En este modo, la ventana clonada se volverá ventana parcialmente transparente, permitiendo hacer click en las otras ventanas de detrás.
 
-Para volver al modo normal en cualquier momento, activar OnTopReplica clickando en la barra de tareas (o en el icono del sistema).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>No, gracias.
-Se podrá activar Click a través más tarde</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Utilizar Click a través</value>
+Para volver al modo normal, usa el comando de desactivación en el menú del icono de OnTopReplica en el área de notificación.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Modo Click a través</value>

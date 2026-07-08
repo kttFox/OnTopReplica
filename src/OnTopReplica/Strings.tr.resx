@@ -295,21 +295,10 @@ Bu moddan çıkmak için, ESC'ye basınız.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Direkt-Tıkla modunu etkinleştir?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Direk-tıkla sadece Yeniden boyutlandır altmenüsünde etkinleştirildiyse ve pencere yarı-transparan ise çalışır.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>Bu modda tamekran pencere kısmen transparan kaplama gibi davranır, arkasındaki pencerelere tıklamanıza izin verir.
 
-Herhangi bir zamanda normal moda dönmek için, OnTopReplica görev çubuğuna (veya sistem simgesine) tıklayarak aktifleştirin.</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Hayır, teşekkür ederim
-direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
-    <comment>Second sentence capitalized?</comment>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Direkt-Tıkla kullan</value>
+Normal moda dönmek için, bildirim alanındaki OnTopReplica simgesinin menüsünden devre dışı bırakma komutunu kullanın.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Direkt-Tıkla modu</value>

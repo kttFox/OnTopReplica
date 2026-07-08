@@ -286,20 +286,10 @@ Um diese Modus zu beenden ESC drücken.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Durchklickmodus aktivieren?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Durchklicken funktioniert nur, wenn es im "Grössen"-Menü aktiviert wurde und das Fenster semi-transparent ist.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>In diesem Modus verhält sich das Vollbild-Fenster wie ein durchsichtiges Overlay und erlaubt es, die Fenster dahinter anzuklicken.
 
-Um zum normalen Modus zurückzukehren, reicht es, OnTopReplica über die Taskleiste oder das Benachrichtigungssymbol zu aktivieren.</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Nein danke.
-Durchklicken kann später aktiviert werden</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Durchklicken aktivieren</value>
+Um zum normalen Modus zurückzukehren, verwenden Sie den Deaktivieren-Befehl im Menü des OnTopReplica-Symbols im Infobereich.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Durchklick-Modus</value>

@@ -724,46 +724,18 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Click-through only works if it has been enabled in the Resize submenu and if the window is semi-transparent. 的當地語系化字串。
-        /// </summary>
-        internal static string InfoClickThroughDetails {
-            get {
-                return ResourceManager.GetString("InfoClickThroughDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 In this mode the fullscreen window will behave as a partially transparent overlay, allowing you to click on the other windows behind it.
+        ///   In this mode the fullscreen window will behave as a partially transparent overlay, allowing you to click on the other windows behind it.
         ///
-        ///To return to normal mode anytime, activate OnTopReplica by clicking on the task bar (or the tray icon). 的當地語系化字串。
+        ///To return to normal mode anytime, activate OnTopReplica by clicking on the task bar (or the tray icon). に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string InfoClickThroughInformation {
+        internal static string InfoClickThroughContent {
             get {
-                return ResourceManager.GetString("InfoClickThroughInformation", resourceCulture);
+                return ResourceManager.GetString("InfoClickThroughContent", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查詢類似 No, thank you.
-        ///You can enable click-through later 的當地語系化字串。
-        /// </summary>
-        internal static string InfoClickThroughNo {
-            get {
-                return ResourceManager.GetString("InfoClickThroughNo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Use Click-Through 的當地語系化字串。
-        /// </summary>
-        internal static string InfoClickThroughOk {
-            get {
-                return ResourceManager.GetString("InfoClickThroughOk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Click-Through mode 的當地語系化字串。
+        ///   Click-Through mode に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InfoClickThroughTitle {
             get {
