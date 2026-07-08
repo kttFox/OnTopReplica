@@ -61,28 +61,15 @@ namespace OnTopReplica.SidePanels {
                     numInterval.Value = _processor.SampleInterval;
                 }
 
-                // Priority: 1) processor current session state  2) processor state  3) default Red
-                HashSet<ColorCategory> categories = null;
+                // Load current state from the processor (factory default: empty selection)
+                HashSet<ColorCategory> categories;
                 Color? loadedCustomColor = null;
 
-                // Use processor's current categories if it has been configured this session
-                // (detected by: processor is non-null and has categories different from factory default,
-                //  OR processor is currently enabled — meaning user has actively used it)
-                bool processorHasSessionState = _processor != null &&
-                    (_processor.Enabled || _processor.EnabledCategories.Count != 1 ||
-                    !_processor.EnabledCategories.Contains(ColorCategory.Red) || _processor.CustomTargetColor.HasValue);
-
-                if (processorHasSessionState) {
-                    categories = new HashSet<ColorCategory>(_processor.EnabledCategories);
-                    loadedCustomColor = _processor.CustomTargetColor;
-                    Log.Write("Loaded ColorAlert categories from processor: {0}", CategoriesToString(categories));
-                }
-
-                if ((categories == null || categories.Count == 0) && _processor != null) {
+                if (_processor != null) {
                     categories = new HashSet<ColorCategory>(_processor.EnabledCategories);
                     loadedCustomColor = _processor.CustomTargetColor;
                 }
-                if (categories == null || categories.Count == 0) {
+                else {
                     categories = new HashSet<ColorCategory>();
                 }
 

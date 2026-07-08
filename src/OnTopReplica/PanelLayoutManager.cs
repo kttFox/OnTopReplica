@@ -352,8 +352,9 @@ namespace OnTopReplica {
                         if (Enum.TryParse(c, out cat) && cat != ColorCategory.None)
                             cats.Add(cat);
                     }
-                    if (cats.Count > 0)
-                        proc.EnabledCategories = cats;
+                    //Apply even when empty: the token reflects the saved state,
+                    //otherwise the processor's default (Red) would incorrectly remain
+                    proc.EnabledCategories = cats;
                 }
 
                 int iv;

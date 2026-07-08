@@ -76,7 +76,7 @@ namespace OnTopReplica.MessagePumpProcessors {
         private const uint PW_CLIENTONLY = 1;
 
         private bool _enabled = false;
-        private HashSet<ColorCategory> _enabledCategories = new HashSet<ColorCategory>() { ColorCategory.Red };
+        private HashSet<ColorCategory> _enabledCategories = new HashSet<ColorCategory>();
         private int _sampleInterval = 500; // サンプリング間隔(ミリ秒)
         private float _alarmVolume = 1.0f; // 0.0 - 1.0
         private string _alarmSoundFile = string.Empty;
