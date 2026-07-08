@@ -72,45 +72,9 @@ namespace OnTopReplica {
         public void EnsureMainFormVisible() {
             //Reset special modes
             FullscreenManager.SwitchBack();
-            ClickThroughEnabled = false;
 
-            //Restore main form in a platform-dependent method
-            Program.Platform.RestoreForm(this);
-        }
-
-        /// <summary>
-        /// Opens a confirmation dialog to confirm whether to reset the main form or not.
-        /// </summary>
-        public void ResetMainFormWithConfirmation() {
-            var dlg = new TaskDialog(Strings.AskReset, Strings.AskResetTitle, Strings.AskResetContent);
-            dlg.UseCommandLinks = true;
-            dlg.CustomButtons = new CustomButton[] {
-                new CustomButton(CommonButtonResult.OK, Strings.AskResetButtonOk),
-                new CustomButton(CommonButtonResult.Cancel, Strings.ButtonCancel)
-            };
-            dlg.CommonIcon = CommonIcon.Information;
-
-            if (dlg.Show(this).CommonButton == CommonButtonResult.OK) {
-                ResetMainForm();
-            }
-        }
-
-        /// <summary>
-        /// Resets the main form to its initial state.
-        /// </summary>
-        public void ResetMainForm() {
-            //Reset form settings
-            UnsetThumbnail();
-            CloseSidePanel();
-
-            //Reset location and size (edge of the screen, min size)
-            Point nuLoc = Screen.PrimaryScreen.WorkingArea.Location;
-            nuLoc.Offset(40, 40);
-            Location = nuLoc;
-            Size = new Size(240, 220);
-
-            this.Show();
-            this.Activate();
+            //Restore all panels in a platform-dependent method
+            RestoreAllPanels();
         }
 
     }

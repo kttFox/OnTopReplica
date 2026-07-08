@@ -121,11 +121,11 @@ namespace OnTopReplica {
 
             var tsi = (ToolStripMenuItem)sender;
             if (tsi.Tag == null) {
-                _owner.UnsetThumbnail();
+                _owner.PrimaryPanel.UnsetThumbnail();
             }
             else {
                 var handle = (WindowHandle)tsi.Tag;
-                _owner.SetThumbnail(handle, null);
+                _owner.PrimaryPanel.SetThumbnail(handle, null);
             }
         }
 
@@ -134,7 +134,7 @@ namespace OnTopReplica {
 
             var tsi = (ToolStripMenuItem)sender;
             var tuple = (Tuple<WindowHandle, StoredRegion>)tsi.Tag;
-            _owner.SetThumbnail(tuple.Item1,
+            _owner.PrimaryPanel.SetThumbnail(tuple.Item1,
                 (tuple.Item2 != null) ? (ThumbnailRegion)tuple.Item2.Region : null);
         }
 

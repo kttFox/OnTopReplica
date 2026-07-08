@@ -179,19 +179,6 @@
     <value />
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Całkowicie zresetować okno?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Zresetuj
-Wszystkie ustawienia zostaną utracone.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Może być użyte do zresetowania ustawień, jeśli została utracona kontrola nad oknem, lub zostało ono przesunięte poza granice ekranu.</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Zresetuj</value>
-  </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>Zresetować ustawienia?</value>
   </data>
@@ -441,20 +428,8 @@ Możesz włączyć kliknij-przez później</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Przełącza na "tryb regionu", w którym można zaznaczyć jako miniaturę określony obszar okna źródłowego.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Resetuj okno</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Resetuje ustawienia OnTopReplica i okna głównego.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Zmień rozmiar</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Przywróć ostatnio klonowane okno</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>Kiedy włączone, OnTopReplica będzie próbować podczas uruchomienia przywrócić ostatnio klonowane okno.</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Ustawienia...</value>

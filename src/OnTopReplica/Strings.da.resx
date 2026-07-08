@@ -416,14 +416,14 @@ Du kan aktivere gennem klik senere.</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Skifter til "område tilstand", der tillader dig at vælge et begrænset område af kildens vindue som miniature.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Nulstil vinduet</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Nulstiller OnTopReplica indstillingerne og hoved vinduet.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Genskab</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>Settings...</value>
+  </data>
+  <data name="MenuSettingsTT" xml:space="preserve">
+    <value>Displays the settings panel.</value>
   </data>
   <data name="MenuSwitch" xml:space="preserve">
     <value>Skift til vindue</value>

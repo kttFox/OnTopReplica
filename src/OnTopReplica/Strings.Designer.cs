@@ -844,7 +844,25 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Advanced 的當地語系化字串。
+        ///   Add panel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MenuAddPanel {
+            get {
+                return ResourceManager.GetString("MenuAddPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Opens another panel window to monitor a different region に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MenuAddPanelTT {
+            get {
+                return ResourceManager.GetString("MenuAddPanelTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Advanced に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string MenuAdvanced {
             get {
@@ -1222,25 +1240,7 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Reset window 的當地語系化字串。
-        /// </summary>
-        internal static string MenuReset {
-            get {
-                return ResourceManager.GetString("MenuReset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Resets OnTopReplica settings and its main window. 的當地語系化字串。
-        /// </summary>
-        internal static string MenuResetTT {
-            get {
-                return ResourceManager.GetString("MenuResetTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Resize 的當地語系化字串。
+        ///   Resize に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string MenuResize {
             get {

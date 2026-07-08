@@ -220,16 +220,6 @@
   <data name="ColorAlert_SoundFile" xml:space="preserve">
     <value>声音文件：</value>
   </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>重置 所有设置将会丢失。</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>如果你无法操控窗口或超出屏幕外，可以重置其全部设置。</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>重置</value>
-  </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>重置设置？</value>
   </data>
@@ -473,20 +463,8 @@
   <data name="MenuRegionTT" xml:space="preserve">
     <value>切换“区域模式”，可以让你只显示监视窗口的一部分内容。</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>重置窗口</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>重置OnTopReplica设置。</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>缩放</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>还原成最后一个监视的窗口</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>打开后，OnTopReplica会尝试在启动后自动监视上一次监视的窗口。</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>设置…</value>

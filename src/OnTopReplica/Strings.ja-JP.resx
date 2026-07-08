@@ -446,20 +446,8 @@ You can enable click-through later</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>リージョンモードに切り替えます。画面の一部を選択して切り取りできます。</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>ウィンドウをリセット</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Resets OnTopReplica settings and its main window.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>リサイズ</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>最後に複製したウィンドウを復元する</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>有効にすると、起動時に最後に複製したウィンドウを復元します。</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>設定</value>

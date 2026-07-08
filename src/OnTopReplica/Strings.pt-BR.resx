@@ -190,25 +190,11 @@
     <value>OnTopReplica</value>
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Resetar a janela completamente?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Resetar
-Todas as configurações serão perdidas.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Pode ser usada para resetar todas as configurações caso você tenha perdido controle da janela ou ela se deslocou para fora da tela.</value>    
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Resetar</value>
-  </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>Resetar Configurações?</value>
   </data>
   <data name="AskSettingResetContent" xml:space="preserve">
     <value>Essa ação irá apagar todas as configurações de OnTopReplica, retornando a aplicação ao estado logo após a instalação inicial (todas as informações salvas, como as definições de região, serão perdidas).</value>
-    
   </data>
   <data name="AskSettingResetTitle" xml:space="preserve">
     <value>Resetar Configurações</value>
@@ -446,51 +432,32 @@ Você pode ativar 'click-trough' mais tarde</value>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Sair da Tela Cheia</value>
   </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Retomar última posição e tamanho.</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Alterna se OnTopReplica deve ou não armazenar sua ultima posição e tamanho e usá-las quando for iniciado novamente.</value>    
-  </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Minimizar</value>
   </data>
   <data name="MenuReduceTT" xml:space="preserve">
-    <value>Minimizar OnTopReplica para a barra de tarefas (ou bandeja).</value>    
+    <value>Minimizar OnTopReplica para a barra de tarefas (ou bandeja).</value>
   </data>
   <data name="MenuRegion" xml:space="preserve">
-    <value>Selecionar Região...</value>    
+    <value>Selecionar Região...</value>
   </data>
   <data name="MenuRegionTT" xml:space="preserve">
-    <value>Alterna para 'Modo de Região', permitindo que você escolha uma posição determinada da origem da janela como miniatura.</value>    
-  </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Resetar janela</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Resetar as configurações de OnTopReplica e sua janela principal.</value>    
+    <value>Alterna para 'Modo de Região', permitindo que você escolha uma posição determinada da origem da janela como miniatura.</value>
   </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Redimensionar</value>
   </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Restaura a última janela clonada</value>    
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>Quando habilitado, OnTopReplica tentará restuarar a última janela no processo de inicialização.</value>    
-  </data>
   <data name="MenuSettings" xml:space="preserve">
-    <value>Configurações...</value>    
+    <value>Configurações...</value>
   </data>
   <data name="MenuSettingsTT" xml:space="preserve">
-    <value>Exibe o Painel de Controle.</value>    
+    <value>Exibe o Painel de Controle.</value>
   </data>
   <data name="MenuSwitch" xml:space="preserve">
     <value>Alterna para a janela</value>
-    
   </data>
   <data name="MenuSwitchTT" xml:space="preserve">
-    <value>Alterna para a janela de origem e esconde OnTopReplica</value>    
+    <value>Alterna para a janela de origem e esconde OnTopReplica</value>
   </data>
   <data name="MenuWindows" xml:space="preserve">
     <value>Seleciona a janela</value>

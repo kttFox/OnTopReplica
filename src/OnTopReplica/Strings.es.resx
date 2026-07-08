@@ -404,14 +404,14 @@ Se podrá activar Click a través más tarde</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Activa o desactiva "Seleccionar región", que permite seleccionar una región específica de la ventana clonada.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Reiniciar ventana</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Reinicia los ajustes de OnTopReplica y la ventana principal</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Cambiar tamaño</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>Ajustes...</value>
+  </data>
+  <data name="MenuSettingsTT" xml:space="preserve">
+    <value>Muestra el panel de ajustes.</value>
   </data>
   <data name="MenuSwitch" xml:space="preserve">
     <value>Ir a la ventana original</value>

@@ -220,16 +220,6 @@
   <data name="ColorAlert_SoundFile" xml:space="preserve">
     <value>声音文件：</value>
   </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;重置
-所有设定均会丢失</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>可以在没辙的时候用来重置所有设定</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>重置</value>
-  </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>重置设定吗？</value>
   </data>
@@ -479,20 +469,8 @@ To return to normal mode anytime, activate OnTopReplica by clicking on the task 
   <data name="MenuRegionTT" xml:space="preserve">
     <value>截取部分窗口内容</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>重置窗口</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>重置OnTopReplica的设定及其主窗口</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>缩放</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>恢复上次克隆的窗口</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>激活此项，程序开启时将尝试恢复最后克隆的窗口</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>设置...</value>

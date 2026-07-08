@@ -175,19 +175,6 @@
     <value />
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Fenster vollständig zurücksetzen?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Zurücksetzen
-Alle Einstellungen werden gelöscht.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Dies kann helfen, wenn die Kontrolle über das Fenster verloren wurde, oder es sich ausserhalb des sichtbaren Bereichs des Monitors befindet.</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Zurücksetzen</value>
-  </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>Einstellungen zurücksetzen?</value>
   </data>
@@ -437,20 +424,8 @@ Durchklicken kann später aktiviert werden</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Wechselt zum "Bereichsmodus" welcher es erlaubt, nur einen ausgewählten Teil eines Fensters zu klonen.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Fenster zurücksetzen</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Setzt OnTopReplica Einstellungen und das Fenster zurück.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Grösse</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Letztes Fenster wieder wählen</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>OnTopReplica wird beim Start versuchen, das gleiche Fenster wie beim letzten beenden zu klonen.</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Einstellungen...</value>

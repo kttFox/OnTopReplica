@@ -26,27 +26,6 @@
     <Setting Name="FullscreenAlwaysOnTop" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="RestoreSizeAndPosition" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="RestoreLastSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
-    </Setting>
-    <Setting Name="RestoreLastPosition" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
-    </Setting>
-    <Setting Name="RestoreLastWindow" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="RestoreLastWindowClass" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RestoreLastWindowTitle" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RestoreLastWindowHwnd" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="HotKeyCloneCurrent" Type="System.String" Scope="User">
       <Value Profile="(Default)">[CTRL]+[SHIFT]+C</Value>
     </Setting>
@@ -55,21 +34,6 @@
     </Setting>
     <Setting Name="FullscreenMode" Type="System.String" Scope="User">
       <Value Profile="(Default)">Standard</Value>
-    </Setting>
-    <Setting Name="RestoreLastShowChrome" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="ColorAlertVolume" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="ColorAlertSoundFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="ColorAlertTargetColors" Type="System.String" Scope="User">
-      <Value Profile="(Default)">["#FF0000","#00FF00"]</Value>
-    </Setting>
-    <Setting Name="ColorAlertTargetColors" Type="System.String" Scope="User">
-      <Value Profile="(Default)">["#FF0000","#00FF00"]</Value>
     </Setting>
   </Settings>
 </SettingsFile>

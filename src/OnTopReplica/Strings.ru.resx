@@ -183,19 +183,6 @@
     <value />
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Сбросить окно?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Сброс
-Все настройки будут удалены.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Можно использовать для сброса всех настроек, если Вы утратили контроль над окном либо поместили его за пределы экрана. </value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Сброс</value>
-  </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>Сбросить настройки?</value>
   </data>
@@ -440,20 +427,8 @@
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Переключается в «режим области», позволяющий выбирать для показа ограниченную область исходного окна.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Сбросить окно</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Сбрасывает настройки программы и ее главное окно.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Изменить размер</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Восстанавливать последнее копированное окно</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>Если включено, программа попытается при запуске восстановить окно, скопированное последним.</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Настройки...</value>

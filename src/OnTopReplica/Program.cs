@@ -78,9 +78,8 @@ namespace OnTopReplica {
             Thread.CurrentThread.CurrentUICulture = Settings.Default.Language;
 
             //Show form
-            using (_mainForm = new MainForm(options)) {
-                Application.Idle += _handlerIdleUpdater;
-
+            using (_mainForm = new MainForm(options))
+            using (new NotificationIcon()) {
                 // if requested on command line, open the color alert panel immediately
                 if (args != null && Array.Exists(args, a => a.Equals("--showcoloralert", StringComparison.OrdinalIgnoreCase))) {
                     _mainForm.SetSidePanel(new SidePanels.ColorAlertPanel());
@@ -88,30 +87,11 @@ namespace OnTopReplica {
 
                 Log.Write("Entering application loop");
 
-                //Enter GUI loop
-                Application.Run(_mainForm);
-
-                //Re-enable chrome to store correct position (position is stored always WITH chrome: when restoring fails, the position stays ok)
-                Settings.Default.RestoreLastShowChrome = _mainForm.IsChromeVisible;
-                if (!_mainForm.IsChromeVisible)
-                    _mainForm.IsChromeVisible = true;
-
-                //Persist settings
-                Log.Write("Last position before shutdown: {0}, size: {1}", _mainForm.Location, _mainForm.Size);
-                Settings.Default.RestoreLastPosition = _mainForm.Location;
-                Settings.Default.RestoreLastSize = _mainForm.ClientSize;
-
-                //Store last thumbnail, if any
-                if (_mainForm.ThumbnailPanel.IsShowingThumbnail && _mainForm.CurrentThumbnailWindowHandle != null) {
-                    Settings.Default.RestoreLastWindowTitle = _mainForm.CurrentThumbnailWindowHandle.Title;
-                    Settings.Default.RestoreLastWindowHwnd = _mainForm.CurrentThumbnailWindowHandle.Handle.ToInt64();
-                    Settings.Default.RestoreLastWindowClass = _mainForm.CurrentThumbnailWindowHandle.Class;
-                }
-                else {
-                    Settings.Default.RestoreLastWindowTitle = string.Empty;
-                    Settings.Default.RestoreLastWindowHwnd = 0;
-                    Settings.Default.RestoreLastWindowClass = string.Empty;
-                }
+                //Enter GUI loop. The loop is not tied to the main form: it keeps running
+                //until the last panel window is closed (see MainForm.OnClosed), so that
+                //closing the primary panel does not terminate the remaining panels.
+                _mainForm.Show();
+                Application.Run(new ApplicationContext());
 
                 Log.Write("Persisting settings");
                 Settings.Default.Save();

@@ -183,19 +183,6 @@
     <value>OnTopReplica</value>
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Pencereyi tamamen yeniden ayarla?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Reset
-Bütün ayarlar kaybolacak.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Eğer pencere üzerindeki denetimizi kaybettiyseniz veya pencere ekran sınırları dışına çıktı ise kullanılabilir.</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Sıfırla</value>
-  </data>
   <data name="AskSettingReset" xml:space="preserve">
     <value>Ayarları sıfırla?</value>
   </data>
@@ -447,20 +434,8 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>"bölge modu"na geçer, bu size kaynak penceresinin küçük resminin kısıtlı bir bölgesini seçmenize izin verir.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Pencereyi sıfırla</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>OnTopReplica'nın ayarlarını ve ana penceresini sıfırlar.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Yeniden boyutlandır</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Son klonlanan pencereyi geri yükle</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>Etkinleştirildiği zaman, OnTopReplica son klonlanan pencereyi başlangıçta yeniden yüklemeye çalışır.</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Ayarlar...</value>

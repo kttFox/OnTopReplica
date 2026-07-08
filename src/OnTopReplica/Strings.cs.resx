@@ -440,20 +440,8 @@ Režim "Proklikávání" je možné zvolit později v menu</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Přepne do režimu "výřezu", který umožní zvolit pouze část okna jako náhled.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Resetovat nastavení okna</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Resetuje nastavení a pozici okna aplikace OnTopReplica.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Velikost</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Obnovit naposledy zobrazené okno</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>Pokud je zatrženo, OnTopReplica se pokusí po spuštění obnovit naposledy zobrazované okno.</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Nastavení...</value>

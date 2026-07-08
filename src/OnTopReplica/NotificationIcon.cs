@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -6,37 +6,52 @@ using OnTopReplica.Properties;
 
 namespace OnTopReplica {
     /// <summary>
-    /// Notification icon that installs itself in the "tray" and manipulates the OnTopReplica main form.
+    /// Notification icon that installs itself in the "tray" and manipulates the
+    /// OnTopReplica panels. The target form is resolved dynamically so the icon
+    /// keeps working when the primary panel changes (promotion on close).
     /// </summary>
     class NotificationIcon : IDisposable {
 
-        public NotificationIcon(MainForm form) {
-            Form = form;
+        public NotificationIcon() {
             Install();
         }
 
-        public MainForm Form { get; private set; }
+        /// <summary>
+        /// Gets the current primary panel (may change over the icon's lifetime).
+        /// </summary>
+        static MainForm Form => MainForm.CurrentPrimary;
 
         NotifyIcon _taskIcon;
         ContextMenuStrip _contextMenu;
+        ToolStripMenuItem _windowsItem;
 
         private void Install() {
+            _windowsItem = new ToolStripMenuItem(Strings.MenuWindows, Resources.list) {
+                ToolTipText = Strings.MenuWindowsTT
+            };
+
             _contextMenu = new ContextMenuStrip();
             _contextMenu.Items.AddRange(new ToolStripItem[] {
                 new ToolStripMenuItem(Strings.MenuOpen, Resources.icon, TaskIconOpen_click) {
                     ToolTipText = Strings.MenuOpenTT,
                 },
-                new ToolStripMenuItem(Strings.MenuWindows, Resources.list){
-                    DropDown = Form.MenuWindows,
-                    ToolTipText = Strings.MenuWindowsTT
+                _windowsItem,
+                new ToolStripMenuItem(Strings.MenuDisableClickForwardingAll, null, TaskIconDisableClickForwarding_click) {
+                    ToolTipText = Strings.MenuDisableClickForwardingAllTT
                 },
-                new ToolStripMenuItem(Strings.MenuReset, null, TaskIconReset_click){
-                    ToolTipText = Strings.MenuResetTT
+                new ToolStripMenuItem(Strings.MenuDisableClickThroughAll, null, TaskIconDisableClickThrough_click) {
+                    ToolTipText = Strings.MenuDisableClickThroughAllTT
                 },
-                new ToolStripMenuItem(Strings.MenuClose, Resources.close_new, TaskIconExit_click){
-                    ToolTipText = Strings.MenuCloseTT
+                new ToolStripMenuItem(Strings.MenuExit, Resources.close_new, TaskIconExit_click){
+                    ToolTipText = Strings.MenuExitTT
                 }
             });
+            //The window list menu belongs to the primary panel: rebind on every
+            //opening since the primary may have changed
+            _contextMenu.Opening += (sender, e) => {
+                _windowsItem.DropDown = Form?.MenuWindows;
+                _windowsItem.Enabled = Form != null;
+            };
             Asztal.Szótár.NativeToolStripRenderer.SetToolStripRenderer(_contextMenu);
 
             _taskIcon = new NotifyIcon {
@@ -64,19 +79,23 @@ namespace OnTopReplica {
         #region Task Icon events
 
         void TaskIcon_doubleclick(object sender, EventArgs e) {
-            Form.EnsureMainFormVisible();
+            Form?.EnsureMainFormVisible();
         }
 
         private void TaskIconOpen_click(object sender, EventArgs e) {
-            Form.EnsureMainFormVisible();
+            Form?.EnsureMainFormVisible();
         }
 
-        private void TaskIconReset_click(object sender, EventArgs e) {
-            Form.ResetMainFormWithConfirmation();
+        private void TaskIconDisableClickThrough_click(object sender, EventArgs e) {
+            Form?.DisableClickThroughAllPanels();
+        }
+
+        private void TaskIconDisableClickForwarding_click(object sender, EventArgs e) {
+            Form?.DisableClickForwardingAllPanels();
         }
 
         private void TaskIconExit_click(object sender, EventArgs e) {
-            Form.Close();
+            Form?.ExitApplication();
         }
 
         #endregion

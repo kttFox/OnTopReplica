@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using OnTopReplica.Native;
 using OnTopReplica.Properties;
 using OnTopReplica.StartupOptions;
-using OnTopReplica.Update;
 using OnTopReplica.WindowSeekers;
 using WindowsFormsAero.Dwm;
 using WindowsFormsAero.TaskDialog;
@@ -46,6 +45,15 @@ namespace OnTopReplica {
             _thumbnailPanel.CloneClick += new EventHandler<CloneClickEventArgs>(Thumbnail_CloneClick);
             Controls.Add(_thumbnailPanel);
 
+            //Populate opacity menu (100% down to 10%, in 10% steps)
+            for (int pct = 100; pct >= 10; pct -= 10) {
+                var item = new ToolStripMenuItem(pct + "%") {
+                    Tag = pct / 100.0
+                };
+                item.Click += new EventHandler(Menu_Opacity_click);
+                menuOpacity.Items.Add(item);
+            }
+
             //Set native renderer on context menus
             Asztal.Szótár.NativeToolStripRenderer.SetToolStripRenderer(
                 menuContext, menuWindows, menuOpacity, menuResize, menuFullscreenContext
@@ -54,10 +62,14 @@ namespace OnTopReplica {
             //Set to Key event preview
             this.KeyPreview = true;
 
+            _openPanels.Add(this);
+
             Log.Write("Main form constructed");
         }
 
         #region Event override
+
+        bool _managersInitialized;
 
         protected override void OnHandleCreated(EventArgs e){
  	        base.OnHandleCreated(e);
@@ -66,12 +78,17 @@ namespace OnTopReplica {
             KeepAspectRatio = false;
             GlassMargins = new Padding(-1);
 
-            //Managers
-            _msgPumpManager.Initialize(this);
-            _windowListManager = new WindowListMenuManager(this, menuWindows);
-            _windowListManager.ParentMenus = new System.Windows.Forms.ContextMenuStrip[] {
-                menuContext, menuFullscreenContext
-            };
+            //Managers: initialize once only. OnHandleCreated fires again when the
+            //handle is recreated (e.g. ShowInTaskbar change on primary promotion)
+            //and re-registering the processors would duplicate them.
+            if (!_managersInitialized) {
+                _managersInitialized = true;
+                _msgPumpManager.Initialize(this);
+                _windowListManager = new WindowListMenuManager(this, menuWindows);
+                _windowListManager.ParentMenus = new System.Windows.Forms.ContextMenuStrip[] {
+                    menuContext, menuFullscreenContext
+                };
+            }
 
             //Platform specific form initialization
             Program.Platform.PostHandleFormInit(this);
@@ -83,31 +100,124 @@ namespace OnTopReplica {
 
             //Apply startup options
             _startupOptions.Apply(this);
+
+            //Restore secondary panels from last session (primary only)
+            if (!IsSecondaryPanel) {
+                _suppressLayoutSave = true;
+                try {
+                    PanelLayoutManager.Restore(this);
+                }
+                finally {
+                    _suppressLayoutSave = false;
+                }
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e) {
             Log.Write("Main form closing");
             base.OnClosing(e);
 
+            MainForm promoted = null;
+            if (!IsSecondaryPanel) {
+                if (!ApplicationExiting && _childPanels.Count > 0) {
+                    //The primary is closing but other panels remain: promote a child
+                    //to primary so the panel set keeps working (and saving its layout).
+                    promoted = PromotePrimaryRole();
+                }
+                else {
+                    //Layout is saved incrementally on every change; suppress further saves so
+                    //that child panels closed during shutdown do not erase the stored layout.
+                    _suppressLayoutSave = true;
+                }
+            }
+
             _msgPumpManager.Dispose();
             Program.Platform.CloseForm(this);
+
+            //Global hotkeys were registered on this (closing) window and were just
+            //released by the manager dispose above: re-register on the new primary.
+            if (promoted != null && !promoted.IsDisposed) {
+                promoted.MessagePumpManager.Get<MessagePumpProcessors.HotKeyManager>().RefreshHotkeys();
+            }
         }
 
         protected override void OnClosed(EventArgs e) {
             Log.Write("Main form closed");
             base.OnClosed(e);
+
+            //Keep the application alive until the last panel window is closed
+            _openPanels.Remove(this);
+            if (_openPanels.Count > 0)
+                return;
+            Log.Write("Last panel closed, exiting application loop");
+            Application.ExitThread();
         }
 
-        protected override void OnMove(EventArgs e) {
-            base.OnMove(e);
+        /// <summary>
+        /// Transfers the primary role to the first remaining child panel.
+        /// Called when the primary closes while other panels are still open.
+        /// </summary>
+        private MainForm PromotePrimaryRole() {
+            var newPrimary = _childPanels[0];
+            _childPanels.RemoveAt(0);
+            newPrimary._primaryPanel = null;
 
-            AdjustSidePanelLocation();
+            //Changing ShowInTaskbar recreates the window handle, which destroys the
+            //DWM thumbnail bound to it. Capture the current clone state and restore
+            //it right after taking over the taskbar button.
+            var cloneHandle = newPrimary.CurrentThumbnailWindowHandle;
+            var cloneRegion = newPrimary.SelectedThumbnailRegion;
+            newPrimary.ShowInTaskbar = true; //take over the single taskbar button
+            if (cloneHandle != null) {
+                newPrimary.SetThumbnail(cloneHandle, cloneRegion);
+            }
+
+            foreach (var child in _childPanels) {
+                child._primaryPanel = newPrimary;
+                newPrimary._childPanels.Add(child);
+            }
+            _childPanels.Clear();
+
+            //This form is closing: stop saving from here, let the new primary take over
+            _suppressLayoutSave = true;
+            Log.Write("Primary role promoted to another panel");
+            PanelLayoutManager.StartWatcher(newPrimary);
+            newPrimary.NotifyPanelLayoutChanged();
+            return newPrimary;
         }
+
+        FormWindowState _lastWindowState = FormWindowState.Normal;
+
+        protected override void OnSizeChanged(EventArgs e) {
+            base.OnSizeChanged(e);
+
+            //Minimizing the primary from the taskbar hides all secondary panels;
+            //restoring it brings them all back.
+            if (WindowState != _lastWindowState) {
+                _lastWindowState = WindowState;
+                if (!IsSecondaryPanel) {
+                    if (WindowState == FormWindowState.Minimized) {
+                        foreach (var child in _childPanels) {
+                            Program.Platform.HideForm(child);
+                        }
+                    }
+                    else {
+                        foreach (var child in _childPanels) {
+                            Program.Platform.RestoreForm(child);
+                        }
+                    }
+                }
+            }
+        }
+
 
         protected override void OnResizeEnd(EventArgs e) {
             base.OnResizeEnd(e);
 
             RefreshScreenLock();
+
+            //Persist layout after a move/resize of any panel
+            NotifyPanelLayoutChanged();
         }
 
         protected override void OnResizing(EventArgs e) {
@@ -302,6 +412,13 @@ namespace OnTopReplica {
         /// <param name="handle">Handle to the window to clone.</param>
         /// <param name="region">Region of the window to clone or null.</param>
         public void SetThumbnail(WindowHandle handle, ThumbnailRegion region) {
+            //Never clone one of our own panel windows: DWM throws when a window
+            //is registered as a thumbnail source of itself.
+            if (handle != null && IsPanelHandle(handle.Handle)) {
+                Log.Write("Refusing to clone own panel window HWND {0}", handle.Handle);
+                return;
+            }
+
             try {
                 Log.Write("Cloning window HWND {0} of class {1}", handle.Handle, handle.Class);
 
@@ -342,6 +459,15 @@ namespace OnTopReplica {
 
             //Disable aspect ratio
             KeepAspectRatio = false;
+
+            //Secondary panels follow the primary
+            foreach (var child in _childPanels.ToArray()) {
+                child.UnsetThumbnail();
+            }
+
+            if (!IsSecondaryPanel) {
+                NotifyPanelLayoutChanged();
+            }
         }
 
         /// <summary>
@@ -363,6 +489,8 @@ namespace OnTopReplica {
                 SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, true);
 
                 FixPositionAndSize();
+
+                NotifyPanelLayoutChanged();
             }
         }
 
@@ -450,6 +578,6 @@ namespace OnTopReplica {
         }
 
         #endregion
-        
+
     }
 }

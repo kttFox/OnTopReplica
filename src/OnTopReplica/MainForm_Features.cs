@@ -127,6 +127,9 @@ namespace OnTopReplica {
 
                 Program.Platform.OnFormStateChange(this);
                 Invalidate();
+
+                //Chrome visibility is part of the persisted panel layout
+                NotifyPanelLayoutChanged();
             }
         }
 
@@ -148,6 +151,7 @@ namespace OnTopReplica {
                     this.SetScreenPosition(value.Value);
 
                 _positionLock = value;
+                NotifyPanelLayoutChanged();
             }
         }
 
