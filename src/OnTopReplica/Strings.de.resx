@@ -265,6 +265,9 @@ Um zum normalen Modus zurückzukehren, verwenden Sie den Deaktivieren-Befehl im 
   <data name="MenuClose" xml:space="preserve">
     <value>Schliessen</value>
   </data>
+  <data name="MenuClosePanel" xml:space="preserve">
+    <value>Panel schließen</value>
+  </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 Verdoppeln</value>
   </data>

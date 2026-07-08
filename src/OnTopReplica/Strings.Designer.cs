@@ -678,7 +678,16 @@ namespace OnTopReplica {
                 return ResourceManager.GetString("MenuClose", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Close panel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MenuClosePanel {
+            get {
+                return ResourceManager.GetString("MenuClosePanel", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Disable Click Forwarding (all panels) に類似しているローカライズされた文字列を検索します。
         /// </summary>
