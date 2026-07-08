@@ -316,26 +316,20 @@ namespace OnTopReplica {
 
                 ThumbnailError(ex, false, Strings.ErrorUnableToCreateThumbnail);
                 _thumbnailPanel.UnsetThumbnail();
+                return;
             }
-        }
 
-        /// <summary>
-        /// Enables group mode on a list of window handles.
-        /// </summary>
-        /// <param name="handles">List of window handles.</param>
-        public void SetThumbnailGroup(IList<WindowHandle> handles) {
-            if (handles.Count == 0)
-                return;
+            //Keep secondary panels on the same source window as the primary
+            foreach (var child in _childPanels.ToArray()) {
+                if (child.CurrentThumbnailWindowHandle == null ||
+                    child.CurrentThumbnailWindowHandle.Handle != handle.Handle) {
+                    child.SetThumbnail(handle, null);
+                }
+            }
 
-            //At last one thumbnail
-            SetThumbnail(handles[0], null);
-
-            //Handle if no real group
-            if (handles.Count == 1)
-                return;
-
-            CurrentThumbnailWindowHandle = null;
-            _msgPumpManager.Get<MessagePumpProcessors.GroupSwitchManager>().EnableGroupMode(handles);
+            if (!IsSecondaryPanel) {
+                NotifyPanelLayoutChanged();
+            }
         }
 
         /// <summary>

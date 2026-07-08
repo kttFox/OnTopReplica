@@ -287,25 +287,6 @@
   <data name="FullscreenTitle" xml:space="preserve">
     <value>Полноэкранный режим</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Отключить</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Включить групповой режим</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Для включения выберите несколько окон.</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Групповой режим включен.</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Групповой режим:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Окна</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>Домашняя страница: www.codeplex.com/ontopreplica.</value>
   </data>
@@ -404,37 +385,6 @@
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Четверть</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Групповой режим</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>Программа автоматически скопирует окно из группы, определенной пользователем, переключаясь на то, которое побывало на переднем плане первым из всех.</value>
-    <comment>Fixed</comment>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (непрозрачный)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>Делает программу полностью непрозрачной.</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>Делает программу прозрачной на 25%.</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>Делает программу прозрачной на 50%.</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>Делает программу прозрачной на 75%.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Прозрачность</value>

@@ -286,25 +286,6 @@ Per farlo, clicca col tasto destro del mouse sul desktop e poi su Personalizza.<
   <data name="FullscreenTitle" xml:space="preserve">
     <value>OnTopReplica a pieno schermo</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Disattiva</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Abilita modalità</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Seleziona più finestre per attivare.</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Modalità Gruppo attivata.</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Modalità Gruppo di finestre:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Finestre</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>Sito internet: www.codeplex.com/ontopreplica.</value>
   </data>
@@ -405,36 +386,6 @@ Puoi abilitare il Click-Through in futuro</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Quarto</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Modalità Gruppo di finestre</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica clonerà automaticamente una finestra di un gruppo, scegliendo quella che non è stata in primo piano da più tempo.</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (opaco)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>Imposta OnTopReplica come finestra completamente opaca.</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>Imposta l'opacità di OnTopReplica al 25%.</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>Imposta l'opacità di OnTopReplica al 50%.</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>Imposta l'opacità di OnTopReplica al 75%.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Opacità</value>

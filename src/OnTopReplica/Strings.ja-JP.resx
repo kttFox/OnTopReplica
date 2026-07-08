@@ -290,25 +290,6 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="FullscreenTitle" xml:space="preserve">
     <value>OnTopReplica フルスクリーン</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>無効</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>グループスイッチモードを有効にする</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Ctrl+クリックで複数のウィンドウを選択できます</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>グループスイッチモードが有効</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>グループスイッチモード:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Windows</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>ホームページ: www.codeplex.com/ontopreplica.</value>
   </data>
@@ -410,36 +391,6 @@ You can enable click-through later</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 1/4倍</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>グループスイッチモード</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>あらかじめウィンドウを指定しておくと自動的にOnTopReplicaに複製されるモードです</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (不透明)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>OnTopReplica が完全に不透明になります</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>OnTopReplica が 25% の不透明度になります。</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>OnTopReplica が 50% の不透明度になります。</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>OnTopReplica が 75%  の不透明度になります。</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>不透明度</value>

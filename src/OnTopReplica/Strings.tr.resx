@@ -290,25 +290,6 @@ Bu programı Windows Vista Home Premium veya daha iyisinde çalıştırmalısın
   <data name="FullscreenTitle" xml:space="preserve">
     <value>OnTopReplica tam ekran</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Etkisizleştir</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Grup modu etkinleştir</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Etkinleştirilecek çoklu pencereleri seçiniz.</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Grup değiştirme modu etkin.</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Grup değiştirme modu:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Pencereler</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>Anasayfa: www.codeplex.com/ontopreplica.</value>
   </data>
@@ -411,36 +392,6 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Çeyrek</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Grup Değiştirme modu</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica kullanıcı tanımlı gruptan bir pencereyi kopyalayıp, arkaplanda en son aktifleştirilen biri ile değiştirecektir.</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (opak)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>OnTopReplica'yı tamamen opak olarak ayarlar.</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>OnTopReplica'yı 25% opaklığına ayarlar.</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>OnTopReplica'yı 50% opaklığına ayarlar.</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>OnTopReplica'yı 75% opaklığına ayarlar.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Opaklık</value>

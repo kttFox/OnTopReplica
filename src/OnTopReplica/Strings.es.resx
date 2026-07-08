@@ -249,25 +249,6 @@ Es necesario utilizar Windows Vista o 7 en su versión Home Premium o superior.<
   <data name="FullscreenTitle" xml:space="preserve">
     <value>OnTopReplica a pantalla completa</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Desactivar</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Activar modo</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Seleccionar varias ventanas para activar.</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Modo en grupo activado</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Modo en grupo:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Ventanas</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>Sitio oficial: www.codeplex.com/ontopreplica.</value>
   </data>
@@ -368,27 +349,6 @@ Se podrá activar Click a través más tarde</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Un cuarto</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Modo en grupo</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica clonará automáticamente una ventana de un grupo definido, eligiendo la que no ha estado en primer plano durante más tiempo.</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (opaco)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>OnTopReplica será totalmente opaco.</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>Establece OnTopReplica al 25% de opacidad.</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>Establece OnTopReplica al 50% de opacidad.</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>Establece OnTopReplica al 75% de opacidad.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Opacidad</value>

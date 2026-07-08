@@ -677,61 +677,7 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Disable 的當地語系化字串。
-        /// </summary>
-        internal static string GroupSwitchModeDisableButton {
-            get {
-                return ResourceManager.GetString("GroupSwitchModeDisableButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Enable Group mode 的當地語系化字串。
-        /// </summary>
-        internal static string GroupSwitchModeEnableButton {
-            get {
-                return ResourceManager.GetString("GroupSwitchModeEnableButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Select multiple windows to enable. 的當地語系化字串。
-        /// </summary>
-        internal static string GroupSwitchModeStatusDisabled {
-            get {
-                return ResourceManager.GetString("GroupSwitchModeStatusDisabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Group switch mode is enabled. 的當地語系化字串。
-        /// </summary>
-        internal static string GroupSwitchModeStatusEnabled {
-            get {
-                return ResourceManager.GetString("GroupSwitchModeStatusEnabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Group switch mode: 的當地語系化字串。
-        /// </summary>
-        internal static string GroupSwitchModeTitle {
-            get {
-                return ResourceManager.GetString("GroupSwitchModeTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Windows 的當地語系化字串。
-        /// </summary>
-        internal static string GroupSwitchModeWindows {
-            get {
-                return ResourceManager.GetString("GroupSwitchModeWindows", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Homepage: www.codeplex.com/ontopreplica. 的當地語系化字串。
+        ///   Homepage: www.codeplex.com/ontopreplica. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Homepage {
             get {

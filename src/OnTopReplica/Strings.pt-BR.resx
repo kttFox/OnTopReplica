@@ -286,44 +286,21 @@ Você deve rodar essa aplicação em um Windows Vista Home Premium ou mais atual
   </data>
   <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
     <value>Força o OnTopReplica a ficar sempre por cima de outras janelas.</value>
-    
   </data>
   <data name="FullscreenModeClickThrough" xml:space="preserve">
     <value>Click Trought</value>
   </data>
   <data name="FullscreenModeClickThroughTT" xml:space="preserve">
     <value>Os cliques em cima do OnTopReplica não serão interpretados.</value>
-    
   </data>
   <data name="FullscreenModeNormal" xml:space="preserve">
     <value>Padrão</value>
   </data>
   <data name="FullscreenModeNormalTT" xml:space="preserve">
     <value>Funciona como um janela normal. Você pode colocar outras janelas por cima do OnTopReplica.</value>
-    
   </data>
   <data name="FullscreenTitle" xml:space="preserve">
     <value>OnTopReplica fullscreen</value>
-  </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Desativar</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Habilitar modo de agrupamento</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Selecione multiplas janelas para habilitar.</value>
-    
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Modo de agrupamento foi habilitado</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Modo agrupamento: </value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Windows</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
   </data>
   <data name="Homepage" xml:space="preserve">
     <value>Website do Projeto: www.codeplex.com/ontopreplica.</value>
@@ -432,36 +409,6 @@ Você pode ativar 'click-trough' mais tarde</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Quarto</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Modo de troca de Grupo</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica vai automaticamente clonar uma janela de um grupo definido, alternando para a janela mais recente em segundo plano.</value>    
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (opaco)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>Define OnTopReplica como completamente opaca.</value>    
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>Define OnTopReplica para 25% de opacidade.</value>    
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>Define OnTopReplica para 50% de opacidade.</value>    
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>Define OnTopReplica para 75% de opacidade.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Opacidade</value>

@@ -282,25 +282,6 @@ Dieses Programm benötigt Windows Vista Home Premium oder besser.</value>
   <data name="FullscreenTitle" xml:space="preserve">
     <value>OnTopReplica Vollbild</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Deaktivieren</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Modus aktivieren</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Mehrere Fenster zum aktivieren auswählen.</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Der Gruppenmodus ist aktiv.</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Gruppenmodus:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Fenster</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>Homepage: www.codeplex.com/ontopreplica.</value>
   </data>
@@ -401,36 +382,6 @@ Durchklicken kann später aktiviert werden</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Vierteln</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Gruppenmodus</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica wird automatisch das zuletzt aktive Fenster aus einer benutzerdefinierten Gruppe klonen.</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (Undurchsichtig)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>OnTopReplica ist völlig undurchsichtig.</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>OnTopReplica auf 25% Sichtbarkeit setzen.</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>OnTopReplica auf 50% Sichtbarkeit setzen.</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>OnTopReplica auf 75% Sichtbarkeit setzen.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Deckkraft</value>

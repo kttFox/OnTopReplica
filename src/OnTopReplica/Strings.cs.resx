@@ -288,25 +288,6 @@ Tuto aplikaci je možné spouštět pouze na systémech Windows Vista Home Premi
   <data name="FullscreenTitle" xml:space="preserve">
     <value>Aplikace OnTopReplica přes celou obrazovku</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Zrušit</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Povolit seskupení</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Výběrem více položek aktivujete seskupení</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Seskupení je aktivní</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Seskupení</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Okna</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>Domácí stránka: www.codeplex.com/ontopreplica.</value>
   </data>
@@ -404,36 +385,6 @@ Režim "Proklikávání" je možné zvolit později v menu</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Čtvrtinová</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Seskupení</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica bude automaticky přepínat mezi okny z uživatelsky definované skupiny tak, že zobrazeno bude vždy to naposledy deaktivované okno.</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (neprůhledné)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>Nastaví aplikaci OnTopReplica jako neprůhlednou.</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>Nastaví průhlednost na 25%.</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>Nastaví průhlednost na 50%.</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>Nastaví průhlednost na 75%.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Průhlednost</value>

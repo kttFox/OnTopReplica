@@ -323,25 +323,6 @@
   <data name="FullscreenTitle" xml:space="preserve">
     <value>OnTopReplica全屏</value>
   </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>关闭</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>打开组模式</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>同时选择多个窗口来打开。</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>组切换模式已打开。</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>组切换模式：</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>窗口</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
   <data name="Homepage" xml:space="preserve">
     <value>主页：www.codeplex.com/ontopreplica。</value>
   </data>
@@ -437,36 +418,6 @@
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 四分之一</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>组切换模式</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica会根据用户定义的组自动复制窗口，切换到最后一个激活的前端窗口。</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% （不透明）</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>设置OnTopReplica不透明。</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>设置OnTopReplica有25%透明度。</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>设置OnTopReplica有50%透明度。</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>设置OnTopReplica有75%透明度。</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>透明度</value>
