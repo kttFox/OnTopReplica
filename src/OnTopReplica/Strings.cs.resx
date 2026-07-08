@@ -125,18 +125,6 @@
     <value />
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>Přerušit aktualizaci.</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>Zobrazit podrobnosti o aplikaci OnTopReplica.</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>Resetovat nastavení OnTopReplica.</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>Aktualizovat OnTopReplica.</value>
-  </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>Rádi byste přispěli k vývoji projektu? Jste vřele vítáni při spolupráci na stávajících nebo nových překladech, případně si můžete stáhnout % ze serveru CodePlex.</value>
   </data>
@@ -183,31 +171,6 @@
     <value />
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>Resetovat nastavení?</value>
-  </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>Operace "Resetovat nastavení" smaže veškerá uživatelská nastavení aplikace OnTopReplica a vrátí nastavení do stejného stavu jako po instalaci (všechny uložené informace, jako například uložené výřezy oken, budou ztraceny).</value>
-  </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>Resetovat nastavení</value>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>&amp;Storno</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>Označte výřez pomocí myši.</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>Podrobnosti</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Podrobnosti k Windows Aero</value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Windows Aero je k dispozici pouze na systémech Windows Vista Home Premium a vyšších.</value>
-  </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>Funkce 'Desktop Composition' není povolena.</value>
   </data>
@@ -244,41 +207,8 @@ Tuto aplikaci je možné spouštět pouze na systémech Windows Vista Home Premi
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>Nelze vložit okno.</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>Kontrola aktualizací se nezdařila.</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>Zdá se, že aplikace OnTopReplica nebyla nainstalována pomocí 'ClickOnce'. Aktualizaci musíte provést ručně (navštivte &lt;a href="http://ontopreplica.codeplex.com"&gt;domácí stránku aplikace OnTopReplica&lt;/a&gt;).</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>Aplikaci OnTopReplica se nepodařilo zjistit, zda existuje nová verze. Zkontrolujte, zda jste připojeni k síti Internet. Pokud ano, je možné, že webové stránky projektu jsou dočasně mimo provoz.</value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>Režim</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>Vždy na vrchu</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>Nastaví aplikaci OnTopReplica, aby zůstávala vždy na vrchu.</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>Proklikávání</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>Aplikace OnTopReplica se bude chovat jako průhledná vrstva přes kterou bude možno proklikávat do podložených oken.</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>Standardní</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>Aplikace OnTopReplica se bude chovat jako běžné okno. Jiná okna mohou překrýt okno aplikace.</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>Aplikace OnTopReplica přes celou obrazovku</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Domácí stránka: www.codeplex.com/ontopreplica.</value>
   </data>
   <data name="InfoClickForwarding" xml:space="preserve">
     <value>Přejete si povolit "přeposílání kliknutí"?</value>
@@ -301,21 +231,6 @@ K návratu do standardního režimu použijte příkaz pro vypnutí v nabídce i
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Režim "Proklikávání"</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>Aplikace OnTopReplica byla aktualizována.</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>Pro použití aktualizací je potřeba aplikaci OnTopReplica restartovat.</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>Aktualizace proběhla úspěšně</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>OnTopReplica je aktuální.</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>Žádná aktualizace není k dispozici.</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Jazyk</value>
@@ -349,9 +264,6 @@ K návratu do standardního režimu použijte příkaz pro vypnutí v nabídce i
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>Zavřít</value>
-  </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>Ukončí aplikaci OnTopReplica.</value>
   </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 Dvojnásobná</value>

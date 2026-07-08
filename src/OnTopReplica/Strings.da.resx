@@ -125,18 +125,6 @@
     <value />
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>Annuller updateringen.</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>Vis detaljer om OnTopReplica.</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>Nulstil alle OnTopReplica indstillinger.</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>Opdater OnTopReplica nu.</value>
-  </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>Care to contribute to the project? You are welcome to improve available translations, start a new one for your native language or to check out the % from CodePlex.</value>
   </data>
@@ -187,31 +175,6 @@
     <value />
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>Nulstil indstillinger?</value>
-  </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>Dette nulstiller OnTopReplica til standard indstillingerne (alle gemte informationer, som gemte områder, vil blive slettet).</value>
-  </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>Nulstil indstillingerne</value>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>&amp;Annuller</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>Tegn områder med musen</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>Detaljer</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Detaljer om Windows Aero</value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Windows Aero er kun tilgængelig op Windows Vista Home Premium eller højere.</value>
-  </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>Windows Aero effekter er ikke slået til</value>
   </data>
@@ -246,41 +209,8 @@ Dette program kræver Windows Vista Home Premium eller bedre.</value>
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>Kunne ikke passes til vinduet.</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>Kan ikke søge efter opdateringer.</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>OnTopReplica blev ikke installeret ved hjælp af 'ClickOnce'. Du bliver nødt til at opdatere manuelt (besøg &lt;a href="http://ontopreplica.codeplex.com"&gt;OnTopReplica's hjemmeside&lt;/a&gt;).</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>OnTopReplica was unable to check whether an updated version is available. Make sure you are connected to the Internet. If you are, the website may be temporarily down.</value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>Tilstande</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>Altid øverst</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>Får OnTopReplica til altid at være øverst.</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>Klikke igennem</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>OnTopReplica vil opføre sig som en gennemsigtig film der lader dig klikke igennem til de underliggende vinduer.</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>Standard</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>Opfører sig som et almindeligt vindue. Du kan trække andre viduer ind over OnTopReplica.</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>OnTopReplica fuld skærm</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Hjemmeside: www.codeplex.com/ontopreplica.</value>
   </data>
   <data name="InfoClickForwarding" xml:space="preserve">
     <value>Ønsker du at aktivere "click forwarding"?</value>
@@ -303,21 +233,6 @@ For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Gennem klik tilstand</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>OnTopReplica er blevet opdateret.</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>For at benytte den opdaterede udgave af OnTopReplica skal du genstarte programmet.</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>Opdatering fuldført</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>OnTopReplice er opdateret.</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>Ingen opdateringer er tilgængelige</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Sprog</value>
@@ -351,9 +266,6 @@ For at vende tilbage til normal tilstand skal du bruge deaktiveringskommandoen i
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>Luk</value>
-  </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>Lukker OnTopReplica.</value>
   </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 dobbelt</value>

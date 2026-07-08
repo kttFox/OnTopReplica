@@ -79,42 +79,6 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   Abort update process. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AboutButtonCancelTT {
-            get {
-                return ResourceManager.GetString("AboutButtonCancelTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Show details about OnTopReplica. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AboutButtonExpanderTT {
-            get {
-                return ResourceManager.GetString("AboutButtonExpanderTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Reset all OnTopReplica settings. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AboutButtonResetTT {
-            get {
-                return ResourceManager.GetString("AboutButtonResetTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Update OnTopReplica now. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AboutButtonUpdateTT {
-            get {
-                return ResourceManager.GetString("AboutButtonUpdateTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Care to contribute to the project? You are welcome to improve available translations, start a new one for your native language or to check out the % from CodePlex. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AboutContribute {
@@ -246,42 +210,6 @@ namespace OnTopReplica {
         internal static string ApplicationName {
             get {
                 return ResourceManager.GetString("ApplicationName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Reset settings? に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AskSettingReset {
-            get {
-                return ResourceManager.GetString("AskSettingReset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   This will erase all settings of OnTopReplica, returning it to the original state right after installation (all saved information, like stored regions, will be lost). に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AskSettingResetContent {
-            get {
-                return ResourceManager.GetString("AskSettingResetContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Reset settings に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AskSettingResetTitle {
-            get {
-                return ResourceManager.GetString("AskSettingResetTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   &amp;Cancel に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ButtonCancel {
-            get {
-                return ResourceManager.GetString("ButtonCancel", resourceCulture);
             }
         }
         
@@ -466,42 +394,6 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   Draw regions using mouse. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string DrawRegions {
-            get {
-                return ResourceManager.GetString("DrawRegions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Details に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorDetailButton {
-            get {
-                return ResourceManager.GetString("ErrorDetailButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Details on Windows Aero に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorDetailsAero {
-            get {
-                return ResourceManager.GetString("ErrorDetailsAero", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Windows Aero is only available on Windows Vista Home Premium or higher. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorDetailsAeroInfo {
-            get {
-                return ResourceManager.GetString("ErrorDetailsAeroInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   &apos;Desktop Composition&apos; is not enabled. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorDwmOff {
@@ -604,110 +496,11 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   Unable to check for updates. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorUpdate {
-            get {
-                return ResourceManager.GetString("ErrorUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   It appears that OnTopReplica wasn&apos;t installed using &apos;ClickOnce&apos;. You&apos;ll have to update manually (visit &lt;a href=&quot;http://ontopreplica.codeplex.com&quot;&gt;OnTopReplica&apos;s homepage&lt;/a&gt;). に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorUpdateContent {
-            get {
-                return ResourceManager.GetString("ErrorUpdateContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   OnTopReplica was unable to check whether an updated version is available. Make sure you are connected to the Internet. If you are, the website may be temporarily down. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorUpdateContentGeneric {
-            get {
-                return ResourceManager.GetString("ErrorUpdateContentGeneric", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Mode に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string FullscreenMode {
             get {
                 return ResourceManager.GetString("FullscreenMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Always on top に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string FullscreenModeAlwaysOnTop {
-            get {
-                return ResourceManager.GetString("FullscreenModeAlwaysOnTop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Forces OnTopReplica to stay always on top. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string FullscreenModeAlwaysOnTopTT {
-            get {
-                return ResourceManager.GetString("FullscreenModeAlwaysOnTopTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Click through に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string FullscreenModeClickThrough {
-            get {
-                return ResourceManager.GetString("FullscreenModeClickThrough", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   OnTopReplica will behave like a transparent overlay that lets your clicks through to the windows below. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string FullscreenModeClickThroughTT {
-            get {
-                return ResourceManager.GetString("FullscreenModeClickThroughTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Standard に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string FullscreenModeNormal {
-            get {
-                return ResourceManager.GetString("FullscreenModeNormal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Behaves like an ordinary window. You can bring other windows above OnTopReplica. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string FullscreenModeNormalTT {
-            get {
-                return ResourceManager.GetString("FullscreenModeNormalTT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   OnTopReplica fullscreen に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string FullscreenTitle {
-            get {
-                return ResourceManager.GetString("FullscreenTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Homepage: www.codeplex.com/ontopreplica. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string Homepage {
-            get {
-                return ResourceManager.GetString("Homepage", resourceCulture);
             }
         }
         
@@ -766,51 +559,6 @@ namespace OnTopReplica {
         internal static string InfoClickThroughTitle {
             get {
                 return ResourceManager.GetString("InfoClickThroughTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   OnTopReplica has been updated. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string InfoUpdated {
-            get {
-                return ResourceManager.GetString("InfoUpdated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   In order to use the updated version of OnTopReplica you&apos;ll have to restart the application. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string InfoUpdatedContent {
-            get {
-                return ResourceManager.GetString("InfoUpdatedContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Update successful に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string InfoUpdatedTitle {
-            get {
-                return ResourceManager.GetString("InfoUpdatedTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   OnTopReplica is up to date. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string InfoUpToDate {
-            get {
-                return ResourceManager.GetString("InfoUpToDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   No update available に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string InfoUpToDateTitle {
-            get {
-                return ResourceManager.GetString("InfoUpToDateTitle", resourceCulture);
             }
         }
         
@@ -928,15 +676,6 @@ namespace OnTopReplica {
         internal static string MenuClose {
             get {
                 return ResourceManager.GetString("MenuClose", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Closes OnTopReplica. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string MenuCloseTT {
-            get {
-                return ResourceManager.GetString("MenuCloseTT", resourceCulture);
             }
         }
         

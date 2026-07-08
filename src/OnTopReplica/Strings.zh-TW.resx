@@ -120,18 +120,6 @@
   <data name="AboutAuthor" xml:space="preserve">
     <value>作者：%。</value>
   </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>停止更新</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>查看更多 OnTopReplica 的說明。</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>重設所有的OnTopReplica設定。</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>更新 OnTopReplica。</value>
-  </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>想要貢獻代碼？歡迎你來翻譯本專案，在 GitHub 建立一個新的本地語言專案以更改%。</value>
   </data>
@@ -174,30 +162,6 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>OnTopReplica</value>
   </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>重設設定？</value>
-  </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>將會清除 OnTopReplica 的全部設定，變為剛安裝後的狀態（所有保存的資訊，例如語言設定）。</value>
-  </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>重設設定</value>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>使用滑鼠選取範圍。</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>說明</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Windows Aero的更多說明</value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Windows Aero 僅支援於 Windows Vista 家用進階版或更高級的系統。</value>
-  </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>「桌面轉譯」(DWM)未啟用。</value>
   </data>
@@ -233,41 +197,8 @@
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>無法配對視窗。</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>無法檢查更新。</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>OnTopReplica 未經由ClickOnce安裝。你需要手動更新（訪問&lt;a href="https://github.com/LorenzCK/OnTopReplica"&gt;OnTopReplica主頁&lt;/a&gt;）。</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>OnTopReplica 無法檢查更新是否存在。請確保你的網路連接正常。如果正常，可能更新伺服器暫時關閉了。</value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>模式</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>永遠置頂</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>強制 OnTopReplica 置頂。</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>點擊穿透</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>OnTopReplica 將自動變為透明，並能夠讓你的點擊穿透進下層視窗。</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>標準</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>變為普通視窗。將不會置頂。</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>OnTopReplica 全螢幕</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>主頁：https://github.com/LorenzCK/OnTopReplica。</value>
   </data>
   <data name="InfoClickForwarding" xml:space="preserve">
     <value>希望打開「點擊轉移」嗎？</value>
@@ -286,21 +217,6 @@
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>點擊穿透模式</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>OnTopReplica 已更新。</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>要使用更新後的 OnTopReplica 你需要重新開啟應用程式。</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>更新完畢</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>OnTopReplica 已更新過。</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>無可用更新</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>語言</value>
@@ -334,9 +250,6 @@
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>關閉</value>
-  </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>關閉OnTopReplica。</value>
   </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 兩倍</value>

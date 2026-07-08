@@ -125,18 +125,6 @@
     <value />
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>Cancela el progreso de actualización.</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>Muestra detalles acerca de OnTopReplica.</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>Reinicia la configuración de OnTopReplica a sus valores iniciales.</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>Actualiza OnTopReplica ahora.</value>
-  </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>Contribuye con el proyecto.</value>
     <comment>Unfinished.</comment>
@@ -183,31 +171,6 @@
     <value />
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>¿Reiniciar los ajustes?</value>
-  </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>Esta acción borrará todos los ajustes de OnTopReplica tras la instalación, volviendo a la configuración inicial (toda la información guardada, como las regiones personalizadas se perderán).</value>
-  </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>Reiniciar ajustes</value>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>&amp;Cancelar</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>Crea una región utilizando el ratón.</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>Detalles</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Detalles en Windows Aero</value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Windows Aero sólo está disponible en Windows Vista o 7, en su versión Home Premium o superior.</value>
-  </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>La Composición de Escritorio no está activada.</value>
   </data>
@@ -244,41 +207,8 @@ Es necesario utilizar Windows Vista o 7 en su versión Home Premium o superior.<
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>Imposible adaptar la ventana.</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>No se ha podido buscar actualizaciones.</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>Parece que OnTopReplica no ha podido ser instalado mediante "ClickOnce". Tendrá que actualizar manualmente visitando &lt;a href="http://ontopreplica.codeplex.com"&gt;la homepage del progetto&lt;/a&gt;.</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>OnTopReplica no ha podido comprobar si hay una actualización disponible. Asegúrese de que está conectado a Internet. Si lo está, quizá la página oficial está temporalmente no disponible.</value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>Modo</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>Siempre encima</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>OnTopReplica permanece siempre encima.</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>Click a través</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>OnTopReplica se comporta como una ventana transparente a través de la cual puede clickar lo que se encuentra detrás.</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>Ventana standard</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>OnTopReplica se comporta como una ventana corriente de Windows, por lo tanto puede estar en segundo plano.</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>OnTopReplica a pantalla completa</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Sitio oficial: www.codeplex.com/ontopreplica.</value>
   </data>
   <data name="InfoClickForwarding" xml:space="preserve">
     <value>Desea activar el "Click en la ventana clonada"?</value>
@@ -301,21 +231,6 @@ Para volver al modo normal, usa el comando de desactivación en el menú del ico
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Modo Click a través</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>OnTopReplica ha sido actualizado.</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>Para poder utilizar la versión actualizada de OnTopReplica se ha de reiniciar la aplicación.</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>Actualización correcta.</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>OnTopReplica está actualizado.</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>No hay actualizaciones disponibles</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
@@ -349,9 +264,6 @@ Para volver al modo normal, usa el comando de desactivación en el menú del ico
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>Cerrar</value>
-  </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>Cierra OnToopReplica</value>
   </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 Doble</value>

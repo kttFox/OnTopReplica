@@ -125,18 +125,6 @@
     <value />
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>终止更新过程</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>展开关于OnTopReplica的详细内容</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>重置OnTopReplica的所有设定</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>现在更新OnTopReplica</value>
-  </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>想为本项目出一份力吗？欢迎你参与到翻译工作中来，抑或检视从CodePlex处取得的 %</value>
   </data>
@@ -207,31 +195,6 @@
   <data name="ColorAlert_SoundFile" xml:space="preserve">
     <value>声音文件：</value>
   </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>重置设定吗？</value>
-  </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>这将清除所有OnTopReplica的设定，并回到刚安装完的状态（所有保存的信息、保存的选区，均会丢失）</value>
-  </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>重置设定</value>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>&amp;取消</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>使用鼠标划出区域</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>详细信息</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Windows Aero的详细信息</value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>为什么Windows Aero特效只在Windows Vista Home Premium或更高级版本中出现</value>
-  </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>未启用桌面组合</value>
   </data>
@@ -268,41 +231,8 @@
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>无法适应窗口</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>无法检查更新</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>OnTopReplica不是用“ClickOnce”方式安装的。您不得不手动更新了（访问 &lt;a href="http://ontopreplica.codeplex.com"&gt;OnTopReplica的主页&lt;/a&gt;）</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>OnTopReplica无法检测更新，请确保已连接到互联网。当然，也有可能是网站暂时关闭</value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>模式</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>总是置顶</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>强制OnTopReplica置顶</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>点击穿过</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>OnTopReplica会像一个透明的覆盖层并允许您点击其后面的窗口</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>标准模式</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>变回普通窗口，OnTopReplica会被其他窗口阻挡</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>OnTopReplica全屏幕</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>主页：www.codeplex.com/ontopreplica</value>
   </data>
   <data name="InfoClickForwarding" xml:space="preserve">
     <value>您想启用“点击转发”吗？</value>
@@ -325,21 +255,6 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>点击穿过模式</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>OnTopReplica已更新</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>为能使用新版OnTopReplica，您必须重新启动本程序</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>更新成功</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>OnTopReplica是最新的</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>没有可用的更新</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>语言</value>
@@ -373,9 +288,6 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>退出</value>
-  </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>关闭OnTopReplica</value>
   </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>200%</value>

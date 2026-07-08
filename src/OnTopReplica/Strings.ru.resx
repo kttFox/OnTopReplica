@@ -125,18 +125,6 @@
     <value />
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>Остановить обновление</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>О программе</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>Установить настройки по умолчанию</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>Обновить программу</value>
-  </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>Хотите поддержать проект? Примите участие в улучшении готовых переводов, создайте свой на вашем родном языке или помогите улучшить % на «CodePlex».</value>
   </data>
@@ -183,31 +171,6 @@
     <value />
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>Сбросить настройки?</value>
-  </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>по умолчанию (вся сохраненная после установки информация вроде сохраненных областей будет утрачена).</value>
-  </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>Сбросить настройки</value>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>&amp;Отмена</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>Выберите области мышью</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>Подробности</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Подробности о «Windows Aero» </value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Функция «Windows Aero» доступна только на системах «Windows», начиная с «Vista Home Premium», кроме версий «Starter» и «Home Basic» (по умолчанию).</value>
-  </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>Композиция слоев рабочего стола недоступна.</value>
   </data>
@@ -241,41 +204,8 @@
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>Невозможно уместить в окне.</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>Невозможно проверить обновления.</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>Вероятно, программа была установлена с использованием функции «ClickOnce». Вам необходимо обновить ее самостоятельно. (Посетите &lt;a href="http://ontopreplica.codeplex.com"&gt; домашнюю страницу программы&lt;/a&gt;).</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>Программе не удалось проверить доступность новой версии. Удостоверьтесь, что подключение к Интернету присутствует. Если присутствует, сайт может временно не работать. </value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>Режим</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>Всегда поверх других окон</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>Всегда удерживать программу поверх других окон.</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>Пропускать щелчки мышью</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>Программа будет работать, как прозрачный слой, позволяющий щелкать мышью по нижележащим окнам.</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>Обычный</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>Программа будет работать, как обычное окно. Вы сможете помещать другие окна поверх окна программы.</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>Полноэкранный режим</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Домашняя страница: www.codeplex.com/ontopreplica.</value>
   </data>
   <data name="InfoClickForwarding" xml:space="preserve">
     <value>Хотите включить передачу щелчков мышью главному окну?</value>
@@ -296,21 +226,6 @@
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Режим сквозных щелчков мышью</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>Программа обновлена.</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>Для использования обновленной версии программы ее необходимо перезапустить.</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>Обновление успешно</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>Используется последняя версия программы.</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>Обновлений нет</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -344,9 +259,6 @@
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>Закрыть</value>
-  </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>Закрыть программу.</value>
   </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 Двойной</value>
