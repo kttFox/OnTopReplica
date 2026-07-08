@@ -23,9 +23,7 @@ namespace OnTopReplica {
         const string TitleToken = "|title=";
         const char Sep = '|';
 
-        static string LayoutFilePath {
-            get { return Path.Combine(AppPaths.PrivateRoamingFolderPath, FileName); }
-        }
+        static string LayoutFilePath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FileName);
 
         /// <summary>
         /// Last known source window and regions. While a source window is attached
@@ -38,10 +36,8 @@ namespace OnTopReplica {
             public string ClassName;
             public string Title;
             //Keyed by panel window; the primary is included like any other panel
-            public readonly Dictionary<MainForm, ThumbnailRegion> PanelRegions =
-                new Dictionary<MainForm, ThumbnailRegion>();
-            public readonly Dictionary<MainForm, bool> PanelChrome =
-                new Dictionary<MainForm, bool>();
+            public readonly Dictionary<MainForm, ThumbnailRegion> PanelRegions = new Dictionary<MainForm, ThumbnailRegion>();
+            public readonly Dictionary<MainForm, bool> PanelChrome = new Dictionary<MainForm, bool>();
 
             public bool HasWindow {
                 get { return Hwnd != 0 || !string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(ClassName); }
