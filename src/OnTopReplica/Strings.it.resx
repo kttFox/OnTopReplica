@@ -155,11 +155,12 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>Licenza d'uso</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Aggiornamenti</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>Questa applicazione è rilasciata sotto la licenza %, che rientra nella definizione di "open-source" data dal consorzio OSI.</value>
+  </data>
+  <data name="AboutLicenseContent" xml:space="preserve">
+    <value />
+    <comment>Can be left blank.</comment>
   </data>
   <data name="AboutSlogan" xml:space="preserve">
     <value>Una copia in tempo reale e sempre in primo piano di una finestra a tua scelta.</value>
@@ -170,12 +171,6 @@
   <data name="AboutTranslators" xml:space="preserve">
     <value>Traduttori: {0}</value>
     <comment>{0} translators (do not end with period)</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Controlla!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica controlla automaticamente la presenza di aggiornamenti ad ogni avvio.</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Versione {0}</value>
@@ -584,72 +579,5 @@ Puoi abilitare il Click-Through in futuro</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Impostazioni</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Annulla aggiornamento
-OnTopReplica si aggiornerà in un secondo momento.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>Continua
-Scarica OnTopReplica {0}.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>Sarà possibile scaricare la nuova versione ed installarla.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Versione installata: {0}
-Versione disponibile: {1}</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>Disponibile la versione {0}</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>Scaricati {0} byte su {1}.</value>
-    <comment>{0} downloaded bytes {1} total bytes
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>Download in corso...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>L'ultima versione di OnTopReplica è già installata. Il programma controllo automaticamente la presenza di aggiornamenti ad ogni avvio.
-
-Per tenersi aggiornati sullo sviluppo di OnTopReplica o suggerire miglioramenti, &lt;a href="website"&gt;visitare il sito ufficiale&lt;/a&gt;.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>Ultima versione stabile rilasciata il {0}.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica è aggiornato</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Installa
-OnTopReplica verrà chiuso e l'aggiornamento sarà installato.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>La versione {0} di OnTopReplica è pronta ad essere installata sul tuo computer.</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>Aggiornamento pronto</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>Aggiornamenti di OnTopReplica</value>
-  </data>
-  <data name="AboutAuthorContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutLicenseContent" xml:space="preserve">
-    <value />
-    <comment>Can be left blank.</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
 </root>

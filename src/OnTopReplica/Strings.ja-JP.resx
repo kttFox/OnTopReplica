@@ -159,9 +159,6 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>ライセンス</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>アップデート</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>The application is licensed under the % license, which meets the terms of the "open-source" definition specified by OSI.</value>
   </data>
@@ -178,16 +175,6 @@
   <data name="AboutTranslators" xml:space="preserve">
     <value>翻訳者: {0}</value>
     <comment>{0} translators (do not end with period)</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>今すぐチェック</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica は起動時に毎回自動的に更新を確認します。</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>バージョン {0}</value>

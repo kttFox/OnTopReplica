@@ -161,12 +161,8 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>Licença</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Atualizações</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>Esta aplicação tem sua licença baseada em %, a qual condiz com os condições "open-source" definidas pela OSI.</value>
-    
   </data>
   <data name="AboutLicenseContent" xml:space="preserve">
     <value>Microsoft Reciprocal (MS-RL)</value>
@@ -186,13 +182,6 @@
   <data name="AboutTranslatorsContent" xml:space="preserve">
     <value>Christian Olaechea M., Daniel Zeus.EX, Federico Lorenzo, Goran Brecelj, Jhonatas Rezende (Beowulf20), Jan Romanczyk, Marco Kraxner, Patrik (batupata), Raúl Morillo, René Mihula, Roberto Leiro, Rodrigo Lourenço, Thomas Amundsen, Eric Hoffmann.</value>
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Verificar Atualizações Disponíveis!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica automaticamente verifica por Atualizações ao iniciar.</value>
-    
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Versão {0}</value>
@@ -618,61 +607,5 @@ Você pode ativar 'click-trough' mais tarde</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Configurações</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Cancelar atualização
-OnTopReplica irá notificá-lo na próxima vez que o programa for iniciado.</value>
-
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>Baixar
-Instalar OnTopReplica {0}.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>A nova versão pode ser baixada e instalada através do site oficial.</value>    
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Versão Atual: {0}
-Versão Disponível: {1}</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>Versão {0} disponível</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} bytes baixados.</value>
-    <comment>{0} bytes baixados {1} bytes totais
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>Baixando...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>A última versão de OnTopReplica já está instalada. O programa verificará automaticamente por atualizações toda vez que for iniciada.
-Você pode se manter atualizado sobre o desenvolvimento OnTopReplica, sugerir melhorias e novas funções no website oficial: &lt;a href="website"&gt;visiting the official website&lt;/a&gt;.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>A versão atual estável foi lançada em {0}.</value>    
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica está atualizado</value>    
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Instalar
-OnTopReplica será fechado e atualizado.</value>
-
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>A versão {0} de OnTopReplica está pronta para ser instalada.</value>    
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>Atualização pronta</value>    
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>Atualizações de OnTopReplica</value>    
   </data>
 </root>

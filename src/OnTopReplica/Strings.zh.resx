@@ -159,9 +159,6 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>许可证</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>更新</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>这个软件使用%许可证，符合OSI提出的“开源”协议。</value>
   </data>
@@ -178,16 +175,6 @@
   <data name="AboutTranslators" xml:space="preserve">
     <value>翻译者：{0}</value>
     <comment>{0} translators (do not end with period)</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>检查更新！</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica每次启动的时候都会自动检查更新。</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>版本 {0}</value>
@@ -624,59 +611,6 @@
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>设置</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>取消更新
-OnTopReplica会在下次启动的时候提醒你。</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>下载
-安装OnTopReplica {0}。</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>官网有新版本可供下载和安装。</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>安装版本：{0}
-现有版本：{1}</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>现有更新版本 {0}</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} 字节已下载。</value>
-    <comment>{0} downloaded bytes {1} total bytes
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>正在下载中…</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>最新版本的OnTopReplica已经安装。软件会在每次启动的时候自动检查更新。你可以关注OnTopReplica的开发，在&lt;a href="website"&gt;官方网站上&lt;/a&gt;提建议或新功能。</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>最后一个稳定版本是 {0}。</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica已更新过</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>安装
-OnTopReplica会关闭并应用更新。</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>OnTopReplica 版本 {0} 已安装到你的电脑上。</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>准备更新</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>OnTopReplica 更新</value>
   </data>
   <data name="RegionsBottom" xml:space="preserve">
     <value>底部</value>

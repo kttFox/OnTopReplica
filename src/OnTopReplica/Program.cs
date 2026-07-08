@@ -5,15 +5,12 @@ using System.Threading;
 using System.Windows.Forms;
 using OnTopReplica.Properties;
 using OnTopReplica.StartupOptions;
-using OnTopReplica.Update;
 
 namespace OnTopReplica {
     
     static class Program {
 
         public static PlatformSupport Platform { get; private set; }
-
-        public static UpdateManager Update { get; private set; }
 
         static MainForm _mainForm;
 
@@ -121,35 +118,6 @@ namespace OnTopReplica {
             }
 
             Log.Write("Shutting down OnTopReplica");
-        }
-
-        private static EventHandler _handlerIdleUpdater = new EventHandler(Application_Idle);
-
-        /// <summary>
-        /// Callback detecting application idle time.
-        /// </summary>
-        static void Application_Idle(object sender, EventArgs e) {
-            Application.Idle -= _handlerIdleUpdater;
-
-            Update = new UpdateManager(_mainForm);
-            Update.UpdateCheckCompleted += new EventHandler<UpdateCheckCompletedEventArgs>(UpdateManager_CheckCompleted);
-            Update.CheckForUpdate();
-        }
-
-        /// <summary>
-        /// Callback that handles update checking.
-        /// </summary>
-        static void UpdateManager_CheckCompleted(object sender, UpdateCheckCompletedEventArgs e) {
-            if (e.Success && e.Information != null) {
-                Log.Write("Update check successful (latest version is {0})", e.Information.LatestVersion);
-
-                if (e.Information.IsNewVersionAvailable) {
-                    Update.ConfirmAndInstall();
-                }
-            }
-            else {
-                Log.WriteException("Unable to check for updates", e.Error);
-            }
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {

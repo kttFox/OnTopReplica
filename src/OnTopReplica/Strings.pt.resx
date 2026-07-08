@@ -159,9 +159,6 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>License</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Updates</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>The application is licensed under the % license, which meets the terms of the "open-source" definition specified by OSI.</value>
   </data>
@@ -178,16 +175,6 @@
   <data name="AboutTranslators" xml:space="preserve">
     <value>Translators: {0}</value>
     <comment>{0} translators (do not end with period)</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Check now!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica automatically checks for updates at every start up.</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Version {0}</value>
@@ -596,60 +583,5 @@ You can enable click-through later</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Cancel update
-OnTopReplica will prompt you the next time it is started.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>Download
-Install OnTopReplica {0}.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>The new version can be downloaded and installed from the official website.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Installed version: {0}
-Available version: {1}</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>Version {0} available</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} bytes downloaded.</value>
-    <comment>{0} downloaded bytes {1} total bytes
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>Downloading...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>The latest version of OnTopReplica is already installed. The program automatically checks for updates at every start.
-
-You can keep up to date about OnTopReplica's development, suggest improvements and new features by &lt;a href="website"&gt;visiting the official website&lt;/a&gt;.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>Latest stable version released on {0}.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica is up to date</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Install
-OnTopReplica will be closed and the update installed.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>OnTopReplica version {0} is ready to be installed on your computer.</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>Update ready</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>OnTopReplica updates</value>
   </data>
 </root>

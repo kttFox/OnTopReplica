@@ -265,11 +265,7 @@
 
         private System.Windows.Forms.Label labelTranslators;
         private System.Windows.Forms.LinkLabel linkCredits;
-        private WindowsFormsAero.ProgressBar progressUpdate;
-        private System.Windows.Forms.Button buttonUpdate;
-        private System.Windows.Forms.Label lblUpdateDisclaimer;
         private WindowsFormsAero.LabeledDivider labeledDivider2;
-        private WindowsFormsAero.LabeledDivider labeledDivider1;
         private System.Windows.Forms.LinkLabel linkHomepage;
         private System.Windows.Forms.LinkLabel linkAuthor;
         private System.Windows.Forms.Label lblSlogan;

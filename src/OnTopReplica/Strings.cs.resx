@@ -155,11 +155,12 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>Licence</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Aktualizace</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>Aplikace je vydána pod % licencí, která splňuje požadavky "open-source" definice dle OSI.</value>
+  </data>
+  <data name="AboutLicenseContent" xml:space="preserve">
+    <value />
+    <comment>Can be left blank.</comment>
   </data>
   <data name="AboutSlogan" xml:space="preserve">
     <value>Nenáročný a instantní náhled libovolného otevřeného okna (nebo jeho výřezu) v systému.</value>
@@ -577,79 +578,5 @@ Režim "Proklikávání" je možné zvolit později v menu</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Nastavení</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Zrušit aktualizaci
-Aplikace OnTopReplica vás vyzve k aktualizaci při dalším startu.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>Pokračovat
-Instalovat OnTopReplica {0}.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>Nová verze bude automaticky stažena a nainstalována.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Nainstalovaná verze: {0}
-Dostupná verze: {1}</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>Verze {0} je k dispozici</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>staženo {0}/{1} bajtů.</value>
-    <comment>{0} downloaded bytes {1} total bytes
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>Stahování...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>Poslední verze aplikace OnTopReplica je již nainstalována. Aktualizace se kontrolují automaticky při každém spuštění.
-
-Na &lt;a href="website"&gt;oficiálních stránkách&lt;/a&gt; můžete sledovat aktuální vývoj aplikace nebo hlásit chyby či navrhovat vylepšení.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>Poslední stabilní verze byla vydána {0}.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica je aktuální</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Instalovat
-OnTopReplica bude nyní ukončena a spustí se aktualizace.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>Nová verze {0} OnTopReplica je připravena k instalaci.</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>Aktualizace je připravena</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>Aktualizace OnTopReplica</value>
-  </data>
-  <data name="AboutAuthorContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutLicenseContent" xml:space="preserve">
-    <value />
-    <comment>Can be left blank.</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="ApplicationName" xml:space="preserve">
-    <value />
-    <comment>Probably doesn't need localization. :)</comment>
-  </data>
-  <data name="MenuAdvanced" xml:space="preserve">
-    <value>Advanced</value>
   </data>
 </root>

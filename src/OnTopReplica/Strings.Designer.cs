@@ -106,7 +106,7 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Update OnTopReplica now. 的當地語系化字串。
+        ///   Update OnTopReplica now. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AboutButtonUpdateTT {
             get {
@@ -178,16 +178,7 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Updates 的當地語系化字串。
-        /// </summary>
-        internal static string AboutDividerUpdates {
-            get {
-                return ResourceManager.GetString("AboutDividerUpdates", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 The application is licensed under the % license, which meets the terms of the &quot;open-source&quot; definition specified by OSI. 的當地語系化字串。
+        ///   The application is licensed under the % license, which meets the terms of the &quot;open-source&quot; definition specified by OSI. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AboutLicense {
             get {
@@ -853,7 +844,7 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Update successful 的當地語系化字串。
+        ///   Update successful に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InfoUpdatedTitle {
             get {
@@ -1600,143 +1591,11 @@ namespace OnTopReplica {
         }
         
         /// <summary>
-        ///   查詢類似 Settings 的當地語系化字串。
+        ///   Settings に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SettingsTitle {
             get {
                 return ResourceManager.GetString("SettingsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Cancel update
-        ///OnTopReplica will prompt you the next time it is started. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateAvailableCommandCancel {
-            get {
-                return ResourceManager.GetString("UpdateAvailableCommandCancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Download
-        ///Install OnTopReplica {0}. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateAvailableCommandOk {
-            get {
-                return ResourceManager.GetString("UpdateAvailableCommandOk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 The new version can be downloaded and installed from the official website. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateAvailableContent {
-            get {
-                return ResourceManager.GetString("UpdateAvailableContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Installed version: {0}
-        ///Available version: {1} 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateAvailableExpanded {
-            get {
-                return ResourceManager.GetString("UpdateAvailableExpanded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Version {0} available 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateAvailableInstruction {
-            get {
-                return ResourceManager.GetString("UpdateAvailableInstruction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 {0}/{1} bytes downloaded. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateDownloadingContent {
-            get {
-                return ResourceManager.GetString("UpdateDownloadingContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Downloading... 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateDownloadingInstruction {
-            get {
-                return ResourceManager.GetString("UpdateDownloadingInstruction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 The latest version of OnTopReplica is already installed. The program automatically checks for updates at every start.
-        ///
-        ///You can keep up to date about OnTopReplica&apos;s development, suggest improvements and new features by &lt;a href=&quot;website&quot;&gt;visiting the official website&lt;/a&gt;. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateInfoContent {
-            get {
-                return ResourceManager.GetString("UpdateInfoContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Latest stable version released on {0}. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateInfoFooter {
-            get {
-                return ResourceManager.GetString("UpdateInfoFooter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 OnTopReplica is up to date 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateInfoInstruction {
-            get {
-                return ResourceManager.GetString("UpdateInfoInstruction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Install
-        ///OnTopReplica will be closed and the update installed. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateReadyCommandOk {
-            get {
-                return ResourceManager.GetString("UpdateReadyCommandOk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 OnTopReplica version {0} is ready to be installed on your computer. 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateReadyContent {
-            get {
-                return ResourceManager.GetString("UpdateReadyContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 Update ready 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateReadyInstruction {
-            get {
-                return ResourceManager.GetString("UpdateReadyInstruction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 OnTopReplica updates 的當地語系化字串。
-        /// </summary>
-        internal static string UpdateTitle {
-            get {
-                return ResourceManager.GetString("UpdateTitle", resourceCulture);
             }
         }
     }

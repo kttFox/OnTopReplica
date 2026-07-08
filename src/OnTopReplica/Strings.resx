@@ -159,9 +159,6 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>License</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Updates</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>The application is licensed under the % license, which meets the terms of the "open-source" definition specified by OSI.</value>
   </data>
@@ -182,12 +179,6 @@
   <data name="AboutTranslatorsContent" xml:space="preserve">
     <value>Christian Olaechea M., Daniel Zeus.EX, Federico Lorenzo, Goran Brecelj, Jan Romanczyk, Marco Kraxner, Patrik (batupata), Raúl Morillo, René Mihula, Roberto Leiro, Rodrigo Lourenço, Thomas Amundsen, Eric Hoffmann.</value>
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Check now!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica automatically checks for updates at every start up.</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Version {0}</value>

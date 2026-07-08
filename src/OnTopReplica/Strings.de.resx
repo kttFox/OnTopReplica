@@ -151,11 +151,12 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>Lizenz</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Aktualisierungen</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>Das Programm ist unter der % Lizenz lizensiert, welche die Bedingungen der Definition von "open-source" nach OSI erfüllt.</value>
+  </data>
+  <data name="AboutLicenseContent" xml:space="preserve">
+    <value>Microsoft Reciprocal (MS-RL)</value>
+    <comment>Can be left blank.</comment>
   </data>
   <data name="AboutSlogan" xml:space="preserve">
     <value>Ein kleines echtzeit-Vorschaubild eines Fensters deiner Wahl, welches immer im Vordergrund bleibt.</value>
@@ -166,12 +167,6 @@
   <data name="AboutTranslators" xml:space="preserve">
     <value>Übersetzer: {0}</value>
     <comment>{0} translators (do not end with period)</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Jetzt prüfen!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica sucht automatisch bei jedem Start nach Aktualisierungen.</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Version {0}</value>
@@ -201,27 +196,6 @@ Alle Einstellungen werden gelöscht.</value>
   </data>
   <data name="AskSettingResetTitle" xml:space="preserve">
     <value>Einstellungen zurücksetzen</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} bytes heruntergeladen.</value>
-    <comment>{0} downloaded bytes {1} total bytes
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>Version {0} ist verfügbar</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Installieren
-OnTopReplica wird geschlossen und die Aktualisierung installiert.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>Eine neue Version kann von der offiziellen Webseite heruntergeladen und installiert werden.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>OnTopReplica version {0} ist zur Installation auf dem Computer bereit.</value>
   </data>
   <data name="ButtonCancel" xml:space="preserve">
     <value>&amp;Abbrechen</value>
@@ -599,57 +573,7 @@ Durchklicken kann später aktiviert werden</value>
   <data name="SettingsRestartRequired" xml:space="preserve">
     <value>Benötigt einen Neustart.</value>
   </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>Herunterladen...</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>Aktualisierung bereit</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>Herunterladen
-OnTopReplica {0} instalieren.</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Aktualisierung abbrechen
-OnTopReplica wird beim nächsten Start darauf hinweisen.</value>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica ist aktuell</value>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>Neuste stabile Programmversion vom {0}.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>Die aktuelle Version vom OnTopReplica ist schon installiert. Das Programm sucht automatisch bei jedem Start nach Aktualisierungen.
-
-Sie können über die Entwicklung von OnTopReplica auf dem Laufenden bleiben und verbesserungen vorschlagen indem sie die &lt;a href="website"&gt;offizielle Webseite besuchen&lt;/a&gt;.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Einstellungen</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>OnTopReplica Aktualisierungen</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Installierte Version: {0}
-Verfügbare Version: {1}</value>
-  </data>
-  <data name="AboutAuthor" xml:space="preserve">
-    <value>Autor: %.</value>
-    <comment>Link % is replaced by string AboutAuthorContent.</comment>
-  </data>
-  <data name="AboutAuthorContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutLicenseContent" xml:space="preserve">
-    <value>Microsoft Reciprocal (MS-RL)</value>
-    <comment>Can be left blank.</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
 </root>

@@ -159,9 +159,6 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>Lisans</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Güncellemeler</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>Bu uygulama OSI tarafından belirtilmiş "açık-kaynak" tanımının koşullarını yerine getiren % lisansı tarafından lisanslanmıştır.</value>
   </data>
@@ -178,16 +175,6 @@
   <data name="AboutTranslators" xml:space="preserve">
     <value>Çevirmenler: {0}</value>
     <comment>{0} translators (do not end with period)</comment>
-  </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Kontrol Et!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica her başlangıçta güncellemeleri otomatik olarak kontrol eder.</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Versiyon {0}</value>
@@ -598,55 +585,5 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Ayarlar</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Güncellemeden vazgeç
-OnTopReplica sizi yeniden başlatıldığında uyaracaktır.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>İndir 
-OnTopReplica {0} Yükle.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>Yeni versiyon resmi siteden indirilebilir ve yüklenebilir.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Yüklü versiyon: {0}.
-Kullanılabilir versiyon: {1}.</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>Versiyon {0} mevcut</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} byte indirildi.</value>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>İndiriliyor...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>OnTopReplica'nın en son sürümü zaten yüklenmiş. Program her başlangıçta güncellemeleri otomatik olarak denetler.
-
-OnTopReplica'nın geliştirilmesi, yeni özellik ve geliştirme önerileri hakkında by &lt;a href="website"&gt;resmi internet sitesini ziyaret ederek&lt;/a&gt; güncel kalabilirsiniz.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>En son kararlı versiyon {0} tarihinde yayınlandı.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica güncel</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Yükle
-OnTopReplica kapatılınca güncelleme yüklenmiş olacaktır.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>OnTopReplica versiyon {0} bilgisayarınızda yüklenmeye hazır.</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>Güncelleme hazır</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>OnTopReplica güncellemeleri</value>
   </data>
 </root>
