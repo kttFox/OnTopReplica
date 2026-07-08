@@ -54,5 +54,9 @@ namespace OnTopReplica.SidePanels {
         private void LinkContribute_clicked(object sender, LinkLabelLinkClickedEventArgs e) {
             Shell.Execute(AppStrings.LatestCommitsLink);
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Shell.Execute("https://github.com/kttFox/OnTopReplica");
+        }
     }
 }
