@@ -32,20 +32,9 @@ namespace OnTopReplica {
             if (CurrentThumbnailWindowHandle == null)
                 return;
 
-            Program.Platform.HideForm(this);
+            //Hide the whole panel set while the source window is in the foreground
+            HideAllPanels();
             Native.WindowManagerMethods.SetForegroundWindow(CurrentThumbnailWindowHandle.Handle);
-        }
-
-        private void Menu_Advanced_opening(object sender, EventArgs e) {
-            restoreLastClonedWindowToolStripMenuItem.Checked = Settings.Default.RestoreLastWindow;
-        }
-
-        private void Menu_GroupSwitchMode_click(object sender, EventArgs e) {
-            SetSidePanel(new SidePanels.GroupSwitchPanel());
-        }
-
-        private void Menu_RestoreLastWindow_click(object sender, EventArgs e) {
-            Settings.Default.RestoreLastWindow = !Settings.Default.RestoreLastWindow;
         }
 
         private void Menu_ClickForwarding_click(object sender, EventArgs e) {
@@ -56,19 +45,30 @@ namespace OnTopReplica {
             ClickThroughEnabled = true;
         }
 
-        private void Menu_Opacity_opening(object sender, CancelEventArgs e) {
-            ToolStripMenuItem[] items = {
-				toolStripMenuItem1,
-				toolStripMenuItem2,
-				toolStripMenuItem3,
-				toolStripMenuItem4
-			};
+        private void Menu_EnableClickForwardingAll_click(object sender, EventArgs e) {
+            EnableClickForwardingAllPanels();
+        }
 
-            foreach (ToolStripMenuItem i in items) {
-                if (((double)i.Tag) == this.Opacity)
-                    i.Checked = true;
-                else
-                    i.Checked = false;
+        private void Menu_DisableClickForwardingAll_click(object sender, EventArgs e) {
+            DisableClickForwardingAllPanels();
+        }
+
+        private void Menu_EnableClickThroughAll_click(object sender, EventArgs e) {
+            EnableClickThroughAllPanels();
+        }
+
+        private void Menu_DisableClickThroughAll_click(object sender, EventArgs e) {
+            DisableClickThroughAllPanels();
+        }
+
+        private void Menu_Opacity_opening(object sender, CancelEventArgs e) {
+            foreach (ToolStripItem item in menuOpacity.Items) {
+                var menuItem = item as ToolStripMenuItem;
+                if (menuItem == null || !(menuItem.Tag is double))
+                    continue;
+
+                //Form.Opacity is stored with limited precision: compare with tolerance
+                menuItem.Checked = Math.Abs((double)menuItem.Tag - this.Opacity) < 0.005;
             }
         }
 
@@ -79,6 +79,7 @@ namespace OnTopReplica {
                 //Target opacity is stored in the item's tag
                 this.Opacity = (double)tsi.Tag;
                 Program.Platform.OnFormStateChange(this);
+                NotifyPanelLayoutChanged();
             }
         }
 
@@ -89,8 +90,6 @@ namespace OnTopReplica {
         private void Menu_Resize_opening(object sender, CancelEventArgs e) {
             if (!_thumbnailPanel.IsShowingThumbnail)
                 e.Cancel = true;
-
-            restorePositionAndSizeToolStripMenuItem.Checked = Settings.Default.RestoreSizeAndPosition;
         }
 
         private void Menu_Resize_Double(object sender, EventArgs e) {
@@ -113,9 +112,6 @@ namespace OnTopReplica {
             FullscreenManager.SwitchFullscreen();
         }
 
-        private void Menu_Resize_RecallPosition_click(object sender, EventArgs e) {
-            Settings.Default.RestoreSizeAndPosition = !Settings.Default.RestoreSizeAndPosition;
-        }
 
         private void Menu_Position_Opening(object sender, EventArgs e) {
             disabledToolStripMenuItem.Checked = (PositionLock == null);
@@ -151,8 +147,14 @@ namespace OnTopReplica {
         }
 
         private void Menu_Reduce_click(object sender, EventArgs e) {
-            //Hide form in a platform specific way
-            Program.Platform.HideForm(this);
+            //Hide all panels in a platform specific way
+            HideAllPanels();
+        }
+
+        private void Menu_AddPanel_click(object sender, EventArgs e) {
+            //Spawn an additional panel window bound to the primary panel's source window.
+            //Region and color alert settings stay independent per panel.
+            CreateChildPanel();
         }
 
         private void Menu_Chrome_click(object sender, EventArgs e) {
@@ -173,6 +175,10 @@ namespace OnTopReplica {
 
         private void Menu_Close_click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void Menu_Exit_click(object sender, EventArgs e) {
+            ExitApplication();
         }
 
         private void Menu_Fullscreen_ExitFullscreen_click(object sender, EventArgs e) {

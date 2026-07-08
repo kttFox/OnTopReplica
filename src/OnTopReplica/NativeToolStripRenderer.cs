@@ -375,7 +375,15 @@ namespace Asztal.Szótár {
 		protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e) {
 			int stateId = e.Item.Enabled ? (int)MenuPopupSubMenuStates.MSM_NORMAL : (int)MenuPopupSubMenuStates.MSM_DISABLED;
 			renderer.SetParameters(MenuClass, (int)MenuParts.MENU_POPUPSUBMENU, stateId);
-			renderer.DrawBackground(e.Graphics, e.ArrowRectangle);
+
+			//Draw the arrow glyph at its native size, centered in the arrow rectangle,
+			//instead of stretching it to fill the rectangle (which distorts its shape)
+			var partSize = renderer.GetPartSize(e.Graphics, ThemeSizeType.True);
+			var rect = new Rectangle(
+				e.ArrowRectangle.Left + (e.ArrowRectangle.Width - partSize.Width) / 2,
+				e.ArrowRectangle.Top + (e.ArrowRectangle.Height - partSize.Height) / 2,
+				partSize.Width, partSize.Height);
+			renderer.DrawBackground(e.Graphics, rect);
 		}
 
 		protected override void OnRenderOverflowButtonBackground(ToolStripItemRenderEventArgs e) {

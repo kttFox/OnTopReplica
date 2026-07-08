@@ -96,6 +96,16 @@ namespace OnTopReplica.MessagePumpProcessors {
         public void RefreshHotkeys() {
             ClearHandlers();
 
+            //Hotkeys are system-wide: only the primary panel registers them.
+            //Registering the same combination on every panel window would fail
+            //(duplicate registration) and die with the primary's window handle.
+            if (Form.IsSecondaryPanel) {
+                //Called on a secondary (e.g. hotkey changed from its options panel):
+                //delegate to the primary so the new combination takes effect.
+                Form.PrimaryPanel.MessagePumpManager.Get<HotKeyManager>().RefreshHotkeys();
+                return;
+            }
+
             RegisterHandler(Settings.Default.HotKeyCloneCurrent, HotKeyCloneHandler);
             RegisterHandler(Settings.Default.HotKeyShowHide, HotKeyShowHideHandler);
         }
@@ -142,7 +152,7 @@ namespace OnTopReplica.MessagePumpProcessors {
             Form.FullscreenManager.SwitchBack();
 
             if (!Program.Platform.IsHidden(Form)) {
-                Program.Platform.HideForm(Form);
+                Form.HideAllPanels();
             }
             else {
                 Form.EnsureMainFormVisible();
@@ -154,7 +164,8 @@ namespace OnTopReplica.MessagePumpProcessors {
         /// </summary>
         void HotKeyCloneHandler() {
             var handle = Win32Helper.GetCurrentForegroundWindow();
-            if (handle.Handle == Form.Handle)
+            //Never clone one of our own panel windows
+            if (MainForm.IsPanelHandle(handle.Handle))
                 return;
 
             Form.SetThumbnail(handle, null);

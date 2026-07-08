@@ -168,7 +168,12 @@ namespace OnTopReplica.StartupOptions {
                 form.ClickThroughEnabled = true;
             }
 
-            form.IsChromeVisible = !DisableChrome;
+            //Chrome is visible by default: only apply when explicitly disabled.
+            //Unconditionally forcing it on would overwrite the restored state
+            //(a panel's OnShown runs these options after the layout was restored).
+            if (DisableChrome) {
+                form.IsChromeVisible = false;
+            }
 
             //Fullscreen
             if (Fullscreen) {

@@ -15,14 +15,16 @@ namespace OnTopReplica {
         private readonly static StreamWriter Writer;
 
         static Log() {
+            //Logs are written next to the executable (not in %AppData%)
+            var logFolder = AppDomain.CurrentDomain.BaseDirectory;
             try {
-                var filepath = Path.Combine(AppPaths.PrivateRoamingFolderPath, LogFileName);
+                var filepath = Path.Combine(logFolder, LogFileName);
                 Writer = new StreamWriter(new FileStream(filepath, FileMode.Create));
                 Writer.AutoFlush = true;
             }
             catch (Exception) {
                 try {
-                    var filepath = Path.Combine(AppPaths.PrivateRoamingFolderPath, string.Format(ConflictLogFileName, System.Diagnostics.Process.GetCurrentProcess().Id));
+                    var filepath = Path.Combine(logFolder, string.Format(ConflictLogFileName, System.Diagnostics.Process.GetCurrentProcess().Id));
                     Writer = new StreamWriter(new FileStream(filepath, FileMode.Create));
                     Writer.AutoFlush = true;
                 }

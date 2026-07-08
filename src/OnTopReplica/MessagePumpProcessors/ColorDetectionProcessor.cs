@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
@@ -12,18 +13,18 @@ using OnTopReplica.Properties;
 namespace OnTopReplica.MessagePumpProcessors {
 
     /// <summary>
-    /// Predefined color categories for detection.
+    /// 検出対象として定義済みの色カテゴリ。
     /// </summary>
     public enum ColorCategory {
         None,
-        Red,    // 红色
-        Orange, // 橙色
-        Gray    // 灰色
+        Red,    // 赤
+        Orange, // オレンジ
+        Gray    // グレー
     }
 
     /// <summary>
-    /// Monitors the cloned window for predefined color categories and triggers an alarm when detected.
-    /// Uses LockBits for fast pixel scanning to avoid blocking the UI thread.
+    /// クローン対象ウィンドウを定義済みの色カテゴリについて監視し、検出時にアラームを発報する。
+    /// UI スレッドをブロックしないよう、LockBits による高速なピクセル走査を使用する。
     /// </summary>
     class ColorDetectionProcessor : BaseMessagePumpProcessor {
 
@@ -58,49 +59,58 @@ namespace OnTopReplica.MessagePumpProcessors {
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool DeleteObject(IntPtr hObject);
 
-        private const uint SRCCOPY = 0x00CC0020;
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-        // PW_RENDERFULLCONTENT = 2: full rendering including DirectComposition content
+        [DllImport("user32.dll")]
+        private static extern uint MapVirtualKey(uint uCode, uint uMapType);
+
+        private const uint SRCCOPY = 0x00CC0020;
+        private const uint WM_KEYDOWN = 0x0100;
+        private const uint WM_KEYUP = 0x0101;
+
+        // PW_RENDERFULLCONTENT = 2: DirectComposition コンテンツを含む完全なレンダリング
         private const uint PW_RENDERFULLCONTENT = 2;
-        // PW_CLIENTONLY = 1: only client area
+        // PW_CLIENTONLY = 1: クライアント領域のみ
         private const uint PW_CLIENTONLY = 1;
 
         private bool _enabled = false;
-        private HashSet<ColorCategory> _enabledCategories = new HashSet<ColorCategory>() { ColorCategory.Red };
-        private int _sampleInterval = 500; // Sampling interval in milliseconds
+        private HashSet<ColorCategory> _enabledCategories = new HashSet<ColorCategory>();
+        private int _sampleInterval = 500; // サンプリング間隔(ミリ秒)
         private float _alarmVolume = 1.0f; // 0.0 - 1.0
-        private string _alarmSoundFile = string.Empty;
         private volatile bool _alarmActive = false;
-        private System.Threading.Timer _alarmStopTimer = null; // fires exactly AlarmDuration ms after alarm starts
-        private System.Threading.Thread _detectionThread = null; // background detection thread (independent of message pump)
+        private System.Threading.Timer _alarmStopTimer = null; // アラーム開始からちょうど AlarmDuration ミリ秒後に発火する
+        private System.Threading.Thread _detectionThread = null; // バックグラウンド検出スレッド(message pump から独立)
         private volatile bool _detectionRunning = false;
-        private System.Windows.Threading.Dispatcher _uiDispatcher = null; // captured on UI thread in Initialize()
-        private const int AlarmDuration = 3000; // 3 seconds in milliseconds
-        // Average-color detection: thresholds for comparing average HSV against target colors
-        // These are intentionally loose because averaging many pixels produces a muted blended color
-        // --- Red ---
-        // (kept for reference but no longer used in per-pixel mode)
-        // --- Gray density threshold ---
-        // Gray triggers only when grayPixels / totalPixels >= this %, preventing scrollbar/border false alarms.
-        // Red/Orange trigger on even 1 matching pixel (colored backgrounds almost never exist).
-        private const int GrayMinDensityPct = 8; // gray pixels must be >= 8% of total region pixels
-        // Minimum absolute non-background pixel count to proceed with detection.
-        // Set to 1: any region with at least 1 valid pixel should be evaluated.
-        private const int MinNonBgPixels = 1; // absolute pixel count
+        private System.Windows.Threading.Dispatcher _uiDispatcher = null; // Initialize() 内で UI スレッド上にてキャプチャする
+        private const int AlarmDuration = 3000; // 3秒(ミリ秒単位)
+        // 平均色検出: 平均 HSV をターゲット色と比較する際のしきい値
+        // 多数のピクセルを平均すると混ざってくすんだ色になるため、意図的に緩めに設定している
+        // --- 赤 ---
+        // (参考のため残しているが、ピクセル単位モードでは使用していない)
+        // --- グレー密度しきい値 ---
+        // グレーは grayPixels / totalPixels がこの割合以上のときのみ発報し、スクロールバーや境界線による誤報を防ぐ。
+        // 赤/オレンジは一致ピクセルが1つでもあれば発報する(有色の背景はほぼ存在しないため)。
+        private const int GrayMinDensityPct = 8; // グレーのピクセルが領域全体の 8% 以上であること
+        private const int CustomColorTolerance = 32;
+        // 検出処理を続行するために必要な、背景以外のピクセルの最小絶対数。
+        // 1 に設定: 有効なピクセルが1つでもある領域は評価対象とする。
+        private const int MinNonBgPixels = 1; // 絶対ピクセル数
         private System.Windows.Media.MediaPlayer _mediaPlayer;
-        private bool _selfTestRun = false; // Run classification self-test once on first enabled cycle
+        private bool _selfTestRun = false; // 初回有効化サイクル時に分類セルフテストを一度だけ実行する
 
         public bool Enabled {
             get { return _enabled; }
             set {
                 bool wasDisabled = !_enabled;
                 _enabled = value;
-                // Run classification self-test once on first enable (regardless of window/region state)
+                // 初回有効化時に分類セルフテストを一度だけ実行する(ウィンドウ/領域の状態にかかわらず)
                 if (value && wasDisabled && !_selfTestRun) {
                     _selfTestRun = true;
                     RunClassificationSelfTest();
                 }
-                // Start or stop the background detection thread
+                // バックグラウンド検出スレッドの開始または停止
                 if (value) {
                     StartDetectionThread();
                 } else {
@@ -110,12 +120,14 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Set of color categories that should trigger the alarm when detected.
+        /// 検出時にアラームを発報させる色カテゴリの集合。
         /// </summary>
         public HashSet<ColorCategory> EnabledCategories {
             get { return _enabledCategories; }
             set { _enabledCategories = value ?? new HashSet<ColorCategory>(); }
         }
+
+        public Color? CustomTargetColor { get; set; }
 
         public int SampleInterval {
             get { return _sampleInterval; }
@@ -131,26 +143,84 @@ namespace OnTopReplica.MessagePumpProcessors {
             set { _alarmVolume = Math.Max(0, Math.Min(1, value)); }
         }
 
-        public string AlarmSoundFile {
-            get { return _alarmSoundFile; }
-            set { _alarmSoundFile = value; }
+        public string AlarmSoundFile { get; set; } = string.Empty;
+
+        /// <summary>
+        /// アラーム発報時に監視対象ウィンドウへキーを送信するかどうか。
+        /// </summary>
+        public bool KeyPressEnabled { get; set; } = false;
+
+        /// <summary>
+        /// アラーム発報時に送信するキー(修飾キーなしの単一キー)。
+        /// </summary>
+        public Keys KeyPressKey { get; set; } = Keys.None;
+
+        /// <summary>
+        /// 監視対象ウィンドウへ設定されたキーを PostMessage で送信する。
+        /// 非アクティブなウィンドウにも届く。バックグラウンドスレッドから呼び出し可能。
+        /// </summary>
+        private void SendKeyToTargetWindow() {
+            if (!KeyPressEnabled || KeyPressKey == Keys.None)
+                return;
+
+            var handle = Form != null ? Form.CurrentThumbnailWindowHandle : null;
+            if (handle == null)
+                return;
+
+            try {
+                uint vk = (uint)(KeyPressKey & Keys.KeyCode);
+                uint scanCode = MapVirtualKey(vk, 0 /* MAPVK_VK_TO_VSC */);
+                IntPtr wParam = new IntPtr((int)vk);
+                IntPtr lParamDown = new IntPtr(unchecked((int)(1u | (scanCode << 16))));
+                IntPtr lParamUp = new IntPtr(unchecked((int)(1u | (scanCode << 16) | (1u << 30) | (1u << 31))));
+                PostMessage(handle.Handle, WM_KEYDOWN, wParam, lParamDown);
+                PostMessage(handle.Handle, WM_KEYUP, wParam, lParamUp);
+                Log.Write("ColorDetection: key {0} sent to target window", KeyPressKey);
+            }
+            catch (Exception ex) {
+                Log.Write("ColorDetection: failed to send key: {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 音声ファイルの代わりに <see cref="System.Media.SystemSounds"/> のサウンドを
+        /// 選択する疑似パスのプレフィックス(例: "system:Asterisk")。
+        /// </summary>
+        public const string SystemSoundPrefix = "system:";
+
+        /// <summary>
+        /// 指定された疑似パスに符号化されたシステムサウンドを再生する。
+        /// 値が "system:" の疑似パスでない場合は false を返す。
+        /// </summary>
+        public static bool TryPlaySystemSound(string sound) {
+            if (string.IsNullOrEmpty(sound) || !sound.StartsWith(SystemSoundPrefix, StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            switch (sound.Substring(SystemSoundPrefix.Length).ToLowerInvariant()) {
+                case "asterisk": System.Media.SystemSounds.Asterisk.Play(); break;
+                case "exclamation": System.Media.SystemSounds.Exclamation.Play(); break;
+                case "hand": System.Media.SystemSounds.Hand.Play(); break;
+                case "question": System.Media.SystemSounds.Question.Play(); break;
+                default: System.Media.SystemSounds.Beep.Play(); break;
+            }
+            return true;
         }
 
         public override void Initialize(MainForm form) {
             base.Initialize(form);
-            // Capture WPF Dispatcher on the UI thread so background threads can marshal
-            // MediaPlayer calls to the correct thread (Application.Current is null in WinForms).
+            // バックグラウンドスレッドから MediaPlayer 呼び出しを正しいスレッドへマーシャリングできるよう、
+            // UI スレッド上で WPF の Dispatcher をキャプチャする(WinForms では Application.Current は null)。
             _uiDispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
         }
 
         public override bool Process(ref Message msg) {
-            // Detection is handled by the background thread (_detectionThread).
-            // The message pump is no longer needed for color detection timing.
+            // 検出はバックグラウンドスレッド(_detectionThread)が担当する。
+            // 色検出のタイミング制御に message pump はもはや必要ない。
             return false;
         }
 
         /// <summary>
-        /// Starts the background detection thread if not already running.
+        /// バックグラウンド検出スレッドが未起動であれば開始する。
         /// </summary>
         private void StartDetectionThread() {
             if (_detectionThread != null && _detectionThread.IsAlive)
@@ -165,18 +235,18 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Signals the background detection thread to stop.
+        /// バックグラウンド検出スレッドに停止を通知する。
         /// </summary>
         private void StopDetectionThread() {
             _detectionRunning = false;
-            // Thread exits on next sleep cycle — no Join needed (IsBackground=true)
+            // スレッドは次のスリープサイクルで終了する — Join は不要(IsBackground=true)
             Log.Write("ColorDetection: background thread stop requested");
         }
 
         /// <summary>
-        /// Background detection loop. Runs every _sampleInterval ms independent of the WinForms
-        /// message pump, so detection latency stays at ~500 ms even when a fullscreen game
-        /// (such as EVE Online) reduces message pump frequency to once per ~6 s.
+        /// バックグラウンド検出ループ。WinForms の message pump とは独立に _sampleInterval ミリ秒ごとに実行されるため、
+        /// フルスクリーンのゲーム(EVE Online など)によって message pump の頻度が約6秒に1回まで低下しても、
+        /// 検出レイテンシは約500ミリ秒に保たれる。
         /// </summary>
         private void DetectionThreadLoop() {
             while (_detectionRunning) {
@@ -184,7 +254,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 if (!_detectionRunning) break;
                 if (!_enabled) break;
                 if (Form == null || Form.CurrentThumbnailWindowHandle == null) continue;
-                if (_enabledCategories.Count == 0) continue;
+                if (_enabledCategories.Count == 0 && !CustomTargetColor.HasValue) continue;
                 if (_alarmActive) continue;
 
                 var catList = string.Join(",", _enabledCategories);
@@ -201,14 +271,14 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Detects if the target color exists in the monitored window.
-        /// Uses PrintWindow API to capture the source window directly (avoids occlusion issues).
+        /// 監視対象ウィンドウ内にターゲット色が存在するかを検出する。
+        /// PrintWindow API でソースウィンドウを直接キャプチャする(遮蔽の問題を回避)。
         /// </summary>
         private bool DetectColorInWindow(IntPtr windowHandle)
         {
             try
             {
-                // 获取窗口客户区大小
+                // ウィンドウのクライアント領域サイズを取得
                 Rectangle clientRect;
                 if (!WindowManagerMethods.GetClientRect(windowHandle, out clientRect))
                 {
@@ -223,20 +293,13 @@ namespace OnTopReplica.MessagePumpProcessors {
                     return false;
                 }
 
-                // 获取主窗体实例
-                MainForm mainForm = null;
-                foreach (Form form in Application.OpenForms)
-                {
-                    if (form is MainForm mf)
-                    {
-                        mainForm = mf;
-                        break;
-                    }
-                }
+                // このプロセッサ自身のフォームを使用する: 複数のパネルウィンドウが開いている場合、
+                // 各プロセッサは自分が属するウィンドウの領域を読み取らなければならない。
+                MainForm mainForm = Form;
 
                 Rectangle regionRect;
 
-                // 优先使用选定区域
+                // 選択領域があれば優先的に使用する
                 if (mainForm != null && mainForm.SelectedThumbnailRegion != null)
                 {
                     var selectedRegion = mainForm.SelectedThumbnailRegion;
@@ -256,13 +319,13 @@ namespace OnTopReplica.MessagePumpProcessors {
                     return false;
                 }
 
-                // 使用 PrintWindow 捕获窗口内容（不受遮挡影响）
+                // PrintWindow でウィンドウ内容をキャプチャする(遮蔽の影響を受けない)
                 Bitmap windowBmp = null;
                 Bitmap regionBmp = null;
                 try
                 {
-                    // 获取完整窗口大小（包含非客户区）
-                    // 注意: GetWindowRect 返回 RECT (left,top,right,bottom) 映射到 Rectangle (X,Y,Width=right,Height=bottom)
+                    // ウィンドウ全体のサイズを取得(非クライアント領域を含む)
+                    // 注意: GetWindowRect は RECT (left,top,right,bottom) を Rectangle (X,Y,Width=right,Height=bottom) にマッピングして返す
                     Rectangle windowRect;
                     WindowManagerMethods.GetWindowRect(windowHandle, out windowRect);
                     int windowWidth = windowRect.Width - windowRect.X;
@@ -275,11 +338,11 @@ namespace OnTopReplica.MessagePumpProcessors {
                         return false;
                     }
 
-                    // 创建窗口大小的位图，用 PrintWindow 捕获
+                    // ウィンドウサイズのビットマップを作成し、PrintWindow でキャプチャする
                     windowBmp = new Bitmap(windowWidth, windowHeight, PixelFormat.Format32bppArgb);
                     bool printSuccess = false;
 
-                    // 尝试不同的 PrintWindow flags
+                    // 複数の PrintWindow flags を順に試す
                     uint[] flags = new uint[] { PW_RENDERFULLCONTENT, PW_CLIENTONLY, 0 };
                     foreach (uint flag in flags)
                     {
@@ -310,12 +373,12 @@ namespace OnTopReplica.MessagePumpProcessors {
                         return DetectColorFallback(windowHandle, regionRect);
                     }
 
-                    // 计算客户区在窗口位图中的偏移量
+                    // ウィンドウビットマップ内におけるクライアント領域のオフセットを計算
                     var clientOriginScreen = WindowManagerMethods.ClientToScreen(windowHandle, new NPoint(0, 0));
                     int clientOffsetX = clientOriginScreen.X - windowRect.X;
                     int clientOffsetY = clientOriginScreen.Y - windowRect.Y;
 
-                    // 将区域坐标偏移到窗口位图坐标
+                    // 領域座標をウィンドウビットマップ座標へオフセットする
                     int cropX = clientOffsetX + regionRect.X;
                     int cropY = clientOffsetY + regionRect.Y;
                     int cropW = Math.Min(regionRect.Width, windowWidth - cropX);
@@ -330,10 +393,10 @@ namespace OnTopReplica.MessagePumpProcessors {
                         return false;
                     }
 
-                    // 裁剪出选定区域
+                    // 選択領域を切り出す
                     regionBmp = windowBmp.Clone(new Rectangle(cropX, cropY, cropW, cropH), PixelFormat.Format32bppArgb);
 
-                    // 保存调试截图（每20次保存一次，避免IO过多）
+                    // デバッグ用スクリーンショットを保存(IO 過多を避けるため20回に1回のみ保存)
                     _debugCounter++;
                     if (_debugCounter % 20 == 1)
                     {
@@ -360,8 +423,9 @@ namespace OnTopReplica.MessagePumpProcessors {
         private int _debugCounter = 0;
 
         /// <summary>
-        /// Saves a bitmap to the AppData folder for debugging.
+        /// デバッグ用にビットマップを AppData フォルダーへ保存する。
         /// </summary>
+        [Conditional("DEBUG")]
         private void SaveDebugBitmap(Bitmap bmp, string prefix)
         {
             try
@@ -379,9 +443,9 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Fallback: use BitBlt from source window DC to capture client area directly.
-        /// This avoids CopyFromScreen which captures the OnTopReplica overlay.
-        /// If BitBlt returns all-black image, falls back to CopyFromScreen with opacity trick.
+        /// フォールバック: ソースウィンドウの DC から BitBlt でクライアント領域を直接キャプチャする。
+        /// これにより OnTopReplica のオーバーレイまで写り込む CopyFromScreen を回避できる。
+        /// BitBlt が全面黒の画像を返した場合は、opacity トリック付きの CopyFromScreen にフォールバックする。
         /// </summary>
         private bool DetectColorFallback(IntPtr windowHandle, Rectangle regionRect)
         {
@@ -394,7 +458,7 @@ namespace OnTopReplica.MessagePumpProcessors {
             int cropW = Math.Min(regionRect.Width, 800);
             int cropH = Math.Min(regionRect.Height, 600);
 
-            // 方案1: 使用 BitBlt + GetDC 直接从源窗口客户区捕获（无闪烁）
+            // 方式1: BitBlt + GetDC でソースウィンドウのクライアント領域から直接キャプチャする(ちらつきなし)
             IntPtr hdcSrc = IntPtr.Zero;
             IntPtr hdcMem = IntPtr.Zero;
             IntPtr hBitmap = IntPtr.Zero;
@@ -416,7 +480,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                     {
                         bmp = Bitmap.FromHbitmap(hBitmap);
 
-                        // 检查是否全黑（硬件渲染窗口可能返回黑色图像）
+                        // 全面黒かどうかを確認(ハードウェアレンダリングのウィンドウは黒い画像を返すことがある)
                         if (!IsBitmapAllBlack(bmp))
                         {
                             Log.Write("ColorDetection Fallback: BitBlt OK, size={0}x{1}", cropW, cropH);
@@ -454,12 +518,12 @@ namespace OnTopReplica.MessagePumpProcessors {
                 if (hdcSrc != IntPtr.Zero) ReleaseDC(windowHandle, hdcSrc);
             }
 
-            // 方案2: CopyFromScreen（最后手段，可能包含覆盖层但不会闪烁）
+            // 方式2: CopyFromScreen(最終手段。オーバーレイが写り込む可能性はあるが、ちらつきは発生しない)
             return DetectColorScreenCapture(windowHandle, regionRect);
         }
 
         /// <summary>
-        /// Last resort: CopyFromScreen. May capture overlay but does not flicker.
+        /// 最終手段: CopyFromScreen。オーバーレイが写り込む可能性はあるが、ちらつきは発生しない。
         /// </summary>
         private bool DetectColorScreenCapture(IntPtr windowHandle, Rectangle regionRect)
         {
@@ -480,7 +544,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 {
                     g.CopyFromScreen(scrRect.X, scrRect.Y, 0, 0, new Size(maxW, maxH));
                 }
-                // 始终保存截图用于调试（限频：每5次保存1次）
+                // デバッグ用にスクリーンショットを常時保存(頻度制限: 5回に1回保存)
                 _debugCounter++;
                 if (_debugCounter % 5 == 1)
                     SaveDebugBitmap(bmp, "screen_capture");
@@ -498,15 +562,15 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Checks if a bitmap is nearly black (indicating failed capture from hardware-rendered window).
-        /// A pixel is considered "black" if all channels are &lt;= threshold.
-        /// Returns true if more than 50% of sampled pixels are near-black.
-        /// Hardware-rendered windows often return mostly-black images with scattered noise.
+        /// ビットマップがほぼ黒一色かどうかを判定する(ハードウェアレンダリングのウィンドウからのキャプチャ失敗を示す)。
+        /// 全チャンネルが threshold 以下のピクセルを「黒」とみなす。
+        /// サンプリングしたピクセルの50%超が黒に近い場合に true を返す。
+        /// ハードウェアレンダリングのウィンドウは、ノイズが散在するほぼ黒一色の画像を返すことが多い。
         /// </summary>
         private bool IsBitmapAllBlack(Bitmap bmp)
         {
             if (bmp == null) return true;
-            const int threshold = 15; // 硬件渲染窗口 BitBlt 可能返回 (3,3,3) 等近黑像素
+            const int threshold = 15; // ハードウェアレンダリングのウィンドウでは BitBlt が (3,3,3) のような黒に近いピクセルを返すことがある
             int stepX = Math.Max(1, bmp.Width / 10);
             int stepY = Math.Max(1, bmp.Height / 10);
             int totalSamples = 0;
@@ -528,20 +592,20 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Per-pixel color detection algorithm:
-        /// 1. Scan all pixels, skip white (S&lt;15 and V&gt;85), black/near-black (V&lt;15),
-        ///    and high-saturation non-target colors (blue/green icons, S&gt;=40 and not Red/Orange/Gray).
-        /// 2. Classify each remaining pixel as Red / Orange / Gray / None.
-        /// 3a. Red or Orange: if even 1 pixel matches an enabled category → alarm immediately.
-        /// 3b. Gray only (no red/orange found): grayPixels/totalPixels &gt;= GrayMinDensityPct% → alarm.
-        ///     The density guard prevents scrollbars/borders (pure gray background, ~6%) from triggering.
+        /// ピクセル単位の色検出アルゴリズム:
+        /// 1. 全ピクセルを走査し、白(S&lt;15 かつ V&gt;85)、黒/黒に近い色(V&lt;15)、
+        ///    および高彩度の非ターゲット色(青/緑のアイコン、S&gt;=40 かつ赤/オレンジ/グレー以外)をスキップする。
+        /// 2. 残った各ピクセルを Red / Orange / Gray / None に分類する。
+        /// 3a. 赤またはオレンジ: 有効なカテゴリに一致するピクセルが1つでもあれば → 即時アラーム。
+        /// 3b. グレーのみ(赤/オレンジが見つからない場合): grayPixels/totalPixels &gt;= GrayMinDensityPct% → アラーム。
+        ///     この密度ガードにより、スクロールバーや境界線(純グレー背景、約6%)による発報を防ぐ。
         /// </summary>
         private bool SampleBitmapForColor(Bitmap bmp) {
             if (bmp == null || bmp.Width <= 0 || bmp.Height <= 0)
                 return false;
 
-            Log.Write("ColorDetection Scan: enabledCategories=[{0}], bmpSize={1}x{2}",
-                string.Join(",", _enabledCategories), bmp.Width, bmp.Height);
+            Log.Write("ColorDetection Scan: enabledCategories=[{0}], customColor={1}, bmpSize={2}x{3}",
+                string.Join(",", _enabledCategories), CustomTargetColor.HasValue ? CustomTargetColor.Value.ToString() : "none", bmp.Width, bmp.Height);
 
             BitmapData data = null;
             try {
@@ -559,10 +623,11 @@ namespace OnTopReplica.MessagePumpProcessors {
                 int totalPixels = bmp.Width * bmp.Height;
                 int whiteSkipped    = 0;
                 int blackSkipped    = 0;
-                int coloredBgSkipped = 0; // high-S non-target colors (blue/green icons)
+                int coloredBgSkipped = 0; // 高彩度の非ターゲット色(青/緑のアイコン)
                 int redCount        = 0;
                 int orangeCount     = 0;
                 int grayCount       = 0;
+                int customCount     = 0;
                 int noneCount       = 0;
 
                 for (int y = 0; y < bmp.Height; y++) {
@@ -576,16 +641,22 @@ namespace OnTopReplica.MessagePumpProcessors {
                         float h, s, v;
                         RgbToHsv(pr, pg, pb, out h, out s, out v);
 
-                        // Skip white: low saturation + high brightness (icon text, borders)
+                        // カスタム色は白/黒スキップより先に判定する
+                        // (白っぽい/黒っぽいカスタム色も検出できるようにするため)
+                        if (CustomTargetColor.HasValue && IsNearCustomColor(pr, pg, pb, CustomTargetColor.Value)) {
+                            customCount++;
+                        }
+
+                        // 白をスキップ: 低彩度 + 高輝度(アイコンのテキスト、境界線)
                         if (s < 15 && v > 85) { whiteSkipped++; continue; }
 
-                        // Skip black/near-black: dark UI background
+                        // 黒/黒に近い色をスキップ: 暗い UI 背景
                         if (v < 15) { blackSkipped++; continue; }
 
-                        // Classify
+                        // 分類
                         ColorCategory cat = ClassifyPixelColor(pr, pg, pb);
 
-                        // Exclude high-S non-target colors (blue/green icons) from analysis
+                        // 高彩度の非ターゲット色(青/緑のアイコン)を解析対象から除外する
                         if (cat == ColorCategory.None && s >= 40) { coloredBgSkipped++; continue; }
 
                         switch (cat) {
@@ -600,11 +671,11 @@ namespace OnTopReplica.MessagePumpProcessors {
                 int validPixels = redCount + orangeCount + grayCount + noneCount;
                 int grayDensityPct = totalPixels > 0 ? grayCount * 100 / totalPixels : 0;
 
-                Log.Write("ColorDetection counts: red={0} orange={1} gray={2} none={3}  total={4} white={5} black={6} coloredBg={7}",
-                    redCount, orangeCount, grayCount, noneCount, totalPixels, whiteSkipped, blackSkipped, coloredBgSkipped);
+                Log.Write("ColorDetection counts: red={0} orange={1} gray={2} custom={3} none={4}  total={5} white={6} black={7} coloredBg={8}",
+                    redCount, orangeCount, grayCount, customCount, noneCount, totalPixels, whiteSkipped, blackSkipped, coloredBgSkipped);
                 Log.Write("  grayDensity={0}%(need \u2265{1}% for gray alarm)", grayDensityPct, GrayMinDensityPct);
 
-                // --- Rule 1: Red or Orange — even 1 pixel triggers alarm ---
+                // --- ルール1: 赤またはオレンジ — 1ピクセルでもあればアラーム発報 ---
                 if (_enabledCategories.Contains(ColorCategory.Red) && redCount >= 1) {
                     Log.Write("ColorDetection MATCH: Red, {0} pixel(s)", redCount);
                     SaveDebugBitmap(bmp, "alarm_trigger");
@@ -616,7 +687,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                     return true;
                 }
 
-                // --- Rule 2: Gray — only if density >= GrayMinDensityPct% ---
+                // --- ルール2: グレー — 密度が GrayMinDensityPct% 以上の場合のみ ---
                 if (_enabledCategories.Contains(ColorCategory.Gray)) {
                     if (grayDensityPct >= GrayMinDensityPct) {
                         Log.Write("ColorDetection MATCH: Gray, {0}px density={1}%", grayCount, grayDensityPct);
@@ -625,6 +696,13 @@ namespace OnTopReplica.MessagePumpProcessors {
                     } else {
                         Log.Write("ColorDetection no-Gray: {0}px density={1}% < {2}%", grayCount, grayDensityPct, GrayMinDensityPct);
                     }
+                }
+
+                // --- ルール3: カスタム色 ---
+                if (CustomTargetColor.HasValue && customCount >= 1) {
+                    Log.Write("ColorDetection MATCH: Custom, {0} pixel(s), target={1}", customCount, CustomTargetColor.Value);
+                    SaveDebugBitmap(bmp, "alarm_trigger");
+                    return true;
                 }
 
                 Log.Write("ColorDetection NO MATCH");
@@ -636,30 +714,30 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Classifies a pixel's RGB color into a predefined color category using HSV ranges.
-        /// Red:    H in [0,15] or [345,360], S >= 40%, V >= 25%  (red icons with dark edges)
-        /// Orange: H in (15,55],              S >= 40%, V >= 25%  (orange icons with dark edges)
-        /// Gray:   S < 20%, V in [15,75%]   (gray icons, broad range to cover dark→medium gray)
-        /// White/black pixels should be pre-filtered before calling this.
+        /// ピクセルの RGB 色を HSV 範囲に基づいて定義済みの色カテゴリに分類する。
+        /// 赤:     H が [0,15] または [345,360], S >= 40%, V >= 25%  (暗い縁を持つ赤アイコン)
+        /// オレンジ: H が (15,55],               S >= 40%, V >= 25%  (暗い縁を持つオレンジアイコン)
+        /// グレー:  S < 20%, V が [15,75%]   (グレーのアイコン、暗いグレー→中間グレーをカバーする広い範囲)
+        /// 白/黒のピクセルは、このメソッドを呼び出す前にフィルタリング済みであること。
         /// </summary>
         private static ColorCategory ClassifyPixelColor(byte r, byte g, byte b) {
             float h, s, v;
             RgbToHsv(r, g, b, out h, out s, out v);
 
-            // Red: hue near 0° with decent saturation
+            // 赤: 色相が 0° 付近で十分な彩度があるもの
             if (s >= 40 && v >= 25) {
                 if (h <= 15 || h >= 345) {
                     return ColorCategory.Red;
                 }
-                // Orange: hue from reddish-orange to yellow-orange
+                // オレンジ: 赤みがかったオレンジから黄色寄りのオレンジまでの色相
                 if (h > 15 && h <= 55) {
                     return ColorCategory.Orange;
                 }
             }
 
-            // Gray: low saturation, covers dark gray (V≈15%) to light gray (V≈83%)
-            // White (V>85, S<15) and black (V<15) are pre-filtered in the scan loop.
-            // S<25 allows slight rendering tint on gray icon backgrounds while excluding beige/warm tones (S≥25)
+            // グレー: 低彩度。暗いグレー(V≈15%)から明るいグレー(V≈83%)までをカバーする
+            // 白(V>85, S<15)と黒(V<15)は走査ループ内で事前にフィルタリング済み。
+            // S<25 とすることで、グレーのアイコン背景に生じるわずかなレンダリング色味を許容しつつ、ベージュ/暖色系(S≥25)を除外する
             if (s < 25 && v >= 15 && v <= 83) {
                 return ColorCategory.Gray;
             }
@@ -667,8 +745,17 @@ namespace OnTopReplica.MessagePumpProcessors {
             return ColorCategory.None;
         }
 
+        private static bool IsNearCustomColor(byte r, byte g, byte b, Color target) {
+            int dr = r - target.R;
+            int dg = g - target.G;
+            int db = b - target.B;
+            int distanceSquared = dr * dr + dg * dg + db * db;
+            int toleranceSquared = CustomColorTolerance * CustomColorTolerance;
+            return distanceSquared <= toleranceSquared;
+        }
+
         /// <summary>
-        /// Converts RGB (0-255) to HSV. H in degrees (0-360), S and V in percent (0-100).
+        /// RGB (0-255) を HSV に変換する。H は度(0-360)、S と V はパーセント(0-100)。
         /// </summary>
         private static void RgbToHsv(int r, int g, int b, out float h, out float s, out float v) {
             float rf = r / 255f, gf = g / 255f, bf = b / 255f;
@@ -676,14 +763,14 @@ namespace OnTopReplica.MessagePumpProcessors {
             float min = Math.Min(rf, Math.Min(gf, bf));
             float delta = max - min;
 
-            // Value
+            // 明度 (Value)
             v = max * 100f;
 
-            // Saturation
+            // 彩度 (Saturation)
             if (max < 0.0001f) { h = 0; s = 0; return; }
             s = (delta / max) * 100f;
 
-            // Hue
+            // 色相 (Hue)
             if (delta < 0.0001f) { h = 0; return; }
             if (Math.Abs(max - rf) < 0.0001f)
                 h = 60f * (((gf - bf) / delta) % 6f);
@@ -696,8 +783,8 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Starts the alarm. Called from the background detection thread — all UI/WPF operations
-        /// are dispatched to the WPF dispatcher to ensure thread safety.
+        /// アラームを開始する。バックグラウンド検出スレッドから呼び出される — スレッドセーフ性を確保するため、
+        /// UI/WPF に関わる操作はすべて WPF の dispatcher へディスパッチされる。
         /// </summary>
         private void StartAlarm() {
             if (_alarmActive)
@@ -705,17 +792,26 @@ namespace OnTopReplica.MessagePumpProcessors {
 
             _alarmActive = true;
 
-            // Schedule automatic stop after AlarmDuration ms.
-            // Independent of both the message pump and the detection thread.
+            // AlarmDuration ミリ秒後の自動停止をスケジュールする。
+            // message pump と検出スレッドのどちらからも独立している。
             _alarmStopTimer?.Dispose();
             _alarmStopTimer = new System.Threading.Timer(_ => StopAlarm(), null, AlarmDuration, System.Threading.Timeout.Infinite);
 
-            Log.Write("Color alarm triggered! volume={0}, file={1}", _alarmVolume, _alarmSoundFile);
+            Log.Write("Color alarm triggered! volume={0}, file={1}", _alarmVolume, AlarmSoundFile);
 
-            // MediaPlayer must be created/used on a thread with a WPF Dispatcher.
-            // _uiDispatcher was captured in Initialize() on the UI thread.
-            if (!string.IsNullOrEmpty(_alarmSoundFile) && File.Exists(_alarmSoundFile)) {
-                var soundFile = _alarmSoundFile;
+            // 設定されていれば、監視対象ウィンドウへキーを1回送信する
+            SendKeyToTargetWindow();
+
+            // システムサウンドの疑似パスは直接再生する(スレッドセーフのため dispatcher は不要)
+            if (TryPlaySystemSound(AlarmSoundFile)) {
+                Log.Write("System sound played: {0}", AlarmSoundFile);
+                return;
+            }
+
+            // MediaPlayer は WPF の Dispatcher を持つスレッド上で生成・使用しなければならない。
+            // _uiDispatcher は Initialize() 内で UI スレッド上にてキャプチャ済み。
+            if (!string.IsNullOrEmpty(AlarmSoundFile) && File.Exists(AlarmSoundFile)) {
+                var soundFile = AlarmSoundFile;
                 var volume = _alarmVolume;
                 if (_uiDispatcher != null) {
                     _uiDispatcher.BeginInvoke((Action)(() => {
@@ -740,52 +836,7 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Plays an alarm tone for the duration.
-        /// </summary>
-        private void PlayAlarmTone() {
-            try {
-                // Generate and play a 1000Hz tone for 3 seconds
-                int sampleRate = 44100;
-                int duration = 3000; // 3 seconds
-                int frequency = 1000; // 1000 Hz
-
-                int numSamples = (sampleRate * duration) / 1000;
-                byte[] data = new byte[numSamples * 2]; // 16-bit audio
-
-                for (int i = 0; i < numSamples; i++) {
-                    double t = (double)i / sampleRate;
-                    short sample = (short)(short.MaxValue * 0.5 * Math.Sin(2 * Math.PI * frequency * t));
-                    data[i * 2] = (byte)(sample & 0xFF);
-                    data[i * 2 + 1] = (byte)((sample >> 8) & 0xFF);
-                }
-
-                // Play using WaveOut
-                PlayAudioData(data, sampleRate);
-            }
-            catch (Exception ex) {
-                Log.Write("Error playing alarm tone: {0}", ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Plays audio data using Wave API.
-        /// </summary>
-        private void PlayAudioData(byte[] audioData, int sampleRate) {
-            try {
-                // Use the simple beep method from System.Media
-                // For more complex tones, we would need WaveOut API
-                for (int i = 0; i < 3; i++) {
-                    System.Media.SystemSounds.Beep.Play();
-                    System.Threading.Thread.Sleep(200);
-                    if (!_alarmActive)
-                        break;
-                }
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// Stops the alarm.
+        /// アラームを停止する。
         /// </summary>
         private void StopAlarm() {
             _alarmActive = false;
@@ -803,39 +854,39 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         /// <summary>
-        /// Runs classification self-tests on startup to verify color detection logic.
-        /// Results are written to the log for inspection.
+        /// 起動時に分類セルフテストを実行し、色検出ロジックを検証する。
+        /// 結果は確認用にログへ出力される。
         /// </summary>
         private void RunClassificationSelfTest() {
             Log.Write("=== ColorDetection Self-Test BEGIN ===");
             Log.Write("  Algorithm: per-pixel  Red/Orange>=1px→alarm  Gray>=density{0}%→alarm", GrayMinDensityPct);
             Log.Write("  White skip: S<15 && V>85, Black skip: V<15, MinNonBgPixels={0}", MinNonBgPixels);
-            // Format: (label, R, G, B, expected category)
+            // 形式: (ラベル, R, G, B, 期待するカテゴリ)
             var tests = new[] {
-                // --- Red (icon body, various shades including dark edges) ---
+                // --- 赤 (アイコン本体。暗い縁を含むさまざまな色合い) ---
                 new { Label="Red icon body",  R=(byte)180, G=(byte)30,  B=(byte)30,  Expect=ColorCategory.Red    },
                 new { Label="Deep red edge",  R=(byte)140, G=(byte)20,  B=(byte)20,  Expect=ColorCategory.Red    },
                 new { Label="Bright red",     R=(byte)255, G=(byte)20,  B=(byte)10,  Expect=ColorCategory.Red    },
                 new { Label="Dark red V=25",  R=(byte)64,  G=(byte)10,  B=(byte)10,  Expect=ColorCategory.Red    },
-                // --- Orange (icon body, with dark border shades) ---
+                // --- オレンジ (アイコン本体。暗い縁取りの色合いを含む) ---
                 new { Label="Orange body",    R=(byte)200, G=(byte)120, B=(byte)40,  Expect=ColorCategory.Orange },
                 new { Label="Bright orange",  R=(byte)255, G=(byte)140, B=(byte)0,   Expect=ColorCategory.Orange },
                 new { Label="Dark orange",    R=(byte)160, G=(byte)80,  B=(byte)20,  Expect=ColorCategory.Orange },
                 new { Label="Yellow-orange",  R=(byte)255, G=(byte)180, B=(byte)0,   Expect=ColorCategory.Orange },
-                // --- Gray (icon body, dark to medium gray) ---
+                // --- グレー (アイコン本体。暗いグレーから中間グレーまで) ---
                 new { Label="Dark gray V=24", R=(byte)60,  G=(byte)60,  B=(byte)60,  Expect=ColorCategory.Gray   },
                 new { Label="Med gray V=50",  R=(byte)128, G=(byte)128, B=(byte)128, Expect=ColorCategory.Gray   },
                 new { Label="Gray V=70",      R=(byte)178, G=(byte)178, B=(byte)178, Expect=ColorCategory.Gray   },
                 new { Label="Gray V=15",      R=(byte)39,  G=(byte)39,  B=(byte)39,  Expect=ColorCategory.Gray   },
                 new { Label="Gray V=80 light",R=(byte)204, G=(byte)204, B=(byte)204, Expect=ColorCategory.Gray   },
-                // --- Should NOT match (None) ---
+                // --- 一致してはならないもの (None) ---
                 new { Label="Green H=120",    R=(byte)0,   G=(byte)200, B=(byte)0,   Expect=ColorCategory.None   },
                 new { Label="Blue H=240",     R=(byte)0,   G=(byte)0,   B=(byte)200, Expect=ColorCategory.None   },
                 new { Label="Yellow H=60",    R=(byte)255, G=(byte)255, B=(byte)0,   Expect=ColorCategory.None   },
-                // --- White/Black: these would be pre-filtered in scan, but classify as None ---
+                // --- 白/黒: 走査時には事前にフィルタリングされるが、分類上は None となる ---
                 new { Label="White (skip)",   R=(byte)255, G=(byte)255, B=(byte)255, Expect=ColorCategory.None   },
                 new { Label="Black (skip)",   R=(byte)0,   G=(byte)0,   B=(byte)0,   Expect=ColorCategory.None   },
-                // --- Boundary / edge cases ---
+                // --- 境界値 / エッジケース ---
                 new { Label="Gray V=76 now ok",R=(byte)194, G=(byte)194, B=(byte)194, Expect=ColorCategory.Gray   },
                 new { Label="Gray V=84 above",R=(byte)215, G=(byte)215, B=(byte)215, Expect=ColorCategory.None   },
                 new { Label="Gray V=14 below",R=(byte)35,  G=(byte)35,  B=(byte)35,  Expect=ColorCategory.None   },

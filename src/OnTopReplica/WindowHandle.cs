@@ -12,7 +12,6 @@ namespace OnTopReplica {
     /// </summary>
 	public class WindowHandle : System.Windows.Forms.IWin32Window {
 		
-        IntPtr _handle;
 		string _title;
 
         /// <summary>
@@ -20,7 +19,7 @@ namespace OnTopReplica {
         /// may be null or empty and will be updated as requested.
         /// </summary>
 		public WindowHandle(IntPtr p, string title) {
-			_handle = p;
+			Handle = p;
 			_title = title;
 		}
 
@@ -29,14 +28,14 @@ namespace OnTopReplica {
         /// </summary>
         /// <param name="p"></param>
         public WindowHandle(IntPtr p) {
-            _handle = p;
+            Handle = p;
             _title = null;
         }
 
 		public string Title {
 			get {
                 if (_title == null) {
-                    _title = WindowMethods.GetWindowText(_handle) ?? string.Empty;
+                    _title = WindowMethods.GetWindowText(Handle) ?? string.Empty;
                 }
 
 				return _title;
@@ -51,7 +50,7 @@ namespace OnTopReplica {
 					//Fetch icon from window
 					IntPtr hIcon;
 
-                    if (MessagingMethods.SendMessageTimeout(_handle, WM.GETICON, new IntPtr(2), new IntPtr(0),
+                    if (MessagingMethods.SendMessageTimeout(Handle, WM.GETICON, new IntPtr(2), new IntPtr(0),
                         MessagingMethods.SendMessageTimeoutFlags.AbortIfHung | MessagingMethods.SendMessageTimeoutFlags.Block, 500, out hIcon) == IntPtr.Zero) {
                         hIcon = IntPtr.Zero;
                     }
@@ -61,7 +60,7 @@ namespace OnTopReplica {
 					}
 					else {
 						//Fetch icon from window class
-                        hIcon = (IntPtr)WindowMethods.GetClassLong(_handle, WindowMethods.ClassLong.IconSmall);
+                        hIcon = (IntPtr)WindowMethods.GetClassLong(Handle, WindowMethods.ClassLong.IconSmall);
 
 						if (hIcon.ToInt64() != 0) {
 							_icon = Icon.FromHandle(hIcon);
@@ -96,7 +95,7 @@ namespace OnTopReplica {
 
         public override string ToString() {
             var sb = new StringBuilder();
-            sb.AppendFormat("#{0}", _handle);
+            sb.AppendFormat("#{0}", Handle);
 
             if (!string.IsNullOrWhiteSpace(_title) || !string.IsNullOrWhiteSpace(_class)) {
                 sb.Append(" (");
@@ -123,20 +122,18 @@ namespace OnTopReplica {
 			if (win == null)
 				return false;
 
-			return (_handle.Equals(win.Handle));
+			return (Handle.Equals(win.Handle));
 		}
 
 		public override int GetHashCode() {
-			return _handle.GetHashCode();
+			return Handle.GetHashCode();
 		}
 
         #endregion
 
         #region IWin32Window Members
 
-        public IntPtr Handle {
-			get { return _handle; }
-		}
+        public IntPtr Handle { get; }
 
 		#endregion
 

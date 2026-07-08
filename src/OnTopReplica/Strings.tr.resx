@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutAuthor" xml:space="preserve">
     <value>Yazar Hakkında: %.</value>
@@ -124,18 +124,6 @@
   <data name="AboutAuthorContent" xml:space="preserve">
     <value />
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>Güncellemeyi iptal et.</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>OnTopRelica hakkında ayrıntıları görüntüle.</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>Bütün OnTopRelica ayarlarını sıfırla.</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>OnTopRelica'yı güncelle.</value>
   </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>Programa katkıda bulunmak ister misiniz? Mevcut çevirileri geliştirmenizi memnuniyetle karşılarız, programı kendi dilinize çevirin veya %'e CodePlex'ten bir göz atın.</value>
@@ -159,9 +147,6 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>Lisans</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>Güncellemeler</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>Bu uygulama OSI tarafından belirtilmiş "açık-kaynak" tanımının koşullarını yerine getiren % lisansı tarafından lisanslanmıştır.</value>
   </data>
@@ -179,60 +164,12 @@
     <value>Çevirmenler: {0}</value>
     <comment>{0} translators (do not end with period)</comment>
   </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>Kontrol Et!</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica her başlangıçta güncellemeleri otomatik olarak kontrol eder.</value>
-  </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Versiyon {0}</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>OnTopReplica</value>
     <comment>Probably doesn't need localization. :)</comment>
-  </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>Pencereyi tamamen yeniden ayarla?</value>
-  </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Reset
-Bütün ayarlar kaybolacak.</value>
-  </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Eğer pencere üzerindeki denetimizi kaybettiyseniz veya pencere ekran sınırları dışına çıktı ise kullanılabilir.</value>
-  </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>Sıfırla</value>
-  </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>Ayarları sıfırla?</value>
-  </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>Bu OnTopReplica'nın bütün ayarlarını silip, yüklemeden hemen sonraki haline geri döndürecektir (bütün kaydedilen bilgi, saklı bölgeler kaybolacaktır).</value>
-  </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>Ayarları sıfırla</value>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>&amp;Vazgeç</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>Farenizi kullarak bölgeler çizin.</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>Ayrıntılar</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Windows Aero'da ki ayrıntılar</value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Windows Aero sadece Windows Vista Home Premium veya daha yüksek sürümlerde bulunmaktadır.</value>
   </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>Masaüstü bileşimi aktif değil.</value>
@@ -270,60 +207,8 @@ Bu programı Windows Vista Home Premium veya daha iyisinde çalıştırmalısın
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>Pencereye oturtulamıyor.</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>Güncellemeler kontrol edilemiyor.</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>OnTopReplica 'ClickOnce' kullanılara yüklenmemiş gözüküyor. Elle güncellemeniz gerek (&lt;a href="http://ontopreplica.codeplex.com"&gt;OnTopReplica's homepage&lt;/a&gt;'i ziyaret edin).</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>OnTopReplica güncellenmiş bir versiyonun mevcut olup olmadığını denetleyemiyor. İnternete bağlı olduğunuzdan emin olun. Eğer bağlı iseniz websitesi geçici olarak servis dışı olabilir.</value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>Mod</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>Her zaman üstte</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>OnTopReplica'nın her zaman en üstte kalması için zorlar.</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>Tıkla</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>OnTopReplica arkadaki pencerelere direkt tıklamanıza izin veren transparan bir kaplama gibi davranır.</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>Standart</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>Normal bir pencere gibi davranır. Diğer pencereleri OnTopReplica'nın üstüne getirebilirsiniz.</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>OnTopReplica tam ekran</value>
-  </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>Etkisizleştir</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>Grup modu etkinleştir</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Etkinleştirilecek çoklu pencereleri seçiniz.</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>Grup değiştirme modu etkin.</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>Grup değiştirme modu:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Pencereler</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>Anasayfa: www.codeplex.com/ontopreplica.</value>
   </data>
   <data name="InfoClickForwarding" xml:space="preserve">
     <value>"tıkla yönlendir"'i etkinleştirmek ister misiniz?</value>
@@ -332,7 +217,7 @@ Bu programı Windows Vista Home Premium veya daha iyisinde çalıştırmalısın
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>Eğer bu mod etkinleştirilmiş ise, OnTopReplica bütün sol fare tıklamalarını klonlanmış pencereye iletecektir(bu size klonlanmış pencere üzerinde onu aktifleştirmeden temel fare işlemlerinizi yapabilmenize izin verir).
 
-Bu moddan çıkmak için, ESC'ye basınız.</value>
+Bu moddan çıkmak için görev çubuğu simgesinin menüsünü kullanınız.</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
     <value>Tıkla yönlendir</value>
@@ -340,39 +225,13 @@ Bu moddan çıkmak için, ESC'ye basınız.</value>
   <data name="InfoClickThrough" xml:space="preserve">
     <value>Direkt-Tıkla modunu etkinleştir?</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>Direk-tıkla sadece Yeniden boyutlandır altmenüsünde etkinleştirildiyse ve pencere yarı-transparan ise çalışır.</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
+  <data name="InfoClickThroughContent" xml:space="preserve">
     <value>Bu modda tamekran pencere kısmen transparan kaplama gibi davranır, arkasındaki pencerelere tıklamanıza izin verir.
 
-Herhangi bir zamanda normal moda dönmek için, OnTopReplica görev çubuğuna (veya sistem simgesine) tıklayarak aktifleştirin.</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>Hayır, teşekkür ederim
-direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
-    <comment>Second sentence capitalized?</comment>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>Direkt-Tıkla kullan</value>
+Normal moda dönmek için, bildirim alanındaki OnTopReplica simgesinin menüsünden devre dışı bırakma komutunu kullanın.</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
     <value>Direkt-Tıkla modu</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>OnTopReplica güncellendi.</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>OnTopReplica'nın güncellenmiş versiyonunu kullanmak için uygulamayı yeniden başlatmalısınız.</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>Güncelleme başarılı</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>OnTopReplica güncel.</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>Güncelleme mevcut değil</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Dil</value>
@@ -407,9 +266,6 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   <data name="MenuClose" xml:space="preserve">
     <value>Kapat</value>
   </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>OnTopReplica'yı kapatır.</value>
-  </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 Çift</value>
   </data>
@@ -424,36 +280,6 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 Çeyrek</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>Grup Değiştirme modu</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>OnTopReplica kullanıcı tanımlı gruptan bir pencereyi kopyalayıp, arkaplanda en son aktifleştirilen biri ile değiştirecektir.</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (opak)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>OnTopReplica'yı tamamen opak olarak ayarlar.</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>OnTopReplica'yı 25% opaklığına ayarlar.</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>OnTopReplica'yı 50% opaklığına ayarlar.</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>OnTopReplica'yı 75% opaklığına ayarlar.</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>Opaklık</value>
@@ -491,12 +317,6 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>Tamekran modundan çık</value>
   </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Son pozisyona dön ve boyutlandır</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>OnTopReplica'nın son konumunu kaydedip kaydetmeyeceğini değiştirir ve boyutlandırıp bunu yeniden başladığında kullanır.</value>
-  </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>Küçült</value>
   </data>
@@ -509,20 +329,8 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>"bölge modu"na geçer, bu size kaynak penceresinin küçük resminin kısıtlı bir bölgesini seçmenize izin verir.</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>Pencereyi sıfırla</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>OnTopReplica'nın ayarlarını ve ana penceresini sıfırlar.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>Yeniden boyutlandır</value>
-  </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>Son klonlanan pencereyi geri yükle</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>Etkinleştirildiği zaman, OnTopReplica son klonlanan pencereyi başlangıçta yeniden yüklemeye çalışır.</value>
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Ayarlar...</value>
@@ -598,55 +406,5 @@ direkt-tıklayı daha sonra etkinleştirebilirsiniz.</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Ayarlar</value>
-  </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Güncellemeden vazgeç
-OnTopReplica sizi yeniden başlatıldığında uyaracaktır.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>İndir 
-OnTopReplica {0} Yükle.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>Yeni versiyon resmi siteden indirilebilir ve yüklenebilir.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>Yüklü versiyon: {0}.
-Kullanılabilir versiyon: {1}.</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>Versiyon {0} mevcut</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} byte indirildi.</value>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>İndiriliyor...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>OnTopReplica'nın en son sürümü zaten yüklenmiş. Program her başlangıçta güncellemeleri otomatik olarak denetler.
-
-OnTopReplica'nın geliştirilmesi, yeni özellik ve geliştirme önerileri hakkında by &lt;a href="website"&gt;resmi internet sitesini ziyaret ederek&lt;/a&gt; güncel kalabilirsiniz.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>En son kararlı versiyon {0} tarihinde yayınlandı.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica güncel</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Yükle
-OnTopReplica kapatılınca güncelleme yüklenmiş olacaktır.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>OnTopReplica versiyon {0} bilgisayarınızda yüklenmeye hazır.</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>Güncelleme hazır</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>OnTopReplica güncellemeleri</value>
   </data>
 </root>

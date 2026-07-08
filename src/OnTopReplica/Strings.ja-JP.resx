@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,18 +125,6 @@
     <value>Lorenz Cuno Klopfenstein</value>
     <comment>Must not be localized. Leave blank in non-default languages.</comment>
   </data>
-  <data name="AboutButtonCancelTT" xml:space="preserve">
-    <value>アップデートをキャンセル</value>
-  </data>
-  <data name="AboutButtonExpanderTT" xml:space="preserve">
-    <value>OnTopReplica についての概要を表示</value>
-  </data>
-  <data name="AboutButtonResetTT" xml:space="preserve">
-    <value>OnTopReplica のすべての設定をリセットする</value>
-  </data>
-  <data name="AboutButtonUpdateTT" xml:space="preserve">
-    <value>今すぐ OnTopReplica をアップデート</value>
-  </data>
   <data name="AboutContribute" xml:space="preserve">
     <value>Care to contribute to the project? You are welcome to improve available translations, start a new one for your native language or to check out the % from CodePlex.</value>
   </data>
@@ -159,9 +147,6 @@
   <data name="AboutDividerLicense" xml:space="preserve">
     <value>ライセンス</value>
   </data>
-  <data name="AboutDividerUpdates" xml:space="preserve">
-    <value>アップデート</value>
-  </data>
   <data name="AboutLicense" xml:space="preserve">
     <value>The application is licensed under the % license, which meets the terms of the "open-source" definition specified by OSI.</value>
   </data>
@@ -179,16 +164,6 @@
     <value>翻訳者: {0}</value>
     <comment>{0} translators (do not end with period)</comment>
   </data>
-  <data name="AboutTranslatorsContent" xml:space="preserve">
-    <value />
-    <comment>Must not be localized. Leave blank in non-default languages.</comment>
-  </data>
-  <data name="AboutUpdatesCheckNow" xml:space="preserve">
-    <value>今すぐチェック</value>
-  </data>
-  <data name="AboutUpdatesDisclaimer" xml:space="preserve">
-    <value>OnTopReplica は起動時に毎回自動的に更新を確認します。</value>
-  </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>バージョン {0}</value>
   </data>
@@ -196,43 +171,29 @@
     <value>OnTopReplica</value>
     <comment>Probably doesn't need localization. :)</comment>
   </data>
-  <data name="AskReset" xml:space="preserve">
-    <value>ウィンドウを完全にリセットしますか？</value>
+  <data name="ColorAlert_Title" xml:space="preserve">
+    <value>カラーアラート</value>
   </data>
-  <data name="AskResetButtonOk" xml:space="preserve">
-    <value>&amp;Reset
-All settings will be lost.</value>
+  <data name="ColorAlert_MenuTitle" xml:space="preserve">
+    <value>カラーアラート...</value>
   </data>
-  <data name="AskResetContent" xml:space="preserve">
-    <value>Can be used to reset all settings if you lost control over the window or moved it beyond the screen boundary.</value>
+  <data name="ColorAlert_Interval" xml:space="preserve">
+    <value>サンプリング間隔 (ms):</value>
   </data>
-  <data name="AskResetTitle" xml:space="preserve">
-    <value>リセット</value>
+  <data name="ColorAlert_Enable" xml:space="preserve">
+    <value>色検出を有効にする</value>
   </data>
-  <data name="AskSettingReset" xml:space="preserve">
-    <value>設定をリセットしますか？</value>
+  <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
+    <value>色チェックの間隔 (ミリ秒)</value>
   </data>
-  <data name="AskSettingResetContent" xml:space="preserve">
-    <value>This will erase all settings of OnTopReplica, returning it to the original state right after installation (all saved information, like stored regions, will be lost).</value>
+  <data name="ColorAlert_MenuTooltip" xml:space="preserve">
+    <value>ウィンドウを監視し、特定の色を検出したら警報します</value>
   </data>
-  <data name="AskSettingResetTitle" xml:space="preserve">
-    <value>設定をリセット</value>
+  <data name="ColorAlert_Volume" xml:space="preserve">
+    <value>警報音量:</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>キャンセル(&amp;C)</value>
-    <comment>&amp; marks the ALT+[] shortcut</comment>
-  </data>
-  <data name="DrawRegions" xml:space="preserve">
-    <value>Draw regions using mouse.</value>
-  </data>
-  <data name="ErrorDetailButton" xml:space="preserve">
-    <value>詳細</value>
-  </data>
-  <data name="ErrorDetailsAero" xml:space="preserve">
-    <value>Windows Aeroの詳細</value>
-  </data>
-  <data name="ErrorDetailsAeroInfo" xml:space="preserve">
-    <value>Windows Aero is only available on Windows Vista Home Premium or higher.</value>
+  <data name="ColorAlert_SoundFile" xml:space="preserve">
+    <value>サウンドファイル:</value>
   </data>
   <data name="ErrorDwmOff" xml:space="preserve">
     <value>デスクトップコンポジションが有効になっていません</value>
@@ -270,108 +231,31 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="ErrorUnableToFit" xml:space="preserve">
     <value>Unable to fit window.</value>
   </data>
-  <data name="ErrorUpdate" xml:space="preserve">
-    <value>アップデートがチェックできませんでした。</value>
-  </data>
-  <data name="ErrorUpdateContent" xml:space="preserve">
-    <value>It appears that OnTopReplica wasn't installed using 'ClickOnce'. You'll have to update manually (visit &lt;a href="http://ontopreplica.codeplex.com"&gt;OnTopReplica's homepage&lt;/a&gt;).</value>
-  </data>
-  <data name="ErrorUpdateContentGeneric" xml:space="preserve">
-    <value>OnTopReplica was unable to check whether an updated version is available. Make sure you are connected to the Internet. If you are, the website may be temporarily down.</value>
-  </data>
   <data name="FullscreenMode" xml:space="preserve">
     <value>モード</value>
   </data>
-  <data name="FullscreenModeAlwaysOnTop" xml:space="preserve">
-    <value>常に最前面</value>
-  </data>
-  <data name="FullscreenModeAlwaysOnTopTT" xml:space="preserve">
-    <value>OnTopReplica を常に最前面にします</value>
-  </data>
-  <data name="FullscreenModeClickThrough" xml:space="preserve">
-    <value>クリックスルー</value>
-  </data>
-  <data name="FullscreenModeClickThroughTT" xml:space="preserve">
-    <value>OnTopReplica will behave like a transparent overlay that lets your clicks through to the windows below.</value>
-  </data>
-  <data name="FullscreenModeNormal" xml:space="preserve">
-    <value>スタンダード</value>
-  </data>
-  <data name="FullscreenModeNormalTT" xml:space="preserve">
-    <value>Behaves like an ordinary window. You can bring other windows above OnTopReplica.</value>
-  </data>
-  <data name="FullscreenTitle" xml:space="preserve">
-    <value>OnTopReplica フルスクリーン</value>
-  </data>
-  <data name="GroupSwitchModeDisableButton" xml:space="preserve">
-    <value>無効</value>
-  </data>
-  <data name="GroupSwitchModeEnableButton" xml:space="preserve">
-    <value>グループスイッチモードを有効にする</value>
-  </data>
-  <data name="GroupSwitchModeStatusDisabled" xml:space="preserve">
-    <value>Ctrl+クリックで複数のウィンドウを選択できます</value>
-  </data>
-  <data name="GroupSwitchModeStatusEnabled" xml:space="preserve">
-    <value>グループスイッチモードが有効</value>
-  </data>
-  <data name="GroupSwitchModeTitle" xml:space="preserve">
-    <value>グループスイッチモード:</value>
-  </data>
-  <data name="GroupSwitchModeWindows" xml:space="preserve">
-    <value>Windows</value>
-    <comment>Column Header of list, simply refers to available windows to be cloned</comment>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>ホームページ: www.codeplex.com/ontopreplica.</value>
-  </data>
   <data name="InfoClickForwarding" xml:space="preserve">
-    <value>クリック-フォワーディングを有効にしますか？</value>
+    <value>クリック転送を有効にしますか？</value>
   </data>
   <data name="InfoClickForwardingContent" xml:space="preserve">
     <value>このモードが有効な場合、マウスの左クリックを複製したウィンドウに転送します。
 (複製したウィンドウをアクティブにすることなく、OnTopReplica上で基本的なマウス操作を行うことができます。)
 
-このモードを終了するには、ESCキーを押します。</value>
+このモードを解除するには、通知領域（システムトレイ）の OnTopReplica アイコンのメニューから解除してください。</value>
   </data>
   <data name="InfoClickForwardingTitle" xml:space="preserve">
-    <value>クリック-フォワーディング</value>
+    <value>クリック転送</value>
   </data>
   <data name="InfoClickThrough" xml:space="preserve">
-    <value>クリック-スルーモードを有効にしますか？</value>
+    <value>クリック透過モードを有効にしますか？</value>
   </data>
-  <data name="InfoClickThroughDetails" xml:space="preserve">
-    <value>クリック-スルーモードは、"高度な設定"で"クリック-スルー"が有効になっている場合かつ、ウィンドウが半透明の場合のみ機能します</value>
-  </data>
-  <data name="InfoClickThroughInformation" xml:space="preserve">
-    <value>In this mode the fullscreen window will behave as a partially transparent overlay, allowing you to click on the other windows behind it.
+  <data name="InfoClickThroughContent" xml:space="preserve">
+    <value>このモードでは、全画面ウィンドウが半透明のオーバーレイとして表示され、背後のウィンドウをそのままクリックして操作できます。
 
-To return to normal mode anytime, activate OnTopReplica by clicking on the task bar (or the tray icon).</value>
-  </data>
-  <data name="InfoClickThroughNo" xml:space="preserve">
-    <value>No, thank you.
-You can enable click-through later</value>
-  </data>
-  <data name="InfoClickThroughOk" xml:space="preserve">
-    <value>クリック-スルーを使う</value>
+このモードを解除するには、通知領域（システムトレイ）の OnTopReplica アイコンのメニューから解除してください。</value>
   </data>
   <data name="InfoClickThroughTitle" xml:space="preserve">
-    <value>クリック-スルー モード</value>
-  </data>
-  <data name="InfoUpdated" xml:space="preserve">
-    <value>OnTopReplica はアップデートされました</value>
-  </data>
-  <data name="InfoUpdatedContent" xml:space="preserve">
-    <value>In order to use the updated version of OnTopReplica you'll have to restart the application.</value>
-  </data>
-  <data name="InfoUpdatedTitle" xml:space="preserve">
-    <value>アップデート完了</value>
-  </data>
-  <data name="InfoUpToDate" xml:space="preserve">
-    <value>OnTopReplica は最新版です。</value>
-  </data>
-  <data name="InfoUpToDateTitle" xml:space="preserve">
-    <value>アップデートはありません</value>
+    <value>クリック透過モード</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>言語</value>
@@ -392,22 +276,43 @@ You can enable click-through later</value>
     <value>ウィンドウ枠表示の切り替え</value>
   </data>
   <data name="MenuClickForwarding" xml:space="preserve">
-    <value>クリック-フォワーディングを有効</value>
+    <value>クリック転送を有効</value>
   </data>
   <data name="MenuClickForwardingTT" xml:space="preserve">
-    <value>複製したウィンドウのクリック-フォワーディングを有効にします</value>
+    <value>OnTopReplica上でのクリックを複製元のウィンドウへ転送します</value>
   </data>
   <data name="MenuClickThrough" xml:space="preserve">
-    <value>クリック-スルーを有効</value>
+    <value>クリック透過を有効</value>
   </data>
   <data name="MenuClickThroughTT" xml:space="preserve">
-    <value>ウィンドウを透過してクリックします (OnTopReplicaで表示されているウィンドウの下へクリックをスルーします)</value>
+    <value>ウィンドウを透過してクリックします (OnTopReplicaの下にあるウィンドウへクリックを通します)</value>
+  </data>
+  <data name="MenuEnableClickForwardingAll" xml:space="preserve">
+    <value>すべてのパネルでクリック転送を有効</value>
+  </data>
+  <data name="MenuEnableClickForwardingAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック転送を有効にします</value>
+  </data>
+  <data name="MenuDisableClickForwardingAll" xml:space="preserve">
+    <value>すべてのパネルでクリック転送を解除</value>
+  </data>
+  <data name="MenuDisableClickForwardingAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック転送を解除します</value>
+  </data>
+  <data name="MenuEnableClickThroughAll" xml:space="preserve">
+    <value>すべてのパネルでクリック透過を有効</value>
+  </data>
+  <data name="MenuEnableClickThroughAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック透過を有効にします</value>
+  </data>
+  <data name="MenuDisableClickThroughAll" xml:space="preserve">
+    <value>すべてのパネルでクリック透過を解除</value>
+  </data>
+  <data name="MenuDisableClickThroughAllTT" xml:space="preserve">
+    <value>このパネルセット内のすべてのパネルでクリック透過を解除します</value>
   </data>
   <data name="MenuClose" xml:space="preserve">
     <value>閉じる</value>
-  </data>
-  <data name="MenuCloseTT" xml:space="preserve">
-    <value>OnTopReplica を閉じる</value>
   </data>
   <data name="MenuFitDouble" xml:space="preserve">
     <value>2:1 2倍</value>
@@ -423,36 +328,6 @@ You can enable click-through later</value>
   </data>
   <data name="MenuFitQuarter" xml:space="preserve">
     <value>1:4 1/4倍</value>
-  </data>
-  <data name="MenuGroupSwitch" xml:space="preserve">
-    <value>グループスイッチモード</value>
-  </data>
-  <data name="MenuGroupSwitchTT" xml:space="preserve">
-    <value>あらかじめウィンドウを指定しておくと自動的にOnTopReplicaに複製されるモードです</value>
-  </data>
-  <data name="MenuOp100" xml:space="preserve">
-    <value>100% (不透明)</value>
-  </data>
-  <data name="MenuOp100TT" xml:space="preserve">
-    <value>OnTopReplica が完全に不透明になります</value>
-  </data>
-  <data name="MenuOp25" xml:space="preserve">
-    <value>25%</value>
-  </data>
-  <data name="MenuOp25TT" xml:space="preserve">
-    <value>OnTopReplica が 25% の不透明度になります。</value>
-  </data>
-  <data name="MenuOp50" xml:space="preserve">
-    <value>50%</value>
-  </data>
-  <data name="MenuOp50TT" xml:space="preserve">
-    <value>OnTopReplica が 50% の不透明度になります。</value>
-  </data>
-  <data name="MenuOp75" xml:space="preserve">
-    <value>75%</value>
-  </data>
-  <data name="MenuOp75TT" xml:space="preserve">
-    <value>OnTopReplica が 75%  の不透明度になります。</value>
   </data>
   <data name="MenuOpacity" xml:space="preserve">
     <value>不透明度</value>
@@ -490,12 +365,6 @@ You can enable click-through later</value>
   <data name="MenuQuitFullscreen" xml:space="preserve">
     <value>フルスクリーンモードを終了</value>
   </data>
-  <data name="MenuRecall" xml:space="preserve">
-    <value>Recall last position and size</value>
-  </data>
-  <data name="MenuRecallTT" xml:space="preserve">
-    <value>Toggles whether OnTopReplica should store its last position and size and use them when it is restarted.</value>
-  </data>
   <data name="MenuReduce" xml:space="preserve">
     <value>最小化</value>
   </data>
@@ -508,23 +377,11 @@ You can enable click-through later</value>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>リージョンモードに切り替えます。画面の一部を選択して切り取りできます。</value>
   </data>
-  <data name="MenuReset" xml:space="preserve">
-    <value>ウィンドウをリセット</value>
-  </data>
-  <data name="MenuResetTT" xml:space="preserve">
-    <value>Resets OnTopReplica settings and its main window.</value>
-  </data>
   <data name="MenuResize" xml:space="preserve">
     <value>リサイズ</value>
   </data>
-  <data name="MenuRestoreLast" xml:space="preserve">
-    <value>最後に複製したウィンドウを復元する</value>
-  </data>
-  <data name="MenuRestoreLastTT" xml:space="preserve">
-    <value>有効にすると、起動時に最後に複製したウィンドウを復元します。</value>
-  </data>
   <data name="MenuSettings" xml:space="preserve">
-    <value>設定</value>
+    <value>設定...</value>
   </data>
   <data name="MenuSettingsTT" xml:space="preserve">
     <value>設定パネルを表示します</value>
@@ -598,61 +455,6 @@ You can enable click-through later</value>
   <data name="SettingsTitle" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="UpdateAvailableCommandCancel" xml:space="preserve">
-    <value>Cancel update
-OnTopReplica will prompt you the next time it is started.</value>
-  </data>
-  <data name="UpdateAvailableCommandOk" xml:space="preserve">
-    <value>ダウンロード
-Install OnTopReplica {0}.</value>
-  </data>
-  <data name="UpdateAvailableContent" xml:space="preserve">
-    <value>The new version can be downloaded and installed from the official website.</value>
-  </data>
-  <data name="UpdateAvailableExpanded" xml:space="preserve">
-    <value>インストールされたバージョン: {0}
-新しいバージョン: {1}</value>
-  </data>
-  <data name="UpdateAvailableInstruction" xml:space="preserve">
-    <value>新しいバージョン {0} があります</value>
-  </data>
-  <data name="UpdateDownloadingContent" xml:space="preserve">
-    <value>{0}/{1} bytes downloaded.</value>
-    <comment>{0} downloaded bytes {1} total bytes
-{0}  bytes geladen von {1} bytes gesamt
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes
-{0} downloaded bytes {1} total bytes</comment>
-  </data>
-  <data name="UpdateDownloadingInstruction" xml:space="preserve">
-    <value>ダウンロード中...</value>
-  </data>
-  <data name="UpdateInfoContent" xml:space="preserve">
-    <value>The latest version of OnTopReplica is already installed. The program automatically checks for updates at every start.
-
-You can keep up to date about OnTopReplica's development, suggest improvements and new features by &lt;a href="website"&gt;visiting the official website&lt;/a&gt;.</value>
-    <comment>The website link should be enclosed in &lt;a href="website"&gt;&lt;/a&gt; tags.</comment>
-  </data>
-  <data name="UpdateInfoFooter" xml:space="preserve">
-    <value>Latest stable version released on {0}.</value>
-    <comment>{0} last version release date</comment>
-  </data>
-  <data name="UpdateInfoInstruction" xml:space="preserve">
-    <value>OnTopReplica はアップデートされました。</value>
-  </data>
-  <data name="UpdateReadyCommandOk" xml:space="preserve">
-    <value>Install
-OnTopReplica will be closed and the update installed.</value>
-  </data>
-  <data name="UpdateReadyContent" xml:space="preserve">
-    <value>OnTopReplica version {0} is ready to be installed on your computer.</value>
-  </data>
-  <data name="UpdateReadyInstruction" xml:space="preserve">
-    <value>アップデート準備完了</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>OnTopReplica のアップデート</value>
-  </data>
   <data name="RegionsBottom" xml:space="preserve">
     <value>下</value>
   </data>
@@ -670,5 +472,53 @@ OnTopReplica will be closed and the update installed.</value>
   </data>
   <data name="RegionsY" xml:space="preserve">
     <value>Y</value>
+  </data>
+  <data name="MenuAddPanel" xml:space="preserve">
+    <value>パネルを追加...</value>
+  </data>
+  <data name="MenuAddPanelTT" xml:space="preserve">
+    <value>別の領域を監視するパネルウィンドウを新しく開きます</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="MenuExitTT" xml:space="preserve">
+    <value>すべてのパネルを閉じてプログラムを終了します</value>
+  </data>
+  <data name="ColorAlert_DetectColors" xml:space="preserve">
+    <value>検出する色:</value>
+  </data>
+  <data name="ColorAlert_Gray" xml:space="preserve">
+    <value>グレー (Gray)</value>
+  </data>
+  <data name="ColorAlert_IntervalRange" xml:space="preserve">
+    <value>(100〜10000の範囲)</value>
+  </data>
+  <data name="ColorAlert_Orange" xml:space="preserve">
+    <value>オレンジ (Orange)</value>
+  </data>
+  <data name="ColorAlert_Red" xml:space="preserve">
+    <value>赤 (Red)</value>
+  </data>
+  <data name="ColorAlert_TestAlarm" xml:space="preserve">
+    <value>アラームをテスト</value>
+  </data>
+  <data name="ColorAlert_KeyPress" xml:space="preserve">
+    <value>アラーム時にキーを送信:</value>
+  </data>
+  <data name="ColorAlert_KeyNone" xml:space="preserve">
+    <value>(クリックしてキーを入力)</value>
+  </data>
+  <data name="ColorAlert_CustomColor" xml:space="preserve">
+    <value>カスタム色</value>
+  </data>
+  <data name="ColorAlert_ChooseColor" xml:space="preserve">
+    <value>色を選択...</value>
+  </data>
+  <data name="ColorAlert_SampleCursorColor" xml:space="preserve">
+    <value>カーソル色を取得</value>
+  </data>
+  <data name="ColorAlert_SamplingInProgress" xml:space="preserve">
+    <value>クリックして選択...</value>
   </data>
 </root>

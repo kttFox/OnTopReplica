@@ -36,7 +36,6 @@ namespace OnTopReplica {
             //Register message pump processors
             Register(new WindowKeeper(), form);
             Register(new HotKeyManager(), form);
-            Register(new GroupSwitchManager(), form);
             Register(new FlashCloner(), form);
             Register(new ColorDetectionProcessor(), form);
         }

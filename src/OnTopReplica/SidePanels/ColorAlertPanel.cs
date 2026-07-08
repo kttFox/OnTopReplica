@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Drawing;
 using System.Text;
@@ -20,7 +19,17 @@ namespace OnTopReplica.SidePanels {
         private void LocalizePanel() {
             groupColor.Text = Strings.ColorAlert_Title;
             labelInterval.Text = Strings.ColorAlert_Interval;
+            labelIntervalUnit.Text = Strings.ColorAlert_IntervalRange;
             checkEnabled.Text = Strings.ColorAlert_Enable;
+            labelColorSelection.Text = Strings.ColorAlert_DetectColors;
+            checkRed.Text = Strings.ColorAlert_Red;
+            checkOrange.Text = Strings.ColorAlert_Orange;
+            checkGray.Text = Strings.ColorAlert_Gray;
+            checkCustomColor.Text = Strings.ColorAlert_CustomColor;
+            btnPickCustomColor.Text = Strings.ColorAlert_ChooseColor;
+            btnSampleCursorColor.Text = Strings.ColorAlert_SampleCursorColor;
+            btnTestAlarm.Text = Strings.ColorAlert_TestAlarm;
+            checkKeyPress.Text = Strings.ColorAlert_KeyPress;
             labelVolume.Text = Strings.ColorAlert_Volume;
             labelSoundFile.Text = Strings.ColorAlert_SoundFile;
             btnClose.Text = Strings.MenuClose;
@@ -30,12 +39,9 @@ namespace OnTopReplica.SidePanels {
 
         ColorDetectionProcessor _processor;
         private bool _loading = false; // suppress CheckColor_CheckedChanged during panel init
-        private const string SoundsRelativePath = "Sounds";
-        private const string ColorConfigFileName = "ColorAlertConfig.json";
 
-        private string GetColorConfigPath() {
-            return Path.Combine(AppPaths.PrivateRoamingFolderPath, ColorConfigFileName);
-        }
+        private const string SoundsRelativePath = "Sounds";
+        private Color? _customTargetColor;
 
         public override void OnFirstShown(MainForm form) {
             base.OnFirstShown(form);
@@ -55,68 +61,94 @@ namespace OnTopReplica.SidePanels {
                     numInterval.Value = _processor.SampleInterval;
                 }
 
-                // Priority: 1) processor current session state  2) config file  3) Settings  4) default Red
-                HashSet<ColorCategory> categories = null;
+                // Load current state from the processor (factory default: empty selection)
+                HashSet<ColorCategory> categories;
+                Color? loadedCustomColor = null;
 
-                // Use processor's current categories if it has been configured this session
-                // (detected by: processor is non-null and has categories different from factory default,
-                //  OR processor is currently enabled — meaning user has actively used it)
-                bool processorHasSessionState = _processor != null &&
-                    (_processor.Enabled || _processor.EnabledCategories.Count != 1 ||
-                    !_processor.EnabledCategories.Contains(ColorCategory.Red));
-
-                if (processorHasSessionState) {
+                if (_processor != null) {
                     categories = new HashSet<ColorCategory>(_processor.EnabledCategories);
-                    Log.Write("Loaded ColorAlert categories from processor: {0}", CategoriesToString(categories));
+                    loadedCustomColor = _processor.CustomTargetColor;
+                }
+                else {
+                    categories = new HashSet<ColorCategory>();
                 }
 
-                if (categories == null || categories.Count == 0) {
-                    categories = LoadCategoriesFromFile();
-                }
-                if (categories == null || categories.Count == 0) {
-                    categories = ParseCategoriesFromString(Settings.Default.ColorAlertTargetColors);
-                }
-                if ((categories == null || categories.Count == 0) && _processor != null) {
-                    categories = new HashSet<ColorCategory>(_processor.EnabledCategories);
-                }
-                if (categories == null || categories.Count == 0) {
-                    categories = new HashSet<ColorCategory> { ColorCategory.Red };
-                }
+                _customTargetColor = loadedCustomColor;
 
                 // Set checkboxes (events suppressed by _loading flag)
                 checkRed.Checked = categories.Contains(ColorCategory.Red);
                 checkOrange.Checked = categories.Contains(ColorCategory.Orange);
                 checkGray.Checked = categories.Contains(ColorCategory.Gray);
+                checkCustomColor.Checked = _customTargetColor.HasValue;
+
+                // キー送信設定
+                if (_processor != null) {
+                    _keyPressKey = _processor.KeyPressKey;
+                    checkKeyPress.Checked = _processor.KeyPressEnabled;
+                }
+                UpdateKeyCaptureUi();
 
                 Log.Write("Loaded ColorAlert categories: {0}", CategoriesToString(categories));
 
                 // Sync to processor
                 if (_processor != null) {
                     _processor.EnabledCategories = new HashSet<ColorCategory>(categories);
+                    _processor.CustomTargetColor = _customTargetColor;
                 }
+
+                UpdateCustomColorUi();
             }
             finally {
                 _loading = false;
             }
 
-            // Load volume and sound settings
-            trackBarVolume.Value = (int)(Settings.Default.ColorAlertVolume * 100);
+            // Load volume and sound settings from this panel's processor (persisted
+            // per panel in the layout file and restored at startup)
+            trackBarVolume.Value = _processor != null ? (int)(_processor.AlarmVolume * 100) : 100;
             PopulateSoundList();
-            if (!string.IsNullOrEmpty(Settings.Default.ColorAlertSoundFile)) {
-                var f = Path.GetFileName(Settings.Default.ColorAlertSoundFile);
-                if (comboSound.Items.Contains(f))
-                    comboSound.SelectedItem = f;
+            var savedSound = _processor != null ? _processor.AlarmSoundFile : null;
+            if (!string.IsNullOrEmpty(savedSound)) {
+                string item;
+                if (savedSound.StartsWith(ColorDetectionProcessor.SystemSoundPrefix, StringComparison.OrdinalIgnoreCase)) {
+                    item = SystemSoundDisplayPrefix + savedSound.Substring(ColorDetectionProcessor.SystemSoundPrefix.Length);
+                }
+                else {
+                    item = Path.GetFileName(savedSound);
+                }
+                if (comboSound.Items.Contains(item))
+                    comboSound.SelectedItem = item;
             }
+        }
+
+        const string SystemSoundDisplayPrefix = "System: ";
+        static readonly string[] SystemSoundNames = { "Beep", "Hand", };
+
+        /// <summary>
+        /// Gets the storable sound value for the current combo selection: either a
+        /// file path in the Sounds folder or a "system:" pseudo-path selecting one
+        /// of the System.Media.SystemSounds entries. Null if nothing is selected.
+        /// </summary>
+        private string GetSelectedSoundPath() {
+            if (comboSound.SelectedItem == null)
+                return null;
+
+            string item = comboSound.SelectedItem.ToString();
+            if (item.StartsWith(SystemSoundDisplayPrefix, StringComparison.Ordinal)) {
+                return ColorDetectionProcessor.SystemSoundPrefix + item.Substring(SystemSoundDisplayPrefix.Length);
+            }
+            return Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), SoundsRelativePath, item);
         }
 
         public override string Title {
             get {
-                return "Color Alert";
+                return Strings.ColorAlert_Title;
             }
         }
 
         public override void OnClosing(MainForm form) {
             base.OnClosing(form);
+
+            EndColorSampling();
 
             var categories = GetEnabledCategories();
 
@@ -125,22 +157,16 @@ namespace OnTopReplica.SidePanels {
                 _processor.SampleInterval = (int)numInterval.Value;
                 _processor.Enabled = checkEnabled.Checked;
                 _processor.AlarmVolume = trackBarVolume.Value / 100f;
-                if (comboSound.SelectedItem != null) {
-                    string file = comboSound.SelectedItem.ToString();
-                    _processor.AlarmSoundFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), SoundsRelativePath, file);
+                if (GetSelectedSoundPath() != null) {
+                    _processor.AlarmSoundFile = GetSelectedSoundPath();
                 }
+                _processor.KeyPressEnabled = checkKeyPress.Checked;
+                _processor.KeyPressKey = _keyPressKey;
             }
 
-            // Persist settings
-            Settings.Default.ColorAlertVolume = trackBarVolume.Value / 100f;
-            if (comboSound.SelectedItem != null) {
-                string file = comboSound.SelectedItem.ToString();
-                Settings.Default.ColorAlertSoundFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), SoundsRelativePath, file);
-            }
-            Settings.Default.ColorAlertTargetColors = CategoriesToString(categories);
-
-            SaveCategoriesToFile(categories);
-            Settings.Default.Save();
+            //Color detection settings (incl. volume and sound) are persisted
+            //per panel in the panel layout file
+            form.NotifyPanelLayoutChanged();
         }
 
         /// <summary>
@@ -154,6 +180,31 @@ namespace OnTopReplica.SidePanels {
             return cats;
         }
 
+        private Color? GetEffectiveCustomTargetColor() {
+            if (!checkCustomColor.Checked) {
+                return null;
+            }
+
+            return _customTargetColor;
+        }
+
+        private void UpdateCustomColorUi() {
+            bool hasCustomColor = _customTargetColor.HasValue;
+            if (hasCustomColor) {
+                panelCustomColor.BackColor = _customTargetColor.Value;
+            }
+            else {
+                panelCustomColor.BackColor = Color.White;
+            }
+
+            if (!hasCustomColor) {
+                checkCustomColor.Checked = false;
+            }
+
+            btnPickCustomColor.Enabled = true;
+            btnSampleCursorColor.Enabled = true;
+        }
+
         /// <summary>
         /// Serializes categories to a comma-separated string.
         /// </summary>
@@ -162,103 +213,6 @@ namespace OnTopReplica.SidePanels {
             var parts = new List<string>();
             foreach (var c in categories) parts.Add(c.ToString());
             return string.Join(",", parts);
-        }
-
-        /// <summary>
-        /// Parses a comma-separated category string.
-        /// </summary>
-        private HashSet<ColorCategory> ParseCategoriesFromString(string text) {
-            var result = new HashSet<ColorCategory>();
-            if (string.IsNullOrWhiteSpace(text)) return result;
-
-            var parts = text.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var part in parts) {
-                string s = part.Trim();
-                ColorCategory cat;
-                if (Enum.TryParse(s, true, out cat) && cat != ColorCategory.None) {
-                    result.Add(cat);
-                }
-            }
-            return result;
-        }
-
-        private void SaveCategoriesToFile(HashSet<ColorCategory> categories) {
-            try {
-                string path = GetColorConfigPath();
-                string data = CategoriesToString(categories);
-                File.WriteAllText(path, data, Encoding.UTF8);
-                Log.Write("Saved color config to {0}: {1}", path, data);
-            }
-            catch (Exception ex) {
-                Log.Write("Error saving color config: {0}", ex.Message);
-            }
-        }
-
-        private HashSet<ColorCategory> LoadCategoriesFromFile() {
-            try {
-                string path = GetColorConfigPath();
-                if (!File.Exists(path)) return null;
-                string data = File.ReadAllText(path, Encoding.UTF8);
-
-                // Try new format (comma-separated category names)
-                var result = ParseCategoriesFromString(data);
-                if (result.Count > 0) {
-                    Log.Write("Loaded color config from {0}: {1}", path, data);
-                    return result;
-                }
-
-                // Legacy format: JSON array of hex colors → map to categories
-                if (data.TrimStart().StartsWith("[")) {
-                    result = MapLegacyColorsToCategories(data);
-                    if (result.Count > 0) {
-                        Log.Write("Loaded legacy color config from {0}, mapped to: {1}", path, CategoriesToString(result));
-                        return result;
-                    }
-                }
-            }
-            catch (Exception ex) {
-                Log.Write("Error loading color config: {0}", ex.Message);
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Maps legacy hex color values to predefined categories for backwards compatibility.
-        /// </summary>
-        private HashSet<ColorCategory> MapLegacyColorsToCategories(string json) {
-            var result = new HashSet<ColorCategory>();
-            try {
-                string trimmed = json.Trim().Trim('[', ']');
-                var parts = trimmed.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var p in parts) {
-                    string s = p.Trim().Trim('"').Trim();
-                    if (s.StartsWith("#")) s = s.Substring(1);
-                    if (s.Length == 6) {
-                        int rgb = int.Parse(s, System.Globalization.NumberStyles.HexNumber);
-                        int r = (rgb >> 16) & 0xFF;
-                        int g = (rgb >> 8) & 0xFF;
-                        int b = rgb & 0xFF;
-
-                        // Simple hue-based classification
-                        float max = Math.Max(r, Math.Max(g, b)) / 255f;
-                        float min = Math.Min(r, Math.Min(g, b)) / 255f;
-                        float sat = max > 0 ? (max - min) / max * 100 : 0;
-
-                        if (sat < 15) {
-                            result.Add(ColorCategory.Gray);
-                        } else if (r > g && r > b) {
-                            // Red or orange
-                            if (g > b && g > r * 0.3f) {
-                                result.Add(ColorCategory.Orange);
-                            } else {
-                                result.Add(ColorCategory.Red);
-                            }
-                        }
-                    }
-                }
-            }
-            catch { }
-            return result;
         }
 
         private void CheckEnabled_CheckedChanged(object sender, EventArgs e) {
@@ -278,8 +232,8 @@ namespace OnTopReplica.SidePanels {
                 _processor.EnabledCategories = new HashSet<ColorCategory>(categories);
                 Log.Write("Color categories changed: {0}", CategoriesToString(categories));
             }
-            // Persist immediately so reopening the panel restores the correct state
-            SaveCategoriesToFile(categories);
+            // Persist immediately so a restart restores the correct state
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
         }
 
         /// <summary>
@@ -288,19 +242,23 @@ namespace OnTopReplica.SidePanels {
         private void SyncSettingsToProcessor() {
             if (_processor == null) return;
             _processor.EnabledCategories = GetEnabledCategories();
+            _processor.CustomTargetColor = GetEffectiveCustomTargetColor();
             _processor.SampleInterval = (int)numInterval.Value;
             _processor.AlarmVolume = trackBarVolume.Value / 100f;
-            if (comboSound.SelectedItem != null) {
-                string file = comboSound.SelectedItem.ToString();
-                _processor.AlarmSoundFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), SoundsRelativePath, file);
+            var soundPath = GetSelectedSoundPath();
+            if (soundPath != null) {
+                _processor.AlarmSoundFile = soundPath;
             }
-            Log.Write("SyncSettingsToProcessor: categories={0}", CategoriesToString(_processor.EnabledCategories));
+            _processor.KeyPressEnabled = checkKeyPress.Checked;
+            _processor.KeyPressKey = _keyPressKey;
+            Log.Write("SyncSettingsToProcessor: categories={0}, custom={1}", CategoriesToString(_processor.EnabledCategories), _processor.CustomTargetColor.HasValue ? _processor.CustomTargetColor.Value.ToString() : "none");
         }
 
         private void TrackBarVolume_Scroll(object sender, EventArgs e) {
             if (_processor != null) {
                 _processor.AlarmVolume = trackBarVolume.Value / 100f;
                 Log.Write("Alarm volume set to {0}", _processor.AlarmVolume);
+                if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
             }
         }
 
@@ -314,16 +272,118 @@ namespace OnTopReplica.SidePanels {
             }
         }
 
+        private void CheckCustomColor_CheckedChanged(object sender, EventArgs e) {
+            if (_loading) {
+                return;
+            }
+
+            if (checkCustomColor.Checked && !_customTargetColor.HasValue) {
+                _customTargetColor = Color.Red;
+            }
+
+            UpdateCustomColorUi();
+            SyncSettingsToProcessor();
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
+        private void BtnPickCustomColor_Click(object sender, EventArgs e) {
+            using (var colorDialog = new ColorDialog()) {
+                colorDialog.FullOpen = true;
+                colorDialog.Color = _customTargetColor ?? Color.Red;
+
+                if (colorDialog.ShowDialog(this) != DialogResult.OK) {
+                    return;
+                }
+
+                ApplyCustomColor(colorDialog.Color);
+            }
+        }
+
+        private ColorSamplingOverlay _samplingOverlay;
+
+        private void BtnSampleCursorColor_Click(object sender, EventArgs e) {
+            if (_samplingOverlay != null) {
+                return; // sampling already in progress
+            }
+
+            StartColorSampling();
+        }
+
+        /// <summary>
+        /// Enters color-sampling mode: shows a full-screen overlay so the next click
+        /// anywhere on screen (not the button itself) determines the sampled color.
+        /// </summary>
+        private void StartColorSampling() {
+            btnSampleCursorColor.Enabled = false;
+            btnPickCustomColor.Enabled = false;
+            btnSampleCursorColor.Text = Strings.ColorAlert_SamplingInProgress;
+
+            _samplingOverlay = new ColorSamplingOverlay();
+            _samplingOverlay.Picked += SamplingOverlay_Picked;
+            _samplingOverlay.Cancelled += SamplingOverlay_Cancelled;
+            _samplingOverlay.Show();
+        }
+
+        private void SamplingOverlay_Picked(object sender, ColorPickedEventArgs e) {
+            EndColorSampling();
+            ApplyCustomColor(e.Color);
+            Log.Write("Sampled custom color from screen: {0}", e.Color);
+        }
+
+        private void SamplingOverlay_Cancelled(object sender, EventArgs e) {
+            EndColorSampling();
+            Log.Write("Color sampling cancelled");
+        }
+
+        /// <summary>
+        /// Closes the sampling overlay (if any) and restores the panel's normal state.
+        /// </summary>
+        private void EndColorSampling() {
+            if (_samplingOverlay != null) {
+                _samplingOverlay.Picked -= SamplingOverlay_Picked;
+                _samplingOverlay.Cancelled -= SamplingOverlay_Cancelled;
+                _samplingOverlay.Close();
+                _samplingOverlay.Dispose();
+                _samplingOverlay = null;
+
+                //Closing the (topmost, full-screen) overlay can drop the non-topmost
+                //settings window behind other windows: bring it back to the front.
+                var host = FindForm();
+                if (host != null && host.Visible && !host.IsDisposed) {
+                    host.Activate();
+                }
+            }
+
+            btnSampleCursorColor.Enabled = true;
+            btnPickCustomColor.Enabled = true;
+            btnSampleCursorColor.Text = Strings.ColorAlert_SampleCursorColor;
+        }
+
+        private void ApplyCustomColor(Color color) {
+            _customTargetColor = color;
+            checkCustomColor.Checked = true;
+            UpdateCustomColorUi();
+            SyncSettingsToProcessor();
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
         private void ComboSound_SelectedIndexChanged(object sender, EventArgs e) {
-            if (_processor != null && comboSound.SelectedItem != null) {
-                string file = comboSound.SelectedItem.ToString();
-                string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), SoundsRelativePath, file);
-                _processor.AlarmSoundFile = path;
+            if (_processor != null) {
+                var path = GetSelectedSoundPath();
+                if (path != null) {
+                    _processor.AlarmSoundFile = path;
+                    if (!_loading && ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+                }
             }
         }
 
         private void PopulateSoundList() {
             comboSound.Items.Clear();
+
+            foreach (var systemSoundName in SystemSoundNames) {
+                comboSound.Items.Add(SystemSoundDisplayPrefix + systemSoundName);
+            }
+
             string dir = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), SoundsRelativePath);
             if (Directory.Exists(dir)) {
                 foreach (var ext in new[] { "*.wav", "*.mp3" }) {
@@ -332,27 +392,76 @@ namespace OnTopReplica.SidePanels {
                     }
                 }
             }
-            Log.Write("PopulateSoundList found {0} files", comboSound.Items.Count);
+
+            Log.Write("PopulateSoundList found {0} items", comboSound.Items.Count);
+        }
+
+        private Keys _keyPressKey = Keys.None;
+
+        /// <summary>
+        /// キー表示テキストボックスを現在の設定に合わせて更新する。
+        /// </summary>
+        private void UpdateKeyCaptureUi() {
+            textKeyCapture.Text = _keyPressKey == Keys.None
+                ? Strings.ColorAlert_KeyNone
+                : _keyPressKey.ToString();
+        }
+
+        private void CheckKeyPress_CheckedChanged(object sender, EventArgs e) {
+            if (_loading) return;
+            if (_processor != null) {
+                _processor.KeyPressEnabled = checkKeyPress.Checked;
+                _processor.KeyPressKey = _keyPressKey;
+            }
+            if (checkKeyPress.Checked && _keyPressKey == Keys.None) {
+                textKeyCapture.Focus();
+            }
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
+        private void TextKeyCapture_KeyDown(object sender, KeyEventArgs e) {
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+
+            // 修飾キー単独は無視する(キーが確定するまで待つ)
+            var key = e.KeyCode;
+            if (key == Keys.ShiftKey || key == Keys.ControlKey || key == Keys.Menu ||
+                key == Keys.LWin || key == Keys.RWin || key == Keys.None) {
+                return;
+            }
+
+            _keyPressKey = key;
+            UpdateKeyCaptureUi();
+            if (_processor != null) {
+                _processor.KeyPressKey = _keyPressKey;
+                _processor.KeyPressEnabled = checkKeyPress.Checked;
+            }
+            Log.Write("ColorAlert key press set to {0}", _keyPressKey);
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
         }
 
         private void BtnTestAlarm_Click(object sender, EventArgs e) {
-            if (comboSound.SelectedItem != null) {
-                string file = comboSound.SelectedItem.ToString();
-                string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), SoundsRelativePath, file);
-                float volume = trackBarVolume.Value / 100f;
-                try {
-                    var player = new System.Windows.Media.MediaPlayer();
-                    player.Open(new Uri(path));
-                    player.Volume = Math.Max(0, Math.Min(1, volume));
-                    player.Play();
-                    Log.Write("Test alarm: playing {0} at volume {1}", file, volume);
-                }
-                catch (Exception ex) {
-                    Log.Write("Test alarm error: {0}", ex.Message);
-                }
-            }
-            else {
+            var path = GetSelectedSoundPath();
+            if (path == null) {
                 Log.Write("Test alarm: no sound file selected");
+                return;
+            }
+
+            if (ColorDetectionProcessor.TryPlaySystemSound(path)) {
+                Log.Write("Test alarm: system sound {0}", path);
+                return;
+            }
+
+            float volume = trackBarVolume.Value / 100f;
+            try {
+                var player = new System.Windows.Media.MediaPlayer();
+                player.Open(new Uri(path));
+                player.Volume = Math.Max(0, Math.Min(1, volume));
+                player.Play();
+                Log.Write("Test alarm: playing {0} at volume {1}", path, volume);
+            }
+            catch (Exception ex) {
+                Log.Write("Test alarm error: {0}", ex.Message);
             }
         }
     }

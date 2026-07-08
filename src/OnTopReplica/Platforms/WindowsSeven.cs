@@ -7,7 +7,9 @@ namespace OnTopReplica.Platforms {
 
     class WindowsSeven : WindowsVista {
 
-        private double? PreviousOpacity { get; set; }
+        //Opacity is stored per form: multiple panel windows can be hidden at once
+        private readonly System.Collections.Generic.Dictionary<MainForm, double> _previousOpacity =
+            new System.Collections.Generic.Dictionary<MainForm, double>();
 
         public override void PreHandleFormInit() {
             //Set Application ID
@@ -21,7 +23,9 @@ namespace OnTopReplica.Platforms {
         }
 
         public override void HideForm(MainForm form) {
-            PreviousOpacity = form.Opacity;
+            if (form.Opacity > 0.0) {
+                _previousOpacity[form] = form.Opacity;
+            }
             form.Opacity = 0;
         }
 
@@ -31,10 +35,11 @@ namespace OnTopReplica.Platforms {
 
         public override void RestoreForm(MainForm form) {
             if (form.Opacity == 0.0) {
-                form.Opacity = PreviousOpacity.GetValueOrDefault(1.0);
-                PreviousOpacity = null;
+                double previous;
+                form.Opacity = _previousOpacity.TryGetValue(form, out previous) ? previous : 1.0;
+                _previousOpacity.Remove(form);
             }
-            
+
             form.Show();
         }
 

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.ComponentModel;
 using OnTopReplica.Properties;
-using OnTopReplica.WindowSeekers;
 using System.Windows.Forms;
 
 namespace OnTopReplica.StartupOptions {
@@ -22,47 +20,9 @@ namespace OnTopReplica.StartupOptions {
         public static Options CreateOptions(string[] args) {
             var options = new Options();
 
-            LoadSettings(options);
-
             ParseCommandLine(args, options);
 
             return options;
-        }
-
-        private static void LoadSettings(Options options) {
-            if (Settings.Default.RestoreSizeAndPosition) {
-                options.StartLocation = Settings.Default.RestoreLastPosition;
-                options.StartSize = Settings.Default.RestoreLastSize;
-                options.DisableChrome = !Settings.Default.RestoreLastShowChrome;
-
-                Log.Write("Restoring window at {0} size {1} {2}", Settings.Default.RestoreLastPosition, Settings.Default.RestoreLastSize,
-                    (Settings.Default.RestoreLastShowChrome) ? "with chrome" : "without chrome");
-            }
-
-            if (Settings.Default.RestoreLastWindow) {
-                var handle = Settings.Default.RestoreLastWindowHwnd;
-                var title = Settings.Default.RestoreLastWindowTitle;
-                var className = Settings.Default.RestoreLastWindowClass;
-
-                var seeker = new RestoreWindowSeeker(new IntPtr(handle), title, className);
-                seeker.SkipNotVisibleWindows = true;
-                seeker.Refresh();
-
-                var resultHandle = seeker.Windows.FirstOrDefault();
-
-                if (resultHandle != null) {
-                    //Found a window: load it!
-                    options.WindowId = resultHandle.Handle;
-                }
-                else {
-                    Log.WriteDetails("Failed to find window to restore from last use",
-                        "HWND {0}, Title '{1}', Class '{2}'",
-                        Settings.Default.RestoreLastWindowHwnd,
-                        Settings.Default.RestoreLastWindowTitle,
-                        Settings.Default.RestoreLastWindowClass
-                    );
-                }
-            }
         }
 
         private static void ParseCommandLine(string[] args, Options options) {

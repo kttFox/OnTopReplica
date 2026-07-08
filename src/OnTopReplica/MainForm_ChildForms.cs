@@ -56,16 +56,6 @@ namespace OnTopReplica {
         }
 
         /// <summary>
-        /// Moves the side panel based on the main form's current location.
-        /// </summary>
-        protected void AdjustSidePanelLocation() {
-            if (!IsSidePanelOpen)
-                return;
-
-            _sidePanelContainer.Location = ComputeSidePanelLocation(_sidePanelContainer);
-        }
-
-        /// <summary>
         /// Computes the target location of a side panel form that ensures it is visible on the current
         /// screen that contains the main form.
         /// </summary>
