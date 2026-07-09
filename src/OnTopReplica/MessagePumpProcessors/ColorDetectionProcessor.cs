@@ -105,9 +105,10 @@ namespace OnTopReplica.MessagePumpProcessors {
             set {
                 bool wasDisabled = !_enabled;
                 _enabled = value;
-                // 監視の再開時は消失検知の armed 状態をリセットする
+                // 監視の再開時は消失検知の状態をリセットする
                 if (value && wasDisabled) {
                     _lossArmed = false;
+                    _lossOngoing = false;
                 }
                 // 初回有効化時に分類セルフテストを一度だけ実行する(ウィンドウ/領域の状態にかかわらず)
                 if (value && wasDisabled && !_selfTestRun) {
@@ -137,6 +138,9 @@ namespace OnTopReplica.MessagePumpProcessors {
         // 消失検知モードで「一度対象色を検出済み」であることを示すフラグ。
         // true の状態で対象色が見つからなくなったサンプリングでアラームを発報する。
         private volatile bool _lossArmed = false;
+        // 消失状態が継続中であることを示すフラグ。true の間はアラームを繰り返し発報し、
+        // 対象色が再出現した時点で false に戻してアラームを停止する。
+        private volatile bool _lossOngoing = false;
 
         /// <summary>
         /// 消失検知モード。true の場合、対象色を一度検出した後に
@@ -147,7 +151,8 @@ namespace OnTopReplica.MessagePumpProcessors {
             set {
                 if (_alertOnLoss != value) {
                     _alertOnLoss = value;
-                    _lossArmed = false; // モード切替時は armed 状態をリセット
+                    _lossArmed = false; // モード切替時は状態をリセット
+                    _lossOngoing = false;
                     Log.Write("ColorDetection: AlertOnLoss={0}", value);
                 }
             }
@@ -279,15 +284,23 @@ namespace OnTopReplica.MessagePumpProcessors {
                 if (!_enabled) break;
                 if (Form == null || Form.CurrentThumbnailWindowHandle == null) continue;
                 if (_enabledCategories.Count == 0 && !CustomTargetColor.HasValue) continue;
-                if (_alarmActive) continue;
+                // 消失検知モードでは、アラーム中も検出を継続する
+                // (色の再出現でアラームを止め、消失が続く限り鳴らし続けるため)
+                if (_alarmActive && !_alertOnLoss) continue;
 
                 var catList = string.Join(",", _enabledCategories);
                 Log.Write("Performing color detection (categories={0})", catList);
                 try {
                     bool detected = DetectColorInWindow(Form.CurrentThumbnailWindowHandle.Handle);
                     if (_alertOnLoss) {
-                        // 消失検知モード: 一度検出(armed)した後、見つからなくなったら発報する
+                        // 消失検知モード: 一度検出(armed)した後、見つからなくなったら発報し、
+                        // 色が再出現するまでアラームを繰り返し鳴らし続ける
                         if (detected) {
+                            if (_lossOngoing) {
+                                _lossOngoing = false;
+                                Log.Write("ColorDetection: target color reappeared — stopping alarm");
+                                if (_alarmActive) StopAlarm();
+                            }
                             if (!_lossArmed) {
                                 _lossArmed = true;
                                 Log.Write("ColorDetection: loss-mode armed (color detected)");
@@ -295,7 +308,13 @@ namespace OnTopReplica.MessagePumpProcessors {
                         }
                         else if (_lossArmed) {
                             _lossArmed = false;
+                            _lossOngoing = true;
                             Log.Write("ColorDetection: target color lost — triggering alarm");
+                            StartAlarm();
+                        }
+                        else if (_lossOngoing && !_alarmActive) {
+                            // 消失が継続中: 前回のアラームが終わったら再発報する
+                            Log.Write("ColorDetection: target color still lost — re-triggering alarm");
                             StartAlarm();
                         }
                     }
