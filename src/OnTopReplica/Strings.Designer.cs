@@ -241,6 +241,24 @@ namespace OnTopReplica {
         }
         
         /// <summary>
+        ///   Alarm when color disappears に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_AlertOnLoss {
+            get {
+                return ResourceManager.GetString("ColorAlert_AlertOnLoss", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   After the target color has been detected once, the alarm sounds when it is no longer found に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_AlertOnLossTooltip {
+            get {
+                return ResourceManager.GetString("ColorAlert_AlertOnLossTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Enable Color Detection に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ColorAlert_Enable {

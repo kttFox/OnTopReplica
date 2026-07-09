@@ -183,6 +183,12 @@
   <data name="ColorAlert_Enable" xml:space="preserve">
     <value>色検出を有効にする</value>
   </data>
+  <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
+    <value>消失時にアラーム</value>
+  </data>
+  <data name="ColorAlert_AlertOnLossTooltip" xml:space="preserve">
+    <value>対象色を一度検出した後、検出されなくなった時点でアラームを鳴らします</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>色チェックの間隔 (ミリ秒)</value>
   </data>

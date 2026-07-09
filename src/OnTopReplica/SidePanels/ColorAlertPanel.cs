@@ -21,6 +21,8 @@ namespace OnTopReplica.SidePanels {
             labelInterval.Text = Strings.ColorAlert_Interval;
             labelIntervalUnit.Text = Strings.ColorAlert_IntervalRange;
             checkEnabled.Text = Strings.ColorAlert_Enable;
+            checkAlertOnLoss.Text = Strings.ColorAlert_AlertOnLoss;
+            tooltipInfo.SetToolTip(checkAlertOnLoss, Strings.ColorAlert_AlertOnLossTooltip);
             labelColorSelection.Text = Strings.ColorAlert_DetectColors;
             checkRed.Text = Strings.ColorAlert_Red;
             checkOrange.Text = Strings.ColorAlert_Orange;
@@ -59,6 +61,7 @@ namespace OnTopReplica.SidePanels {
                 if (_processor != null) {
                     checkEnabled.Checked = _processor.Enabled;
                     numInterval.Value = _processor.SampleInterval;
+                    checkAlertOnLoss.Checked = _processor.AlertOnLoss;
                 }
 
                 // Load current state from the processor (factory default: empty selection)
@@ -162,6 +165,7 @@ namespace OnTopReplica.SidePanels {
                 }
                 _processor.KeyPressEnabled = checkKeyPress.Checked;
                 _processor.KeyPressKey = _keyPressKey;
+                _processor.AlertOnLoss = checkAlertOnLoss.Checked;
             }
 
             //Color detection settings (incl. volume and sound) are persisted
@@ -225,6 +229,16 @@ namespace OnTopReplica.SidePanels {
             }
         }
 
+        private void CheckAlertOnLoss_CheckedChanged(object sender, EventArgs e) {
+            if (_loading) return; // suppress during panel initialization
+            if (_processor != null) {
+                _processor.AlertOnLoss = checkAlertOnLoss.Checked;
+                Log.Write("AlertOnLoss changed: {0}", checkAlertOnLoss.Checked);
+            }
+            // Persist immediately so a restart restores the correct state
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
         private void CheckColor_CheckedChanged(object sender, EventArgs e) {
             if (_loading) return; // suppress during panel initialization
             var categories = GetEnabledCategories();
@@ -251,6 +265,7 @@ namespace OnTopReplica.SidePanels {
             }
             _processor.KeyPressEnabled = checkKeyPress.Checked;
             _processor.KeyPressKey = _keyPressKey;
+            _processor.AlertOnLoss = checkAlertOnLoss.Checked;
             Log.Write("SyncSettingsToProcessor: categories={0}, custom={1}", CategoriesToString(_processor.EnabledCategories), _processor.CustomTargetColor.HasValue ? _processor.CustomTargetColor.Value.ToString() : "none");
         }
 

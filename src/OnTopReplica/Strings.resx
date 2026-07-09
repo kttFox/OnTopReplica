@@ -187,6 +187,12 @@
   <data name="ColorAlert_Enable" xml:space="preserve">
     <value>Enable Color Detection</value>
   </data>
+  <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
+    <value>Alarm when color disappears</value>
+  </data>
+  <data name="ColorAlert_AlertOnLossTooltip" xml:space="preserve">
+    <value>After the target color has been detected once, the alarm sounds when it is no longer found</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>Time between color checks in milliseconds</value>
   </data>

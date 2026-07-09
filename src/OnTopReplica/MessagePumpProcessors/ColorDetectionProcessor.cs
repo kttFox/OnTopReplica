@@ -105,6 +105,10 @@ namespace OnTopReplica.MessagePumpProcessors {
             set {
                 bool wasDisabled = !_enabled;
                 _enabled = value;
+                // 監視の再開時は消失検知の armed 状態をリセットする
+                if (value && wasDisabled) {
+                    _lossArmed = false;
+                }
                 // 初回有効化時に分類セルフテストを一度だけ実行する(ウィンドウ/領域の状態にかかわらず)
                 if (value && wasDisabled && !_selfTestRun) {
                     _selfTestRun = true;
@@ -128,6 +132,26 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         public Color? CustomTargetColor { get; set; }
+
+        private bool _alertOnLoss = false;
+        // 消失検知モードで「一度対象色を検出済み」であることを示すフラグ。
+        // true の状態で対象色が見つからなくなったサンプリングでアラームを発報する。
+        private volatile bool _lossArmed = false;
+
+        /// <summary>
+        /// 消失検知モード。true の場合、対象色を一度検出した後に
+        /// 「検出されなくなった」時点でアラームを発報する(検出時には発報しない)。
+        /// </summary>
+        public bool AlertOnLoss {
+            get { return _alertOnLoss; }
+            set {
+                if (_alertOnLoss != value) {
+                    _alertOnLoss = value;
+                    _lossArmed = false; // モード切替時は armed 状態をリセット
+                    Log.Write("ColorDetection: AlertOnLoss={0}", value);
+                }
+            }
+        }
 
         public int SampleInterval {
             get { return _sampleInterval; }
@@ -260,7 +284,22 @@ namespace OnTopReplica.MessagePumpProcessors {
                 var catList = string.Join(",", _enabledCategories);
                 Log.Write("Performing color detection (categories={0})", catList);
                 try {
-                    if (DetectColorInWindow(Form.CurrentThumbnailWindowHandle.Handle)) {
+                    bool detected = DetectColorInWindow(Form.CurrentThumbnailWindowHandle.Handle);
+                    if (_alertOnLoss) {
+                        // 消失検知モード: 一度検出(armed)した後、見つからなくなったら発報する
+                        if (detected) {
+                            if (!_lossArmed) {
+                                _lossArmed = true;
+                                Log.Write("ColorDetection: loss-mode armed (color detected)");
+                            }
+                        }
+                        else if (_lossArmed) {
+                            _lossArmed = false;
+                            Log.Write("ColorDetection: target color lost — triggering alarm");
+                            StartAlarm();
+                        }
+                    }
+                    else if (detected) {
                         StartAlarm();
                     }
                 } catch (Exception ex) {

@@ -328,6 +328,7 @@ namespace OnTopReplica {
                     //File path or "system:" pseudo-path: cannot contain the separator
                     tokens.Add("sound=" + proc.AlarmSoundFile);
                 }
+                tokens.Add("losson=" + (proc.AlertOnLoss ? "1" : "0"));
                 tokens.Add("keyon=" + (proc.KeyPressEnabled ? "1" : "0"));
                 if (proc.KeyPressKey != System.Windows.Forms.Keys.None) {
                     tokens.Add("key=" + ((int)proc.KeyPressKey).ToString(inv));
@@ -387,6 +388,10 @@ namespace OnTopReplica {
 
                 if (tokens.TryGetValue("keyon", out v)) {
                     proc.KeyPressEnabled = v == "1";
+                }
+
+                if (tokens.TryGetValue("losson", out v)) {
+                    proc.AlertOnLoss = v == "1";
                 }
 
                 if (tokens.TryGetValue("alert", out v)) {

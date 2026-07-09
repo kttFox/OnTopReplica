@@ -183,6 +183,12 @@
   <data name="ColorAlert_Enable" xml:space="preserve">
     <value>启用颜色检测</value>
   </data>
+  <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
+    <value>颜色消失时报警</value>
+  </data>
+  <data name="ColorAlert_AlertOnLossTooltip" xml:space="preserve">
+    <value>检测到目标颜色一次后，当不再检测到时触发警报</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>颜色检查之间的时间 (毫秒)</value>
   </data>

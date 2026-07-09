@@ -26,6 +26,7 @@ namespace OnTopReplica.SidePanels {
 			this.components = new System.ComponentModel.Container();
 			this.groupColor = new System.Windows.Forms.GroupBox();
 			this.checkEnabled = new System.Windows.Forms.CheckBox();
+			this.checkAlertOnLoss = new System.Windows.Forms.CheckBox();
 			this.labelColorSelection = new System.Windows.Forms.Label();
 			this.checkRed = new System.Windows.Forms.CheckBox();
 			this.checkOrange = new System.Windows.Forms.CheckBox();
@@ -54,6 +55,7 @@ namespace OnTopReplica.SidePanels {
 			// groupColor
 			// 
 			this.groupColor.Controls.Add(this.checkEnabled);
+			this.groupColor.Controls.Add(this.checkAlertOnLoss);
 			this.groupColor.Controls.Add(this.labelColorSelection);
 			this.groupColor.Controls.Add(this.checkRed);
 			this.groupColor.Controls.Add(this.checkOrange);
@@ -92,7 +94,19 @@ namespace OnTopReplica.SidePanels {
 			this.checkEnabled.Text = "Enable Color Detection";
 			this.checkEnabled.UseVisualStyleBackColor = true;
 			this.checkEnabled.CheckedChanged += new System.EventHandler(this.CheckEnabled_CheckedChanged);
-			// 
+			//
+			// checkAlertOnLoss
+			//
+			this.checkAlertOnLoss.AutoSize = true;
+			this.checkAlertOnLoss.Location = new System.Drawing.Point(185, 25);
+			this.checkAlertOnLoss.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.checkAlertOnLoss.Name = "checkAlertOnLoss";
+			this.checkAlertOnLoss.Size = new System.Drawing.Size(180, 19);
+			this.checkAlertOnLoss.TabIndex = 1;
+			this.checkAlertOnLoss.Text = "Alarm when color disappears";
+			this.checkAlertOnLoss.UseVisualStyleBackColor = true;
+			this.checkAlertOnLoss.CheckedChanged += new System.EventHandler(this.CheckAlertOnLoss_CheckedChanged);
+			//
 			// labelColorSelection
 			// 
 			this.labelColorSelection.AutoSize = true;
@@ -341,6 +355,7 @@ namespace OnTopReplica.SidePanels {
 
         private System.Windows.Forms.GroupBox groupColor;
         private System.Windows.Forms.CheckBox checkEnabled;
+        private System.Windows.Forms.CheckBox checkAlertOnLoss;
         private System.Windows.Forms.Label labelColorSelection;
         private System.Windows.Forms.CheckBox checkRed;
         private System.Windows.Forms.CheckBox checkOrange;
