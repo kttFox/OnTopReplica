@@ -24,10 +24,15 @@ namespace OnTopReplica {
         NotifyIcon _taskIcon;
         ContextMenuStrip _contextMenu;
         ToolStripMenuItem _windowsItem;
+        ToolStripMenuItem _colorAlertPauseItem;
 
         private void Install() {
             _windowsItem = new ToolStripMenuItem(Strings.MenuWindows, Resources.list) {
                 ToolTipText = Strings.MenuWindowsTT
+            };
+
+            _colorAlertPauseItem = new ToolStripMenuItem(Strings.MenuPauseColorAlertAll, null, TaskIconColorAlertPauseResume_click) {
+                ToolTipText = Strings.MenuPauseColorAlertAllTT
             };
 
             _contextMenu = new ContextMenuStrip();
@@ -42,6 +47,7 @@ namespace OnTopReplica {
                 new ToolStripMenuItem(Strings.MenuDisableClickThroughAll, null, TaskIconDisableClickThrough_click) {
                     ToolTipText = Strings.MenuDisableClickThroughAllTT
                 },
+                _colorAlertPauseItem,
                 new ToolStripMenuItem(Strings.MenuExit, Resources.close_new, TaskIconExit_click){
                     ToolTipText = Strings.MenuExitTT
                 }
@@ -51,6 +57,14 @@ namespace OnTopReplica {
             _contextMenu.Opening += (sender, e) => {
                 _windowsItem.DropDown = Form?.MenuWindows;
                 _windowsItem.Enabled = Form != null;
+
+                //カラーアラートの一時停止状態に応じて表記を切り替える
+                bool alertPaused = Form != null && Form.IsColorAlertPausedAllPanels;
+                _colorAlertPauseItem.Text = alertPaused
+                    ? Strings.MenuResumeColorAlertAll : Strings.MenuPauseColorAlertAll;
+                _colorAlertPauseItem.ToolTipText = alertPaused
+                    ? Strings.MenuResumeColorAlertAllTT : Strings.MenuPauseColorAlertAllTT;
+                _colorAlertPauseItem.Enabled = Form != null;
             };
             Asztal.Szótár.NativeToolStripRenderer.SetToolStripRenderer(_contextMenu);
 
@@ -92,6 +106,12 @@ namespace OnTopReplica {
 
         private void TaskIconDisableClickForwarding_click(object sender, EventArgs e) {
             Form?.DisableClickForwardingAllPanels();
+        }
+
+        private void TaskIconColorAlertPauseResume_click(object sender, EventArgs e) {
+            var form = Form;
+            if (form == null) return;
+            form.SetColorAlertPausedAllPanels(!form.IsColorAlertPausedAllPanels);
         }
 
         private void TaskIconExit_click(object sender, EventArgs e) {

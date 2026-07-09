@@ -124,6 +124,27 @@ namespace OnTopReplica.MessagePumpProcessors {
             }
         }
 
+        private volatile bool _paused = false;
+
+        /// <summary>
+        /// 一時停止フラグ。true の間は検出・発報を行わない(Enabled 設定は保持される)。
+        /// メニューの「全パネル一時停止/再開」から使用され、永続化はされない。
+        /// </summary>
+        public bool Paused {
+            get { return _paused; }
+            set {
+                if (_paused == value) return;
+                _paused = value;
+                if (value) {
+                    // 一時停止時: 鳴動中のアラームを止め、消失検知の状態をリセットする
+                    if (_alarmActive) StopAlarm();
+                    _lossArmed = false;
+                    _lossOngoing = false;
+                }
+                Log.Write("ColorDetection: Paused={0}", value);
+            }
+        }
+
         /// <summary>
         /// 検出時にアラームを発報させる色カテゴリの集合。
         /// </summary>
@@ -282,6 +303,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 System.Threading.Thread.Sleep(_sampleInterval);
                 if (!_detectionRunning) break;
                 if (!_enabled) break;
+                if (_paused) continue; // 一時停止中は検出しない
                 if (Form == null || Form.CurrentThumbnailWindowHandle == null) continue;
                 if (_enabledCategories.Count == 0 && !CustomTargetColor.HasValue) continue;
                 // 消失検知モードでは、アラーム中も検出を継続する

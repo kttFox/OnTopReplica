@@ -187,6 +187,18 @@
   <data name="ColorAlert_Enable" xml:space="preserve">
     <value>Enable Color Detection</value>
   </data>
+  <data name="MenuPauseColorAlertAll" xml:space="preserve">
+    <value>Pause Color Alerts (all panels)</value>
+  </data>
+  <data name="MenuPauseColorAlertAllTT" xml:space="preserve">
+    <value>Temporarily suspends color detection on every panel without changing settings</value>
+  </data>
+  <data name="MenuResumeColorAlertAll" xml:space="preserve">
+    <value>Resume Color Alerts (all panels)</value>
+  </data>
+  <data name="MenuResumeColorAlertAllTT" xml:space="preserve">
+    <value>Resumes color detection on every panel</value>
+  </data>
   <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
     <value>Alarm when color disappears</value>
   </data>

@@ -241,6 +241,42 @@ namespace OnTopReplica {
         }
         
         /// <summary>
+        ///   Pause Color Alerts (all panels) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MenuPauseColorAlertAll {
+            get {
+                return ResourceManager.GetString("MenuPauseColorAlertAll", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Temporarily suspends color detection on every panel without changing settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MenuPauseColorAlertAllTT {
+            get {
+                return ResourceManager.GetString("MenuPauseColorAlertAllTT", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Resume Color Alerts (all panels) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MenuResumeColorAlertAll {
+            get {
+                return ResourceManager.GetString("MenuResumeColorAlertAll", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Resumes color detection on every panel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MenuResumeColorAlertAllTT {
+            get {
+                return ResourceManager.GetString("MenuResumeColorAlertAllTT", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Alarm when color disappears に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ColorAlert_AlertOnLoss {

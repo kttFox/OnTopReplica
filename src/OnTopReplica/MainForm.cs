@@ -142,6 +142,44 @@ namespace OnTopReplica {
         }
 
         /// <summary>
+        /// Pauses or resumes color alert detection on the whole panel set.
+        /// The Enabled setting of each panel is preserved.
+        /// </summary>
+        public void SetColorAlertPausedAllPanels(bool paused) {
+            var primary = _primaryPanel ?? this;
+            SetColorAlertPaused(primary, paused);
+            foreach (var child in primary._childPanels) {
+                if (!child.IsDisposed) {
+                    SetColorAlertPaused(child, paused);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets whether color alert detection is currently paused for the panel set
+        /// (the primary panel's state is used as representative).
+        /// </summary>
+        public bool IsColorAlertPausedAllPanels {
+            get {
+                var primary = _primaryPanel ?? this;
+                try {
+                    return primary.MessagePumpManager.Get<MessagePumpProcessors.ColorDetectionProcessor>().Paused;
+                }
+                catch {
+                    return false;
+                }
+            }
+        }
+
+        static void SetColorAlertPaused(MainForm panel, bool paused) {
+            try {
+                var proc = panel.MessagePumpManager.Get<MessagePumpProcessors.ColorDetectionProcessor>();
+                proc.Paused = paused;
+            }
+            catch { }
+        }
+
+        /// <summary>
         /// Closes all panels and terminates the application. Layout saving is
         /// suppressed first, so that panels closing during shutdown do not
         /// overwrite the stored layout with a partial state.

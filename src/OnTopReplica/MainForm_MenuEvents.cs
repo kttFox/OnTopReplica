@@ -26,6 +26,13 @@ namespace OnTopReplica {
             chromeToolStripMenuItem.Enabled = showing;
             clickThroughToolStripMenuItem.Enabled = showing;
             clickForwardingToolStripMenuItem.Enabled = showing;
+
+            //一時停止状態に応じてメニュー表記を切り替える
+            bool alertPaused = IsColorAlertPausedAllPanels;
+            pauseColorAlertAllPanelsToolStripMenuItem.Text = alertPaused
+                ? Strings.MenuResumeColorAlertAll : Strings.MenuPauseColorAlertAll;
+            pauseColorAlertAllPanelsToolStripMenuItem.ToolTipText = alertPaused
+                ? Strings.MenuResumeColorAlertAllTT : Strings.MenuPauseColorAlertAllTT;
         }
 
         private void Menu_Switch_click(object sender, EventArgs e) {
@@ -171,6 +178,10 @@ namespace OnTopReplica {
 
         private void Menu_ColorAlert_click(object sender, EventArgs e) {
             this.SetSidePanel(new ColorAlertPanel());
+        }
+
+        private void Menu_ColorAlertPauseResumeAll_click(object sender, EventArgs e) {
+            SetColorAlertPausedAllPanels(!IsColorAlertPausedAllPanels);
         }
 
         private void Menu_Close_click(object sender, EventArgs e) {

@@ -183,6 +183,18 @@
   <data name="ColorAlert_Enable" xml:space="preserve">
     <value>色検出を有効にする</value>
   </data>
+  <data name="MenuPauseColorAlertAll" xml:space="preserve">
+    <value>カラーアラートを一時停止 (全パネル)</value>
+  </data>
+  <data name="MenuPauseColorAlertAllTT" xml:space="preserve">
+    <value>設定を変えずに全パネルの色検出を一時的に停止します</value>
+  </data>
+  <data name="MenuResumeColorAlertAll" xml:space="preserve">
+    <value>カラーアラートを再開 (全パネル)</value>
+  </data>
+  <data name="MenuResumeColorAlertAllTT" xml:space="preserve">
+    <value>全パネルの色検出を再開します</value>
+  </data>
   <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
     <value>消失時にアラーム</value>
   </data>

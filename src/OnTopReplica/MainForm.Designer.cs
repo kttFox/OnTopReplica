@@ -57,6 +57,7 @@
 			this.bottomLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bottomRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorAlertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.pauseColorAlertAllPanelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clickForwardingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.enableClickForwardingallPanelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +103,7 @@
             this.colorAlertToolStripMenuItem,
             this.advancedToolStripMenuItem,
             this.toolStripSeparator1,
+            this.pauseColorAlertAllPanelsToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.reduceToIconToolStripMenuItem,
             this.aboutToolStripMenuItem,
@@ -410,9 +412,17 @@
 			this.disableClickThroughallPanelsToolStripMenuItem.Text = global::OnTopReplica.Strings.MenuDisableClickThroughAll;
 			this.disableClickThroughallPanelsToolStripMenuItem.ToolTipText = global::OnTopReplica.Strings.MenuDisableClickThroughAllTT;
 			this.disableClickThroughallPanelsToolStripMenuItem.Click += new System.EventHandler(this.Menu_DisableClickThroughAll_click);
-			// 
+			//
+			// pauseColorAlertAllPanelsToolStripMenuItem
+			//
+			this.pauseColorAlertAllPanelsToolStripMenuItem.Name = "pauseColorAlertAllPanelsToolStripMenuItem";
+			this.pauseColorAlertAllPanelsToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+			this.pauseColorAlertAllPanelsToolStripMenuItem.Text = global::OnTopReplica.Strings.MenuPauseColorAlertAll;
+			this.pauseColorAlertAllPanelsToolStripMenuItem.ToolTipText = global::OnTopReplica.Strings.MenuPauseColorAlertAllTT;
+			this.pauseColorAlertAllPanelsToolStripMenuItem.Click += new System.EventHandler(this.Menu_ColorAlertPauseResumeAll_click);
+			//
 			// toolStripSeparator1
-			// 
+			//
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
 			// 
@@ -573,6 +583,7 @@
         private System.Windows.Forms.ContextMenuStrip menuOpacity;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorAlertToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pauseColorAlertAllPanelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reduceToIconToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addPanelToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem selectRegionToolStripMenuItem;

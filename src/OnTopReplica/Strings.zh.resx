@@ -183,6 +183,18 @@
   <data name="ColorAlert_Enable" xml:space="preserve">
     <value>启用颜色检测</value>
   </data>
+  <data name="MenuPauseColorAlertAll" xml:space="preserve">
+    <value>暂停颜色报警 (所有面板)</value>
+  </data>
+  <data name="MenuPauseColorAlertAllTT" xml:space="preserve">
+    <value>暂时停止所有面板的颜色检测，不更改设置</value>
+  </data>
+  <data name="MenuResumeColorAlertAll" xml:space="preserve">
+    <value>恢复颜色报警 (所有面板)</value>
+  </data>
+  <data name="MenuResumeColorAlertAllTT" xml:space="preserve">
+    <value>恢复所有面板的颜色检测</value>
+  </data>
   <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
     <value>颜色消失时报警</value>
   </data>
