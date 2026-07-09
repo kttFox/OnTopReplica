@@ -35,6 +35,8 @@ Very useful for monitoring background processes, wrangling with complex multi-wi
 ### Color-alert enhancements
 
 * Detection colors: in addition to the red, orange, and gray categories, you can specify a **custom color**. A sampling feature lets you pick a color by clicking any point on the screen (a cursor-following color preview is shown while sampling).
+* Added an option to sound the alarm when the detection color disappears.
+  You can set the number of consecutive misses required, to avoid false positives.
 * Alarm sounds: in addition to the bundled WAV/MP3 files (just drop files into the `Sounds` folder to add them to the list), some Windows system sounds can be selected.
 * Detection runs independently per panel.
 * Added the ability to send a single key to the monitored window when the alarm fires.
@@ -75,4 +77,4 @@ The original version (MSI installer) is available from the [LorenzCK/OnTopReplic
 
 …are very welcome. Fork away! 🍽️
 
-Submitting [issues](https://github.com/LorenzCK/OnTopReplica/issues) and other feedback is also appreciated.
+Submitting [issues](https://github.com/kttFox/OnTopReplica/issues) and other feedback is also appreciated.
