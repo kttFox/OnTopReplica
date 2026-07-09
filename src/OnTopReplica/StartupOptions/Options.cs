@@ -100,7 +100,12 @@ namespace OnTopReplica.StartupOptions {
         public void Apply(MainForm form) {
             Log.Write("Applying command line launch parameters");
 
-            form.Opacity = (double)Opacity / 255.0;
+            //Opacity is fully opaque by default: only apply when explicitly changed.
+            //Unconditionally setting it would overwrite the restored panel opacity
+            //(a panel's OnShown runs these options after the layout was restored).
+            if (Opacity != 255) {
+                form.Opacity = (double)Opacity / 255.0;
+            }
 
             //Seek handle for thumbnail cloning
             WindowHandle handle = null;
