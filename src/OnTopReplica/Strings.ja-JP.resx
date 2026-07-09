@@ -201,6 +201,18 @@
   <data name="ColorAlert_AlertOnLossTooltip" xml:space="preserve">
     <value>対象色を一度検出した後、検出されなくなった時点でアラームを鳴らします</value>
   </data>
+  <data name="ColorAlert_IgnoreDark" xml:space="preserve">
+    <value>暗転を無視</value>
+  </data>
+  <data name="ColorAlert_IgnoreDarkTooltip" xml:space="preserve">
+    <value>ほぼ黒一色の画面を消失として扱いません</value>
+  </data>
+  <data name="ColorAlert_LossMissCount" xml:space="preserve">
+    <value>連続消失回数:</value>
+  </data>
+  <data name="ColorAlert_LossMissCountTooltip" xml:space="preserve">
+    <value>対象色がこの回数連続で検出されなかった場合に消失アラームを発報します</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>色チェックの間隔 (ミリ秒)</value>
   </data>

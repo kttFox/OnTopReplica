@@ -27,6 +27,9 @@ namespace OnTopReplica.SidePanels {
 			this.groupColor = new System.Windows.Forms.GroupBox();
 			this.checkEnabled = new System.Windows.Forms.CheckBox();
 			this.checkAlertOnLoss = new System.Windows.Forms.CheckBox();
+			this.checkIgnoreDark = new System.Windows.Forms.CheckBox();
+			this.labelLossMiss = new System.Windows.Forms.Label();
+			this.numLossMiss = new System.Windows.Forms.NumericUpDown();
 			this.labelColorSelection = new System.Windows.Forms.Label();
 			this.checkRed = new System.Windows.Forms.CheckBox();
 			this.checkOrange = new System.Windows.Forms.CheckBox();
@@ -49,6 +52,7 @@ namespace OnTopReplica.SidePanels {
 			this.tooltipInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.groupColor.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numInterval)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numLossMiss)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -56,6 +60,9 @@ namespace OnTopReplica.SidePanels {
 			// 
 			this.groupColor.Controls.Add(this.checkEnabled);
 			this.groupColor.Controls.Add(this.checkAlertOnLoss);
+			this.groupColor.Controls.Add(this.checkIgnoreDark);
+			this.groupColor.Controls.Add(this.labelLossMiss);
+			this.groupColor.Controls.Add(this.numLossMiss);
 			this.groupColor.Controls.Add(this.labelColorSelection);
 			this.groupColor.Controls.Add(this.checkRed);
 			this.groupColor.Controls.Add(this.checkOrange);
@@ -106,6 +113,54 @@ namespace OnTopReplica.SidePanels {
 			this.checkAlertOnLoss.Text = "Alarm when color disappears";
 			this.checkAlertOnLoss.UseVisualStyleBackColor = true;
 			this.checkAlertOnLoss.CheckedChanged += new System.EventHandler(this.CheckAlertOnLoss_CheckedChanged);
+			//
+			// checkIgnoreDark
+			//
+			this.checkIgnoreDark.AutoSize = true;
+			this.checkIgnoreDark.Checked = true;
+			this.checkIgnoreDark.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkIgnoreDark.Location = new System.Drawing.Point(203, 47);
+			this.checkIgnoreDark.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.checkIgnoreDark.Name = "checkIgnoreDark";
+			this.checkIgnoreDark.Size = new System.Drawing.Size(130, 19);
+			this.checkIgnoreDark.TabIndex = 2;
+			this.checkIgnoreDark.Text = "Ignore dark frames";
+			this.checkIgnoreDark.UseVisualStyleBackColor = true;
+			this.checkIgnoreDark.CheckedChanged += new System.EventHandler(this.CheckIgnoreDark_CheckedChanged);
+			//
+			// labelLossMiss
+			//
+			this.labelLossMiss.AutoSize = true;
+			this.labelLossMiss.Location = new System.Drawing.Point(185, 76);
+			this.labelLossMiss.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.labelLossMiss.Name = "labelLossMiss";
+			this.labelLossMiss.Size = new System.Drawing.Size(110, 15);
+			this.labelLossMiss.TabIndex = 3;
+			this.labelLossMiss.Text = "Consecutive misses:";
+			//
+			// numLossMiss
+			//
+			this.numLossMiss.Location = new System.Drawing.Point(310, 72);
+			this.numLossMiss.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.numLossMiss.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numLossMiss.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numLossMiss.Name = "numLossMiss";
+			this.numLossMiss.Size = new System.Drawing.Size(55, 23);
+			this.numLossMiss.TabIndex = 4;
+			this.numLossMiss.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+			this.numLossMiss.ValueChanged += new System.EventHandler(this.NumLossMiss_ValueChanged);
 			//
 			// labelColorSelection
 			// 
@@ -346,6 +401,7 @@ namespace OnTopReplica.SidePanels {
 			this.groupColor.ResumeLayout(false);
 			this.groupColor.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numInterval)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numLossMiss)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
 			this.ResumeLayout(false);
 
@@ -356,6 +412,9 @@ namespace OnTopReplica.SidePanels {
         private System.Windows.Forms.GroupBox groupColor;
         private System.Windows.Forms.CheckBox checkEnabled;
         private System.Windows.Forms.CheckBox checkAlertOnLoss;
+        private System.Windows.Forms.CheckBox checkIgnoreDark;
+        private System.Windows.Forms.Label labelLossMiss;
+        private System.Windows.Forms.NumericUpDown numLossMiss;
         private System.Windows.Forms.Label labelColorSelection;
         private System.Windows.Forms.CheckBox checkRed;
         private System.Windows.Forms.CheckBox checkOrange;

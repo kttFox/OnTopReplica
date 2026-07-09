@@ -201,6 +201,18 @@
   <data name="ColorAlert_AlertOnLossTooltip" xml:space="preserve">
     <value>检测到目标颜色一次后，当不再检测到时触发警报</value>
   </data>
+  <data name="ColorAlert_IgnoreDark" xml:space="preserve">
+    <value>忽略黑屏</value>
+  </data>
+  <data name="ColorAlert_IgnoreDarkTooltip" xml:space="preserve">
+    <value>不将全黑画面视为颜色消失</value>
+  </data>
+  <data name="ColorAlert_LossMissCount" xml:space="preserve">
+    <value>连续消失次数:</value>
+  </data>
+  <data name="ColorAlert_LossMissCountTooltip" xml:space="preserve">
+    <value>目标颜色连续该次数未被检测到时触发消失警报</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>颜色检查之间的时间 (毫秒)</value>
   </data>

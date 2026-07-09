@@ -23,6 +23,10 @@ namespace OnTopReplica.SidePanels {
             checkEnabled.Text = Strings.ColorAlert_Enable;
             checkAlertOnLoss.Text = Strings.ColorAlert_AlertOnLoss;
             tooltipInfo.SetToolTip(checkAlertOnLoss, Strings.ColorAlert_AlertOnLossTooltip);
+            checkIgnoreDark.Text = Strings.ColorAlert_IgnoreDark;
+            tooltipInfo.SetToolTip(checkIgnoreDark, Strings.ColorAlert_IgnoreDarkTooltip);
+            labelLossMiss.Text = Strings.ColorAlert_LossMissCount;
+            tooltipInfo.SetToolTip(labelLossMiss, Strings.ColorAlert_LossMissCountTooltip);
             labelColorSelection.Text = Strings.ColorAlert_DetectColors;
             checkRed.Text = Strings.ColorAlert_Red;
             checkOrange.Text = Strings.ColorAlert_Orange;
@@ -62,7 +66,10 @@ namespace OnTopReplica.SidePanels {
                     checkEnabled.Checked = _processor.Enabled;
                     numInterval.Value = _processor.SampleInterval;
                     checkAlertOnLoss.Checked = _processor.AlertOnLoss;
+                    checkIgnoreDark.Checked = _processor.IgnoreDarkFrames;
+                    numLossMiss.Value = Math.Max(numLossMiss.Minimum, Math.Min(numLossMiss.Maximum, _processor.LossMissThreshold));
                 }
+                UpdateIgnoreDarkUi();
 
                 // Load current state from the processor (factory default: empty selection)
                 HashSet<ColorCategory> categories;
@@ -166,6 +173,8 @@ namespace OnTopReplica.SidePanels {
                 _processor.KeyPressEnabled = checkKeyPress.Checked;
                 _processor.KeyPressKey = _keyPressKey;
                 _processor.AlertOnLoss = checkAlertOnLoss.Checked;
+                _processor.IgnoreDarkFrames = checkIgnoreDark.Checked;
+                _processor.LossMissThreshold = (int)numLossMiss.Value;
             }
 
             //Color detection settings (incl. volume and sound) are persisted
@@ -230,10 +239,40 @@ namespace OnTopReplica.SidePanels {
         }
 
         private void CheckAlertOnLoss_CheckedChanged(object sender, EventArgs e) {
+            UpdateIgnoreDarkUi();
             if (_loading) return; // suppress during panel initialization
             if (_processor != null) {
                 _processor.AlertOnLoss = checkAlertOnLoss.Checked;
                 Log.Write("AlertOnLoss changed: {0}", checkAlertOnLoss.Checked);
+            }
+            // Persist immediately so a restart restores the correct state
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
+        /// <summary>
+        /// 「暗転を無視」チェックと連続消失回数は消失検知モード時のみ有効化する。
+        /// </summary>
+        private void UpdateIgnoreDarkUi() {
+            checkIgnoreDark.Enabled = checkAlertOnLoss.Checked;
+            labelLossMiss.Enabled = checkAlertOnLoss.Checked;
+            numLossMiss.Enabled = checkAlertOnLoss.Checked;
+        }
+
+        private void NumLossMiss_ValueChanged(object sender, EventArgs e) {
+            if (_loading) return; // suppress during panel initialization
+            if (_processor != null) {
+                _processor.LossMissThreshold = (int)numLossMiss.Value;
+                Log.Write("LossMissThreshold changed: {0}", (int)numLossMiss.Value);
+            }
+            // Persist immediately so a restart restores the correct state
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
+        private void CheckIgnoreDark_CheckedChanged(object sender, EventArgs e) {
+            if (_loading) return; // suppress during panel initialization
+            if (_processor != null) {
+                _processor.IgnoreDarkFrames = checkIgnoreDark.Checked;
+                Log.Write("IgnoreDarkFrames changed: {0}", checkIgnoreDark.Checked);
             }
             // Persist immediately so a restart restores the correct state
             if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
@@ -266,6 +305,8 @@ namespace OnTopReplica.SidePanels {
             _processor.KeyPressEnabled = checkKeyPress.Checked;
             _processor.KeyPressKey = _keyPressKey;
             _processor.AlertOnLoss = checkAlertOnLoss.Checked;
+            _processor.IgnoreDarkFrames = checkIgnoreDark.Checked;
+            _processor.LossMissThreshold = (int)numLossMiss.Value;
             Log.Write("SyncSettingsToProcessor: categories={0}, custom={1}", CategoriesToString(_processor.EnabledCategories), _processor.CustomTargetColor.HasValue ? _processor.CustomTargetColor.Value.ToString() : "none");
         }
 

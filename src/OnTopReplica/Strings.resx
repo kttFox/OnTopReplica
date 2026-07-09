@@ -205,6 +205,18 @@
   <data name="ColorAlert_AlertOnLossTooltip" xml:space="preserve">
     <value>After the target color has been detected once, the alarm sounds when it is no longer found</value>
   </data>
+  <data name="ColorAlert_IgnoreDark" xml:space="preserve">
+    <value>Ignore dark frames</value>
+  </data>
+  <data name="ColorAlert_IgnoreDarkTooltip" xml:space="preserve">
+    <value>Do not treat all-black screens as color loss</value>
+  </data>
+  <data name="ColorAlert_LossMissCount" xml:space="preserve">
+    <value>Consecutive misses:</value>
+  </data>
+  <data name="ColorAlert_LossMissCountTooltip" xml:space="preserve">
+    <value>Number of consecutive samples without the target color before the loss alarm triggers</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>Time between color checks in milliseconds</value>
   </data>

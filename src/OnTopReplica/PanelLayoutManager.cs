@@ -329,6 +329,8 @@ namespace OnTopReplica {
                     tokens.Add("sound=" + proc.AlarmSoundFile);
                 }
                 tokens.Add("losson=" + (proc.AlertOnLoss ? "1" : "0"));
+                tokens.Add("darkskip=" + (proc.IgnoreDarkFrames ? "1" : "0"));
+                tokens.Add("lossmiss=" + proc.LossMissThreshold.ToString(inv));
                 tokens.Add("keyon=" + (proc.KeyPressEnabled ? "1" : "0"));
                 if (proc.KeyPressKey != System.Windows.Forms.Keys.None) {
                     tokens.Add("key=" + ((int)proc.KeyPressKey).ToString(inv));
@@ -392,6 +394,16 @@ namespace OnTopReplica {
 
                 if (tokens.TryGetValue("losson", out v)) {
                     proc.AlertOnLoss = v == "1";
+                }
+
+                if (tokens.TryGetValue("darkskip", out v)) {
+                    proc.IgnoreDarkFrames = v == "1";
+                }
+
+                int lossMiss;
+                if (tokens.TryGetValue("lossmiss", out v) &&
+                    int.TryParse(v, NumberStyles.Integer, inv, out lossMiss)) {
+                    proc.LossMissThreshold = lossMiss;
                 }
 
                 if (tokens.TryGetValue("alert", out v)) {

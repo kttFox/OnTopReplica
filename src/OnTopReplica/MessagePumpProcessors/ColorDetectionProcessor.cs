@@ -109,6 +109,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 if (value && wasDisabled) {
                     _lossArmed = false;
                     _lossOngoing = false;
+                    _lossMissCount = 0;
                 }
                 // 初回有効化時に分類セルフテストを一度だけ実行する(ウィンドウ/領域の状態にかかわらず)
                 if (value && wasDisabled && !_selfTestRun) {
@@ -123,6 +124,12 @@ namespace OnTopReplica.MessagePumpProcessors {
                 }
             }
         }
+
+        /// <summary>
+        /// 暗転(黒画面)を消失判定から除外するかどうか。
+        /// true(既定)の場合、ほぼ黒一色のサンプルでは消失判定を保留する。
+        /// </summary>
+        public bool IgnoreDarkFrames { get; set; } = true;
 
         private volatile bool _paused = false;
 
@@ -140,6 +147,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                     if (_alarmActive) StopAlarm();
                     _lossArmed = false;
                     _lossOngoing = false;
+                    _lossMissCount = 0;
                 }
                 Log.Write("ColorDetection: Paused={0}", value);
             }
@@ -162,6 +170,21 @@ namespace OnTopReplica.MessagePumpProcessors {
         // 消失状態が継続中であることを示すフラグ。true の間はアラームを繰り返し発報し、
         // 対象色が再出現した時点で false に戻してアラームを停止する。
         private volatile bool _lossOngoing = false;
+        // 直近のサンプリング画像がほぼ黒一色だったことを示すフラグ。
+        private volatile bool _lastSampleMostlyBlack = false;
+        private const int MostlyBlackPct = 95; // 黒スキップ画素がこの割合以上なら黒画面とみなす
+        private int _lossMissCount = 0; // 連続で対象色が見つからなかった回数(検出スレッドのみが使用)
+
+        private int _lossMissThreshold = 3;
+
+        /// <summary>
+        /// 消失アラームの発報に必要な連続消失サンプリング回数(1以上)。
+        /// フェード等の一時的な消失を吸収し、誤報を防ぐ。
+        /// </summary>
+        public int LossMissThreshold {
+            get { return _lossMissThreshold; }
+            set { _lossMissThreshold = Math.Max(1, value); }
+        }
 
         /// <summary>
         /// 消失検知モード。true の場合、対象色を一度検出した後に
@@ -174,6 +197,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                     _alertOnLoss = value;
                     _lossArmed = false; // モード切替時は状態をリセット
                     _lossOngoing = false;
+                    _lossMissCount = 0;
                     Log.Write("ColorDetection: AlertOnLoss={0}", value);
                 }
             }
@@ -313,11 +337,17 @@ namespace OnTopReplica.MessagePumpProcessors {
                 var catList = string.Join(",", _enabledCategories);
                 Log.Write("Performing color detection (categories={0})", catList);
                 try {
+                    _lastSampleMostlyBlack = false; // 前回サンプルの黒画面フラグをクリア
                     bool detected = DetectColorInWindow(Form.CurrentThumbnailWindowHandle.Handle);
                     if (_alertOnLoss) {
                         // 消失検知モード: 一度検出(armed)した後、見つからなくなったら発報し、
                         // 色が再出現するまでアラームを繰り返し鳴らし続ける
-                        if (detected) {
+                        if (!detected && _lastSampleMostlyBlack && IgnoreDarkFrames) {
+                            // 黒画面は消失判定の対象外: 状態と連続消失カウントを変えず判定を保留する
+                            Log.Write("ColorDetection: sample mostly black — loss judgment skipped");
+                        }
+                        else if (detected) {
+                            _lossMissCount = 0;
                             if (_lossOngoing) {
                                 _lossOngoing = false;
                                 Log.Write("ColorDetection: target color reappeared — stopping alarm");
@@ -329,10 +359,16 @@ namespace OnTopReplica.MessagePumpProcessors {
                             }
                         }
                         else if (_lossArmed) {
-                            _lossArmed = false;
-                            _lossOngoing = true;
-                            Log.Write("ColorDetection: target color lost — triggering alarm");
-                            StartAlarm();
+                            // 連続 LossMissThreshold 回消失したら発報(フェード等の一時的な消失を吸収)
+                            _lossMissCount++;
+                            Log.Write("ColorDetection: target color missing ({0}/{1})", _lossMissCount, _lossMissThreshold);
+                            if (_lossMissCount >= _lossMissThreshold) {
+                                _lossMissCount = 0;
+                                _lossArmed = false;
+                                _lossOngoing = true;
+                                Log.Write("ColorDetection: target color lost — triggering alarm");
+                                StartAlarm();
+                            }
                         }
                         else if (_lossOngoing && !_alarmActive) {
                             // 消失が継続中: 前回のアラームが終わったら再発報する
@@ -750,6 +786,9 @@ namespace OnTopReplica.MessagePumpProcessors {
 
                 int validPixels = redCount + orangeCount + grayCount + noneCount;
                 int grayDensityPct = totalPixels > 0 ? grayCount * 100 / totalPixels : 0;
+
+                // 黒画面判定: 黒スキップ画素がほぼ全体を占める場合、消失検知モードでは判定を保留する
+                _lastSampleMostlyBlack = totalPixels > 0 && (blackSkipped * 100 / totalPixels) >= MostlyBlackPct;
 
                 Log.Write("ColorDetection counts: red={0} orange={1} gray={2} custom={3} none={4}  total={5} white={6} black={7} coloredBg={8}",
                     redCount, orangeCount, grayCount, customCount, noneCount, totalPixels, whiteSkipped, blackSkipped, coloredBgSkipped);

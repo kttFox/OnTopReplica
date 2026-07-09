@@ -295,6 +295,42 @@ namespace OnTopReplica {
         }
 
         /// <summary>
+        ///   Ignore dark frames に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_IgnoreDark {
+            get {
+                return ResourceManager.GetString("ColorAlert_IgnoreDark", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Do not treat black screens or fade transitions as color loss に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_IgnoreDarkTooltip {
+            get {
+                return ResourceManager.GetString("ColorAlert_IgnoreDarkTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Consecutive misses: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_LossMissCount {
+            get {
+                return ResourceManager.GetString("ColorAlert_LossMissCount", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Number of consecutive samples without the target color before the loss alarm triggers に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_LossMissCountTooltip {
+            get {
+                return ResourceManager.GetString("ColorAlert_LossMissCountTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Enable Color Detection に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ColorAlert_Enable {
