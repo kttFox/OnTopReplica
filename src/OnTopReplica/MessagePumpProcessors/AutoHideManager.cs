@@ -12,6 +12,9 @@ namespace OnTopReplica.MessagePumpProcessors {
     /// </summary>
     class AutoHideManager : BaseMessagePumpProcessor {
 
+        static readonly uint NativeProcessId =
+            (uint)System.Diagnostics.Process.GetCurrentProcess().Id;
+
         public override bool Process(ref Message msg) {
             if (msg.Msg == HookMethods.WM_SHELLHOOKMESSAGE) {
                 int hookCode = msg.WParam.ToInt32();
@@ -61,6 +64,13 @@ namespace OnTopReplica.MessagePumpProcessors {
 
             //自分のパネルをクリックした場合は非表示にしない
             if (MainForm.IsPanelHandle(activatedWindow))
+                return true;
+
+            //自プロセスのウィンドウ(サイドパネル、コンテキストメニュー、
+            //ダイアログ等)がアクティブになった場合も非表示にしない
+            uint processId;
+            WindowManagerMethods.GetWindowThreadProcessId(activatedWindow, out processId);
+            if (processId == NativeProcessId)
                 return true;
 
             //オーナーチェーンを辿り、対象ウィンドウに行き着けばアクティブ扱い

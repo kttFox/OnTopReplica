@@ -39,6 +39,9 @@ namespace OnTopReplica.Native {
         public static extern IntPtr GetDesktopWindow();
 
         [DllImport("user32.dll")]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+
+        [DllImport("user32.dll")]
         static extern bool ClientToScreen(IntPtr hwnd, ref NPoint point);
 
         /// <summary>
