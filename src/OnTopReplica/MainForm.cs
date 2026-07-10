@@ -269,6 +269,7 @@ namespace OnTopReplica {
         /// </summary>
         public void HideAllPanels() {
             var primary = _primaryPanel ?? this;
+            primary._autoHidden = false; //manual hide supersedes auto hide
             Program.Platform.HideForm(primary);
             foreach (var child in primary._childPanels) {
                 Program.Platform.HideForm(child);
@@ -276,6 +277,62 @@ namespace OnTopReplica {
             //Deactivate: releases focus so the taskbar button is no longer highlighted
             primary.WindowState = FormWindowState.Minimized;
         }
+
+        #region Auto hide on source deactivation
+
+        //True while the panel set is hidden because the cloned window lost focus
+        //(primary only). Distinct from manual hiding (hotkey/taskbar).
+        bool _autoHidden;
+
+        /// <summary>
+        /// 対象ウィンドウの非アクティブ化により、パネルセットが自動非表示中かどうか。
+        /// </summary>
+        internal bool IsAutoHidden {
+            get { return (_primaryPanel ?? this)._autoHidden; }
+        }
+
+        /// <summary>
+        /// 対象ウィンドウが非アクティブになったときにパネルセット全体を
+        /// フォーカスを奪わずに非表示にする(AutoHideManager から呼ばれる)。
+        /// 手動で非表示・最小化されている場合は何もしない。
+        /// </summary>
+        internal void AutoHideAllPanels() {
+            var primary = _primaryPanel ?? this;
+            if (primary._autoHidden || primary.IsDisposed) return;
+            //手動非表示や最小化と競合しないよう、表示中のみ対象とする
+            if (!primary.Visible || primary.WindowState == FormWindowState.Minimized) return;
+
+            primary._autoHidden = true;
+            SetPanelVisibleNoActivate(primary, false);
+            foreach (var child in primary._childPanels) {
+                SetPanelVisibleNoActivate(child, false);
+            }
+        }
+
+        /// <summary>
+        /// 対象ウィンドウが再度アクティブになったとき、自動非表示中の
+        /// パネルセットをフォーカスを奪わずに再表示する。
+        /// </summary>
+        internal void AutoShowAllPanels() {
+            var primary = _primaryPanel ?? this;
+            if (!primary._autoHidden || primary.IsDisposed) return;
+
+            primary._autoHidden = false;
+            SetPanelVisibleNoActivate(primary, true);
+            foreach (var child in primary._childPanels) {
+                SetPanelVisibleNoActivate(child, true);
+            }
+        }
+
+        //アクティブ化(フォーカス奪取)を伴わずにパネルの表示/非表示を切り替える
+        static void SetPanelVisibleNoActivate(MainForm panel, bool visible) {
+            if (panel.IsDisposed || !panel.IsHandleCreated) return;
+            WindowManagerMethods.ShowWindow(panel.Handle,
+                visible ? WindowManagerMethods.SW_SHOWNOACTIVATE : WindowManagerMethods.SW_HIDE);
+            panel.UpdateColorAlertIndicator();
+        }
+
+        #endregion
 
         bool _restoringAllPanels; //re-entrancy guard (Show() re-triggers OnActivated)
 
@@ -293,6 +350,7 @@ namespace OnTopReplica {
                 return;
 
             primary._restoringAllPanels = true;
+            primary._autoHidden = false; //manual restore supersedes auto hide
             try {
                 if (primary.WindowState == FormWindowState.Minimized) {
                     primary.WindowState = FormWindowState.Normal;

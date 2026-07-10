@@ -479,6 +479,12 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="SettingsHotKeyTitle" xml:space="preserve">
     <value>ホットキー:</value>
   </data>
+  <data name="SettingsAutoHideTitle" xml:space="preserve">
+    <value>自動非表示:</value>
+  </data>
+  <data name="SettingsAutoHideWhenSourceInactive" xml:space="preserve">
+    <value>対象のウィンドウが非アクティブのときパネルを非表示にする</value>
+  </data>
   <data name="SettingsIndicatorTitle" xml:space="preserve">
     <value>カラーアラート目印:</value>
   </data>

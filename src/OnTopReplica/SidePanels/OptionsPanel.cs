@@ -31,6 +31,9 @@ namespace OnTopReplica.SidePanels {
             lblIndicatorRunColor.Text = Strings.SettingsIndicatorRunColor;
             lblIndicatorPauseColor.Text = Strings.SettingsIndicatorPauseColor;
 
+            groupAutoHide.Text = Strings.SettingsAutoHideTitle;
+            checkAutoHide.Text = Strings.SettingsAutoHideWhenSourceInactive;
+
             btnClose.Text = Strings.MenuClose;
         }
 
@@ -56,7 +59,29 @@ namespace OnTopReplica.SidePanels {
             finally {
                 _loadingIndicatorSettings = false;
             }
+
+            //Load auto hide setting (event suppressed while loading)
+            _loadingAutoHideSetting = true;
+            try {
+                checkAutoHide.Checked = Settings.Default.HideWhenSourceDeactivated;
+            }
+            finally {
+                _loadingAutoHideSetting = false;
+            }
         }
+
+        #region Auto hide
+
+        bool _loadingAutoHideSetting = false;
+
+        private void AutoHide_CheckedChanged(object sender, EventArgs e) {
+            if (_loadingAutoHideSetting) return;
+
+            Settings.Default.HideWhenSourceDeactivated = checkAutoHide.Checked;
+            Settings.Default.Save();
+        }
+
+        #endregion
 
         private void Close_click(object sender, EventArgs e) {
             OnRequestClosing();

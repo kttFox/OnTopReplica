@@ -156,6 +156,18 @@ namespace OnTopReplica.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideWhenSourceDeactivated {
+            get {
+                return ((bool)(this["HideWhenSourceDeactivated"]));
+            }
+            set {
+                this["HideWhenSourceDeactivated"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ColorAlertIndicatorEnabled {
             get {

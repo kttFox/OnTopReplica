@@ -482,6 +482,12 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
   <data name="SettingsHotKeyTitle" xml:space="preserve">
     <value>Hot keys:</value>
   </data>
+  <data name="SettingsAutoHideTitle" xml:space="preserve">
+    <value>Auto hide:</value>
+  </data>
+  <data name="SettingsAutoHideWhenSourceInactive" xml:space="preserve">
+    <value>Hide panels when the cloned window is inactive</value>
+  </data>
   <data name="SettingsIndicatorTitle" xml:space="preserve">
     <value>Color alert indicator:</value>
   </data>

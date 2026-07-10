@@ -1319,6 +1319,24 @@ namespace OnTopReplica {
         }
 
         /// <summary>
+        ///   Auto hide: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsAutoHideTitle {
+            get {
+                return ResourceManager.GetString("SettingsAutoHideTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Hide panels when the cloned window is inactive に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsAutoHideWhenSourceInactive {
+            get {
+                return ResourceManager.GetString("SettingsAutoHideWhenSourceInactive", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Color alert indicator: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SettingsIndicatorTitle {
