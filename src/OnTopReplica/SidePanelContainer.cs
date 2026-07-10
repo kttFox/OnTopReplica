@@ -32,6 +32,13 @@ namespace OnTopReplica {
 
             //Ensure side panel closing code is run
             FreeSidePanel();
+
+            //フォーカスを持ったまま閉じると OS が別アプリをアクティブ化し、
+            //自動非表示が発動してパネルが最小化されるため、フォーカスを
+            //メインフォームへ戻す。
+            if (Form.ActiveForm == this && _parent != null && !_parent.IsDisposed) {
+                _parent.Activate();
+            }
         }
 
         /// <summary>

@@ -35,8 +35,17 @@ namespace OnTopReplica {
                 return;
             }
 
+            //サイドパネルがフォーカスを持ったまま閉じると、OS が別アプリを
+            //アクティブ化して自動非表示が発動し、パネルが最小化されてしまう。
+            //先にフォーカスをメインフォームへ戻しておく。
+            bool hadFocus = (Form.ActiveForm == _sidePanelContainer);
+
             _sidePanelContainer.Hide();
             _sidePanelContainer.FreeSidePanel();
+
+            if (hadFocus && !IsDisposed) {
+                Activate();
+            }
         }
 
         /// <summary>
