@@ -192,6 +192,9 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Windows-Forms-Aero" Version="3.0.1" />
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>

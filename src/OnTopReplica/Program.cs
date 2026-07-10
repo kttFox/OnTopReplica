@@ -58,12 +58,6 @@ namespace OnTopReplica {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Update settings if needed
-            if (Settings.Default.MustUpdate) {
-                Settings.Default.Upgrade();
-                Settings.Default.MustUpdate = false;
-            }
-
             //Load startup options
             var options = StartupOptions.Factory.CreateOptions(args);
             string optionsMessage = options.DebugMessage;

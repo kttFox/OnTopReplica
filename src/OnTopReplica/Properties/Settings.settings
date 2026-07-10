@@ -11,9 +11,6 @@
     <Setting Name="Language" Type="System.Globalization.CultureInfo" Scope="User">
       <Value Profile="(Default)">(Default)</Value>
     </Setting>
-    <Setting Name="MustUpdate" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="ClickThrough" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
