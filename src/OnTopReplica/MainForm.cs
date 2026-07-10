@@ -303,9 +303,16 @@ namespace OnTopReplica {
             if (!primary.Visible || primary.WindowState == FormWindowState.Minimized) return;
 
             primary._autoHidden = true;
-            SetPanelVisibleNoActivate(primary, false);
             foreach (var child in primary._childPanels) {
                 SetPanelVisibleNoActivate(child, false);
+            }
+            //プライマリは SW_HIDE ではなくアクティブ化なしの最小化にする。
+            //非表示にするとタスクバーボタンも消えてしまうため、最小化で
+            //タスクバーボタンを常に残す(クリックで手動復帰も可能)。
+            if (primary.IsHandleCreated) {
+                WindowManagerMethods.ShowWindow(primary.Handle,
+                    WindowManagerMethods.SW_SHOWMINNOACTIVE);
+                primary.UpdateColorAlertIndicator();
             }
         }
 
@@ -317,11 +324,13 @@ namespace OnTopReplica {
             var primary = _primaryPanel ?? this;
             if (!primary._autoHidden || primary.IsDisposed) return;
 
-            primary._autoHidden = false;
+            //SW_SHOWNOACTIVATE は最小化状態から元のサイズ・位置に
+            //アクティブ化なしで復元する
             SetPanelVisibleNoActivate(primary, true);
             foreach (var child in primary._childPanels) {
                 SetPanelVisibleNoActivate(child, true);
             }
+            primary._autoHidden = false; //OnSizeChanged のガードのため最後にクリア
         }
 
         //アクティブ化(フォーカス奪取)を伴わずにパネルの表示/非表示を切り替える
@@ -584,7 +593,9 @@ namespace OnTopReplica {
             //restoring it brings them all back.
             if (WindowState != _lastWindowState) {
                 _lastWindowState = WindowState;
-                if (!IsSecondaryPanel) {
+                //自動非表示による最小化/復元は AutoHide/AutoShowAllPanels 側で
+                //子パネルを処理済みのため、ここでは連動させない
+                if (!IsSecondaryPanel && !_autoHidden) {
                     if (WindowState == FormWindowState.Minimized) {
                         foreach (var child in _childPanels) {
                             Program.Platform.HideForm(child);

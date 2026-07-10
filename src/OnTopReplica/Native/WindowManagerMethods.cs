@@ -112,6 +112,7 @@ namespace OnTopReplica.Native {
 
         public const int SW_HIDE = 0;
         public const int SW_SHOWNOACTIVATE = 4;
+        public const int SW_SHOWMINNOACTIVE = 7;
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
