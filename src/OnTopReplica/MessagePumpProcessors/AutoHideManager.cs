@@ -45,6 +45,18 @@ namespace OnTopReplica.MessagePumpProcessors {
                 return;
             }
 
+            //TopMost ウィンドウのアクティブ化時、シェルフックは lParam=0 を
+            //通知することがある。その場合は実際のフォアグラウンドウィンドウで判定する。
+            //(パネル自身のクリック/ドラッグで誤って非表示になるのを防ぐ)
+            if (activatedWindow == IntPtr.Zero) {
+                activatedWindow = WindowManagerMethods.GetForegroundWindow();
+            }
+
+            //自アプリのフォームがアクティブな間(パネルのドラッグ中など)は隠さない
+            if (System.Windows.Forms.Form.ActiveForm != null) {
+                return;
+            }
+
             if (IsSourceActive(activatedWindow, source.Handle)) {
                 Form.AutoShowAllPanels();
             }
