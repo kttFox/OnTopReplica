@@ -479,6 +479,21 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="SettingsHotKeyTitle" xml:space="preserve">
     <value>ホットキー:</value>
   </data>
+  <data name="SettingsIndicatorTitle" xml:space="preserve">
+    <value>カラーアラート目印:</value>
+  </data>
+  <data name="SettingsIndicatorShow" xml:space="preserve">
+    <value>目印(●)を表示する</value>
+  </data>
+  <data name="SettingsIndicatorSize" xml:space="preserve">
+    <value>丸の大きさ (px):</value>
+  </data>
+  <data name="SettingsIndicatorRunColor" xml:space="preserve">
+    <value>動作中の色:</value>
+  </data>
+  <data name="SettingsIndicatorPauseColor" xml:space="preserve">
+    <value>一時停止中の色:</value>
+  </data>
   <data name="SettingsLanguageTitle" xml:space="preserve">
     <value>言語:</value>
   </data>

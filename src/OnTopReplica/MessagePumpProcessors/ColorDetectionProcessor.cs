@@ -122,7 +122,24 @@ namespace OnTopReplica.MessagePumpProcessors {
                 } else {
                     StopDetectionThread();
                 }
+                NotifyIndicatorUpdate();
             }
+        }
+
+        /// <summary>
+        /// 実行状態(Enabled/Paused)の変化をフォームへ通知し、
+        /// パネル右上の●インジケーターを更新させる。どのスレッドからでも呼び出し可能。
+        /// </summary>
+        private void NotifyIndicatorUpdate() {
+            var form = Form;
+            if (form == null || form.IsDisposed || !form.IsHandleCreated)
+                return;
+            try {
+                form.BeginInvoke((Action)(() => {
+                    if (!form.IsDisposed) form.UpdateColorAlertIndicator();
+                }));
+            }
+            catch { } //シャットダウン中のハンドル破棄と競合した場合は無視する
         }
 
         /// <summary>
@@ -150,6 +167,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                     _lossMissCount = 0;
                 }
                 Log.Write("ColorDetection: Paused={0}", value);
+                NotifyIndicatorUpdate();
             }
         }
 

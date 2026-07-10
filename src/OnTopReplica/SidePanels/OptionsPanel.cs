@@ -25,6 +25,12 @@ namespace OnTopReplica.SidePanels {
             lblHotKeyClone.Text = Strings.SettingsHotKeyClone;
             label1.Text = Strings.SettingsHotKeyDescription;
 
+            groupIndicator.Text = Strings.SettingsIndicatorTitle;
+            checkIndicator.Text = Strings.SettingsIndicatorShow;
+            lblIndicatorSize.Text = Strings.SettingsIndicatorSize;
+            lblIndicatorRunColor.Text = Strings.SettingsIndicatorRunColor;
+            lblIndicatorPauseColor.Text = Strings.SettingsIndicatorPauseColor;
+
             btnClose.Text = Strings.MenuClose;
         }
 
@@ -37,6 +43,19 @@ namespace OnTopReplica.SidePanels {
             form.MessagePumpManager.Get<OnTopReplica.MessagePumpProcessors.HotKeyManager>().Enabled = false;
             txtHotKeyShowHide.Text = Settings.Default.HotKeyShowHide;
             txtHotKeyClone.Text = Settings.Default.HotKeyCloneCurrent;
+
+            //Load color alert indicator settings (events suppressed while loading)
+            _loadingIndicatorSettings = true;
+            try {
+                checkIndicator.Checked = Settings.Default.ColorAlertIndicatorEnabled;
+                numIndicatorSize.Value = Math.Max(numIndicatorSize.Minimum,
+                    Math.Min(numIndicatorSize.Maximum, Settings.Default.ColorAlertIndicatorSize));
+                panelIndicatorRunColor.BackColor = Settings.Default.ColorAlertIndicatorRunningColor;
+                panelIndicatorPauseColor.BackColor = Settings.Default.ColorAlertIndicatorPausedColor;
+            }
+            finally {
+                _loadingIndicatorSettings = false;
+            }
         }
 
         private void Close_click(object sender, EventArgs e) {
@@ -59,6 +78,50 @@ namespace OnTopReplica.SidePanels {
             manager.RefreshHotkeys();
             manager.Enabled = true;
         }
+
+        #region Color alert indicator
+
+        bool _loadingIndicatorSettings = false;
+
+        /// <summary>
+        /// インジケーター設定を保存し、開いている全パネルへ即時反映する。
+        /// </summary>
+        private void ApplyIndicatorSettings() {
+            if (_loadingIndicatorSettings) return;
+
+            Settings.Default.ColorAlertIndicatorEnabled = checkIndicator.Checked;
+            Settings.Default.ColorAlertIndicatorSize = (int)numIndicatorSize.Value;
+            Settings.Default.ColorAlertIndicatorRunningColor = panelIndicatorRunColor.BackColor;
+            Settings.Default.ColorAlertIndicatorPausedColor = panelIndicatorPauseColor.BackColor;
+            Settings.Default.Save();
+
+            MainForm.UpdateAllColorAlertIndicators();
+        }
+
+        private void Indicator_SettingChanged(object sender, EventArgs e) {
+            ApplyIndicatorSettings();
+        }
+
+        private void PanelIndicatorRunColor_Click(object sender, EventArgs e) {
+            PickIndicatorColor(panelIndicatorRunColor);
+        }
+
+        private void PanelIndicatorPauseColor_Click(object sender, EventArgs e) {
+            PickIndicatorColor(panelIndicatorPauseColor);
+        }
+
+        private void PickIndicatorColor(Panel swatch) {
+            using (var dialog = new ColorDialog()) {
+                dialog.FullOpen = true;
+                dialog.Color = swatch.BackColor;
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+                swatch.BackColor = dialog.Color;
+            }
+            ApplyIndicatorSettings();
+        }
+
+        #endregion
 
         #region Language
 

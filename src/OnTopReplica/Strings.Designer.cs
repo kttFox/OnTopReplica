@@ -1317,6 +1317,51 @@ namespace OnTopReplica {
                 return ResourceManager.GetString("SettingsHotKeyTitle", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Color alert indicator: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsIndicatorTitle {
+            get {
+                return ResourceManager.GetString("SettingsIndicatorTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Show indicator dot に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsIndicatorShow {
+            get {
+                return ResourceManager.GetString("SettingsIndicatorShow", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Dot size (px): に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsIndicatorSize {
+            get {
+                return ResourceManager.GetString("SettingsIndicatorSize", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Running color: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsIndicatorRunColor {
+            get {
+                return ResourceManager.GetString("SettingsIndicatorRunColor", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Paused color: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsIndicatorPauseColor {
+            get {
+                return ResourceManager.GetString("SettingsIndicatorPauseColor", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Language: に類似しているローカライズされた文字列を検索します。

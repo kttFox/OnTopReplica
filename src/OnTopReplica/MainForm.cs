@@ -177,6 +177,68 @@ namespace OnTopReplica {
                 proc.Paused = paused;
             }
             catch { }
+            panel.UpdateColorAlertIndicator();
+        }
+
+        ColorAlertIndicatorWindow _colorAlertIndicator;
+
+        /// <summary>
+        /// 開いている全パネルの●インジケーターを更新する。
+        /// 設定パネルでインジケーター関連の設定が変更されたときに呼び出す。
+        /// </summary>
+        public static void UpdateAllColorAlertIndicators() {
+            foreach (var panel in _openPanels) {
+                if (!panel.IsDisposed) panel.UpdateColorAlertIndicator();
+            }
+        }
+
+        /// <summary>
+        /// カラーアラートの実行状態に応じて、パネル右上の●インジケーターの
+        /// 表示/非表示と位置を更新する。UI スレッドから呼び出すこと。
+        /// </summary>
+        public void UpdateColorAlertIndicator() {
+            if (IsDisposed || !IsHandleCreated) return;
+            if (!_managersInitialized) return; //ハンドル作成前の OnLocationChanged 等に備えるガード
+
+            bool show;
+            bool paused = false;
+            try {
+                var proc = MessagePumpManager.Get<MessagePumpProcessors.ColorDetectionProcessor>();
+                show = proc.Enabled;
+                paused = proc.Paused;
+            }
+            catch {
+                show = false;
+            }
+            show &= Properties.Settings.Default.ColorAlertIndicatorEnabled;
+            show &= Visible && WindowState != FormWindowState.Minimized;
+
+            if (show) {
+                if (_colorAlertIndicator == null || _colorAlertIndicator.IsDisposed) {
+                    _colorAlertIndicator = new ColorAlertIndicatorWindow {
+                        Owner = this //オーナー付きにすることで TopMost なしで常にこのパネルの直上に保たれる
+                    };
+                }
+                //実行中/一時停止中の色とサイズは設定から反映する
+                _colorAlertIndicator.DotSize = Properties.Settings.Default.ColorAlertIndicatorSize;
+                _colorAlertIndicator.DotColor = paused
+                    ? Properties.Settings.Default.ColorAlertIndicatorPausedColor
+                    : Properties.Settings.Default.ColorAlertIndicatorRunningColor;
+                _colorAlertIndicator.UpdatePosition(this);
+                if (!_colorAlertIndicator.Visible) {
+                    _colorAlertIndicator.Show();
+                }
+                //オーナー(このパネル)が TopMost の場合、オーナー付きウィンドウが
+                //TopMost バンドに入らず下に潜ることがあるため、常に状態を同期して
+                //パネルの直上に保つ。
+                if (_colorAlertIndicator.TopMost != TopMost) {
+                    _colorAlertIndicator.TopMost = TopMost;
+                }
+                _colorAlertIndicator.EnsureAbove(this);
+            }
+            else if (_colorAlertIndicator != null && !_colorAlertIndicator.IsDisposed && _colorAlertIndicator.Visible) {
+                _colorAlertIndicator.Hide();
+            }
         }
 
         /// <summary>
@@ -409,6 +471,11 @@ namespace OnTopReplica {
             Log.Write("Main form closed");
             base.OnClosed(e);
 
+            if (_colorAlertIndicator != null) {
+                _colorAlertIndicator.Dispose();
+                _colorAlertIndicator = null;
+            }
+
             //Keep the application alive until the last panel window is closed
             _openPanels.Remove(this);
             if (_openPanels.Count > 0)
@@ -472,6 +539,18 @@ namespace OnTopReplica {
                     }
                 }
             }
+
+            UpdateColorAlertIndicator();
+        }
+
+        protected override void OnLocationChanged(EventArgs e) {
+            base.OnLocationChanged(e);
+            UpdateColorAlertIndicator();
+        }
+
+        protected override void OnVisibleChanged(EventArgs e) {
+            base.OnVisibleChanged(e);
+            UpdateColorAlertIndicator();
         }
 
 
@@ -501,6 +580,9 @@ namespace OnTopReplica {
 
             //Restoring any panel brings back the whole panel set
             RestoreAllPanels();
+
+            //前面化でインジケーターが下に潜ることがあるため Z オーダーを再同期する
+            UpdateColorAlertIndicator();
         }
 
         protected override void OnDeactivate(EventArgs e) {
@@ -511,6 +593,10 @@ namespace OnTopReplica {
             if (!FullscreenManager.IsFullscreen) { //fullscreen mode doesn't use TopMost
                 TopMost = false;
                 TopMost = true;
+
+                //TopMost の再設定でこのウィンドウが最前面バンドの先頭に上がり、
+                //●インジケーターが下に潜るため Z オーダーを再同期する
+                UpdateColorAlertIndicator();
             }
         }
 

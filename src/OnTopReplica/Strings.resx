@@ -482,6 +482,21 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
   <data name="SettingsHotKeyTitle" xml:space="preserve">
     <value>Hot keys:</value>
   </data>
+  <data name="SettingsIndicatorTitle" xml:space="preserve">
+    <value>Color alert indicator:</value>
+  </data>
+  <data name="SettingsIndicatorShow" xml:space="preserve">
+    <value>Show indicator dot</value>
+  </data>
+  <data name="SettingsIndicatorSize" xml:space="preserve">
+    <value>Dot size (px):</value>
+  </data>
+  <data name="SettingsIndicatorRunColor" xml:space="preserve">
+    <value>Running color:</value>
+  </data>
+  <data name="SettingsIndicatorPauseColor" xml:space="preserve">
+    <value>Paused color:</value>
+  </data>
   <data name="SettingsLanguageTitle" xml:space="preserve">
     <value>Language:</value>
   </data>

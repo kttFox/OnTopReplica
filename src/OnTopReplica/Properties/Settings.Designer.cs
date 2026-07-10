@@ -153,5 +153,53 @@ namespace OnTopReplica.Properties {
                 this["FullscreenMode"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ColorAlertIndicatorEnabled {
+            get {
+                return ((bool)(this["ColorAlertIndicatorEnabled"]));
+            }
+            set {
+                this["ColorAlertIndicatorEnabled"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public int ColorAlertIndicatorSize {
+            get {
+                return ((int)(this["ColorAlertIndicatorSize"]));
+            }
+            set {
+                this["ColorAlertIndicatorSize"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color ColorAlertIndicatorRunningColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorAlertIndicatorRunningColor"]));
+            }
+            set {
+                this["ColorAlertIndicatorRunningColor"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LimeGreen")]
+        public global::System.Drawing.Color ColorAlertIndicatorPausedColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorAlertIndicatorPausedColor"]));
+            }
+            set {
+                this["ColorAlertIndicatorPausedColor"] = value;
+            }
+        }
     }
 }
