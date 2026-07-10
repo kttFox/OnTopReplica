@@ -52,7 +52,7 @@ namespace OnTopReplica {
             panel.RequestClosing += RequestClosingHandler;
             this.Controls.Add(panel);
             
-            var minSize = panel.MinimumSize.Expand(this.Padding);
+            var minSize = panel.Size.Expand(this.Padding);
             this.ClientSize = minSize;
             this.EnsureMinimumClientSize(minSize);
             this.GlassMargins = panel.GlassMargins;
