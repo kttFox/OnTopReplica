@@ -40,10 +40,16 @@ Very useful for monitoring background processes, wrangling with complex multi-wi
 * Alarm sounds: in addition to the bundled WAV/MP3 files (just drop files into the `Sounds` folder to add them to the list), some Windows system sounds can be selected.
 * Detection runs independently per panel.
 * Added the ability to send a single key to the monitored window when the alarm fires.
+* A small **status indicator (●)** is shown at the top-right of the preview so you can see at a glance whether color-alert monitoring is running (a different color is used while paused). Visibility, size, and colors are configurable in the settings panel.
+
+### Auto-hide
+
+* Added an option to **automatically hide all panels while the target window is not active**, and show them again (without stealing focus) when the target becomes active (setting "Hide when source is deactivated", disabled by default). The taskbar button remains visible while hidden, so you can also restore the panels manually.
 
 ### Other
 
 * Removed the auto-update feature.
+* Application settings are now saved next to the executable (`OnTopReplica.Settings.xml`) instead of the per-user `user.config`, and are written immediately on every change.
 * Removed the MSI installer and made the application **portable** (just place the executable files and run).
 * Added a Japanese locale (translation resources).
 * Removed legacy settings such as "restore last window" and "restore previous position and size", which have been consolidated into the automatic layout restore described above.
