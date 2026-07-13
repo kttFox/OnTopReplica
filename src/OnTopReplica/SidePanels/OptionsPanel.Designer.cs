@@ -201,9 +201,10 @@
 			// 
 			// checkIndicator
 			// 
+			this.checkIndicator.AutoSize = true;
 			this.checkIndicator.Location = new System.Drawing.Point(10, 22);
 			this.checkIndicator.Name = "checkIndicator";
-			this.checkIndicator.Size = new System.Drawing.Size(276, 20);
+			this.checkIndicator.Size = new System.Drawing.Size(126, 19);
 			this.checkIndicator.TabIndex = 0;
 			this.checkIndicator.Text = "Show indicator dot";
 			this.checkIndicator.UseVisualStyleBackColor = true;
@@ -211,9 +212,10 @@
 			// 
 			// lblIndicatorSize
 			// 
+			this.lblIndicatorSize.AutoSize = true;
 			this.lblIndicatorSize.Location = new System.Drawing.Point(10, 52);
 			this.lblIndicatorSize.Name = "lblIndicatorSize";
-			this.lblIndicatorSize.Size = new System.Drawing.Size(180, 20);
+			this.lblIndicatorSize.Size = new System.Drawing.Size(75, 15);
 			this.lblIndicatorSize.TabIndex = 1;
 			this.lblIndicatorSize.Text = "Dot size (px):";
 			this.lblIndicatorSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -243,9 +245,10 @@
 			// 
 			// lblIndicatorRunColor
 			// 
+			this.lblIndicatorRunColor.AutoSize = true;
 			this.lblIndicatorRunColor.Location = new System.Drawing.Point(10, 82);
 			this.lblIndicatorRunColor.Name = "lblIndicatorRunColor";
-			this.lblIndicatorRunColor.Size = new System.Drawing.Size(180, 20);
+			this.lblIndicatorRunColor.Size = new System.Drawing.Size(85, 15);
 			this.lblIndicatorRunColor.TabIndex = 3;
 			this.lblIndicatorRunColor.Text = "Running color:";
 			this.lblIndicatorRunColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -263,9 +266,10 @@
 			// 
 			// lblIndicatorPauseColor
 			// 
+			this.lblIndicatorPauseColor.AutoSize = true;
 			this.lblIndicatorPauseColor.Location = new System.Drawing.Point(10, 112);
 			this.lblIndicatorPauseColor.Name = "lblIndicatorPauseColor";
-			this.lblIndicatorPauseColor.Size = new System.Drawing.Size(180, 20);
+			this.lblIndicatorPauseColor.Size = new System.Drawing.Size(78, 15);
 			this.lblIndicatorPauseColor.TabIndex = 5;
 			this.lblIndicatorPauseColor.Text = "Paused color:";
 			this.lblIndicatorPauseColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -319,6 +323,7 @@
 			this.groupHotkeys.PerformLayout();
 			this.groupLanguage.ResumeLayout(false);
 			this.groupIndicator.ResumeLayout(false);
+			this.groupIndicator.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numIndicatorSize)).EndInit();
 			this.groupAutoHide.ResumeLayout(false);
 			this.ResumeLayout(false);
