@@ -152,7 +152,7 @@ namespace OnTopReplica.MessagePumpProcessors {
 
         /// <summary>
         /// 一時停止フラグ。true の間は検出・発報を行わない(Enabled 設定は保持される)。
-        /// メニューの「全パネル一時停止/再開」から使用され、永続化はされない。
+        /// メニューの「全パネル一時停止/再開」から使用され、PanelLayoutManager によって永続化される。
         /// </summary>
         public bool Paused {
             get { return _paused; }

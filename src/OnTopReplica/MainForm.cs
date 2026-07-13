@@ -153,6 +153,8 @@ namespace OnTopReplica {
                     SetColorAlertPaused(child, paused);
                 }
             }
+            //一時停止状態もレイアウトファイルに永続化する
+            NotifyPanelLayoutChanged();
         }
 
         /// <summary>

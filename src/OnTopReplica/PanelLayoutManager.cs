@@ -359,6 +359,7 @@ namespace OnTopReplica {
                 var inv = CultureInfo.InvariantCulture;
 
                 tokens.Add("alert=" + (proc.Enabled ? "1" : "0"));
+                tokens.Add("paused=" + (proc.Paused ? "1" : "0"));
                 var categories = string.Join(";", proc.EnabledCategories);
                 if (categories.Length > 0) {
                     tokens.Add("colors=" + categories);
@@ -452,6 +453,11 @@ namespace OnTopReplica {
 
                 if (tokens.TryGetValue("alert", out v)) {
                     proc.Enabled = v == "1";
+                }
+
+                //Enabled の後に適用する(Enabled セッターがインジケーター等を更新するため)
+                if (tokens.TryGetValue("paused", out v)) {
+                    proc.Paused = v == "1";
                 }
             }
             catch { }
