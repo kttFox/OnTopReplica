@@ -243,22 +243,31 @@ namespace OnTopReplica {
                         return;
                     }
 
+                    //The thumbnail can be dropped by a transient DWM error while
+                    //the source window is still alive: re-attach it and restore
+                    //the remembered region instead of leaving the panel blank.
+                    if (!primary.ThumbnailPanel.IsShowingThumbnail) {
+                        Log.Write("Panel layout: thumbnail dropped while source window is alive, re-attaching");
+                        ThumbnailRegion primaryRegion;
+                        _snapshot.PanelRegions.TryGetValue(primary, out primaryRegion);
+                        primary.SetThumbnail(current, primaryRegion);
+                        foreach (var kv in _snapshot.PanelRegions) {
+                            if (!kv.Key.IsDisposed && kv.Key.ThumbnailPanel.IsShowingThumbnail) {
+                                kv.Key.SelectedThumbnailRegion = kv.Value;
+                            }
+                        }
+                        return;
+                    }
+
                     //Attached: refresh the snapshot with the live state
                     //(the primary is tracked like any other panel)
                     _snapshot.Hwnd = current.Handle.ToInt64();
                     _snapshot.ClassName = current.Class;
                     _snapshot.Title = current.Title;
-                    _snapshot.PanelRegions.Clear();
-                    _snapshot.PanelChrome.Clear();
-                    var rp = primary.SelectedThumbnailRegion;
-                    if (rp != null)
-                        _snapshot.PanelRegions[primary] = rp;
-                    _snapshot.PanelChrome[primary] = primary.IsChromeVisible;
+                    PruneSnapshotPanels();
+                    RefreshPanelSnapshot(primary);
                     foreach (var child in primary.ChildPanels) {
-                        var r = child.SelectedThumbnailRegion;
-                        if (r != null)
-                            _snapshot.PanelRegions[child] = r;
-                        _snapshot.PanelChrome[child] = child.IsChromeVisible;
+                        RefreshPanelSnapshot(child);
                     }
                     return;
                 }
@@ -292,6 +301,41 @@ namespace OnTopReplica {
             timer.Start();
             _watcher = timer;
             Log.Write("Panel layout: source window watcher started");
+        }
+
+        /// <summary>
+        /// Refreshes the snapshot entries of a single panel from its live state.
+        /// The snapshot is only updated while the panel actually shows a thumbnail:
+        /// a transient DWM error unsets the thumbnail at the panel level (while the
+        /// source window is still alive), and refreshing from that broken state
+        /// would wipe the remembered region.
+        /// </summary>
+        static void RefreshPanelSnapshot(MainForm panel) {
+            if (panel.IsDisposed || !panel.ThumbnailPanel.IsShowingThumbnail)
+                return;
+
+            var region = panel.SelectedThumbnailRegion;
+            if (region != null)
+                _snapshot.PanelRegions[panel] = region;
+            else
+                _snapshot.PanelRegions.Remove(panel);
+            _snapshot.PanelChrome[panel] = panel.IsChromeVisible;
+        }
+
+        /// <summary>
+        /// Removes snapshot entries of disposed panels (the snapshot is updated
+        /// incrementally, so stale entries must be pruned explicitly).
+        /// </summary>
+        static void PruneSnapshotPanels() {
+            var stale = new List<MainForm>();
+            foreach (var p in _snapshot.PanelRegions.Keys)
+                if (p.IsDisposed) stale.Add(p);
+            foreach (var p in _snapshot.PanelChrome.Keys)
+                if (p.IsDisposed && !stale.Contains(p)) stale.Add(p);
+            foreach (var p in stale) {
+                _snapshot.PanelRegions.Remove(p);
+                _snapshot.PanelChrome.Remove(p);
+            }
         }
 
         /// <summary>
@@ -425,9 +469,12 @@ namespace OnTopReplica {
                 tokens.Add("screenLock=" + panel.PositionLock.Value.ToString());
             }
 
-            //Region (fall back to the last known region while no window is attached)
+            //Region (fall back to the last known region while no thumbnail is
+            //shown: no window attached, or thumbnail dropped by a DWM error).
+            //A region deliberately cleared by the user is also removed from the
+            //snapshot by the watcher, so the fallback never resurrects it.
             var region = panel.SelectedThumbnailRegion;
-            if (region == null && panel.CurrentThumbnailWindowHandle == null) {
+            if (region == null && !panel.ThumbnailPanel.IsShowingThumbnail) {
                 _snapshot.PanelRegions.TryGetValue(panel, out region);
             }
             if (region != null) {
