@@ -841,6 +841,14 @@ namespace OnTopReplica {
                 CurrentThumbnailWindowHandle = handle;
                 _thumbnailPanel.SetThumbnailHandle(handle, region);
 
+                //The internal thumbnail update can fail on a transient DWM error
+                //and silently unset the thumbnail: bail out quietly (no error
+                //dialog) and let the watcher retry on its next tick.
+                if (!_thumbnailPanel.IsShowingThumbnail) {
+                    Log.Write("Thumbnail was unset during setup (transient DWM error), will retry");
+                    return;
+                }
+
                 //Set aspect ratio (this will resize the form), do not refresh if in fullscreen
                 SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, !FullscreenManager.IsFullscreen);
             }
@@ -901,6 +909,12 @@ namespace OnTopReplica {
                     return;
 
                 _thumbnailPanel.SelectedRegion = value;
+
+                //Setting the region internally updates the thumbnail, which can
+                //fail on a transient DWM error and unset it: re-check before
+                //querying the pixel size (would throw InvalidOperationException).
+                if (!_thumbnailPanel.IsShowingThumbnail)
+                    return;
 
                 SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, true);
 

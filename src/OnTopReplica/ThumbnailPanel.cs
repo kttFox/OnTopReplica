@@ -273,9 +273,20 @@ namespace OnTopReplica {
                     var target = new Rectangle(_padWidth, _padHeight, _thumbnailSize.Width, _thumbnailSize.Height);
                     Rectangle source = (_regionEnabled) ? _currentRegion.ComputeRegionRectangle(_thumbnail.GetSourceSize()) : new Rectangle(Point.Empty, _thumbnail.GetSourceSize());
 
+                    //Clamp the source rectangle to the source window bounds:
+                    //if the source window shrank since the region was stored,
+                    //an out-of-bounds rectangle makes the DWM update fail forever.
+                    var bounds = new Rectangle(Point.Empty, _thumbnail.GetSourceSize());
+                    source.Intersect(bounds);
+                    if (source.Width < 1 || source.Height < 1) {
+                        Log.Write("Stored region {0} is outside source bounds {1}, showing full window", _currentRegion, bounds);
+                        source = bounds;
+                    }
+
                     _thumbnail.Update(target, source, ThumbnailOpacity, true, true);
                 }
-                catch {
+                catch (Exception ex) {
+                    Log.WriteException("Thumbnail update failed, unsetting", ex);
                     //Any error updating the thumbnail forces to unset (handle may not be valid anymore)
                     UnsetThumbnail();
                     return;
