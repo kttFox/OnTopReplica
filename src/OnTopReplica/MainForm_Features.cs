@@ -13,7 +13,7 @@ namespace OnTopReplica {
 
         public bool ClickForwardingEnabled {
             get {
-                return _thumbnailPanel.ReportThumbnailClicks;
+                return ThumbnailPanel.ReportThumbnailClicks;
             }
             set {
                 if (value && Settings.Default.FirstTimeClickForwarding) {
@@ -21,7 +21,7 @@ namespace OnTopReplica {
                         return;
                 }
 
-                _thumbnailPanel.ReportThumbnailClicks = value;
+                ThumbnailPanel.ReportThumbnailClicks = value;
             }
         }
 
@@ -107,7 +107,7 @@ namespace OnTopReplica {
                     return;
 
                 //Cancel hiding chrome if no thumbnail is shown
-                if (!value && !_thumbnailPanel.IsShowingThumbnail)
+                if (!value && !ThumbnailPanel.IsShowingThumbnail)
                     return;
 
                 if (!value) {

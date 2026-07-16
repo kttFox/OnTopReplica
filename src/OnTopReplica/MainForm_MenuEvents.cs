@@ -16,7 +16,7 @@ namespace OnTopReplica {
                 return;
             }
 
-            bool showing = _thumbnailPanel.IsShowingThumbnail;
+            bool showing = ThumbnailPanel.IsShowingThumbnail;
 
             selectRegionToolStripMenuItem.Enabled = showing;
             switchToWindowToolStripMenuItem.Enabled = showing;
@@ -95,7 +95,7 @@ namespace OnTopReplica {
         }
 
         private void Menu_Resize_opening(object sender, CancelEventArgs e) {
-            if (!_thumbnailPanel.IsShowingThumbnail)
+            if (!ThumbnailPanel.IsShowingThumbnail)
                 e.Cancel = true;
         }
 

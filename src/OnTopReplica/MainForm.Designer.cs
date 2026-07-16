@@ -29,7 +29,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuContext = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.menuContextWindows = new System.Windows.Forms.ToolStripMenuItem();
-			this.menuWindows = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.MenuWindows = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fullSelectWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.switchToWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +81,7 @@
 			this.disableClickThroughallPanelsFullscreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fullExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuContext.SuspendLayout();
-			this.menuWindows.SuspendLayout();
+			this.MenuWindows.SuspendLayout();
 			this.menuResize.SuspendLayout();
 			this.menuFullscreenContext.SuspendLayout();
 			this.SuspendLayout();
@@ -114,7 +114,7 @@
 			// 
 			// menuContextWindows
 			// 
-			this.menuContextWindows.DropDown = this.menuWindows;
+			this.menuContextWindows.DropDown = this.MenuWindows;
 			this.menuContextWindows.Image = global::OnTopReplica.Properties.Resources.list;
 			this.menuContextWindows.Name = "menuContextWindows";
 			this.menuContextWindows.Size = new System.Drawing.Size(186, 22);
@@ -123,11 +123,11 @@
 			// 
 			// menuWindows
 			// 
-			this.menuWindows.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.MenuWindows.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.noneToolStripMenuItem});
-			this.menuWindows.Name = "menuWindows";
-			this.menuWindows.OwnerItem = this.menuContextWindows;
-			this.menuWindows.Size = new System.Drawing.Size(118, 26);
+			this.MenuWindows.Name = "menuWindows";
+			this.MenuWindows.OwnerItem = this.menuContextWindows;
+			this.MenuWindows.Size = new System.Drawing.Size(118, 26);
 			// 
 			// noneToolStripMenuItem
 			// 
@@ -137,7 +137,7 @@
 			// 
 			// fullSelectWindowToolStripMenuItem
 			// 
-			this.fullSelectWindowToolStripMenuItem.DropDown = this.menuWindows;
+			this.fullSelectWindowToolStripMenuItem.DropDown = this.MenuWindows;
 			this.fullSelectWindowToolStripMenuItem.Image = global::OnTopReplica.Properties.Resources.list;
 			this.fullSelectWindowToolStripMenuItem.Name = "fullSelectWindowToolStripMenuItem";
 			this.fullSelectWindowToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
@@ -564,7 +564,7 @@
 			this.Text = "OnTopReplica";
 			this.TopMost = true;
 			this.menuContext.ResumeLayout(false);
-			this.menuWindows.ResumeLayout(false);
+			this.MenuWindows.ResumeLayout(false);
 			this.menuResize.ResumeLayout(false);
 			this.menuFullscreenContext.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -577,7 +577,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuContextWindows;
         private System.Windows.Forms.ToolStripMenuItem menuContextClose;
         private System.Windows.Forms.ToolStripMenuItem menuContextExit;
-		private System.Windows.Forms.ContextMenuStrip menuWindows;
         private System.Windows.Forms.ToolStripMenuItem menuContextOpacity;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ContextMenuStrip menuOpacity;

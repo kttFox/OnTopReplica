@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using OnTopReplica.Native;
 using OnTopReplica.Properties;
@@ -15,7 +16,6 @@ namespace OnTopReplica {
     partial class MainForm : AspectRatioForm {
 
         //GUI elements
-        ThumbnailPanel _thumbnailPanel;
 
         //Multi-panel support: secondary panels always clone the primary's source window
         MainForm _primaryPanel; //null on the primary panel itself
@@ -47,37 +47,23 @@ namespace OnTopReplica {
         /// Gets whether this window is a secondary panel added via "Add panel".
         /// Secondary panels follow the primary panel's cloned window.
         /// </summary>
-        public bool IsSecondaryPanel {
-            get { return _primaryPanel != null; }
-        }
+        public bool IsSecondaryPanel => _primaryPanel != null;
 
         /// <summary>
         /// Gets the secondary panels bound to this (primary) panel.
         /// </summary>
-        internal IEnumerable<MainForm> ChildPanels {
-            get { return _childPanels; }
-        }
+        internal IEnumerable<MainForm> ChildPanels => _childPanels;
 
         /// <summary>
         /// Gets the primary panel of this window's panel set (itself if primary).
         /// </summary>
-        internal MainForm PrimaryPanel {
-            get { return _primaryPanel ?? this; }
-        }
+        internal MainForm PrimaryPanel => _primaryPanel ?? this;
 
         /// <summary>
         /// Gets the current primary panel, resolving promotions. Null when no
         /// panel is open (i.e. during shutdown).
         /// </summary>
-        internal static MainForm CurrentPrimary {
-            get {
-                foreach (var panel in _openPanels) {
-                    if (!panel.IsDisposed && !panel.IsSecondaryPanel)
-                        return panel;
-                }
-                return null;
-            }
-        }
+        internal static MainForm CurrentPrimary => _openPanels.FirstOrDefault(panel => !panel.IsDisposed && !panel.IsSecondaryPanel);
 
         /// <summary>
         /// Enables click forwarding on the whole panel set.
@@ -90,10 +76,8 @@ namespace OnTopReplica {
                 return;
 
             primary.ClickForwardingEnabled = true;
-            foreach (var child in primary._childPanels) {
-                if (!child.IsDisposed) {
-                    child.ClickForwardingEnabled = true;
-                }
+            foreach( var child in primary._childPanels.Where(child => !child.IsDisposed) ) {
+                child.ClickForwardingEnabled = true;
             }
         }
 
@@ -103,10 +87,8 @@ namespace OnTopReplica {
         public void DisableClickForwardingAllPanels() {
             var primary = _primaryPanel ?? this;
             primary.ClickForwardingEnabled = false;
-            foreach (var child in primary._childPanels) {
-                if (!child.IsDisposed) {
-                    child.ClickForwardingEnabled = false;
-                }
+            foreach (var child in primary._childPanels.Where(child => !child.IsDisposed)) {
+                child.ClickForwardingEnabled = false;
             }
         }
 
@@ -121,10 +103,8 @@ namespace OnTopReplica {
                 return;
 
             primary.ClickThroughEnabled = true;
-            foreach (var child in primary._childPanels) {
-                if (!child.IsDisposed) {
-                    child.ClickThroughEnabled = true;
-                }
+            foreach (var child in primary._childPanels.Where(child => !child.IsDisposed)) {
+                child.ClickThroughEnabled = true;
             }
         }
 
@@ -134,10 +114,8 @@ namespace OnTopReplica {
         public void DisableClickThroughAllPanels() {
             var primary = _primaryPanel ?? this;
             primary.ClickThroughEnabled = false;
-            foreach (var child in primary._childPanels) {
-                if (!child.IsDisposed) {
-                    child.ClickThroughEnabled = false;
-                }
+            foreach (var child in primary._childPanels.Where(child => !child.IsDisposed)) {
+                child.ClickThroughEnabled = false;
             }
         }
 
@@ -148,10 +126,8 @@ namespace OnTopReplica {
         public void SetColorAlertPausedAllPanels(bool paused) {
             var primary = _primaryPanel ?? this;
             SetColorAlertPaused(primary, paused);
-            foreach (var child in primary._childPanels) {
-                if (!child.IsDisposed) {
-                    SetColorAlertPaused(child, paused);
-                }
+            foreach (var child in primary._childPanels.Where(child => !child.IsDisposed)) {
+                SetColorAlertPaused(child, paused);
             }
             //一時停止状態もレイアウトファイルに永続化する
             NotifyPanelLayoutChanged();
@@ -189,8 +165,8 @@ namespace OnTopReplica {
         /// 設定パネルでインジケーター関連の設定が変更されたときに呼び出す。
         /// </summary>
         public static void UpdateAllColorAlertIndicators() {
-            foreach (var panel in _openPanels) {
-                if (!panel.IsDisposed) panel.UpdateColorAlertIndicator();
+            foreach( var panel in _openPanels ) {
+                panel.UpdateColorAlertIndicator();
             }
         }
 
@@ -421,7 +397,6 @@ namespace OnTopReplica {
         }
 
         //Managers
-        readonly MessagePumpManager _msgPumpManager = new MessagePumpManager();
         WindowListMenuManager _windowListManager;
         public FullscreenFormManager FullscreenManager { get; private set; }
 
@@ -431,7 +406,7 @@ namespace OnTopReplica {
             _startupOptions = startupOptions;
 
             FullscreenManager = new FullscreenFormManager(this);
-            _quickRegionDrawingHandler = new ThumbnailPanel.RegionDrawnHandler(HandleQuickRegionDrawn);
+            _quickRegionDrawingHandler = HandleQuickRegionDrawn;
             
             //WinForms init pass
             InitializeComponent();
@@ -441,25 +416,25 @@ namespace OnTopReplica {
             DefaultBorderStyle = this.FormBorderStyle;
 
             //Thumbnail panel
-            _thumbnailPanel = new ThumbnailPanel {
+            ThumbnailPanel = new ThumbnailPanel {
                 Location = Point.Empty,
                 Dock = DockStyle.Fill
             };
-            _thumbnailPanel.CloneClick += new EventHandler<CloneClickEventArgs>(Thumbnail_CloneClick);
-            Controls.Add(_thumbnailPanel);
+            ThumbnailPanel.CloneClick += Thumbnail_CloneClick;
+            Controls.Add(ThumbnailPanel);
 
             //Populate opacity menu (100% down to 10%, in 10% steps)
             for (int pct = 100; pct >= 10; pct -= 10) {
                 var item = new ToolStripMenuItem(pct + "%") {
                     Tag = pct / 100.0
                 };
-                item.Click += new EventHandler(Menu_Opacity_click);
+                item.Click += Menu_Opacity_click;
                 menuOpacity.Items.Add(item);
             }
 
             //Set native renderer on context menus
             Asztal.Szótár.NativeToolStripRenderer.SetToolStripRenderer(
-                menuContext, menuWindows, menuOpacity, menuResize, menuFullscreenContext
+                menuContext, MenuWindows, menuOpacity, menuResize, menuFullscreenContext
             );
 
             //Set to Key event preview
@@ -486,10 +461,11 @@ namespace OnTopReplica {
             //and re-registering the processors would duplicate them.
             if (!_managersInitialized) {
                 _managersInitialized = true;
-                _msgPumpManager.Initialize(this);
-                _windowListManager = new WindowListMenuManager(this, menuWindows);
-                _windowListManager.ParentMenus = new System.Windows.Forms.ContextMenuStrip[] {
-                    menuContext, menuFullscreenContext
+                MessagePumpManager.Initialize(this);
+                _windowListManager = new WindowListMenuManager(this, MenuWindows) {
+                    ParentMenus = new[] {
+                        menuContext, menuFullscreenContext
+                    }
                 };
             }
 
@@ -534,7 +510,7 @@ namespace OnTopReplica {
                 }
             }
 
-            _msgPumpManager.Dispose();
+            MessagePumpManager.Dispose();
             Program.Platform.CloseForm(this);
 
             //Global hotkeys were registered on this (closing) window and were just
@@ -647,8 +623,8 @@ namespace OnTopReplica {
 
         protected override void OnResizing(EventArgs e) {
             //Update aspect ratio from thumbnail while resizing (but do not refresh, resizing does that anyway)
-            if (_thumbnailPanel.IsShowingThumbnail) {
-                SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, false);
+            if (ThumbnailPanel.IsShowingThumbnail) {
+                SetAspectRatio(ThumbnailPanel.ThumbnailPixelSize, false);
             }
         }
 
@@ -686,8 +662,8 @@ namespace OnTopReplica {
             base.OnMouseWheel(e);
 
             if (!FullscreenManager.IsFullscreen) {
-                if (_thumbnailPanel.IsShowingThumbnail) {
-                    SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, false);
+                if (ThumbnailPanel.IsShowingThumbnail) {
+                    SetAspectRatio(ThumbnailPanel.ThumbnailPixelSize, false);
                 }
 
                 int change = (int)(e.Delta / 6.0); //assumes a mouse wheel "tick" is in the 80-120 range
@@ -718,8 +694,8 @@ namespace OnTopReplica {
         private ThumbnailPanel.RegionDrawnHandler _quickRegionDrawingHandler;
 
         protected override void WndProc(ref Message m) {
-            if (_msgPumpManager != null) {
-                if (_msgPumpManager.PumpMessage(ref m)) {
+            if (MessagePumpManager != null) {
+                if (MessagePumpManager.PumpMessage(ref m)) {
                     return;
                 }
             }
@@ -850,24 +826,24 @@ namespace OnTopReplica {
                 Log.Write("Cloning window HWND {0} of class {1}", handle.Handle, handle.Class);
 
                 CurrentThumbnailWindowHandle = handle;
-                _thumbnailPanel.SetThumbnailHandle(handle, region);
+                ThumbnailPanel.SetThumbnailHandle(handle, region);
 
                 //The internal thumbnail update can fail on a transient DWM error
                 //and silently unset the thumbnail: bail out quietly (no error
                 //dialog) and let the watcher retry on its next tick.
-                if (!_thumbnailPanel.IsShowingThumbnail) {
+                if (!ThumbnailPanel.IsShowingThumbnail) {
                     Log.Write("Thumbnail was unset during setup (transient DWM error), will retry");
                     return;
                 }
 
                 //Set aspect ratio (this will resize the form), do not refresh if in fullscreen
-                SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, !FullscreenManager.IsFullscreen);
+                SetAspectRatio(ThumbnailPanel.ThumbnailPixelSize, !FullscreenManager.IsFullscreen);
             }
             catch (Exception ex) {
                 Log.WriteException("Unable to set new thumbnail", ex);
 
                 ThumbnailError(ex, false, Strings.ErrorUnableToCreateThumbnail);
-                _thumbnailPanel.UnsetThumbnail();
+                ThumbnailPanel.UnsetThumbnail();
                 return;
             }
 
@@ -890,7 +866,7 @@ namespace OnTopReplica {
         public void UnsetThumbnail() {
             //Unset handle
             CurrentThumbnailWindowHandle = null;
-            _thumbnailPanel.UnsetThumbnail();
+            ThumbnailPanel.UnsetThumbnail();
 
             //Disable aspect ratio
             KeepAspectRatio = false;
@@ -910,24 +886,24 @@ namespace OnTopReplica {
         /// </summary>
         public ThumbnailRegion SelectedThumbnailRegion {
             get {
-                if (!_thumbnailPanel.IsShowingThumbnail || !_thumbnailPanel.ConstrainToRegion)
+                if (!ThumbnailPanel.IsShowingThumbnail || !ThumbnailPanel.ConstrainToRegion)
                     return null;
 
-                return _thumbnailPanel.SelectedRegion;
+                return ThumbnailPanel.SelectedRegion;
             }
             set {
-                if (!_thumbnailPanel.IsShowingThumbnail)
+                if (!ThumbnailPanel.IsShowingThumbnail)
                     return;
 
-                _thumbnailPanel.SelectedRegion = value;
+                ThumbnailPanel.SelectedRegion = value;
 
                 //Setting the region internally updates the thumbnail, which can
                 //fail on a transient DWM error and unset it: re-check before
                 //querying the pixel size (would throw InvalidOperationException).
-                if (!_thumbnailPanel.IsShowingThumbnail)
+                if (!ThumbnailPanel.IsShowingThumbnail)
                     return;
 
-                SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, true);
+                SetAspectRatio(ThumbnailPanel.ThumbnailPixelSize, true);
 
                 FixPositionAndSize();
 
@@ -969,7 +945,7 @@ namespace OnTopReplica {
         /// <param name="p">Scale of the thumbnail to consider.</param>
         private void FitToThumbnail(double p) {
             try {
-                Size originalSize = _thumbnailPanel.ThumbnailPixelSize;
+                Size originalSize = ThumbnailPanel.ThumbnailPixelSize;
                 Size fittedSize = new Size((int)(originalSize.Width * p), (int)(originalSize.Height * p));
                 ClientSize = fittedSize;
                 RefreshScreenLock();
@@ -986,37 +962,22 @@ namespace OnTopReplica {
         /// <summary>
         /// Gets the form's thumbnail panel.
         /// </summary>
-        public ThumbnailPanel ThumbnailPanel {
-            get {
-                return _thumbnailPanel;
-            }
-        }
+        public ThumbnailPanel ThumbnailPanel { get; }
 
         /// <summary>
         /// Gets the form's message pump manager.
         /// </summary>
-        public MessagePumpManager MessagePumpManager {
-            get {
-                return _msgPumpManager;
-            }
-        }
+        public MessagePumpManager MessagePumpManager { get; } = new MessagePumpManager();
 
         /// <summary>
         /// Gets the form's window list drop down menu.
         /// </summary>
-        public ContextMenuStrip MenuWindows {
-            get {
-                return menuWindows;
-            }
-        }
+        public ContextMenuStrip MenuWindows { get; private set; }
 
         /// <summary>
         /// Retrieves the window handle of the currently cloned thumbnail.
         /// </summary>
-        public WindowHandle CurrentThumbnailWindowHandle {
-            get;
-            private set;
-        }
+        public WindowHandle CurrentThumbnailWindowHandle { get; private set;}
 
         #endregion
 
