@@ -214,6 +214,9 @@ namespace OnTopReplica {
             }
             show &= Properties.Settings.Default.ColorAlertIndicatorEnabled;
             show &= Visible && WindowState != FormWindowState.Minimized;
+            //Windows 7 以降の HideForm は Opacity=0 で隠すため Visible は true のまま。
+            //プラットフォーム側の「非表示」状態も判定に含める。
+            show &= !Program.Platform.IsHidden(this);
 
             if (show) {
                 if (_colorAlertIndicator == null || _colorAlertIndicator.IsDisposed) {
@@ -273,8 +276,11 @@ namespace OnTopReplica {
             var primary = _primaryPanel ?? this;
             primary._autoHidden = false; //manual hide supersedes auto hide
             Program.Platform.HideForm(primary);
+            primary.UpdateColorAlertIndicator();
             foreach (var child in primary._childPanels) {
                 Program.Platform.HideForm(child);
+                //Opacity=0 で隠す実装では Visible 変更イベントが発火しないため明示的に更新する
+                child.UpdateColorAlertIndicator();
             }
             //Deactivate: releases focus so the taskbar button is no longer highlighted
             primary.WindowState = FormWindowState.Minimized;
@@ -367,9 +373,11 @@ namespace OnTopReplica {
                     primary.WindowState = FormWindowState.Normal;
                 }
                 Program.Platform.RestoreForm(primary);
+                primary.UpdateColorAlertIndicator();
                 foreach (var child in primary._childPanels.ToArray()) {
                     if (!child.IsDisposed && !child.Disposing) {
                         Program.Platform.RestoreForm(child);
+                        child.UpdateColorAlertIndicator();
                     }
                 }
             }
@@ -601,11 +609,14 @@ namespace OnTopReplica {
                     if (WindowState == FormWindowState.Minimized) {
                         foreach (var child in _childPanels) {
                             Program.Platform.HideForm(child);
+                            //Opacity=0 で隠す実装では Visible 変更イベントが発火しないため明示的に更新する
+                            child.UpdateColorAlertIndicator();
                         }
                     }
                     else {
                         foreach (var child in _childPanels) {
                             Program.Platform.RestoreForm(child);
+                            child.UpdateColorAlertIndicator();
                         }
                     }
                 }
