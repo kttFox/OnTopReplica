@@ -40,6 +40,8 @@ Very useful for monitoring background processes, wrangling with complex multi-wi
 * Alarm sounds: in addition to the bundled WAV/MP3 files (just drop files into the `Sounds` folder to add them to the list), some Windows system sounds can be selected.
 * Detection runs independently per panel.
 * Added the ability to send a single key to the monitored window when the alarm fires.
+* A **minimum detection pixel count** can be set per panel: the alarm only fires when at least the specified number of matching pixels is found. The current per-category detection counts are shown in real time on the panel (e.g. "Detecting: Red:12 Gray:340"), and a count-monitoring mode keeps updating the counts even while detection is disabled or paused (without firing alarms).
+* The paused state of color-alert monitoring is saved in the panel layout and restored at the next startup.
 * A small **status indicator (●)** is shown at the top-right of the preview so you can see at a glance whether color-alert monitoring is running (a different color is used while paused). Visibility, size, and colors are configurable in the settings panel.
 
 ### Auto-hide
