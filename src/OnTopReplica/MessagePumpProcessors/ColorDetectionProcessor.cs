@@ -413,14 +413,13 @@ namespace OnTopReplica.MessagePumpProcessors {
             try
             {
                 // ウィンドウのクライアント領域サイズを取得
-                Rectangle clientRect;
-                if (!WindowManagerMethods.GetClientRect(windowHandle, out clientRect))
+                if( !WindowManagerMethods.GetClientRect(windowHandle, out var clientRect) )
                 {
                     Log.Write("ColorDetection: Failed to get client rect");
                     return false;
                 }
 
-                Size clientSize = new Size(clientRect.Width, clientRect.Height);
+                var clientSize = new Size(clientRect.Width, clientRect.Height);
                 if (clientSize.Width <= 0 || clientSize.Height <= 0)
                 {
                     Log.Write("ColorDetection: Invalid client size {0}x{1}", clientSize.Width, clientSize.Height);
@@ -434,7 +433,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 Rectangle regionRect;
 
                 // 選択領域があれば優先的に使用する
-                if (mainForm != null && mainForm.SelectedThumbnailRegion != null)
+                if (mainForm?.SelectedThumbnailRegion != null)
                 {
                     var selectedRegion = mainForm.SelectedThumbnailRegion;
                     regionRect = selectedRegion.ComputeRegionRectangle(clientSize);
@@ -460,8 +459,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 {
                     // ウィンドウ全体のサイズを取得(非クライアント領域を含む)
                     // 注意: GetWindowRect は RECT (left,top,right,bottom) を Rectangle (X,Y,Width=right,Height=bottom) にマッピングして返す
-                    Rectangle windowRect;
-                    WindowManagerMethods.GetWindowRect(windowHandle, out windowRect);
+                    WindowManagerMethods.GetWindowRect(windowHandle, out var windowRect);
                     int windowWidth = windowRect.Width - windowRect.X;
                     int windowHeight = windowRect.Height - windowRect.Y;
 
@@ -477,12 +475,12 @@ namespace OnTopReplica.MessagePumpProcessors {
                     bool printSuccess = false;
 
                     // 複数の PrintWindow flags を順に試す
-                    uint[] flags = new uint[] { PW_RENDERFULLCONTENT, PW_CLIENTONLY, 0 };
+                    var flags = new uint[] { PW_RENDERFULLCONTENT, PW_CLIENTONLY, 0 };
                     foreach (uint flag in flags)
                     {
-                        using (Graphics g = Graphics.FromImage(windowBmp))
+                        using (var g = Graphics.FromImage(windowBmp))
                         {
-                            IntPtr hdc = g.GetHdc();
+                            var hdc = g.GetHdc();
                             try
                             {
                                 printSuccess = PrintWindow(windowHandle, hdc, flag);
@@ -541,10 +539,8 @@ namespace OnTopReplica.MessagePumpProcessors {
                 }
                 finally
                 {
-                    if (regionBmp != null)
-                        regionBmp.Dispose();
-                    if (windowBmp != null)
-                        windowBmp.Dispose();
+                    regionBmp?.Dispose();
+                    windowBmp?.Dispose();
                 }
             }
             catch (Exception ex)
@@ -643,7 +639,8 @@ namespace OnTopReplica.MessagePumpProcessors {
             catch (Exception ex)
             {
                 Log.Write("ColorDetection Fallback BitBlt error: {0}", ex.Message);
-                if (bmp != null) { bmp.Dispose(); bmp = null; }
+                bmp?.Dispose();
+                bmp = null;
             }
             finally
             {
@@ -691,7 +688,8 @@ namespace OnTopReplica.MessagePumpProcessors {
             }
             finally
             {
-                if (bmp != null) bmp.Dispose();
+                bmp?.Dispose();
+                bmp = null;
             }
         }
 
