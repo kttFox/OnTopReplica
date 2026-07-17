@@ -217,6 +217,18 @@
   <data name="ColorAlert_LossMissCountTooltip" xml:space="preserve">
     <value>Number of consecutive samples without the target color before the loss alarm triggers</value>
   </data>
+  <data name="ColorAlert_MinPixels" xml:space="preserve">
+    <value>Min pixels:</value>
+  </data>
+  <data name="ColorAlert_MinPixelsTooltip" xml:space="preserve">
+    <value>Minimum number of matching pixels required to trigger the alarm</value>
+  </data>
+  <data name="ColorAlert_DetectedPixels" xml:space="preserve">
+    <value>Detected:</value>
+  </data>
+  <data name="ColorAlert_DetectedPixelsTooltip" xml:space="preserve">
+    <value>Matching pixel counts from the most recent sample</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>Time between color checks in milliseconds</value>
   </data>

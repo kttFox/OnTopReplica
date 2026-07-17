@@ -30,6 +30,9 @@ namespace OnTopReplica.SidePanels {
 			this.checkIgnoreDark = new System.Windows.Forms.CheckBox();
 			this.labelLossMiss = new System.Windows.Forms.Label();
 			this.numLossMiss = new System.Windows.Forms.NumericUpDown();
+			this.labelMinPixels = new System.Windows.Forms.Label();
+			this.numMinPixels = new System.Windows.Forms.NumericUpDown();
+			this.labelDetectedPixels = new System.Windows.Forms.Label();
 			this.labelColorSelection = new System.Windows.Forms.Label();
 			this.checkRed = new System.Windows.Forms.CheckBox();
 			this.checkOrange = new System.Windows.Forms.CheckBox();
@@ -53,6 +56,7 @@ namespace OnTopReplica.SidePanels {
 			this.groupColor.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numInterval)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numLossMiss)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMinPixels)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -63,6 +67,9 @@ namespace OnTopReplica.SidePanels {
 			this.groupColor.Controls.Add(this.checkIgnoreDark);
 			this.groupColor.Controls.Add(this.labelLossMiss);
 			this.groupColor.Controls.Add(this.numLossMiss);
+			this.groupColor.Controls.Add(this.labelMinPixels);
+			this.groupColor.Controls.Add(this.numMinPixels);
+			this.groupColor.Controls.Add(this.labelDetectedPixels);
 			this.groupColor.Controls.Add(this.labelColorSelection);
 			this.groupColor.Controls.Add(this.checkRed);
 			this.groupColor.Controls.Add(this.checkOrange);
@@ -85,7 +92,7 @@ namespace OnTopReplica.SidePanels {
 			this.groupColor.Location = new System.Drawing.Point(10, 5);
 			this.groupColor.Name = "groupColor";
 			this.groupColor.Padding = new System.Windows.Forms.Padding(12);
-			this.groupColor.Size = new System.Drawing.Size(388, 396);
+			this.groupColor.Size = new System.Drawing.Size(388, 422);
 			this.groupColor.TabIndex = 0;
 			this.groupColor.TabStop = false;
 			this.groupColor.Text = "Color Alert";
@@ -161,6 +168,51 @@ namespace OnTopReplica.SidePanels {
             0,
             0});
 			this.numLossMiss.ValueChanged += new System.EventHandler(this.NumLossMiss_ValueChanged);
+			//
+			// labelMinPixels
+			//
+			this.labelMinPixels.AutoSize = true;
+			this.labelMinPixels.Location = new System.Drawing.Point(185, 108);
+			this.labelMinPixels.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.labelMinPixels.Name = "labelMinPixels";
+			this.labelMinPixels.Size = new System.Drawing.Size(110, 15);
+			this.labelMinPixels.TabIndex = 5;
+			this.labelMinPixels.Text = "Min pixels:";
+			//
+			// numMinPixels
+			//
+			this.numMinPixels.Location = new System.Drawing.Point(310, 104);
+			this.numMinPixels.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.numMinPixels.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.numMinPixels.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numMinPixels.Name = "numMinPixels";
+			this.numMinPixels.Size = new System.Drawing.Size(55, 23);
+			this.numMinPixels.TabIndex = 6;
+			this.numMinPixels.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numMinPixels.ValueChanged += new System.EventHandler(this.NumMinPixels_ValueChanged);
+			//
+			// labelDetectedPixels
+			//
+			this.labelDetectedPixels.AutoEllipsis = true;
+			this.labelDetectedPixels.ForeColor = System.Drawing.SystemColors.GrayText;
+			this.labelDetectedPixels.Location = new System.Drawing.Point(15, 194);
+			this.labelDetectedPixels.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.labelDetectedPixels.Name = "labelDetectedPixels";
+			this.labelDetectedPixels.Size = new System.Drawing.Size(360, 17);
+			this.labelDetectedPixels.TabIndex = 7;
+			this.labelDetectedPixels.Text = "Detected: --";
 			//
 			// labelColorSelection
 			// 
@@ -260,7 +312,7 @@ namespace OnTopReplica.SidePanels {
 			// labelInterval
 			// 
 			this.labelInterval.AutoSize = true;
-			this.labelInterval.Location = new System.Drawing.Point(15, 200);
+			this.labelInterval.Location = new System.Drawing.Point(15, 226);
 			this.labelInterval.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelInterval.Name = "labelInterval";
 			this.labelInterval.Size = new System.Drawing.Size(116, 15);
@@ -269,7 +321,7 @@ namespace OnTopReplica.SidePanels {
 			// 
 			// numInterval
 			// 
-			this.numInterval.Location = new System.Drawing.Point(175, 196);
+			this.numInterval.Location = new System.Drawing.Point(175, 222);
 			this.numInterval.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.numInterval.Maximum = new decimal(new int[] {
             10000,
@@ -294,7 +346,7 @@ namespace OnTopReplica.SidePanels {
 			// labelIntervalUnit
 			// 
 			this.labelIntervalUnit.AutoSize = true;
-			this.labelIntervalUnit.Location = new System.Drawing.Point(274, 200);
+			this.labelIntervalUnit.Location = new System.Drawing.Point(274, 226);
 			this.labelIntervalUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelIntervalUnit.Name = "labelIntervalUnit";
 			this.labelIntervalUnit.Size = new System.Drawing.Size(101, 15);
@@ -304,7 +356,7 @@ namespace OnTopReplica.SidePanels {
 			// labelVolume
 			// 
 			this.labelVolume.AutoSize = true;
-			this.labelVolume.Location = new System.Drawing.Point(15, 237);
+			this.labelVolume.Location = new System.Drawing.Point(15, 263);
 			this.labelVolume.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelVolume.Name = "labelVolume";
 			this.labelVolume.Size = new System.Drawing.Size(83, 15);
@@ -313,7 +365,7 @@ namespace OnTopReplica.SidePanels {
 			// 
 			// trackBarVolume
 			// 
-			this.trackBarVolume.Location = new System.Drawing.Point(117, 231);
+			this.trackBarVolume.Location = new System.Drawing.Point(117, 257);
 			this.trackBarVolume.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.trackBarVolume.Maximum = 100;
 			this.trackBarVolume.Name = "trackBarVolume";
@@ -325,7 +377,7 @@ namespace OnTopReplica.SidePanels {
 			// labelSoundFile
 			// 
 			this.labelSoundFile.AutoSize = true;
-			this.labelSoundFile.Location = new System.Drawing.Point(15, 283);
+			this.labelSoundFile.Location = new System.Drawing.Point(15, 309);
 			this.labelSoundFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelSoundFile.Name = "labelSoundFile";
 			this.labelSoundFile.Size = new System.Drawing.Size(62, 15);
@@ -336,7 +388,7 @@ namespace OnTopReplica.SidePanels {
 			// 
 			this.comboSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboSound.FormattingEnabled = true;
-			this.comboSound.Location = new System.Drawing.Point(117, 278);
+			this.comboSound.Location = new System.Drawing.Point(117, 304);
 			this.comboSound.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.comboSound.Name = "comboSound";
 			this.comboSound.Size = new System.Drawing.Size(259, 23);
@@ -345,7 +397,7 @@ namespace OnTopReplica.SidePanels {
 			// 
 			// btnTestAlarm
 			// 
-			this.btnTestAlarm.Location = new System.Drawing.Point(117, 317);
+			this.btnTestAlarm.Location = new System.Drawing.Point(117, 343);
 			this.btnTestAlarm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btnTestAlarm.Name = "btnTestAlarm";
 			this.btnTestAlarm.Size = new System.Drawing.Size(117, 29);
@@ -357,7 +409,7 @@ namespace OnTopReplica.SidePanels {
 			// checkKeyPress
 			//
 			this.checkKeyPress.AutoSize = true;
-			this.checkKeyPress.Location = new System.Drawing.Point(15, 358);
+			this.checkKeyPress.Location = new System.Drawing.Point(15, 384);
 			this.checkKeyPress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.checkKeyPress.Name = "checkKeyPress";
 			this.checkKeyPress.Size = new System.Drawing.Size(120, 19);
@@ -368,7 +420,7 @@ namespace OnTopReplica.SidePanels {
 			//
 			// textKeyCapture
 			//
-			this.textKeyCapture.Location = new System.Drawing.Point(175, 355);
+			this.textKeyCapture.Location = new System.Drawing.Point(175, 381);
 			this.textKeyCapture.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.textKeyCapture.Name = "textKeyCapture";
 			this.textKeyCapture.ReadOnly = true;
@@ -379,7 +431,7 @@ namespace OnTopReplica.SidePanels {
 			//
 			// btnClose
 			// 
-			this.btnClose.Location = new System.Drawing.Point(158, 407);
+			this.btnClose.Location = new System.Drawing.Point(158, 433);
 			this.btnClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(93, 29);
@@ -394,14 +446,15 @@ namespace OnTopReplica.SidePanels {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.groupColor);
 			this.Controls.Add(this.btnClose);
-			this.MinimumSize = new System.Drawing.Size(408, 448);
+			this.MinimumSize = new System.Drawing.Size(408, 474);
 			this.Name = "ColorAlertPanel";
 			this.Padding = new System.Windows.Forms.Padding(10, 5, 10, 0);
-			this.Size = new System.Drawing.Size(408, 448);
+			this.Size = new System.Drawing.Size(408, 474);
 			this.groupColor.ResumeLayout(false);
 			this.groupColor.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numInterval)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numLossMiss)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMinPixels)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
 			this.ResumeLayout(false);
 
@@ -415,6 +468,9 @@ namespace OnTopReplica.SidePanels {
         private System.Windows.Forms.CheckBox checkIgnoreDark;
         private System.Windows.Forms.Label labelLossMiss;
         private System.Windows.Forms.NumericUpDown numLossMiss;
+        private System.Windows.Forms.Label labelMinPixels;
+        private System.Windows.Forms.NumericUpDown numMinPixels;
+        private System.Windows.Forms.Label labelDetectedPixels;
         private System.Windows.Forms.Label labelColorSelection;
         private System.Windows.Forms.CheckBox checkRed;
         private System.Windows.Forms.CheckBox checkOrange;

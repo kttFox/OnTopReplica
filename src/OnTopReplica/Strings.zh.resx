@@ -213,6 +213,18 @@
   <data name="ColorAlert_LossMissCountTooltip" xml:space="preserve">
     <value>目标颜色连续该次数未被检测到时触发消失警报</value>
   </data>
+  <data name="ColorAlert_MinPixels" xml:space="preserve">
+    <value>最少像素数:</value>
+  </data>
+  <data name="ColorAlert_MinPixelsTooltip" xml:space="preserve">
+    <value>匹配像素达到该数量以上时触发警报</value>
+  </data>
+  <data name="ColorAlert_DetectedPixels" xml:space="preserve">
+    <value>当前检测:</value>
+  </data>
+  <data name="ColorAlert_DetectedPixelsTooltip" xml:space="preserve">
+    <value>最近一次采样中匹配的像素数</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>颜色检查之间的时间 (毫秒)</value>
   </data>

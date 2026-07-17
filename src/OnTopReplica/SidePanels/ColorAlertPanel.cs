@@ -27,6 +27,9 @@ namespace OnTopReplica.SidePanels {
             tooltipInfo.SetToolTip(checkIgnoreDark, Strings.ColorAlert_IgnoreDarkTooltip);
             labelLossMiss.Text = Strings.ColorAlert_LossMissCount;
             tooltipInfo.SetToolTip(labelLossMiss, Strings.ColorAlert_LossMissCountTooltip);
+            labelMinPixels.Text = Strings.ColorAlert_MinPixels;
+            tooltipInfo.SetToolTip(labelDetectedPixels, Strings.ColorAlert_DetectedPixelsTooltip);
+            tooltipInfo.SetToolTip(labelMinPixels, Strings.ColorAlert_MinPixelsTooltip);
             labelColorSelection.Text = Strings.ColorAlert_DetectColors;
             checkRed.Text = Strings.ColorAlert_Red;
             checkOrange.Text = Strings.ColorAlert_Orange;
@@ -68,6 +71,7 @@ namespace OnTopReplica.SidePanels {
                     checkAlertOnLoss.Checked = _processor.AlertOnLoss;
                     checkIgnoreDark.Checked = _processor.IgnoreDarkFrames;
                     numLossMiss.Value = Math.Max(numLossMiss.Minimum, Math.Min(numLossMiss.Maximum, _processor.LossMissThreshold));
+                    numMinPixels.Value = Math.Max(numMinPixels.Minimum, Math.Min(numMinPixels.Maximum, _processor.MinDetectionPixels));
                 }
                 UpdateIgnoreDarkUi();
 
@@ -128,6 +132,63 @@ namespace OnTopReplica.SidePanels {
                 if (comboSound.Items.Contains(item))
                     comboSound.SelectedItem = item;
             }
+
+            StartDetectedPixelsTimer();
+        }
+
+        private Timer _detectedPixelsTimer;
+
+        /// <summary>
+        /// パネル表示中、直近の検出ピクセル数を定期的にラベルへ反映するタイマーを開始する。
+        /// </summary>
+        private void StartDetectedPixelsTimer() {
+            if (_detectedPixelsTimer != null) return;
+            // 検出が無効・一時停止中でも検出数を更新できるよう、カウント監視モードを有効化する
+            if (_processor != null) _processor.CountMonitoringEnabled = true;
+            _detectedPixelsTimer = new Timer { Interval = 500 };
+            _detectedPixelsTimer.Tick += (s, e) => UpdateDetectedPixelsLabel();
+            _detectedPixelsTimer.Start();
+            UpdateDetectedPixelsLabel();
+        }
+
+        private void StopDetectedPixelsTimer() {
+            if (_processor != null) _processor.CountMonitoringEnabled = false;
+            if (_detectedPixelsTimer == null) return;
+            _detectedPixelsTimer.Stop();
+            _detectedPixelsTimer.Dispose();
+            _detectedPixelsTimer = null;
+        }
+
+        /// <summary>
+        /// 直近サンプリングのカテゴリ別ピクセル数をラベルに表示する。
+        /// 検出が無効/未実行の場合は "--" を表示する。
+        /// ラベルに収まらない場合(AutoEllipsis で省略される場合)に備えて、
+        /// 全文をツールチップにも設定する。
+        /// </summary>
+        private void UpdateDetectedPixelsLabel() {
+            string text;
+            // 直近サンプリングが古い(対象ウィンドウなし等でサンプリングが止まっている)場合は "--" を表示する
+            bool stale = _processor == null ||
+                _processor.LastSampleTimeUtc == DateTime.MinValue ||
+                (DateTime.UtcNow - _processor.LastSampleTimeUtc).TotalMilliseconds > Math.Max(5000, _processor.SampleInterval * 3);
+            if (stale) {
+                text = Strings.ColorAlert_DetectedPixels + " --";
+            }
+            else {
+                var parts = new List<string>();
+                if (checkRed.Checked) parts.Add(Strings.ColorAlert_Red + ":" + _processor.LastRedCount);
+                if (checkOrange.Checked) parts.Add(Strings.ColorAlert_Orange + ":" + _processor.LastOrangeCount);
+                if (checkGray.Checked) parts.Add(Strings.ColorAlert_Gray + ":" + _processor.LastGrayCount);
+                if (checkCustomColor.Checked) parts.Add(Strings.ColorAlert_CustomColor + ":" + _processor.LastCustomCount);
+
+                text = Strings.ColorAlert_DetectedPixels + " " +
+                    (parts.Count > 0 ? string.Join(" ", parts) : "--");
+            }
+
+            if (labelDetectedPixels.Text != text) {
+                labelDetectedPixels.Text = text;
+                tooltipInfo.SetToolTip(labelDetectedPixels, text);
+            }
         }
 
         const string SystemSoundDisplayPrefix = "System: ";
@@ -158,6 +219,7 @@ namespace OnTopReplica.SidePanels {
         public override void OnClosing(MainForm form) {
             base.OnClosing(form);
 
+            StopDetectedPixelsTimer();
             EndColorSampling();
 
             var categories = GetEnabledCategories();
@@ -175,6 +237,7 @@ namespace OnTopReplica.SidePanels {
                 _processor.AlertOnLoss = checkAlertOnLoss.Checked;
                 _processor.IgnoreDarkFrames = checkIgnoreDark.Checked;
                 _processor.LossMissThreshold = (int)numLossMiss.Value;
+                _processor.MinDetectionPixels = (int)numMinPixels.Value;
             }
 
             //Color detection settings (incl. volume and sound) are persisted
@@ -268,6 +331,16 @@ namespace OnTopReplica.SidePanels {
             if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
         }
 
+        private void NumMinPixels_ValueChanged(object sender, EventArgs e) {
+            if (_loading) return; // suppress during panel initialization
+            if (_processor != null) {
+                _processor.MinDetectionPixels = (int)numMinPixels.Value;
+                Log.Write("MinDetectionPixels changed: {0}", (int)numMinPixels.Value);
+            }
+            // Persist immediately so a restart restores the correct state
+            if (ParentMainForm != null) ParentMainForm.NotifyPanelLayoutChanged();
+        }
+
         private void CheckIgnoreDark_CheckedChanged(object sender, EventArgs e) {
             if (_loading) return; // suppress during panel initialization
             if (_processor != null) {
@@ -307,6 +380,7 @@ namespace OnTopReplica.SidePanels {
             _processor.AlertOnLoss = checkAlertOnLoss.Checked;
             _processor.IgnoreDarkFrames = checkIgnoreDark.Checked;
             _processor.LossMissThreshold = (int)numLossMiss.Value;
+            _processor.MinDetectionPixels = (int)numMinPixels.Value;
             Log.Write("SyncSettingsToProcessor: categories={0}, custom={1}", CategoriesToString(_processor.EnabledCategories), _processor.CustomTargetColor.HasValue ? _processor.CustomTargetColor.Value.ToString() : "none");
         }
 

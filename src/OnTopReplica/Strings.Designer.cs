@@ -331,6 +331,42 @@ namespace OnTopReplica {
         }
 
         /// <summary>
+        ///   Detected: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_DetectedPixels {
+            get {
+                return ResourceManager.GetString("ColorAlert_DetectedPixels", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Matching pixel counts from the most recent sample に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_DetectedPixelsTooltip {
+            get {
+                return ResourceManager.GetString("ColorAlert_DetectedPixelsTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Min pixels: に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_MinPixels {
+            get {
+                return ResourceManager.GetString("ColorAlert_MinPixels", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Minimum number of matching pixels required to trigger the alarm に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorAlert_MinPixelsTooltip {
+            get {
+                return ResourceManager.GetString("ColorAlert_MinPixelsTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Enable Color Detection に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ColorAlert_Enable {

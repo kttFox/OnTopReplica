@@ -117,7 +117,8 @@ namespace OnTopReplica.MessagePumpProcessors {
                     RunClassificationSelfTest();
                 }
                 // バックグラウンド検出スレッドの開始または停止
-                if (value) {
+                // (カウント監視中はスレッドを維持し、検出数の表示更新を続ける)
+                if (value || _countMonitoring) {
                     StartDetectionThread();
                 } else {
                     StopDetectionThread();
@@ -219,6 +220,47 @@ namespace OnTopReplica.MessagePumpProcessors {
                     Log.Write("ColorDetection: AlertOnLoss={0}", value);
                 }
             }
+        }
+
+        private volatile bool _countMonitoring = false;
+
+        /// <summary>
+        /// カウント監視モード。true の間は検出が無効・一時停止中でもサンプリングを継続し、
+        /// 検出ピクセル数(LastXxxCount)を更新し続ける。アラームは発報しない。
+        /// カラーアラートパネルの表示中に有効化される。
+        /// </summary>
+        public bool CountMonitoringEnabled {
+            get { return _countMonitoring; }
+            set {
+                if (_countMonitoring == value) return;
+                _countMonitoring = value;
+                if (value) {
+                    StartDetectionThread();
+                } else if (!_enabled) {
+                    StopDetectionThread();
+                }
+                Log.Write("ColorDetection: CountMonitoring={0}", value);
+            }
+        }
+
+        // 直近のサンプリングで検出されたカテゴリ別ピクセル数(UI 表示用)。
+        // int の読み書きはアトミックなので、検出スレッドが書き込み UI スレッドが読み取っても安全。
+        public int LastRedCount { get; private set; }
+        public int LastOrangeCount { get; private set; }
+        public int LastGrayCount { get; private set; }
+        public int LastCustomCount { get; private set; }
+        /// <summary>直近サンプリングの時刻(UTC)。一度も実行されていなければ DateTime.MinValue。</summary>
+        public DateTime LastSampleTimeUtc { get; private set; } = DateTime.MinValue;
+
+        private int _minDetectionPixels = 1;
+
+        /// <summary>
+        /// アラーム発報に必要な、ターゲット色に一致するピクセルの最小数(1以上)。
+        /// 赤/オレンジ/カスタム色に適用される。グレーは密度条件に加えてこの条件も満たす必要がある。
+        /// </summary>
+        public int MinDetectionPixels {
+            get { return _minDetectionPixels; }
+            set { _minDetectionPixels = Math.Max(1, value); }
         }
 
         public int SampleInterval {
@@ -344,20 +386,26 @@ namespace OnTopReplica.MessagePumpProcessors {
             while (_detectionRunning) {
                 System.Threading.Thread.Sleep(_sampleInterval);
                 if (!_detectionRunning) break;
-                if (!_enabled) break;
-                if (_paused) continue; // 一時停止中は検出しない
+                if (!_enabled && !_countMonitoring) break;
+                // アラーム発報が許可されるのは、検出有効かつ一時停止中でない場合のみ。
+                // カウント監視中はそれ以外でもサンプリングを継続し、検出数の表示だけ更新する。
+                bool alarmAllowed = _enabled && !_paused;
+                if (!alarmAllowed && !_countMonitoring) continue;
                 if (Form == null || Form.CurrentThumbnailWindowHandle == null) continue;
                 if (_enabledCategories.Count == 0 && !CustomTargetColor.HasValue) continue;
                 // 消失検知モードでは、アラーム中も検出を継続する
                 // (色の再出現でアラームを止め、消失が続く限り鳴らし続けるため)
-                if (_alarmActive && !_alertOnLoss) continue;
+                if (_alarmActive && !_alertOnLoss && !_countMonitoring) continue;
 
                 var catList = string.Join(",", _enabledCategories);
                 Log.Write("Performing color detection (categories={0})", catList);
                 try {
                     _lastSampleMostlyBlack = false; // 前回サンプルの黒画面フラグをクリア
                     bool detected = DetectColorInWindow(Form.CurrentThumbnailWindowHandle.Handle);
-                    if (_alertOnLoss) {
+                    if (!alarmAllowed) {
+                        // カウント監視のみ: 検出数は更新済み。発報や消失判定は行わない。
+                    }
+                    else if (_alertOnLoss) {
                         // 消失検知モード: 一度検出(armed)した後、見つからなくなったら発報し、
                         // 色が再出現するまでアラームを繰り返し鳴らし続ける
                         if (!detected && _lastSampleMostlyBlack && IgnoreDarkFrames) {
@@ -728,8 +776,8 @@ namespace OnTopReplica.MessagePumpProcessors {
         /// 1. 全ピクセルを走査し、白(S&lt;15 かつ V&gt;85)、黒/黒に近い色(V&lt;15)、
         ///    および高彩度の非ターゲット色(青/緑のアイコン、S&gt;=40 かつ赤/オレンジ/グレー以外)をスキップする。
         /// 2. 残った各ピクセルを Red / Orange / Gray / None に分類する。
-        /// 3a. 赤またはオレンジ: 有効なカテゴリに一致するピクセルが1つでもあれば → 即時アラーム。
-        /// 3b. グレーのみ(赤/オレンジが見つからない場合): grayPixels/totalPixels &gt;= GrayMinDensityPct% → アラーム。
+        /// 3a. 赤またはオレンジ: 有効なカテゴリに一致するピクセルが minPixels 以上あれば → 即時アラーム。
+        /// 3b. グレーのみ(赤/オレンジが見つからない場合): grayPixels/totalPixels &gt;= GrayMinDensityPct% かつ grayPixels &gt;= minPixels → アラーム。
         ///     この密度ガードにより、スクロールバーや境界線(純グレー背景、約6%)による発報を防ぐ。
         /// </summary>
         private bool SampleBitmapForColor(Bitmap bmp) {
@@ -800,6 +848,13 @@ namespace OnTopReplica.MessagePumpProcessors {
                     }
                 }
 
+                // UI 表示用に直近カウントを公開する
+                LastRedCount = redCount;
+                LastOrangeCount = orangeCount;
+                LastGrayCount = grayCount;
+                LastCustomCount = customCount;
+                LastSampleTimeUtc = DateTime.UtcNow;
+
                 int validPixels = redCount + orangeCount + grayCount + noneCount;
                 int grayDensityPct = totalPixels > 0 ? grayCount * 100 / totalPixels : 0;
 
@@ -810,31 +865,34 @@ namespace OnTopReplica.MessagePumpProcessors {
                     redCount, orangeCount, grayCount, customCount, noneCount, totalPixels, whiteSkipped, blackSkipped, coloredBgSkipped);
                 Log.Write("  grayDensity={0}%(need \u2265{1}% for gray alarm)", grayDensityPct, GrayMinDensityPct);
 
-                // --- ルール1: 赤またはオレンジ — 1ピクセルでもあればアラーム発報 ---
-                if (_enabledCategories.Contains(ColorCategory.Red) && redCount >= 1) {
-                    Log.Write("ColorDetection MATCH: Red, {0} pixel(s)", redCount);
+                // アラーム発報に必要な最小一致ピクセル数(設定可能、既定1)
+                int minPixels = _minDetectionPixels;
+
+                // --- ルール1: 赤またはオレンジ — 一致ピクセルが minPixels 以上であればアラーム発報 ---
+                if (_enabledCategories.Contains(ColorCategory.Red) && redCount >= minPixels) {
+                    Log.Write("ColorDetection MATCH: Red, {0} pixel(s) (min={1})", redCount, minPixels);
                     SaveDebugBitmap(bmp, "alarm_trigger");
                     return true;
                 }
-                if (_enabledCategories.Contains(ColorCategory.Orange) && orangeCount >= 1) {
-                    Log.Write("ColorDetection MATCH: Orange, {0} pixel(s)", orangeCount);
+                if (_enabledCategories.Contains(ColorCategory.Orange) && orangeCount >= minPixels) {
+                    Log.Write("ColorDetection MATCH: Orange, {0} pixel(s) (min={1})", orangeCount, minPixels);
                     SaveDebugBitmap(bmp, "alarm_trigger");
                     return true;
                 }
 
-                // --- ルール2: グレー — 密度が GrayMinDensityPct% 以上の場合のみ ---
+                // --- ルール2: グレー — 密度が GrayMinDensityPct% 以上かつ minPixels 以上の場合のみ ---
                 if (_enabledCategories.Contains(ColorCategory.Gray)) {
-                    if (grayDensityPct >= GrayMinDensityPct) {
-                        Log.Write("ColorDetection MATCH: Gray, {0}px density={1}%", grayCount, grayDensityPct);
+                    if (grayDensityPct >= GrayMinDensityPct && grayCount >= minPixels) {
+                        Log.Write("ColorDetection MATCH: Gray, {0}px density={1}% (min={2})", grayCount, grayDensityPct, minPixels);
                         SaveDebugBitmap(bmp, "alarm_trigger");
                         return true;
                     } else {
-                        Log.Write("ColorDetection no-Gray: {0}px density={1}% < {2}%", grayCount, grayDensityPct, GrayMinDensityPct);
+                        Log.Write("ColorDetection no-Gray: {0}px density={1}% < {2}% or count < min({3})", grayCount, grayDensityPct, GrayMinDensityPct, minPixels);
                     }
                 }
 
                 // --- ルール3: カスタム色 ---
-                if (CustomTargetColor.HasValue && customCount >= 1) {
+                if (CustomTargetColor.HasValue && customCount >= minPixels) {
                     Log.Write("ColorDetection MATCH: Custom, {0} pixel(s), target={1}", customCount, CustomTargetColor.Value);
                     SaveDebugBitmap(bmp, "alarm_trigger");
                     return true;
@@ -1043,6 +1101,7 @@ namespace OnTopReplica.MessagePumpProcessors {
         }
 
         protected override void Shutdown() {
+            _countMonitoring = false; // Enabled=false 設定時にスレッドが再起動しないよう先にクリアする
             StopDetectionThread();
             Enabled = false;
             if (_alarmActive)

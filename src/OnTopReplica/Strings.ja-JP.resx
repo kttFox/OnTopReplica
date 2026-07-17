@@ -213,6 +213,18 @@
   <data name="ColorAlert_LossMissCountTooltip" xml:space="preserve">
     <value>対象色がこの回数連続で検出されなかった場合に消失アラームを発報します</value>
   </data>
+  <data name="ColorAlert_MinPixels" xml:space="preserve">
+    <value>検出ピクセル数:</value>
+  </data>
+  <data name="ColorAlert_MinPixelsTooltip" xml:space="preserve">
+    <value>一致するピクセルがこの数以上検出された場合にアラームを発報します</value>
+  </data>
+  <data name="ColorAlert_DetectedPixels" xml:space="preserve">
+    <value>検出中:</value>
+  </data>
+  <data name="ColorAlert_DetectedPixelsTooltip" xml:space="preserve">
+    <value>直近のサンプリングで一致したピクセル数</value>
+  </data>
   <data name="ColorAlert_IntervalTooltip" xml:space="preserve">
     <value>色チェックの間隔 (ミリ秒)</value>
   </data>
