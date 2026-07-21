@@ -20,8 +20,8 @@ namespace OnTopReplica.MessagePumpProcessors {
                     //Check whether the destroyed window is the one we were cloning
                     IntPtr destroyedHandle = msg.LParam;
                     if (destroyedHandle == Form.CurrentThumbnailWindowHandle.Handle) {
-                        //Disable cloning
-                        Form.UnsetThumbnail();
+                        //Disable cloning (対象ウィンドウ終了として通知)
+                        Form.UnsetThumbnail(true);
                     }
                 }
             }

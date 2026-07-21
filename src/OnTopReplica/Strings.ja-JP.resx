@@ -495,7 +495,7 @@ You must run this application on Windows Vista Home Premium or better.</value>
     <value>自動非表示:</value>
   </data>
   <data name="SettingsAutoHideWhenSourceInactive" xml:space="preserve">
-    <value>対象のウィンドウが非アクティブのときパネルを非表示にする</value>
+    <value>対象のウィンドウに連動して表示/非表示させる</value>
   </data>
   <data name="SettingsIndicatorTitle" xml:space="preserve">
     <value>カラーアラート目印:</value>

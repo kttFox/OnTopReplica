@@ -239,7 +239,7 @@ namespace OnTopReplica {
                     //raised: detect it actively so the watcher can start seeking.
                     if (!Native.WindowManagerMethods.IsWindow(current.Handle)) {
                         Log.Write("Panel layout: source window is gone, watching for it to reappear");
-                        primary.UnsetThumbnail();
+                        primary.UnsetThumbnail(true);
                         return;
                     }
 
@@ -283,6 +283,14 @@ namespace OnTopReplica {
 
                 //Attach the primary (propagates the window to all secondary panels)
                 primary.SetThumbnail(handle, null);
+
+                //対象ウィンドウが起動したら（再出現したら）ウィンドウを表示する（自動非表示設定がONの場合）。
+                //自動非表示の復帰と挙動を揃え、フォーカスを奪わずに復元する。
+                if (Settings.Default.HideWhenSourceDeactivated && primary.IsHandleCreated &&
+                    primary.WindowState == System.Windows.Forms.FormWindowState.Minimized) {
+                    Native.WindowManagerMethods.ShowWindow(primary.Handle,
+                        Native.WindowManagerMethods.SW_SHOWNOACTIVATE);
+                }
 
                 //Re-apply the remembered regions (primary included)
                 foreach (var kv in _snapshot.PanelRegions) {

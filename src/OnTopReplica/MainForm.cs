@@ -880,7 +880,11 @@ namespace OnTopReplica {
         /// <summary>
         /// Disables the cloned thumbnail.
         /// </summary>
-        public void UnsetThumbnail() {
+        /// <param name="targetLost">
+        /// クローン対象のウィンドウが終了・消失したことによる解除の場合は true。
+        /// ユーザー操作による手動解除では false。
+        /// </param>
+        public void UnsetThumbnail(bool targetLost = false) {
             //Unset handle
             CurrentThumbnailWindowHandle = null;
             ThumbnailPanel.UnsetThumbnail();
@@ -895,6 +899,15 @@ namespace OnTopReplica {
 
             if (!IsSecondaryPanel) {
                 NotifyPanelLayoutChanged();
+            }
+
+            //対象ウィンドウが終了したら最小化する（自動非表示設定がONの場合）。
+            //検知経路に依らず一元的にここで処理する。
+            //自動非表示と挙動を揃え、フォーカスを奪わない最小化にする。
+            if (targetLost && !IsSecondaryPanel && IsHandleCreated &&
+                Properties.Settings.Default.HideWhenSourceDeactivated) {
+                WindowManagerMethods.ShowWindow(Handle,
+                    WindowManagerMethods.SW_SHOWMINNOACTIVE);
             }
         }
 
