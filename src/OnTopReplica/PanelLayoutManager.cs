@@ -38,6 +38,9 @@ namespace OnTopReplica {
             //Keyed by panel window; the primary is included like any other panel
             public readonly Dictionary<MainForm, ThumbnailRegion> PanelRegions = new Dictionary<MainForm, ThumbnailRegion>();
             public readonly Dictionary<MainForm, bool> PanelChrome = new Dictionary<MainForm, bool>();
+            //Remembered client size of each panel, so the size can be restored on
+            //reappear instead of being recomputed from a stale/minimized width.
+            public readonly Dictionary<MainForm, System.Drawing.Size> PanelSizes = new Dictionary<MainForm, System.Drawing.Size>();
 
             public bool HasWindow {
                 get { return Hwnd != 0 || !string.IsNullOrEmpty(Title) || !string.IsNullOrEmpty(ClassName); }
@@ -281,21 +284,33 @@ namespace OnTopReplica {
 
                 Log.Write("Panel layout: source window appeared, restoring '{0}'", handle.Title);
 
-                //Attach the primary (propagates the window to all secondary panels)
-                primary.SetThumbnail(handle, null);
-
                 //対象ウィンドウが起動したら（再出現したら）ウィンドウを表示する（自動非表示設定がONの場合）。
                 //自動非表示の復帰と挙動を揃え、フォーカスを奪わずに復元する。
+                //SetThumbnail より前に復元することで、最小化中の小さな ClientSize.Width を
+                //基準にアスペクト比計算が走り、パネルが縮小してしまうのを防ぐ。
                 if (Settings.Default.HideWhenSourceDeactivated && primary.IsHandleCreated &&
                     primary.WindowState == System.Windows.Forms.FormWindowState.Minimized) {
                     Native.WindowManagerMethods.ShowWindow(primary.Handle,
                         Native.WindowManagerMethods.SW_SHOWNOACTIVATE);
                 }
 
+                //Attach the primary (propagates the window to all secondary panels)
+                primary.SetThumbnail(handle, null);
+
                 //Re-apply the remembered regions (primary included)
                 foreach (var kv in _snapshot.PanelRegions) {
                     if (!kv.Key.IsDisposed && kv.Key.ThumbnailPanel.IsShowingThumbnail) {
                         kv.Key.SelectedThumbnailRegion = kv.Value;
+                    }
+                }
+
+                //Restore the remembered panel sizes: SetThumbnail/region changes
+                //recompute the size from the current width, which may still be
+                //stale after a restore, so re-apply the size we saw while attached.
+                foreach (var kv in _snapshot.PanelSizes) {
+                    if (!kv.Key.IsDisposed && kv.Key.ThumbnailPanel.IsShowingThumbnail &&
+                        kv.Key.WindowState == System.Windows.Forms.FormWindowState.Normal) {
+                        kv.Key.ClientSize = kv.Value;
                     }
                 }
 
@@ -328,6 +343,10 @@ namespace OnTopReplica {
             else
                 _snapshot.PanelRegions.Remove(panel);
             _snapshot.PanelChrome[panel] = panel.IsChromeVisible;
+            //Only remember a size while the panel is in its normal state, so a
+            //minimized/hidden width is never captured as the "good" size.
+            if (panel.WindowState == System.Windows.Forms.FormWindowState.Normal)
+                _snapshot.PanelSizes[panel] = panel.ClientSize;
         }
 
         /// <summary>
@@ -340,9 +359,12 @@ namespace OnTopReplica {
                 if (p.IsDisposed) stale.Add(p);
             foreach (var p in _snapshot.PanelChrome.Keys)
                 if (p.IsDisposed && !stale.Contains(p)) stale.Add(p);
+            foreach (var p in _snapshot.PanelSizes.Keys)
+                if (p.IsDisposed && !stale.Contains(p)) stale.Add(p);
             foreach (var p in stale) {
                 _snapshot.PanelRegions.Remove(p);
                 _snapshot.PanelChrome.Remove(p);
+                _snapshot.PanelSizes.Remove(p);
             }
         }
 
