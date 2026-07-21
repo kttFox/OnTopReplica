@@ -243,6 +243,7 @@ namespace OnTopReplica {
                     if (!Native.WindowManagerMethods.IsWindow(current.Handle)) {
                         Log.Write("Panel layout: source window is gone, watching for it to reappear");
                         primary.UnsetThumbnail(true);
+                        primary.StopColorAlertForSourceLoss();
                         return;
                     }
 
@@ -279,8 +280,13 @@ namespace OnTopReplica {
                 if (!_snapshot.HasWindow)
                     return;
                 var handle = SeekWindow();
-                if (handle == null)
+                if (handle == null) {
+                    //対象ウィンドウが未アタッチかつ見つからない = 喪失状態。
+                    //DWM エラー等で targetLost=false のまま UnsetThumbnail された経路でも
+                    //確実にカラーアラートを停止する(設定が有効な場合、一度きり)。
+                    primary.StopColorAlertForSourceLoss();
                     return;
+                }
 
                 Log.Write("Panel layout: source window appeared, restoring '{0}'", handle.Title);
 

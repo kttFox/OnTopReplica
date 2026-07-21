@@ -64,7 +64,7 @@ namespace OnTopReplica {
         Color _dotColor = Color.Red;
 
         /// <summary>
-        /// ●の色。実行中は赤、一時停止中はグリーン。
+        /// ●の色。実行中は赤、停止中はグリーン。
         /// </summary>
         public Color DotColor {
             get { return _dotColor; }

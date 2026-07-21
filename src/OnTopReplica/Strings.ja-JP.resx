@@ -184,16 +184,16 @@
     <value>色検出を有効にする</value>
   </data>
   <data name="MenuPauseColorAlertAll" xml:space="preserve">
-    <value>カラーアラートを一時停止 (全パネル)</value>
+    <value>カラーアラートを停止 (全パネル)</value>
   </data>
   <data name="MenuPauseColorAlertAllTT" xml:space="preserve">
-    <value>設定を変えずに全パネルの色検出を一時的に停止します</value>
+    <value>設定を変えずに全パネルの色検出を停止します</value>
   </data>
   <data name="MenuResumeColorAlertAll" xml:space="preserve">
-    <value>カラーアラートを再開 (全パネル)</value>
+    <value>カラーアラートを開始 (全パネル)</value>
   </data>
   <data name="MenuResumeColorAlertAllTT" xml:space="preserve">
-    <value>全パネルの色検出を再開します</value>
+    <value>全パネルの色検出を開始します</value>
   </data>
   <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
     <value>消失時にアラーム</value>
@@ -498,7 +498,7 @@ You must run this application on Windows Vista Home Premium or better.</value>
     <value>対象のウィンドウに連動して表示/非表示させる</value>
   </data>
   <data name="SettingsPauseColorAlertWhenSourceLost" xml:space="preserve">
-    <value>ウィンドウが失われたらカラーアラートを一時停止する</value>
+    <value>ウィンドウが失われたらカラーアラートを停止する</value>
   </data>
   <data name="SettingsIndicatorTitle" xml:space="preserve">
     <value>カラーアラート:</value>
@@ -513,7 +513,7 @@ You must run this application on Windows Vista Home Premium or better.</value>
     <value>動作中の色:</value>
   </data>
   <data name="SettingsIndicatorPauseColor" xml:space="preserve">
-    <value>一時停止中の色:</value>
+    <value>停止中の色:</value>
   </data>
   <data name="SettingsLanguageTitle" xml:space="preserve">
     <value>言語:</value>

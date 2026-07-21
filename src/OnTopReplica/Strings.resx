@@ -188,16 +188,16 @@
     <value>Enable Color Detection</value>
   </data>
   <data name="MenuPauseColorAlertAll" xml:space="preserve">
-    <value>Pause Color Alerts (all panels)</value>
+    <value>Stop Color Alerts (all panels)</value>
   </data>
   <data name="MenuPauseColorAlertAllTT" xml:space="preserve">
-    <value>Temporarily suspends color detection on every panel without changing settings</value>
+    <value>Stops color detection on every panel without changing settings</value>
   </data>
   <data name="MenuResumeColorAlertAll" xml:space="preserve">
-    <value>Resume Color Alerts (all panels)</value>
+    <value>Start Color Alerts (all panels)</value>
   </data>
   <data name="MenuResumeColorAlertAllTT" xml:space="preserve">
-    <value>Resumes color detection on every panel</value>
+    <value>Starts color detection on every panel</value>
   </data>
   <data name="ColorAlert_AlertOnLoss" xml:space="preserve">
     <value>Alarm when color disappears</value>
@@ -501,7 +501,7 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
     <value>Show/hide in sync with the cloned window</value>
   </data>
   <data name="SettingsPauseColorAlertWhenSourceLost" xml:space="preserve">
-    <value>Pause color alerts when the window is lost</value>
+    <value>Stop color alerts when the window is lost</value>
   </data>
   <data name="SettingsIndicatorTitle" xml:space="preserve">
     <value>Color alert:</value>
@@ -516,7 +516,7 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
     <value>Running color:</value>
   </data>
   <data name="SettingsIndicatorPauseColor" xml:space="preserve">
-    <value>Paused color:</value>
+    <value>Stopped color:</value>
   </data>
   <data name="SettingsLanguageTitle" xml:space="preserve">
     <value>Language:</value>

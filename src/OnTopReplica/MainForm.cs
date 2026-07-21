@@ -129,7 +129,7 @@ namespace OnTopReplica {
             foreach (var child in primary._childPanels.Where(child => !child.IsDisposed)) {
                 SetColorAlertPaused(child, paused);
             }
-            //一時停止状態もレイアウトファイルに永続化する
+            //停止状態もレイアウトファイルに永続化する
             NotifyPanelLayoutChanged();
         }
 
@@ -147,6 +147,34 @@ namespace OnTopReplica {
                     return false;
                 }
             }
+        }
+
+        //対象ウィンドウ喪失によりカラーアラートを停止済みかどうか(プライマリのみ)。
+        //喪失検出は複数経路(WindowKeeper のシェルフック、PanelLayoutManager のウォッチャ、
+        //DWM エラー)から起こり得るため、多重停止・レイアウト保存の連打を防ぐ一度きりのガード。
+        //対象ウィンドウが再アタッチされた時点でリセットする(自動開始はしない)。
+        bool _colorAlertStoppedForLoss;
+
+        /// <summary>
+        /// 対象ウィンドウが失われたとき、設定が有効ならカラーアラート検出を停止する。
+        /// 検出経路に依らず一元的にここで処理する。停止は一度きりで、
+        /// 再アタッチ(<see cref="ResetColorAlertSourceLossState"/>)までは繰り返さない。
+        /// </summary>
+        public void StopColorAlertForSourceLoss() {
+            var primary = _primaryPanel ?? this;
+            if (primary.IsSecondaryPanel) return;
+            if (!Properties.Settings.Default.PauseColorAlertWhenSourceLost) return;
+            if (primary._colorAlertStoppedForLoss) return;
+            primary._colorAlertStoppedForLoss = true;
+            primary.SetColorAlertPausedAllPanels(true);
+        }
+
+        /// <summary>
+        /// 対象ウィンドウ喪失の停止ガードをリセットする(再アタッチ時に呼ぶ)。
+        /// 停止状態(Paused)自体は変更しない — 自動開始は行わない。
+        /// </summary>
+        public void ResetColorAlertSourceLossState() {
+            (_primaryPanel ?? this)._colorAlertStoppedForLoss = false;
         }
 
         static void SetColorAlertPaused(MainForm panel, bool paused) {
@@ -200,7 +228,7 @@ namespace OnTopReplica {
                         Owner = this //オーナー付きにすることで TopMost なしで常にこのパネルの直上に保たれる
                     };
                 }
-                //実行中/一時停止中の色とサイズは設定から反映する
+                //実行中/停止中の色とサイズは設定から反映する
                 _colorAlertIndicator.DotSize = Properties.Settings.Default.ColorAlertIndicatorSize;
                 _colorAlertIndicator.DotColor = paused
                     ? Properties.Settings.Default.ColorAlertIndicatorPausedColor
@@ -873,6 +901,8 @@ namespace OnTopReplica {
             }
 
             if (!IsSecondaryPanel) {
+                //再アタッチできたので喪失停止ガードをリセットする(停止状態自体は保持)。
+                ResetColorAlertSourceLossState();
                 NotifyPanelLayoutChanged();
             }
         }
@@ -910,12 +940,11 @@ namespace OnTopReplica {
                     WindowManagerMethods.SW_SHOWMINNOACTIVE);
             }
 
-            //対象ウィンドウが失われたら、設定に応じてカラーアラート検出を一時停止する。
-            //検出対象が存在しないため誤検知・無駄な走査を防ぎ、目印を「一時停止」表示にする。
-            //自動再開は行わない(ユーザーがメニュー等で明示的に再開する)。
-            if (targetLost && !IsSecondaryPanel &&
-                Properties.Settings.Default.PauseColorAlertWhenSourceLost) {
-                SetColorAlertPausedAllPanels(true);
+            //対象ウィンドウが失われたら、設定に応じてカラーアラート検出を停止する。
+            //検出対象が存在しないため誤検知・無駄な走査を防ぎ、目印を「停止」表示にする。
+            //自動開始は行わない(ユーザーがメニュー等で明示的に開始する)。
+            if (targetLost && !IsSecondaryPanel) {
+                StopColorAlertForSourceLoss();
             }
         }
 

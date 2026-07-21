@@ -105,7 +105,7 @@ namespace OnTopReplica.MessagePumpProcessors {
             set {
                 bool wasDisabled = !_enabled;
                 _enabled = value;
-                // 監視の再開時は消失検知の状態をリセットする
+                // 監視の開始時は消失検知の状態をリセットする
                 if (value && wasDisabled) {
                     _lossArmed = false;
                     _lossOngoing = false;
@@ -152,8 +152,8 @@ namespace OnTopReplica.MessagePumpProcessors {
         private volatile bool _paused = false;
 
         /// <summary>
-        /// 一時停止フラグ。true の間は検出・発報を行わない(Enabled 設定は保持される)。
-        /// メニューの「全パネル一時停止/再開」から使用され、PanelLayoutManager によって永続化される。
+        /// 停止フラグ。true の間は検出・発報を行わない(Enabled 設定は保持される)。
+        /// メニューの「全パネル停止/開始」から使用され、PanelLayoutManager によって永続化される。
         /// </summary>
         public bool Paused {
             get { return _paused; }
@@ -161,7 +161,7 @@ namespace OnTopReplica.MessagePumpProcessors {
                 if (_paused == value) return;
                 _paused = value;
                 if (value) {
-                    // 一時停止時: 鳴動中のアラームを止め、消失検知の状態をリセットする
+                    // 停止時: 鳴動中のアラームを止め、消失検知の状態をリセットする
                     if (_alarmActive) StopAlarm();
                     _lossArmed = false;
                     _lossOngoing = false;
@@ -225,7 +225,7 @@ namespace OnTopReplica.MessagePumpProcessors {
         private volatile bool _countMonitoring = false;
 
         /// <summary>
-        /// カウント監視モード。true の間は検出が無効・一時停止中でもサンプリングを継続し、
+        /// カウント監視モード。true の間は検出が無効・停止中でもサンプリングを継続し、
         /// 検出ピクセル数(LastXxxCount)を更新し続ける。アラームは発報しない。
         /// カラーアラートパネルの表示中に有効化される。
         /// </summary>
@@ -387,11 +387,19 @@ namespace OnTopReplica.MessagePumpProcessors {
                 System.Threading.Thread.Sleep(_sampleInterval);
                 if (!_detectionRunning) break;
                 if (!_enabled && !_countMonitoring) break;
-                // アラーム発報が許可されるのは、検出有効かつ一時停止中でない場合のみ。
+                // アラーム発報が許可されるのは、検出有効かつ停止中でない場合のみ。
                 // カウント監視中はそれ以外でもサンプリングを継続し、検出数の表示だけ更新する。
                 bool alarmAllowed = _enabled && !_paused;
                 if (!alarmAllowed && !_countMonitoring) continue;
                 if (Form == null || Form.CurrentThumbnailWindowHandle == null) continue;
+                // 対象ウィンドウが既に破棄されている場合は検出をスキップする。
+                // 破棄されたハンドルに対する検出は失敗(色なし)となり、消失検知モードで
+                // 誤ってアラームを発報してしまう。喪失時の停止処理(UnsetThumbnail)が
+                // 走る前のこの隙間を塞ぐ。
+                if (!WindowManagerMethods.IsWindow(Form.CurrentThumbnailWindowHandle.Handle)) {
+                    Log.Write("ColorDetection: target window no longer exists — skipping detection");
+                    continue;
+                }
                 if (_enabledCategories.Count == 0 && !CustomTargetColor.HasValue) continue;
                 // 消失検知モードでは、アラーム中も検出を継続する
                 // (色の再出現でアラームを止め、消失が続く限り鳴らし続けるため)

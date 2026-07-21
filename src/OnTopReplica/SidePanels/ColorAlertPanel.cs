@@ -143,7 +143,7 @@ namespace OnTopReplica.SidePanels {
         /// </summary>
         private void StartDetectedPixelsTimer() {
             if (_detectedPixelsTimer != null) return;
-            // 検出が無効・一時停止中でも検出数を更新できるよう、カウント監視モードを有効化する
+            // 検出が無効・停止中でも検出数を更新できるよう、カウント監視モードを有効化する
             if (_processor != null) _processor.CountMonitoringEnabled = true;
             _detectedPixelsTimer = new Timer { Interval = 500 };
             _detectedPixelsTimer.Tick += (s, e) => UpdateDetectedPixelsLabel();

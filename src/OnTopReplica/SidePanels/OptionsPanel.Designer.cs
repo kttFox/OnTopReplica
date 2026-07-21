@@ -277,7 +277,7 @@ namespace OnTopReplica.SidePanels {
 			this.lblIndicatorPauseColor.Name = "lblIndicatorPauseColor";
 			this.lblIndicatorPauseColor.Size = new System.Drawing.Size(78, 15);
 			this.lblIndicatorPauseColor.TabIndex = 15;
-			this.lblIndicatorPauseColor.Text = "Paused color:";
+			this.lblIndicatorPauseColor.Text = "Stopped color:";
 			this.lblIndicatorPauseColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// panelIndicatorPauseColor
@@ -301,7 +301,7 @@ namespace OnTopReplica.SidePanels {
 			this.checkPauseColorAlertOnLoss.Name = "checkPauseColorAlertOnLoss";
 			this.checkPauseColorAlertOnLoss.Size = new System.Drawing.Size(248, 19);
 			this.checkPauseColorAlertOnLoss.TabIndex = 17;
-			this.checkPauseColorAlertOnLoss.Text = "Pause color alerts when the window is lost";
+			this.checkPauseColorAlertOnLoss.Text = "Stop color alerts when the window is lost";
 			this.checkPauseColorAlertOnLoss.UseVisualStyleBackColor = true;
 			this.checkPauseColorAlertOnLoss.CheckedChanged += new System.EventHandler(this.PauseColorAlertOnLoss_CheckedChanged);
 			// 

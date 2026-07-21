@@ -27,7 +27,7 @@ namespace OnTopReplica {
             clickThroughToolStripMenuItem.Enabled = showing;
             clickForwardingToolStripMenuItem.Enabled = showing;
 
-            //一時停止状態に応じてメニュー表記を切り替える
+            //停止状態に応じてメニュー表記を切り替える
             bool alertPaused = IsColorAlertPausedAllPanels;
             pauseColorAlertAllPanelsToolStripMenuItem.Text = alertPaused
                 ? Strings.MenuResumeColorAlertAll : Strings.MenuPauseColorAlertAll;

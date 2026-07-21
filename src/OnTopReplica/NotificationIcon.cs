@@ -58,7 +58,7 @@ namespace OnTopReplica {
                 _windowsItem.DropDown = Form?.MenuWindows;
                 _windowsItem.Enabled = Form != null;
 
-                //カラーアラートの一時停止状態に応じて表記を切り替える
+                //カラーアラートの停止状態に応じて表記を切り替える
                 bool alertPaused = Form != null && Form.IsColorAlertPausedAllPanels;
                 _colorAlertPauseItem.Text = alertPaused
                     ? Strings.MenuResumeColorAlertAll : Strings.MenuPauseColorAlertAll;
