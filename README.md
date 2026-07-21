@@ -37,6 +37,7 @@ Very useful for monitoring background processes, wrangling with complex multi-wi
 * Detection colors: in addition to the red, orange, and gray categories, you can specify a **custom color**. A sampling feature lets you pick a color by clicking any point on the screen (a cursor-following color preview is shown while sampling).
 * Added an option to sound the alarm when the detection color disappears.
   You can set the number of consecutive misses required, to avoid false positives.
+* Color-alert monitoring can be **paused automatically while the target window is lost** (e.g. minimized or not yet running) and resumed when it comes back, avoiding spurious alarms (setting "Pause color alerts when the window is lost").
 * Alarm sounds: in addition to the bundled WAV/MP3 files (just drop files into the `Sounds` folder to add them to the list), some Windows system sounds can be selected.
 * Detection runs independently per panel.
 * Added the ability to send a single key to the monitored window when the alarm fires.
@@ -46,7 +47,7 @@ Very useful for monitoring background processes, wrangling with complex multi-wi
 
 ### Auto-hide
 
-* Added an option to **automatically hide all panels while the target window is not active**, and show them again (without stealing focus) when the target becomes active (setting "Hide when source is deactivated", disabled by default). The taskbar button remains visible while hidden, so you can also restore the panels manually.
+* Added an option to **show/hide all panels in sync with the target window** (setting "Show/hide in sync with the cloned window", disabled by default): panels are hidden (without stealing focus) while the target window is inactive and shown again when it becomes active. This is also integrated with the target window's exit/start, so panels are hidden when the target exits and restored when it starts again. The taskbar button remains visible while hidden, so you can also restore the panels manually.
 
 ### Other
 
