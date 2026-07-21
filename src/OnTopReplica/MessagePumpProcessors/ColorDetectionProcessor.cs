@@ -66,6 +66,9 @@ namespace OnTopReplica.MessagePumpProcessors {
         [DllImport("user32.dll")]
         private static extern uint MapVirtualKey(uint uCode, uint uMapType);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
         private const uint SRCCOPY = 0x00CC0020;
         private const uint WM_KEYDOWN = 0x0100;
         private const uint WM_KEYUP = 0x0101;
@@ -400,6 +403,18 @@ namespace OnTopReplica.MessagePumpProcessors {
                     Log.Write("ColorDetection: target window no longer exists — skipping detection");
                     continue;
                 }
+                // 非アクティブ抑制: 対象ウィンドウが前面(フォアグラウンド)でない場合はアラームを発報しない(常に有効)。
+                // カウント監視はそのまま継続する(alarmAllowed のみ無効化する)。
+                if (alarmAllowed && GetForegroundWindow() != Form.CurrentThumbnailWindowHandle.Handle) {
+                    alarmAllowed = false;
+                    if (_alarmActive) StopAlarm();
+                    // 消失検知の状態をリセットし、再アクティブ化直後の誤報を防ぐ
+                    _lossArmed = false;
+                    _lossOngoing = false;
+                    _lossMissCount = 0;
+                    if (!_countMonitoring) continue;
+                }
+
                 if (_enabledCategories.Count == 0 && !CustomTargetColor.HasValue) continue;
                 // 消失検知モードでは、アラーム中も検出を継続する
                 // (色の再出現でアラームを止め、消失が続く限り鳴らし続けるため)
