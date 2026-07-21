@@ -500,8 +500,11 @@ To return to normal mode, use the disable command in the menu of the OnTopReplic
   <data name="SettingsAutoHideWhenSourceInactive" xml:space="preserve">
     <value>Show/hide in sync with the cloned window</value>
   </data>
+  <data name="SettingsPauseColorAlertWhenSourceLost" xml:space="preserve">
+    <value>Pause color alerts when the window is lost</value>
+  </data>
   <data name="SettingsIndicatorTitle" xml:space="preserve">
-    <value>Color alert indicator:</value>
+    <value>Color alert:</value>
   </data>
   <data name="SettingsIndicatorShow" xml:space="preserve">
     <value>Show indicator dot</value>

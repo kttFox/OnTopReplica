@@ -156,6 +156,18 @@ namespace OnTopReplica.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PauseColorAlertWhenSourceLost {
+            get {
+                return ((bool)(this["PauseColorAlertWhenSourceLost"]));
+            }
+            set {
+                this["PauseColorAlertWhenSourceLost"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ColorAlertIndicatorEnabled {
             get {

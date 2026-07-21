@@ -42,6 +42,7 @@ namespace OnTopReplica.SidePanels {
 			this.panelIndicatorRunColor = new System.Windows.Forms.Panel();
 			this.lblIndicatorPauseColor = new System.Windows.Forms.Label();
 			this.panelIndicatorPauseColor = new System.Windows.Forms.Panel();
+			this.checkPauseColorAlertOnLoss = new System.Windows.Forms.CheckBox();
 			this.groupAutoHide = new System.Windows.Forms.Label();
 			this.checkAutoHide = new System.Windows.Forms.CheckBox();
 			this.panelMain.SuspendLayout();
@@ -51,7 +52,7 @@ namespace OnTopReplica.SidePanels {
 			// btnClose
 			// 
 			this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnClose.Location = new System.Drawing.Point(220, 437);
+			this.btnClose.Location = new System.Drawing.Point(220, 460);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(87, 27);
 			this.btnClose.TabIndex = 20;
@@ -82,11 +83,12 @@ namespace OnTopReplica.SidePanels {
 			this.panelMain.Controls.Add(this.panelIndicatorRunColor);
 			this.panelMain.Controls.Add(this.lblIndicatorPauseColor);
 			this.panelMain.Controls.Add(this.panelIndicatorPauseColor);
+			this.panelMain.Controls.Add(this.checkPauseColorAlertOnLoss);
 			this.panelMain.Controls.Add(this.groupAutoHide);
 			this.panelMain.Controls.Add(this.checkAutoHide);
 			this.panelMain.Location = new System.Drawing.Point(7, 7);
 			this.panelMain.Name = "panelMain";
-			this.panelMain.Size = new System.Drawing.Size(301, 424);
+			this.panelMain.Size = new System.Drawing.Size(301, 447);
 			this.panelMain.TabIndex = 1;
 			// 
 			// groupLanguage
@@ -195,14 +197,16 @@ namespace OnTopReplica.SidePanels {
 			this.groupIndicator.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.groupIndicator.Location = new System.Drawing.Point(3, 228);
 			this.groupIndicator.Name = "groupIndicator";
-			this.groupIndicator.Size = new System.Drawing.Size(115, 15);
+			this.groupIndicator.Size = new System.Drawing.Size(65, 15);
 			this.groupIndicator.TabIndex = 9;
-			this.groupIndicator.Text = "Color alert indicator:";
+			this.groupIndicator.Text = "Color alert:";
 			// 
 			// checkIndicator
 			// 
 			this.checkIndicator.AutoSize = true;
-			this.checkIndicator.Location = new System.Drawing.Point(16, 249);
+			this.checkIndicator.Checked = true;
+			this.checkIndicator.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkIndicator.Location = new System.Drawing.Point(16, 252);
 			this.checkIndicator.Name = "checkIndicator";
 			this.checkIndicator.Size = new System.Drawing.Size(126, 19);
 			this.checkIndicator.TabIndex = 10;
@@ -213,7 +217,7 @@ namespace OnTopReplica.SidePanels {
 			// lblIndicatorSize
 			// 
 			this.lblIndicatorSize.AutoSize = true;
-			this.lblIndicatorSize.Location = new System.Drawing.Point(16, 279);
+			this.lblIndicatorSize.Location = new System.Drawing.Point(23, 279);
 			this.lblIndicatorSize.Name = "lblIndicatorSize";
 			this.lblIndicatorSize.Size = new System.Drawing.Size(75, 15);
 			this.lblIndicatorSize.TabIndex = 11;
@@ -247,7 +251,7 @@ namespace OnTopReplica.SidePanels {
 			// lblIndicatorRunColor
 			// 
 			this.lblIndicatorRunColor.AutoSize = true;
-			this.lblIndicatorRunColor.Location = new System.Drawing.Point(16, 309);
+			this.lblIndicatorRunColor.Location = new System.Drawing.Point(23, 309);
 			this.lblIndicatorRunColor.Name = "lblIndicatorRunColor";
 			this.lblIndicatorRunColor.Size = new System.Drawing.Size(85, 15);
 			this.lblIndicatorRunColor.TabIndex = 13;
@@ -269,7 +273,7 @@ namespace OnTopReplica.SidePanels {
 			// lblIndicatorPauseColor
 			// 
 			this.lblIndicatorPauseColor.AutoSize = true;
-			this.lblIndicatorPauseColor.Location = new System.Drawing.Point(16, 339);
+			this.lblIndicatorPauseColor.Location = new System.Drawing.Point(23, 339);
 			this.lblIndicatorPauseColor.Name = "lblIndicatorPauseColor";
 			this.lblIndicatorPauseColor.Size = new System.Drawing.Size(78, 15);
 			this.lblIndicatorPauseColor.TabIndex = 15;
@@ -288,16 +292,29 @@ namespace OnTopReplica.SidePanels {
 			this.panelIndicatorPauseColor.TabIndex = 16;
 			this.panelIndicatorPauseColor.Click += new System.EventHandler(this.PanelIndicatorPauseColor_Click);
 			// 
+			// checkPauseColorAlertOnLoss
+			// 
+			this.checkPauseColorAlertOnLoss.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkPauseColorAlertOnLoss.AutoSize = true;
+			this.checkPauseColorAlertOnLoss.Location = new System.Drawing.Point(16, 368);
+			this.checkPauseColorAlertOnLoss.Name = "checkPauseColorAlertOnLoss";
+			this.checkPauseColorAlertOnLoss.Size = new System.Drawing.Size(248, 19);
+			this.checkPauseColorAlertOnLoss.TabIndex = 17;
+			this.checkPauseColorAlertOnLoss.Text = "Pause color alerts when the window is lost";
+			this.checkPauseColorAlertOnLoss.UseVisualStyleBackColor = true;
+			this.checkPauseColorAlertOnLoss.CheckedChanged += new System.EventHandler(this.PauseColorAlertOnLoss_CheckedChanged);
+			// 
 			// groupAutoHide
 			// 
 			this.groupAutoHide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupAutoHide.AutoSize = true;
 			this.groupAutoHide.Font = new System.Drawing.Font("Segoe UI", 9F);
-			this.groupAutoHide.Location = new System.Drawing.Point(3, 372);
+			this.groupAutoHide.Location = new System.Drawing.Point(3, 398);
 			this.groupAutoHide.Name = "groupAutoHide";
 			this.groupAutoHide.Size = new System.Drawing.Size(62, 15);
-			this.groupAutoHide.TabIndex = 17;
+			this.groupAutoHide.TabIndex = 18;
 			this.groupAutoHide.Text = "Auto hide:";
 			// 
 			// checkAutoHide
@@ -305,10 +322,10 @@ namespace OnTopReplica.SidePanels {
 			this.checkAutoHide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkAutoHide.AutoSize = true;
-			this.checkAutoHide.Location = new System.Drawing.Point(16, 393);
+			this.checkAutoHide.Location = new System.Drawing.Point(16, 419);
 			this.checkAutoHide.Name = "checkAutoHide";
 			this.checkAutoHide.Size = new System.Drawing.Size(253, 19);
-			this.checkAutoHide.TabIndex = 18;
+			this.checkAutoHide.TabIndex = 19;
 			this.checkAutoHide.Text = "Show/hide in sync with the cloned window";
 			this.checkAutoHide.UseVisualStyleBackColor = true;
 			this.checkAutoHide.CheckedChanged += new System.EventHandler(this.AutoHide_CheckedChanged);
@@ -323,7 +340,7 @@ namespace OnTopReplica.SidePanels {
 			this.MinimumSize = new System.Drawing.Size(315, 422);
 			this.Name = "OptionsPanel";
 			this.Padding = new System.Windows.Forms.Padding(7);
-			this.Size = new System.Drawing.Size(315, 471);
+			this.Size = new System.Drawing.Size(315, 494);
 			this.panelMain.ResumeLayout(false);
 			this.panelMain.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numIndicatorSize)).EndInit();
@@ -354,5 +371,6 @@ namespace OnTopReplica.SidePanels {
         private System.Windows.Forms.Panel panelIndicatorPauseColor;
         private System.Windows.Forms.Label groupAutoHide;
         private System.Windows.Forms.CheckBox checkAutoHide;
+        private System.Windows.Forms.CheckBox checkPauseColorAlertOnLoss;
     }
 }

@@ -35,5 +35,8 @@
     <Setting Name="HideWhenSourceDeactivated" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="PauseColorAlertWhenSourceLost" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

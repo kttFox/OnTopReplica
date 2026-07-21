@@ -497,8 +497,11 @@ You must run this application on Windows Vista Home Premium or better.</value>
   <data name="SettingsAutoHideWhenSourceInactive" xml:space="preserve">
     <value>対象のウィンドウに連動して表示/非表示させる</value>
   </data>
+  <data name="SettingsPauseColorAlertWhenSourceLost" xml:space="preserve">
+    <value>ウィンドウが失われたらカラーアラートを一時停止する</value>
+  </data>
   <data name="SettingsIndicatorTitle" xml:space="preserve">
-    <value>カラーアラート目印:</value>
+    <value>カラーアラート:</value>
   </data>
   <data name="SettingsIndicatorShow" xml:space="preserve">
     <value>目印(●)を表示する</value>

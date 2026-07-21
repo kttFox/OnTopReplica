@@ -1372,6 +1372,15 @@ namespace OnTopReplica {
             }
         }
 
+        /// <summary>
+        ///   Pause color alerts when the window is lost に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsPauseColorAlertWhenSourceLost {
+            get {
+                return ResourceManager.GetString("SettingsPauseColorAlertWhenSourceLost", resourceCulture);
+            }
+        }
+
 
         /// <summary>
         ///   Color alert indicator: に類似しているローカライズされた文字列を検索します。

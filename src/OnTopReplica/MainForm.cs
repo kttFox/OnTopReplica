@@ -909,6 +909,14 @@ namespace OnTopReplica {
                 WindowManagerMethods.ShowWindow(Handle,
                     WindowManagerMethods.SW_SHOWMINNOACTIVE);
             }
+
+            //対象ウィンドウが失われたら、設定に応じてカラーアラート検出を一時停止する。
+            //検出対象が存在しないため誤検知・無駄な走査を防ぎ、目印を「一時停止」表示にする。
+            //自動再開は行わない(ユーザーがメニュー等で明示的に再開する)。
+            if (targetLost && !IsSecondaryPanel &&
+                Properties.Settings.Default.PauseColorAlertWhenSourceLost) {
+                SetColorAlertPausedAllPanels(true);
+            }
         }
 
         /// <summary>

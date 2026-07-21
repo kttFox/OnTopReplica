@@ -30,6 +30,7 @@ namespace OnTopReplica.SidePanels {
             lblIndicatorSize.Text = Strings.SettingsIndicatorSize;
             lblIndicatorRunColor.Text = Strings.SettingsIndicatorRunColor;
             lblIndicatorPauseColor.Text = Strings.SettingsIndicatorPauseColor;
+            checkPauseColorAlertOnLoss.Text = Strings.SettingsPauseColorAlertWhenSourceLost;
 
             groupAutoHide.Text = Strings.SettingsAutoHideTitle;
             checkAutoHide.Text = Strings.SettingsAutoHideWhenSourceInactive;
@@ -55,6 +56,7 @@ namespace OnTopReplica.SidePanels {
                     Math.Min(numIndicatorSize.Maximum, Settings.Default.ColorAlertIndicatorSize));
                 panelIndicatorRunColor.BackColor = Settings.Default.ColorAlertIndicatorRunningColor;
                 panelIndicatorPauseColor.BackColor = Settings.Default.ColorAlertIndicatorPausedColor;
+                checkPauseColorAlertOnLoss.Checked = Settings.Default.PauseColorAlertWhenSourceLost;
             }
             finally {
                 _loadingIndicatorSettings = false;
@@ -125,6 +127,13 @@ namespace OnTopReplica.SidePanels {
 
         private void Indicator_SettingChanged(object sender, EventArgs e) {
             ApplyIndicatorSettings();
+        }
+
+        private void PauseColorAlertOnLoss_CheckedChanged(object sender, EventArgs e) {
+            if (_loadingIndicatorSettings) return;
+
+            Settings.Default.PauseColorAlertWhenSourceLost = checkPauseColorAlertOnLoss.Checked;
+            Settings.Default.Save();
         }
 
         private void PanelIndicatorRunColor_Click(object sender, EventArgs e) {
