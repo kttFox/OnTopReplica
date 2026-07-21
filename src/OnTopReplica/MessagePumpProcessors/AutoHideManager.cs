@@ -52,15 +52,17 @@ namespace OnTopReplica.MessagePumpProcessors {
                 activatedWindow = WindowManagerMethods.GetForegroundWindow();
             }
 
-            //自アプリのフォームがアクティブな間(パネルのドラッグ中など)は隠さない
-            if (System.Windows.Forms.Form.ActiveForm != null) {
-                return;
-            }
-
             if (IsSourceActive(activatedWindow, source.Handle)) {
                 Form.AutoShowAllPanels();
             }
             else {
+                //自アプリのフォームがアクティブな間(パネルのドラッグ中など)は隠さない。
+                //※このガードは「隠す」側のみに適用する。復帰側にも適用すると、
+                //  自アプリのウィンドウがアクティブなタイミングで対象が再アクティブ化
+                //  された場合に再表示の機会を失い、パネルが隠れたままになる。
+                if (System.Windows.Forms.Form.ActiveForm != null) {
+                    return;
+                }
                 Form.AutoHideAllPanels();
             }
         }

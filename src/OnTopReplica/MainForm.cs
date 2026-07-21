@@ -322,6 +322,22 @@ namespace OnTopReplica {
             if (panel.IsDisposed || !panel.IsHandleCreated) return;
             WindowManagerMethods.ShowWindow(panel.Handle,
                 visible ? WindowManagerMethods.SW_SHOWNOACTIVATE : WindowManagerMethods.SW_HIDE);
+            if (visible) {
+                //Opacity=0(プラットフォームの非表示実装)のまま表示されると
+                //見えないままになるため、必要なら不透明度も復元する
+                //(表示済みフォームへの Show() は no-op なのでフォーカスは奪わない)
+                if (Program.Platform.IsHidden(panel)) {
+                    Program.Platform.RestoreForm(panel);
+                }
+                //SW_SHOWNOACTIVATE では TOPMOST バンド内の順序が保証されず、
+                //クローン元ウィンドウの背面に残る場合があるため明示的に再前面化する
+                if (panel.TopMost) {
+                    WindowManagerMethods.SetWindowPos(panel.Handle,
+                        WindowManagerMethods.HWND_TOPMOST, 0, 0, 0, 0,
+                        WindowManagerMethods.SWP_NOMOVE | WindowManagerMethods.SWP_NOSIZE |
+                        WindowManagerMethods.SWP_NOACTIVATE);
+                }
+            }
             panel.UpdateColorAlertIndicator();
         }
 
@@ -652,9 +668,10 @@ namespace OnTopReplica {
                 TopMost = false;
                 TopMost = true;
 
-                //TopMost の再設定でこのウィンドウが最前面バンドの先頭に上がり、
-                //●インジケーターが下に潜るため Z オーダーを再同期する
-                UpdateColorAlertIndicator();
+                //フォーカスを奪わずに最前面バンドの先頭へ確実に復帰させる。
+                //(TopMost 再設定だけでは順序が保証されない場合があるため)
+                //ここでインジケーターの Z オーダーも再同期される。
+                ReassertTopMost();
             }
         }
 

@@ -14,12 +14,31 @@ namespace OnTopReplica {
             if (position.HasValue)
                 menuPosition = position.Value;
 
-            if (FullscreenManager.IsFullscreen) {
-                menuFullscreenContext.Show(menuPosition);
-            }
-            else {
-                menuContext.Show(menuPosition);
-            }
+            var menu = FullscreenManager.IsFullscreen ? menuFullscreenContext : menuContext;
+            //メニューを閉じて別ウィンドウがアクティブになると、パネルが最前面バンドの
+            //背面に落ちることがあるため、閉じたタイミングで TopMost を再主張する。
+            //(重複登録を避けるため一旦解除してから登録)
+            menu.Closed -= ContextMenu_Closed;
+            menu.Closed += ContextMenu_Closed;
+            menu.Show(menuPosition);
+        }
+
+        private void ContextMenu_Closed(object sender, ToolStripDropDownClosedEventArgs e) {
+            ReassertTopMost();
+        }
+
+        /// <summary>
+        /// フォーカスを奪わずに最前面(TOPMOST バンドの先頭)へ復帰させる。
+        /// </summary>
+        internal void ReassertTopMost() {
+            if (IsDisposed || !IsHandleCreated || FullscreenManager.IsFullscreen || !TopMost)
+                return;
+
+            Native.WindowManagerMethods.SetWindowPos(Handle,
+                Native.WindowManagerMethods.HWND_TOPMOST, 0, 0, 0, 0,
+                Native.WindowManagerMethods.SWP_NOMOVE | Native.WindowManagerMethods.SWP_NOSIZE |
+                Native.WindowManagerMethods.SWP_NOACTIVATE);
+            UpdateColorAlertIndicator();
         }
 
         /// <summary>
